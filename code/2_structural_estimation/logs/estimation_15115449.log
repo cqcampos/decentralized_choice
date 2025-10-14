@@ -1,0 +1,439 @@
+==========================================
+SLURM_JOB_ID = 15115449
+SLURM_SUBMIT_DIR = /project/lausd/decentralized_choice/code/2_structural_estimation
+SLURM_JOB_NODELIST = mcn10
+==========================================
+Job ID: 15115449
+Job User: ryanlee22
+Num Cores: 32
+Starting estimation at Mon Sep 15 09:59:50 CDT 2025
+RUNNING THE L-BFGS-B CODE
+
+           * * *
+
+Machine precision = 2.220D-16
+ N =          100     M =           10
+
+At X0         0 variables are exactly at the bounds
+
+At iterate    0    f=  6.26359D+04    |proj g|=  6.58120D+02
+ This problem is unconstrained.
+Optimization specifications =========================================
+Number of threads use for torch operation 32
+Number of simulation draws: 300
+Number of types assumed: 3
+Eta outside of exp(): True
+X includes currently in magnet indicator: True
+Method for drawing normal: sobol
+Seed value for normal draws: 12345
+Number of blocks for objfn and grad: 1
+Last year of applications: 2013
+======================================================================
+Loading raw data...
+84257
+53
+(84257, 53)
+Drawing from normal...
+Min u: 1.1920928955078125e-07
+Max u: 0.9999998807907104
+Min u: 1.1920928955078125e-07
+Max u: 0.9999998807907104
+Printing the theta draws for round 1-5 for student 1-5
+tensor([[ 0.2283, -0.0807, -1.8039,  1.3607,  1.0810],
+        [ 1.8388, -1.3337, -0.2216,  0.0915,  0.0081],
+        [ 0.4589, -0.5152, -0.8406,  0.9408,  1.2818],
+        [ 1.1497, -0.6845, -0.6506,  0.3307,  0.5114],
+        [ 0.0365, -0.2840, -1.1945,  2.3192,  0.7842]])
+Printing some of the sims_c
+tensor([-0.6918,  0.2699,  0.2526, -0.3049,  0.2384, -1.0786,  0.8553, -0.7140,
+         0.9672, -0.1479, -0.3092,  0.6269,  0.5244,  0.2538, -0.4179, -0.3082,
+         0.0672, -0.0194,  0.5510,  2.1409, -0.6443, -1.0098,  0.1055, -0.5918,
+         0.7717,  1.4901, -0.2917, -0.5079, -0.6234,  0.8708, -1.2490, -0.9800,
+        -0.5789, -0.8838, -3.5513, -0.5024, -0.9778,  0.5311,  2.7746, -0.4511,
+         3.4911, -1.7472, -0.9146,  1.1632, -1.9182,  1.9947,  0.2430, -0.7491,
+         0.5771,  0.5596,  0.6479,  1.1130, -1.2514])
+Picking starting values for optimization...
+Converting numpy arrays to tensors...
+starting values:
+[-8.234400e-02 -8.120080e-01 -1.657717e+00 -2.702595e+00  1.672002e+00
+  1.428475e+00 -1.928099e+00 -5.315540e-01 -1.535448e+00 -1.792133e+00
+ -2.338426e+00 -1.606545e+00  2.234830e-01 -9.019740e-01 -6.333520e-01
+ -5.985360e-01  1.634750e+00 -2.540916e+00 -9.636940e-01 -1.282817e+00
+  2.308790e-01  8.611400e-01 -1.913761e+00 -1.024508e+00 -1.102711e+00
+  6.824610e-01 -1.704199e+00 -1.273383e+00 -1.352369e+00 -4.099100e-02
+ -1.561058e+00  9.540700e-02 -2.344869e+00 -7.510740e-01 -2.311019e+00
+ -9.773920e-01 -1.581657e+00  2.189675e+00 -1.302953e+00 -1.507649e+00
+ -4.023840e-01  4.403800e-02  2.522300e+00 -1.180310e+00 -1.631329e+00
+ -9.450150e-01 -9.844680e-01 -5.442500e-01 -5.547780e-01 -1.059589e+00
+ -3.626050e-01  3.226497e+00  4.136221e+00  6.077000e-03 -1.144900e-01
+ -1.095170e-01 -1.107454e+00  6.018500e-02 -2.192010e-01 -1.486060e-01
+  1.669270e-01  2.016570e-01 -5.874800e-02  1.270226e+00  1.308480e-01
+ -3.260710e-01 -1.849000e-03  1.894200e-02 -1.078700e-02 -1.271290e-01
+ -1.619300e-02  1.647800e-02  2.292900e-02  1.210000e-04 -6.810000e-03
+ -1.514000e-03  7.544800e-02  2.666600e-02  3.646000e-03  2.253120e-01
+  2.595000e-03 -3.631200e-02  6.433300e-02 -8.302900e-02  1.223200e-02
+  1.100300e-02 -1.152200e-02 -3.367400e-02 -1.863100e-02  5.244000e-03
+ -9.665300e-02 -2.514900e-02 -9.957830e-01 -1.562508e+00 -2.038194e+00
+ -1.038199e+00  1.904746e+00  2.156522e+00 -9.221000e-01  3.905670e-01]
+Starting L-BFGS-B optimization...
+Number of NaNs in likelihood: 0
+Number of zero values in likelihood: 0
+Number of NaNs in gradients: 0
+Individual likelihood stats:
+Min     : 9.060484e-09
+Max     : 9.982655e-01
+1% quantile  : 3.799728e-04
+25% quantile : 7.897819e-01
+50% quantile : 9.025003e-01
+75% quantile : 9.424166e-01
+99% quantile : 9.880053e-01
+=============================================
+Objfn Value: 62635.86778683236
+Gradients: tensor([ 6.9815e+00,  3.4308e+00,  4.6921e+00,  3.7271e+00,  7.1016e+00,
+         1.4437e+01,  7.4829e+00,  2.1466e-01,  2.0569e+00, -1.0692e+00,
+        -5.1916e-01, -8.6897e-01, -1.1754e+01,  2.4132e+00, -2.9641e+00,
+        -4.2482e+00, -5.4277e+00,  4.7328e+00,  2.0279e-01,  3.2298e+00,
+        -6.8728e-01, -3.7812e+00,  2.8472e+00,  2.6739e+00,  1.2801e+00,
+        -9.4689e+00,  3.4822e+00,  5.7043e+00,  6.0861e-01, -6.9562e+00,
+        -5.6300e+00, -6.1482e+00, -2.0596e+00,  3.1991e+00,  1.1516e+00,
+         3.3898e+00,  1.3504e+00,  3.6671e+01,  1.3363e+00,  3.5157e+00,
+         2.6340e+00, -5.5808e+00, -3.1283e+00,  2.7164e+00,  3.4006e+00,
+        -2.9110e+00,  2.5194e+00,  1.7623e+00,  6.5544e+00,  1.4994e+00,
+        -2.1970e+00, -4.4959e+00,  4.3372e+00,  5.3662e-01, -6.6501e-01,
+         4.4818e+00, -5.8936e-01, -5.7776e+00,  1.9314e+01, -1.7146e+01,
+        -1.2065e+01,  1.4785e+01,  1.6477e+01, -2.4911e+00,  8.6488e+00,
+        -3.1696e+01,  4.4857e+01,  4.5308e+01,  1.3376e+01,  2.9258e+01,
+        -5.3491e+01,  2.8235e+01, -2.4392e+01, -7.5894e+00, -1.7214e+00,
+        -6.4368e+01,  2.7311e+01, -2.8149e+01, -6.5812e+02, -3.9655e+00,
+        -3.3192e+01, -3.3152e+01, -8.2388e+00, -5.7472e+00, -3.3689e+01,
+         6.4891e+00, -1.4660e+01, -1.1783e+02, -1.2083e+02,  8.3831e+01,
+        -1.3549e+01,  5.9818e+00,  2.1180e+01,  4.4521e+00,  4.8928e-01,
+        -1.4261e+01, -1.4833e+01,  2.8619e+01,  2.7055e+01,  1.2817e+01],
+       dtype=torch.float64)
+Norm of Average Gradient: 8.05260654441023
+Current coefficients:
+  Mean Utility 1: -0.082344
+  Mean Utility 2: -0.812008
+  Mean Utility 3: -1.657717
+  Mean Utility 4: -2.702595
+  Mean Utility 5: 1.672002
+  Mean Utility 6: 1.428475
+  Mean Utility 7: -1.928099
+  Mean Utility 8: -0.531554
+  Mean Utility 9: -1.535448
+  Mean Utility 10: -1.792133
+  Mean Utility 11: -2.338426
+  Mean Utility 12: -1.606545
+  Mean Utility 13: 0.223483
+  Mean Utility 14: -0.901974
+  Mean Utility 15: -0.633352
+  Mean Utility 16: -0.598536
+  Mean Utility 17: 1.634750
+  Mean Utility 18: -2.540916
+  Mean Utility 19: -0.963694
+  Mean Utility 20: -1.282817
+  Mean Utility 21: 0.230879
+  Mean Utility 22: 0.861140
+  Mean Utility 23: -1.913761
+  Mean Utility 24: -1.024508
+  Mean Utility 25: -1.102711
+  Mean Utility 26: 0.682461
+  Mean Utility 27: -1.704199
+  Mean Utility 28: -1.273383
+  Mean Utility 29: -1.352369
+  Mean Utility 30: -0.040991
+  Mean Utility 31: -1.561058
+  Mean Utility 32: 0.095407
+  Mean Utility 33: -2.344869
+  Mean Utility 34: -0.751074
+  Mean Utility 35: -2.311019
+  Mean Utility 36: -0.977392
+  Mean Utility 37: -1.581657
+  Mean Utility 38: 2.189675
+  Mean Utility 39: -1.302953
+  Mean Utility 40: -1.507649
+  Mean Utility 41: -0.402384
+  Mean Utility 42: 0.044038
+  Mean Utility 43: 2.522300
+  Mean Utility 44: -1.180310
+  Mean Utility 45: -1.631329
+  Mean Utility 46: -0.945015
+  Mean Utility 47: -0.984468
+  Mean Utility 48: -0.544250
+  Mean Utility 49: -0.554778
+  Mean Utility 50: -1.059589
+  Mean Utility 51: -0.362605
+  Mean Utility 52: 3.226497
+  Mean Utility 53: 4.136221
+  U x female: 0.006077
+  U x black: -0.114490
+  U x hispanic: -0.109517
+  U x white: -1.107454
+  U x poverty: 0.060185
+  U x el: -0.219201
+  U x eng_home: -0.148606
+  U x lag_ela: 0.166927
+  U x lag_math: 0.201657
+  U x median_income: -0.058748
+  U x current_in_mag: 1.270226
+  U x current_peer_quality: 0.130848
+  Distance Cost: -0.326071
+  Distance Cost x female: -0.001849
+  Distance Cost x black: 0.018942
+  Distance Cost x hispanic: -0.010787
+  Distance Cost x white: -0.127129
+  Distance Cost x poverty: -0.016193
+  Distance Cost x el: 0.016478
+  Distance Cost x eng_home: 0.022929
+  Distance Cost x lag_ela: 0.000121
+  Distance Cost x lag_math: -0.006810
+  Distance Cost x median_income: -0.001514
+  Distance Cost x current_in_mag: 0.075448
+  Distance Cost x current_peer_quality: 0.026666
+  Distance Cost Sq: 0.003646
+  App. Cost: 0.225312
+  App. Cost female: 0.002595
+  App. Cost black: -0.036312
+  App. Cost hispanic: 0.064333
+  App. Cost white: -0.083029
+  App. Cost poverty: 0.012232
+  App. Cost el: 0.011003
+  App. Cost eng_home: -0.011522
+  App. Cost lag_ela: -0.033674
+  App. Cost lag_math: -0.018631
+  App. Cost median_income: 0.005244
+  App. Cost current_in_mag: -0.096653
+  App. Cost current_peer_quality: -0.025149
+  log(sd eta): -0.995783
+  log(sd theta 1): -1.562508
+  log(sd theta 2): -2.038194
+  log(sd theta 3): -1.038199
+  alpha theta 1: 1.904746
+  alpha theta 2: 2.156522
+  mu theta 1: -0.922100
+  mu theta 2: 0.390567
+=============================================
+Number of NaNs in likelihood: 0
+Number of zero values in likelihood: 0
+Number of NaNs in gradients: 0
+Individual likelihood stats:
+Min     : 2.963933e-288
+Max     : 6.604889e-02
+1% quantile  : 6.670502e-258
+25% quantile : 9.116353e-258
+50% quantile : 1.051887e-257
+75% quantile : 1.302299e-257
+99% quantile : 3.084007e-02
+=============================================
+Objfn Value: 47755267.921066016
+Gradients: tensor([ 4.3828e+04,  5.2119e+03,  4.1018e+03,  2.6772e+03,  3.5753e+03,
+         7.0463e+03,  3.1563e+04,  2.5073e+04,  2.8886e+04,  3.4984e+04,
+         1.7810e+04,  1.8395e+04,  1.3351e+04,  3.2893e+04,  3.7934e+04,
+         4.6660e+04,  1.8660e+04,  1.9943e+04,  2.4629e+04,  3.4545e+04,
+         3.0521e+04,  2.0442e+04,  2.7219e+04,  2.9603e+04,  1.8147e+04,
+         1.7881e+04,  1.1703e+03,  3.3754e+04,  7.6819e+03,  3.9823e+04,
+         4.0774e+04,  2.4607e+04,  3.4769e+04,  2.0079e+04,  2.3696e+04,
+         1.5320e+04,  1.1170e+04,  6.5881e+03,  4.1692e+04,  4.2593e+04,
+         2.2328e+04,  2.4325e+04,  1.0553e+04,  4.3707e+04,  2.4577e+04,
+         9.5376e+02,  1.1541e+03,  9.3930e+02,  1.0350e+04,  1.4976e+03,
+         3.7072e+04, -1.8280e+03,  7.8762e+02, -1.5487e+03, -5.6524e+03,
+         6.1239e+03,  9.2476e+03,  3.1396e+03,  7.7435e+03, -1.4820e+03,
+        -6.2573e+04, -6.3412e+04,  5.7667e+04, -3.3615e+04, -1.9017e+04,
+         1.9992e+07, -2.5770e+03, -1.8911e+05, -2.2542e+05,  3.9481e+05,
+        -2.8635e+05, -3.2081e+05,  3.5351e+05,  3.6233e+05,  2.1534e+05,
+         4.5445e+06, -1.0585e+05,  3.1406e+05,  3.8874e+08, -1.9103e+06,
+        -3.3143e+04,  2.8980e+04, -1.3811e+05,  6.9873e+04, -1.0635e+05,
+        -1.6521e+04,  1.1035e+05, -4.6817e+04, -1.0473e+05,  1.3205e+06,
+         1.0078e+05,  1.3350e+05, -2.0280e+05, -1.0411e+02, -5.9918e+01,
+         9.6789e+03,  7.4445e+05, -3.4145e+05, -3.1521e+05, -3.8370e+05],
+       dtype=torch.float64)
+Norm of Average Gradient: 4137200.927411571
+Current coefficients:
+  Mean Utility 1: -0.092265
+  Mean Utility 2: -0.816883
+  Mean Utility 3: -1.664385
+  Mean Utility 4: -2.707891
+  Mean Utility 5: 1.661910
+  Mean Utility 6: 1.407960
+  Mean Utility 7: -1.938733
+  Mean Utility 8: -0.531859
+  Mean Utility 9: -1.538371
+  Mean Utility 10: -1.790614
+  Mean Utility 11: -2.337688
+  Mean Utility 12: -1.605310
+  Mean Utility 13: 0.240186
+  Mean Utility 14: -0.905403
+  Mean Utility 15: -0.629140
+  Mean Utility 16: -0.592499
+  Mean Utility 17: 1.642463
+  Mean Utility 18: -2.547642
+  Mean Utility 19: -0.963982
+  Mean Utility 20: -1.287407
+  Mean Utility 21: 0.231856
+  Mean Utility 22: 0.866513
+  Mean Utility 23: -1.917807
+  Mean Utility 24: -1.028308
+  Mean Utility 25: -1.104530
+  Mean Utility 26: 0.695917
+  Mean Utility 27: -1.709147
+  Mean Utility 28: -1.281489
+  Mean Utility 29: -1.353234
+  Mean Utility 30: -0.031106
+  Mean Utility 31: -1.553058
+  Mean Utility 32: 0.104144
+  Mean Utility 33: -2.341942
+  Mean Utility 34: -0.755620
+  Mean Utility 35: -2.312655
+  Mean Utility 36: -0.982209
+  Mean Utility 37: -1.583576
+  Mean Utility 38: 2.137563
+  Mean Utility 39: -1.304852
+  Mean Utility 40: -1.512645
+  Mean Utility 41: -0.406127
+  Mean Utility 42: 0.051969
+  Mean Utility 43: 2.526745
+  Mean Utility 44: -1.184170
+  Mean Utility 45: -1.636161
+  Mean Utility 46: -0.940878
+  Mean Utility 47: -0.988048
+  Mean Utility 48: -0.546754
+  Mean Utility 49: -0.564092
+  Mean Utility 50: -1.061720
+  Mean Utility 51: -0.359483
+  Mean Utility 52: 3.232886
+  Mean Utility 53: 4.130058
+  U x female: 0.005314
+  U x black: -0.113545
+  U x hispanic: -0.115886
+  U x white: -1.106616
+  U x poverty: 0.068395
+  U x el: -0.246647
+  U x eng_home: -0.124241
+  U x lag_ela: 0.184072
+  U x lag_math: 0.180647
+  U x median_income: -0.082163
+  U x current_in_mag: 1.273766
+  U x current_peer_quality: 0.118558
+  Distance Cost: -0.281030
+  Distance Cost x female: -0.065592
+  Distance Cost x black: -0.045442
+  Distance Cost x hispanic: -0.029795
+  Distance Cost x white: -0.168705
+  Distance Cost x poverty: 0.059820
+  Distance Cost x el: -0.023645
+  Distance Cost x eng_home: 0.057591
+  Distance Cost x lag_ela: 0.010906
+  Distance Cost x lag_math: -0.004364
+  Distance Cost x median_income: 0.089956
+  Distance Cost x current_in_mag: 0.036638
+  Distance Cost x current_peer_quality: 0.066667
+  Distance Cost Sq: 0.938865
+  App. Cost: 0.230947
+  App. Cost female: 0.049763
+  App. Cost black: 0.010798
+  App. Cost hispanic: 0.076041
+  App. Cost white: -0.074862
+  App. Cost poverty: 0.060106
+  App. Cost el: 0.001782
+  App. Cost eng_home: 0.009311
+  App. Cost lag_ela: 0.133768
+  App. Cost lag_math: 0.153068
+  App. Cost median_income: -0.113883
+  App. Cost current_in_mag: -0.077399
+  App. Cost current_peer_quality: -0.033649
+  log(sd eta): -1.025881
+  log(sd theta 1): -1.568835
+  log(sd theta 2): -2.038889
+  log(sd theta 3): -1.017934
+  alpha theta 1: 1.925824
+  alpha theta 2: 2.115854
+  mu theta 1: -0.960547
+  mu theta 2: 0.372353
+=============================================
+Number of NaNs in likelihood: 0
+Number of zero values in likelihood: 0
+Number of NaNs in gradients: 0
+Individual likelihood stats:
+Min     : 2.187701e-265
+Max     : 1.427259e-01
+1% quantile  : 7.197121e-258
+25% quantile : 1.367453e-257
+50% quantile : 2.087676e-257
+75% quantile : 2.734906e-257
+99% quantile : 2.112135e-150
+=============================================
+Objfn Value: 48787571.745557785
+Gradients: tensor([ 3.8538e+04,  1.8507e+03,  1.9184e+03,  1.8784e+03,  3.6145e+03,
+         2.7176e+03,  2.1442e+04,  7.5501e+03,  2.4331e+04,  2.8266e+04,
+         1.5720e+04,  1.4278e+04,  2.3225e+03,  4.2980e+04,  3.6316e+04,
+         8.0717e+04,  2.1470e+04,  1.4606e+04,  1.9031e+04,  2.4343e+04,
+         3.5045e+04,  3.7857e+04,  2.3569e+04,  2.5163e+04,  1.8514e+04,
+         3.0631e+04,  7.5502e+02,  1.6937e+04,  4.4911e+03,  6.8648e+04,
+         1.8603e+04,  1.3874e+04,  2.3625e+04,  2.8592e+04,  2.0732e+04,
+         2.5388e+04,  1.0094e+04,  1.7406e+04,  7.1601e+04,  7.3263e+04,
+         1.6645e+04,  4.5898e+04, -2.4818e+03,  8.3691e+04,  2.2443e+04,
+         1.1998e+03,  1.3310e+03,  9.9663e+02,  9.9528e+03,  1.2256e+03,
+         2.4517e+04, -5.7104e+03, -2.7616e+02, -1.6653e+03, -6.9886e+03,
+         6.5935e+03,  1.0366e+04,  7.6011e+02,  9.0483e+03, -1.7756e+03,
+        -6.1710e+04, -6.3284e+04,  7.7902e+04, -3.4608e+04, -1.8412e+04,
+         2.5599e+07,  9.8489e+02, -1.2092e+05, -2.1433e+05,  3.9309e+05,
+        -2.0908e+05, -2.5632e+05,  3.1051e+05,  1.0805e+05, -1.2079e+04,
+         3.4547e+06, -1.6555e+05,  1.0663e+05,  5.5253e+08, -1.8326e+06,
+        -6.6002e+03,  2.6828e+04, -1.1870e+05,  5.3629e+04, -6.6944e+04,
+        -7.9061e+04,  8.5129e+04,  2.1903e+05,  1.8698e+05,  6.5259e+05,
+         9.5848e+04,  1.2744e+05, -2.2648e+05, -2.4563e+02, -1.2619e+02,
+         1.3052e+04,  7.7543e+05, -3.9695e+05, -3.6140e+05, -4.6496e+05],
+       dtype=torch.float64)
+Norm of Average Gradient: 5812954.079692513
+Current coefficients:
+  Mean Utility 1: -0.085066
+  Mean Utility 2: -0.813345
+  Mean Utility 3: -1.659546
+  Mean Utility 4: -2.704048
+  Mean Utility 5: 1.669234
+  Mean Utility 6: 1.422847
+  Mean Utility 7: -1.931016
+  Mean Utility 8: -0.531638
+  Mean Utility 9: -1.536250
+  Mean Utility 10: -1.791716
+  Mean Utility 11: -2.338224
+  Mean Utility 12: -1.606206
+  Mean Utility 13: 0.228065
+  Mean Utility 14: -0.902915
+  Mean Utility 15: -0.632197
+  Mean Utility 16: -0.596880
+  Mean Utility 17: 1.636866
+  Mean Utility 18: -2.542761
+  Mean Utility 19: -0.963773
+  Mean Utility 20: -1.284076
+  Mean Utility 21: 0.231147
+  Mean Utility 22: 0.862614
+  Mean Utility 23: -1.914871
+  Mean Utility 24: -1.025550
+  Mean Utility 25: -1.103210
+  Mean Utility 26: 0.686152
+  Mean Utility 27: -1.705556
+  Mean Utility 28: -1.275607
+  Mean Utility 29: -1.352606
+  Mean Utility 30: -0.038279
+  Mean Utility 31: -1.558863
+  Mean Utility 32: 0.097804
+  Mean Utility 33: -2.344066
+  Mean Utility 34: -0.752321
+  Mean Utility 35: -2.311468
+  Mean Utility 36: -0.978713
+  Mean Utility 37: -1.582183
+  Mean Utility 38: 2.175380
+  Mean Utility 39: -1.303474
+  Mean Utility 40: -1.509019
+  Mean Utility 41: -0.403411
+  Mean Utility 42: 0.046214
+  Mean Utility 43: 2.523519
+  Mean Utility 44: -1.181369
+  Mean Utility 45: -1.632655
+  Mean Utility 46: -0.943880
+  Mean Utility 47: -0.985450
+  Mean Utility 48: -0.544937
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+slurmstepd: error: *** JOB 15115449 ON mcn10 CANCELLED AT 2025-09-15T10:06:47 ***
+slurmstepd: error: *** STEP 15115449.0 ON mcn10 CANCELLED AT 2025-09-15T10:06:47 ***

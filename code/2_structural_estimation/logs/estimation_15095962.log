@@ -1,0 +1,29 @@
+==========================================
+SLURM_JOB_ID = 15095962
+SLURM_SUBMIT_DIR = /project/lausd/decentralized_choice/code/2_structural_estimation
+SLURM_JOB_NODELIST = mcn34
+==========================================
+Job ID: 15095962
+Job User: ryanlee22
+Num Cores: 32
+Starting estimation at Mon Sep  8 13:05:20 CDT 2025
+Optimization specifications =========================================
+Number of threads use for torch operation 32
+Number of simulation draws: 300
+Number of types assumed: 3
+Eta outside of exp(): True
+X includes currently in magnet indicator: True
+Method for drawing normal: sobol
+Seed value for normal draws: 12345
+Number of blocks for objfn and grad: 1
+Last year of applications: 2013
+======================================================================
+Loading raw data...
+Traceback (most recent call last):
+  File "/project/lausd/decentralized_choice/code/2_structural_estimation/estimate_mixture.py", line 51, in <module>
+    mle_input_dict = process_dta(ROOT, K, R, lmbda, homog, eta_out, in_mag_ind, device,  full_samp=False, last_yr=last_yr,)
+  File "/project/lausd/decentralized_choice/code/2_structural_estimation/util.py", line 108, in process_dta
+    cohort = np.column_stack([(yearapp == y).astype(int) for y in years])
+NameError: name 'years' is not defined. Did you mean: 'vars'?
+srun: error: mcn34: task 0: Exited with exit code 1
+Job completed at Mon Sep  8 13:05:30 CDT 2025

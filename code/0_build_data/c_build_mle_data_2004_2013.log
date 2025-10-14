@@ -1,0 +1,2445 @@
+
+  ___  ____  ____  ____  ____ ®
+ /__    /   ____/   /   ____/      StataNow 19.5
+___/   /   /___/   /   /___/       MP—Parallel Edition
+
+ Statistics and Data Science       Copyright 1985-2025 StataCorp LLC
+                                   StataCorp
+                                   4905 Lakeway Drive
+                                   College Station, Texas 77845 USA
+                                   800-782-8272        https://www.stata.com
+                                   979-696-4600        service@stata.com
+
+Stata license: 22-user 8-core network, expiring 30 Jun 2026
+Serial number: 501909306443
+  Licensed to: The University of Chicago Booth School of Business
+               Mercury Computing Cluster
+
+Notes:
+      1. Stata is running in batch mode.
+      2. Unicode is supported; see help unicode_advice.
+      3. More than 2 billion observations are allowed; see help obs_advice.
+      4. Maximum number of variables is set to 5,000 but can be increased;
+          see help set_maxvar.
+
+. do /project/lausd/decentralized_choice/code/0_build_data/c_build_mle_data_200
+> 4_2013.do 
+
+. /****************************************************************************
+> ****
+> - Author: Chris Campos
+> - Antonia Edited the path files to follow the folders restructuration 
+> - Description: some preliminary analysis of magnet programs 
+> - Date started: 12/17/2024
+> - Last update: 07/24/2025
+> *****************************************************************************
+> **/
+. clear all
+
+. set trace on
+
+. set tracedepth 2
+
+. set maxvar 120000
+
+
+. 
+. capture program drop main
+
+. program define main
+  1. 
+.         set_paths
+  2.         
+.         local minY = 2004
+  3.         local maxY = 2013
+  4.         
+.         /*
+>         prepStudentData, minYr(`minY') maxYr(`maxY')
+> 
+>         * Extrat subset of applications for relevant years 
+>         prepApplications, minYr(`minY') maxYr(`maxY')
+> 
+>         /* Prep magnet schools */ 
+>         isolateSchools, minYr(`minY') maxYr(`maxY')
+>         isolateApplications, minYr(`minY') maxYr(`maxY')
+>         
+>         /* Calculate distances */
+>         calculateDistances, minYr(`minY') maxYr(`maxY') 
+> */
+.         /* Prep structural data */
+.        prepStructuralData, minYr(`minY') maxYr(`maxY')
+  5. 
+.         /* Admission probabilities */ 
+.            prepareSeats, minYr(`minY') maxYr(`maxY')
+  6.        student_p_i, minYr(`minY') maxYr(`maxY')
+  7. end
+
+. 
+. *****************************************************************************
+> ***
+. * set_paths 
+. * 
+. * Description: Establish paths 
+. *****************************************************************************
+> ***
+. capture program drop set_paths
+
+. program define set_paths
+  1. 
+.     * Establish directories 
+.     if "`c(os)'"=="MacOSX" & "`c(username)'"=="cqcampos"{
+  2.         global ROOT /Volumes/lausd/decentralized_choice 
+  3.         global BUILD /Volumes/lausd/build/output/data
+  4.         global ROOTSOURCE "/Volumes/lausd/build/" 
+  5.         global magnet "/Volumes/lausd/magnet/"
+  6.     }
+  7.     else{
+  8.             global ROOT "/project/lausd/decentralized_choice"
+  9.             global BUILD "/project/lausd/build/output/data"
+ 10.             global ROOTSOURCE "/project/lausd/build/" 
+ 11.             global magnet "/project/lausd/magnet"
+ 12. 
+.     }
+ 13.         
+.     global DTARAW "$ROOT/rawdata" 
+ 14.     global RAW $ROOT/data/raw
+ 15.     global DTAFINAL "$ROOT/data" 
+ 16.     global tables "$ROOT/tables"
+ 17.     global figures "$ROOT/figures"
+ 18. 
+.     * Raw source data
+.     global UE "$ROOTSOURCE/rawdata/Campos_Master_DUA/Unified_Enrollment"
+ 19.     global RAWOUT "$ROOTSOURCE/output/data" 
+ 20. 
+. 
+. end
+
+. 
+. 
+. *****************************************************************************
+> ***
+. * prepStudentData 
+. * 
+. * Description: Preps relevant fifth grade cohort student data 
+. *****************************************************************************
+> ***
+. capture program drop prepStudentData 
+
+. program define prepStudentData 
+  1. syntax, [minYr(int 2004) maxYr(int 2017)]
+  2.         /*
+>     use "$BUILD/magnet_rank.dta", clear
+>     keep if choice_ranking ==1
+>     contract mag_cd_ endyear
+>     drop if _freq<=10 // those that have less than 10 apps are usually data e
+> ntry errors
+>     drop _freq 
+>     rename mag_cd_ next_scode 
+>     drop if next_scode==. 
+>     tempfile tempcodes 
+>     save `tempcodes'
+> 
+> 
+>     * Create offer dummies (not conditioning on lottery) THIS DATA IS NOW CRE
+> ATED IN 0_build.do and store in "./decentralized_choice/data/raw/magnet_offer
+> s.dta"
+>     import delimited "$UE/Deidentified_NEW_MAG_ALL.csv", clear stringcols(_al
+> l)
+>     destring application_id school_yr, replace
+>     merge 1:1 application_id using "$RAWOUT/apps_time_stamp.dta"
+>     drop _merge
+>     replace app_endyear = school_yr if missing(app_endyear) // so we don;t lo
+> se the 2023, 2024 people
+>     sort student_pseudo_id
+>     rename (student_pseudo_id ) (studentpseudoid) 
+>     gen magnet_offer = mag_action_1=="B" | mag_action_2 =="B" | mag_action_3=
+> ="B"
+>     contract studentpseudoid app_endyear magnet_offer
+>     gen endyear = app_endyear //just to use for the match in the build code 
+>     drop _freq 
+>     duplicates drop studentpseudoid endyear, force 
+>     save "$magnetINT/magnet_offers.dta", replace 
+>         */
+.         
+.         local minYr = 2004
+  3.         local maxYr = 2013
+  4.         
+.     * Read in main sample, merge magnet offers, and create necessary variable
+> s 
+.     use if endyear >=`minYr' & endyear <=(`maxYr' +4)  using $RAWOUT/lausd200
+> 1_2023_encoded.dta, clear 
+  5.     merge m:1 studentpseudoid endyear using $RAW/magnet_offers, gen(mergeO
+> ffers) keep( 1 3)
+  6.     drop mergeOffers 
+  7.     gen appliedMagnet = mergeMagnet ==3
+  8.     egen sid = group(studentpseudoid)
+  9. 
+.     xtset sid endyear 
+ 10.     decode schoollocationname, gen(sname)
+ 11.     gen next_schoolname = F1.schoollocationname
+ 12.     label values next_schoolname schoollocationname_
+ 13.     gen next_scode = F1.schoolcostcentercode 
+ 14.     decode next_schoolname, gen(next_sname)
+ 15.     gen F1math = F1.z_math_all 
+ 16.     gen F1ela = F1.z_ela_all
+ 17.     gen F2math = F2.z_math_all
+ 18.     gen F2ela = F2.z_ela_all
+ 19.     gen F3math = F3.z_math_all
+ 20.     gen F3ela = F3.z_ela_all
+ 21. 
+.     egen avg_Fmath = rowmean(F1math F2math F3math)
+ 22.     egen avg_Fela = rowmean(F1ela F2ela F3ela)
+ 23.         
+.         keep if endyear >=`minYr' & endyear <=`maxYr'
+ 24. 
+.     gen hispanic = ethnicitydescription==1
+ 25.     gen black = ethnicitydescription==2
+ 26.     gen white = ethnicitydescription==3
+ 27.     gen asian= ethnicitydescription==4 
+ 28.     gen other = hispanic==0 & black==0 & white==0 & asian==0 
+ 29.     gen female = gendercode==1
+ 30.     gen poverty = studentpovertyindicator==3
+ 31.     gen el = languageclasscode==3
+ 32.     gen gifted = !missing(studentgiftedprogramdescription) 
+ 33. 
+.     gen sixthGradeAddress = censusblockid1 if gradecode ==6
+ 34.     bys studentpseudoid : egen addressSix = mean(sixthGradeAddress )
+ 35.     replace censusblockid1 = addressSix if missing(censusblockid1 ) & grad
+> ecode ==5
+ 36.     keep if gradecode==5
+ 37. 
+.     gen schooltype = "ms" if gradecode ==5
+ 38.     
+.     rename censusblockid1 censusblockid
+ 39.     decode censusblockid, gen(blockid)  
+ 40.     rename (censusblockid blockid) (blockid censusblockid)
+ 41.     merge m:1 censusblockid schooltype endyear using $DTAFINAL/intermediat
+> e/magnet_distances.dta  , gen(mergeDistances) keep(1 3)
+ 42. 
+.     gen next_mag = regexm(next_sname , "MAG") | regexm(next_sname, "MG")    
+ 43. 
+. 
+.     drop city2 api_city2 api_state2 api_zip_code2 censusblockid2 city3 api_ci
+> ty3 api_state3 api_zip_code3 censusblockid3 ///
+>         city4 api_city4 api_state4 api_zip_code4 censusblockid4 city5 api_cit
+> y5 api_state5 api_zip_code5 censusblockid5 ///
+>         city6 api_city6 api_state6 api_zip_code6 censusblockid6 city7 api_cit
+> y7 api_state7 api_zip_code7 censusblockid7 ///
+>         city8 api_city8 api_state8 api_zip_code8 censusblockid8 city9 api_cit
+> y9 api_state9 api_zip_code9 censusblockid9 ///
+>         sbac_ela sbac_math mergeSBAC ss_cst_ela1 ss_cst_math1 ss_cst_ela2 ss_
+> cst_math2 numTests testid mergeCST ///
+>         effective_date2 zip_code2 effective_date3 zip_code3 effective_date4 z
+> ip_code4 effective_date5 zip_code5 effective_date6 zip_code6 effective_date7 
+> zip_code7 effective_date8 zip_code8 effective_date9 zip_code9 mergeAddresses 
+> ///
+>         ethnicitydescription gendercode parentedulevelname preferredlocationn
+> ame schoollocationname studentbirthcountry studentusschoolfirstattenddate lan
+> guageclasscode homelanguagedescription studentspedflag studentgiftedprogramde
+> scription studentpovertyindicator overallperformancelevelnameELA overallperfo
+> rmancelevelnameMath testnameela1 testnamemath1 testnameela2 testnamemath2 per
+> f_cst_ela1 perf_cst_math1 perf_cst_ela2 perf_cst_math2 ///
+>         sixthGradeAddress addressSix 
+ 44. 
+.     save $DTAFINAL/lausd_5thgrade_cohorts_`minYr'_`maxYr'.dta, replace
+ 45. 
+. end 
+
+. 
+. 
+. capture program drop prepApplications 
+
+. program define prepApplications
+  1. syntax, [minYr(int 2004) maxYr(int 2017)]
+  2. 
+. 
+.     use "$BUILD/magnet_rank.dta", clear
+  3.     **In this case these are the same because we want to know who apply to
+>  a magnet when they were in 5th year
+.     gen endyear = school_yr
+  4.     keep if choice_ranking ==1 
+  5.     keep if endyear >=`minYr' & endyear <= `maxYr'
+  6.     keep if stu_grade==6
+  7. 
+. 
+.     save $DTAFINAL/applications_5thgrade_cohorts_`minYr'_`maxYr'.dta, replace
+  8. end 
+
+. 
+. 
+. 
+. /****************************************************************************
+> ****
+> * isolateSchools 
+> * Description: There are many programs middle school students apply to that a
+> re 
+> * elementary programs or other highly gifted programs with additional screeni
+> ng 
+> * criteria. Drop these programs and keep only those that are middle school ma
+> gnets. 
+> * This will be the list of magnets that we use moving forward. 
+> *****************************************************************************
+> ***/
+. capture program drop isolateSchools
+
+. program define isolateSchools
+  1. syntax, [minYr(int 2004) maxYr(int 2017)]
+  2. 
+.     use $DTAFINAL/applications_5thgrade_cohorts_`minYr'_`maxYr'.dta, clear 
+  3.     drop if regexm(mag_name_ , "MS")
+  4.     drop if regexm(mag_name_ , " EL") | regexm(mag_name_ , " CM") | regexm
+> (mag_name_ , "ACAD")
+  5.     drop if regexm(mag_name_ , " CA") | regexm(mag_name_ , " LC") | regexm
+> (mag_name_ , "ACAD")
+  6.     drop if regexm(mag_name_, "SVCS-CO")
+  7.     drop if regexm(mag_name_, "CONTRACT ISSUED")
+  8.     drop if regexm(mag_name_, "CHATSWORTH LAAMP")
+  9.     gen obs = 1 
+ 10.     bys mag_cd_: egen numApps = total(obs)
+ 11.     tab numApps
+ 12.     keep if numApps>15
+ 13. 
+.     bys endyear: egen nschools = nvals(mag_cd_ )
+ 14.     egen nschoolsall = nvals(mag_cd_ )
+ 15. 
+.     tab nschools 
+ 16.     tab nschoolsall 
+ 17. 
+.     * These magnets do not exist in enrollment data -- all are elementary sch
+> ools
+.     drop if mag_cd_== 1226901 | mag_cd_== 1493201 | mag_cd_== 1713702 | mag_c
+> d_== 1861402 | mag_cd_== 1875401 | mag_cd == 1206802  
+ 18.     
+.     * The following are highly gifted and have other screening criteria 
+.     drop if mag_cd == 1350702 | mag_cd == 1350703
+ 19.     
+.     * The following are elementary schools (checked manually)
+.     drop if inlist(mag_cd, 1250701, 1258902, 1274101, 1367102, 1461602, 15315
+> 02, 1687502)
+ 20.     
+.     * Ryan: Between 2009 and 2013, mag_name_has trailing spaces (e.g., "LA MA
+> G " instead of "LA MAG")
+.     * Remove the trailing spaces
+.     replace mag_name_ =  trim(mag_name_)        
+ 21.     contract mag_cd_ mag_name_ 
+ 22.     rename mag_cd_ schoolcostcentercode
+ 23.    
+.      drop if missing(schoolcostcentercode)
+ 24.     save $DTAFINAL/magnet_codes_`minYr'_`maxYr'.dta, replace
+ 25. end 
+
+. 
+. 
+. capture program drop isolateApplications 
+
+. program define isolateApplications
+  1. syntax, [minYr(int 2004) maxYr(int 2017)]
+  2. 
+.     set sortseed 123456 
+  3. 
+.     use $DTAFINAL/applications_5thgrade_cohorts_`minYr'_`maxYr'.dta, clear 
+  4.     drop if regexm(mag_name_ , "MS")
+  5.     drop if regexm(mag_name_ , " EL") | regexm(mag_name_ , " CM") | regexm
+> (mag_name_ , "ACAD")
+  6.     drop if regexm(mag_name_ , " CA") | regexm(mag_name_ , " LC") | regexm
+> (mag_name_ , "ACAD")
+  7. 
+.     duplicates drop studentpseudoid endyear, force 
+  8.     rename mag_cd_ schoolcostcentercode 
+  9.     merge m:1 schoolcostcentercode using $DTAFINAL/magnet_codes_`minYr'_`m
+> axYr'.dta, gen(mergeMagnet) keep(3)
+ 10.     rename schoolcostcentercode mag_cd_
+ 11.     save $DTAFINAL/applications_`minYr'_`maxYr'.dta, replace 
+ 12. 
+.     gen offer = mag_action_=="B"
+ 13.     keep if offer ==1 
+ 14.     rename mag_cd_ mag_offered_code
+ 15.     keep studentpseudoid endyear mag_offered
+ 16.     duplicates drop studentpseudoid endyear, force
+ 17.     save $DTAFINAL/offers_`minYr'_`maxYr'.dta, replace
+ 18. end 
+
+. 
+. 
+. capture program drop calculateDistances
+
+. program define calculateDistances
+  1. syntax, [cyear(string) minYr(int 2004) maxYr(int 2017)]
+  2. 
+.         cap  log close 
+  3. 
+.         import delimited "$ROOTSOURCE/rawdata/raw_base/pubschls.csv", clear 
+  4.         tempfile cde 
+  5.         save `cde' 
+  6. 
+.         import delimited "$ROOTSOURCE/rawdata/raw_base/blocks_la.csv", clear 
+> stringcols(_all) varnames(1)
+  7.         destring lon lat, replace  float 
+  8.         sort censusblockid 
+  9.         gen blockid = _n 
+ 10.         count 
+ 11.         local Nblocks = r(N)
+ 12.         format lat %20.0g
+ 13.         format lon %20.0g
+ 14.         cap drop block_name
+ 15.         rename (lat lon) (block_lat block_lon)
+ 16.         tempfile blocks 
+ 17.         save `blocks'
+ 18.         
+.         *2
+. 
+.                 use if endyear>=`minYr' & endyear<=(`maxYr'+1) using $RAWOUT/
+> lausd2001_2023_encoded.dta, clear 
+ 19.                 keep if gradecode==6 
+ 20.                  
+.                 collapse (count) enrollment = endyear, by(preferredlocationco
+> de schoolcostcentercode gradecode) 
+ 21.                 merge m:1 preferredlocationcode using "$ROOTSOURCE/rawdata
+> /raw_base/plocn_cde_xwalk.dta", gen(mergeCDEcodes) keep(3)            
+ 22.                 
+.                 * Four obs are unmatched (check website to manually assign)
+.                 replace cdecode = 0140046 if preferredlocationcode==7895
+ 23.                 replace cdecode = 6058028 if preferredlocationcode==7567
+ 24.                 replace cdecode = 6057962 if preferredlocationcode==7566
+ 25.                 tostring cdecode , replace
+ 26.                 replace cdecode = "0" + cdecode if length(cdecode )==6
+ 27.                 replace cdecode = "1964733" + cdecode
+ 28.                 gen cdscode = cdecode
+ 29.                 merge m:1 cdscode using `cde', keep(1 3) gen(mergeCDEInfo)
+ 30.   
+.                 * Keep only magnet programs that we have flagged 
+.                 * If _merge == 2 exists, some schools that are applied by stu
+> dents are problematic 
+.                 merge m:1 schoolcostcentercode using "$DTAFINAL/magnet_codes_
+> `minYr'_`maxYr'.dta", gen(mergeMagnet) keep(2 3)
+ 31.         
+. 
+.                 * create an alternate identifier to use in expand 
+.                 *drop preferredlocationcode
+.                 gen grade_level = gradecode 
+ 32.                 rename schoolcostcentercode school_number
+ 33.                 sort grade_level school_number
+ 34.                 bys grade_level: gen auxid = _n
+ 35. 
+.                 * keep relevent variables to merge later 
+.                 keep school_number  grade_level cdscode  latitude longitude  
+ 36.                 order  grade_level, after(school_number)
+ 37.                 foreach var of varlist cdscode latitude longitude {
+ 38.                         rename `var' receiving_`var'
+ 39.                 }
+ 40.                 gen feeder_grade = grade_level 
+ 41.                 replace grade_level = grade_level-1
+ 42. 
+.                 * drop additional Special Ed, Continuation, Opportunity and a
+> dult schools 
+.                 *drop if inlist(receiving_edopsname, "Community Day School", 
+> "Continuation School", "Opportunity School", "Special Education School")
+.                 tempfile receiving_schools 
+ 43.                 drop if receiving_latitude=="No Data" | receiving_longitud
+> e=="No Data"
+ 44.                 drop if receiving_latitude=="NA" | receiving_longitude=="N
+> A"
+ 45.                 destring  receiving_latitude receiving_longitude , replace
+>  
+ 46.                 save `receiving_schools' 
+ 47.                 
+. 
+.         use `receiving_schools', clear 
+ 48.         keep if grade_level==5
+ 49.         count 
+ 50.         
+.         local Nexpand = r(N) 
+ 51.         expand `Nblocks'
+ 52.         sort school_number
+ 53.         bys school_number: gen blockid = _n 
+ 54.         merge m:1 blockid using `blocks', gen(mergeBlocks) 
+ 55.         geodist block_lat block_lon receiving_latitude receiving_longitude
+> , gen(dist) miles  
+ 56.         sort censusblockid dist 
+ 57. 
+.         * Identify magnet schools
+. 
+.         cap destring receiving_cdscode , replace
+ 58.         cap format receiving_cdscode %20.0g 
+ 59.         drop feeder_grade pop receiving_cdscode
+ 60.         
+.         keep censusblockid block_lat block_lon dist school_number 
+ 61.         rename dist d_ 
+ 62.         reshape wide d_, i(censusblockid) j(school_number)
+ 63.         save $DTAFINAL/distance_to_magnets_`minYr'_`maxYr'.dta, replace 
+ 64. 
+. 
+. 
+. 
+. end 
+
+. 
+. 
+. 
+. capture program drop prepStructuralData
+
+. program define prepStructuralData
+  1. syntax, [minYr(int 2004) maxYr(int 2017)]       
+  2. 
+.         *AV 07/24/2025 when using the command getcensus i was getting a weird
+>  error about the 
+.         * directoy, this was my solution but may need to be adapted for diffe
+> rent users
+.         *! mkdir -p /home/avazque0/.local/share/getcensus/
+.         * ! ls -la /home/avazque0/.local/share/getcensus/
+.         ***
+.         getcensus B19013, geography(tract) sample(5) state("06") clear year(2
+> 020)
+  3.     gen censustract = state + county + tract 
+  4.     rename b19013_001e median_income 
+  5.     keep censustract median_income
+  6.     replace median_income = 0 if missing(median_income)
+  7.     replace median_income = median_income/10000
+  8.     tempfile census_tracts
+  9.     save `census_tracts', replace
+ 10. 
+.     
+.     
+.     
+.         local minYr =2004 
+ 11.         local maxYr = 2013
+ 12.     use $DTAFINAL/magnet_codes_`minYr'_`maxYr'.dta, clear 
+ 13.     levelsof schoolcostcentercode, local(mag_codes) clean 
+ 14.     
+.     use $DTAFINAL/lausd_5thgrade_cohorts_`minYr'_`maxYr'.dta, clear 
+ 15.     merge m:1 studentpseudoid endyear using $DTAFINAL/applications_`minYr'
+> _`maxYr'.dta, keepusing(mag_cd_) gen(mergeApps) keep(1 3)
+ 16.     rename mag_cd_ mag_applied_code 
+ 17.     merge m:1 studentpseudoid endyear using $DTAFINAL/offers_`minYr'_`maxY
+> r'.dta, keepusing(mag_offered_code) gen(mergeOffers) keep(1 3)
+ 18.      * Organize the data in a particular order for the structural code 
+.     local covs "female black white hispanic poverty el eng_home"
+ 19.     order endyear `covs', first 
+ 20.     local scores "F1math F1ela F2math F2ela F3math F3ela avg_Fmath avg_Fel
+> a"
+ 21.     order `scores', after(eng_home)
+ 22.     rename (z_math_all z_ela_all) (lag_math lag_ela)
+ 23.     bys endyear: egen mean_math = mean(lag_math)
+ 24.     bys endyear: egen mean_ela = mean(lag_ela)
+ 25.     replace lag_math = lag_math - mean_math
+ 26.     replace lag_ela = lag_ela - mean_ela
+ 27.     gen missing_math = missing(lag_math)
+ 28.     gen missing_ela = missing(lag_ela)
+ 29. 
+.     replace lag_math = 0 if missing_math == 1
+ 30.     replace lag_ela = 0 if missing_ela == 1
+ 31.     local lags "lag_math lag_ela missing_math missing_ela"
+ 32.     order `lags', after(avg_Fela)
+ 33. 
+.     gen Dchoice = next_scode 
+ 34.     order Dchoice, after(missing_ela)
+ 35. 
+.     * Create enrollment and application dummies 
+.     foreach code of local mag_codes{
+ 36.         gen D_`code' = next_scode == `code'
+ 37.     }
+ 38.     foreach code of local mag_codes{
+ 39.         gen A_`code' = mag_applied_code == `code'
+ 40.     }
+ 41.     foreach code of local mag_codes{
+ 42.         gen Z_`code' = mag_offered_code == `code'
+ 43.     }
+ 44.     gen Achoice= mag_applied_code
+ 45.     replace Achoice = 0 if missing(Achoice)
+ 46. 
+. 
+.     egen enroll_one = rowtotal(D_*)
+ 47.     gen D_0 = enroll_one ==0 
+ 48.     drop enroll_one
+ 49.     
+.     order Achoice, after(Dchoice)
+ 50.     order D_* A_* Z_*, after(Dchoice)
+ 51.     order D_0, after(Dchoice)
+ 52. 
+.     * Keep students with addresses 
+.     merge m:1 censusblockid using $DTAFINAL/distance_to_magnets_`minYr'_`maxY
+> r'.dta, gen(mergeDistance) keep(3)
+ 53. 
+.     order d_*, after(Z_1884201)
+ 54.     foreach code of local mag_codes{
+ 55.         replace d_`code' = d_`code' - nearest_schl_dist
+ 56.     }
+ 57. 
+.     order block_lat block_lon, after(d_1884201)
+ 58. 
+.     drop if missing(avg_Fela) | missing(avg_Fmath)
+ 59. 
+.      * DROP STUDENTS WHO ENROLLED IN A SCHOOL THEY DIDN'T RECEIVE AN OFFER FR
+> OM
+.     gen inconsistent_enrollment = 0
+ 60.     foreach code of local mag_codes {
+ 61.         replace inconsistent_enrollment = 1 if D_`code' == 1 & Z_`code' ==
+>  0
+ 62.     }
+ 63.     count if inconsistent_enrollment == 1
+ 64.     local dropped = r(N)
+ 65.     drop if inconsistent_enrollment == 1
+ 66.     drop inconsistent_enrollment
+ 67.     display "Dropped `dropped' students who enrolled in schools they didn'
+> t receive offers from"
+ 68. 
+. 
+.     drop studentclassofname esp_home ytdofattendeddays ytdofenrolleddays ytdo
+> fabsentdays otherabsencecount ytdofattendance appabsencecount mergeATT num_of
+> _suspensions_Class num_suspended_days_Class num_of_suspensions_In_school num_
+> suspended_days_In_school num_of_suspensions_Out_of_school num_suspended_days_
+> Out_of_school total_num_suspended_days total_num_suspensions mergeSuspensions
+>  gpa_fall gpa_spring mergeGPA
+ 69. 
+.     drop mergeAFC mergeMagnet mergeDLE mergeACS mergePWT mergeSAS cst_ela cst
+> _math z_cst_ela z_cst_math z_sbac_ela z_sbac_math
+ 70.     
+.     
+.     gen censustract = substr(censusblockid, 1, 11) 
+ 71.     merge m:1 censustract using `census_tracts', gen(mergeCensus) keep(1 3
+> )
+ 72. 
+.     gen any_missing_score = missing_math==1 | missing_ela ==1
+ 73.     gen current_in_mag = regexm(sname, "MAG") | regexm(sname, "MG") | rege
+> xm(sname, "SOCES") | regexm(sname, "LACES")
+ 74.     bys sname endyear : egen current_peer_quality =mean(lag_math)
+ 75.     
+.     * For now have a subset of applicants that apply to magnets that we have 
+> not flagged as magnets (3%)
+.     * Drop for now 
+.     gen applied = Achoice !=0
+ 76.     drop if applied==0 & appliedMagnet==1
+ 77. 
+.     sort endyear studentpseudoid
+ 78.     save $DTAFINAL/structural_data_`minYr'_`maxYr'.dta, replace
+ 79. 
+.     gen rand = runiform()
+ 80.     sort rand 
+ 81.     keep if rand <=0.25
+ 82.     drop rand 
+ 83.     sort endyear studentpseudoid
+ 84.     save $DTAFINAL/structural_data_`minYr'_`maxYr'_sample.dta, replace
+ 85. 
+. end 
+
+. 
+. 
+. 
+. capture program drop prepareSeats
+
+. program define prepareSeats 
+  1. syntax, [minYr(int 2004) maxYr(int 2017)]
+  2. 
+.     use $BUILD/magnet_cutoffs/prog_seats_app.dta, clear 
+  3.     rename mag_cd_ schoolcostcentercode 
+  4.     rename app_endyear endyear
+  5.     keep if endyear <=`maxYr' & endyear>=`minYr' 
+  6.     keep if stu_grade==6 
+  7.    
+. 
+.     merge m:1 schoolcostcentercode using $DTAFINAL/magnet_codes_`minYr'_`maxY
+> r'.dta, gen(mergeSchools) keep(3)
+  8.     preserve 
+  9.         keep endyear schoolcostcentercode stu_grade phbao seats_available
+ 10.         rename seats_available seats_ 
+ 11.         reshape wide seats_, i(endyear stu_grade phbao) j(schoolcostcenter
+> code)
+ 12.         ds seats_*
+ 13.         foreach var of varlist `r(varlist)'{
+ 14.             replace `var' = 0 if missing(`var')
+ 15.         }
+ 16.         save $DTAFINAL/prog_seats_`minYr'_`maxYr'.dta, replace
+ 17.     restore
+ 18.     preserve 
+ 19.         collapse (sum) applications seats_available, by(schoolcostcenterco
+> de)
+ 20.         gen p = seats_available / applications
+ 21.         replace p = 1 if seats_available> applications & !missing(seats_av
+> ailable)
+ 22.         save $DTAFINAL/aggregate_prog_admission_prob_`minYr'_`maxYr'.dta, 
+> replace
+ 23.     restore 
+ 24.  
+.     gen p_i = seats_available /applications 
+ 25.     replace p_i = 1 if seats_available> applications & !missing(seats_avai
+> lable)
+ 26.     replace p_i = 0 if missing(p_i)
+ 27.     
+. 
+.     keep endyear schoolcostcentercode stu_grade phbao p_i
+ 28. 
+.     rename p_i p_i_
+ 29.     reshape wide p_i_ , i(endyear stu_grade phbao ) j(schoolcostcentercode
+>  )
+ 30.     ds p_i_*
+ 31.     foreach var of varlist `r(varlist)'{
+ 32.         replace `var' = 0 if missing(`var')
+ 33.     }
+ 34.     
+. 
+.     save $DTAFINAL/prog_seats_app_`minYr'_`maxYr'.dta, replace
+ 35. 
+. end 
+
+. 
+. 
+. capture program drop student_p_i 
+
+. program define student_p_i 
+  1. syntax, [minYr(int 2004) maxYr(int 2017)]
+  2. 
+.     use $DTAFINAL/structural_data_`minYr'_`maxYr'.dta, clear
+  3.     gen phbao = (black==1 | asian==1 | hispanic==1 | other==1)
+  4.     gen stu_grade = 6 
+  5.     merge m:1 phbao stu_grade endyear using $DTAFINAL/prog_seats_app_`minY
+> r'_`maxYr'.dta, gen(mergeP) keep( 1 3)
+  6.     sort endyear studentpseudoid
+  7.     keep studentpseudoid endyear p_i_*
+  8. 
+.     save $DTAFINAL/student_p_i_`minYr'_`maxYr'.dta, replace
+  9. 
+.     use $DTAFINAL/structural_data_`minYr'_`maxYr'_sample.dta, clear
+ 10.     gen phbao = (black==1 | asian==1 | hispanic==1 | other==1)
+ 11.     gen stu_grade = 6 
+ 12.     merge m:1 phbao stu_grade endyear using $DTAFINAL/prog_seats_app_`minY
+> r'_`maxYr'.dta, gen(mergeP) keep(1 3)
+ 13.     sort endyear studentpseudoid
+ 14.     keep studentpseudoid endyear p_i_*
+ 15.     save $DTAFINAL/student_p_i_`minYr'_`maxYr'_sample.dta, replace
+ 16. end 
+
+. 
+. 
+. main
+  -------------------------------------------------------------- begin main ---
+  - set_paths
+    ------------------------------------------------------- begin set_paths ---
+    - if "`c(os)'"=="MacOSX" & "`c(username)'"=="cqcampos"{
+    = if "Unix"=="MacOSX" & "ryanlee22"=="cqcampos"{
+      global ROOT /Volumes/lausd/decentralized_choice
+      global BUILD /Volumes/lausd/build/output/data
+      global ROOTSOURCE "/Volumes/lausd/build/"
+      global magnet "/Volumes/lausd/magnet/"
+      }
+    - else{
+    - global ROOT "/project/lausd/decentralized_choice"
+    - global BUILD "/project/lausd/build/output/data"
+    - global ROOTSOURCE "/project/lausd/build/"
+    - global magnet "/project/lausd/magnet"
+    - }
+    - global DTARAW "$ROOT/rawdata"
+    = global DTARAW "/project/lausd/decentralized_choice/rawdata"
+    - global RAW $ROOT/data/raw
+    = global RAW /project/lausd/decentralized_choice/data/raw
+    - global DTAFINAL "$ROOT/data"
+    = global DTAFINAL "/project/lausd/decentralized_choice/data"
+    - global tables "$ROOT/tables"
+    = global tables "/project/lausd/decentralized_choice/tables"
+    - global figures "$ROOT/figures"
+    = global figures "/project/lausd/decentralized_choice/figures"
+    - global UE "$ROOTSOURCE/rawdata/Campos_Master_DUA/Unified_Enrollment"
+    = global UE "/project/lausd/build//rawdata/Campos_Master_DUA/Unified_Enroll
+> ment"
+    - global RAWOUT "$ROOTSOURCE/output/data"
+    = global RAWOUT "/project/lausd/build//output/data"
+    --------------------------------------------------------- end set_paths ---
+  - local minY = 2004
+  - local maxY = 2013
+  - prepStructuralData, minYr(`minY') maxYr(`maxY')
+  = prepStructuralData, minYr(2004) maxYr(2013)
+    ---------------------------------------------- begin prepStructuralData ---
+    - syntax, [minYr(int 2004) maxYr(int 2017)]
+    - getcensus B19013, geography(tract) sample(5) state("06") clear year(2020)
+You have not provided an API key. Without a key, you are limited to 500 API
+queries per day. To use an API key, specify key() or store your API key in a
+global macro named censuskey in your profile.do.
+(11 vars, 9,129 obs)
+ Link to data for 2020
+Variables labeled using data dictionary for 2020.
+One or more variable labels were truncated. For full descriptions, list the
+variable notes.
+    - gen censustract = state + county + tract
+    - rename b19013_001e median_income
+    - keep censustract median_income
+    - replace median_income = 0 if missing(median_income)
+(127 real changes made)
+    - replace median_income = median_income/10000
+variable median_income was long now double
+(9,002 real changes made)
+    - tempfile census_tracts
+    - save `census_tracts', replace
+    = save /scratch/ryanlee22/15095978/St1455951.000002, replace
+(file /scratch/ryanlee22/15095978/St1455951.000002 not found)
+file /scratch/ryanlee22/15095978/St1455951.000002 saved as .dta format
+    - local minYr =2004
+    - local maxYr = 2013
+    - use $DTAFINAL/magnet_codes_`minYr'_`maxYr'.dta, clear
+    = use /project/lausd/decentralized_choice/data/magnet_codes_2004_2013.dta, 
+> clear
+    - levelsof schoolcostcentercode, local(mag_codes) clean
+1331101 1350001 1521901 1643802 1713701 1739001 1802802 1803802 1804702 1804703
+>  1806002 1806602 1807502 1808002 1810302 1810702 1811002 1811202 1811802 1811
+> 803 1812702 1813702 1815102 1816802 1817902 1818202 1820801 1820802 1820803 1
+> 821702 1822602 1823502 1823702 1824002 1825502 1825902 1826802 1827202 183210
+> 2 1832103 1835202 1835402 1835602 1836302 1838702 1839601 1839602 1839603 184
+> 2502 1849301 1849302 1874101 1884201
+    - use $DTAFINAL/lausd_5thgrade_cohorts_`minYr'_`maxYr'.dta, clear
+    = use /project/lausd/decentralized_choice/data/lausd_5thgrade_cohorts_2004_
+> 2013.dta, clear
+    - merge m:1 studentpseudoid endyear using $DTAFINAL/applications_`minYr'_`m
+> axYr'.dta, keepusing(mag_cd_) gen(mergeApps) keep(1 3)
+    = merge m:1 studentpseudoid endyear using /project/lausd/decentralized_choi
+> ce/data/applications_2004_2013.dta, keepusing(mag_cd_) gen(mergeApps) keep(1 
+> 3)
+(label _merge already defined)
+
+    Result                      Number of obs
+    -----------------------------------------
+    Not matched                       476,285
+        from master                   476,285  (mergeApps==1)
+        from using                          0  (mergeApps==2)
+
+    Matched                            73,312  (mergeApps==3)
+    -----------------------------------------
+    - rename mag_cd_ mag_applied_code
+    - merge m:1 studentpseudoid endyear using $DTAFINAL/offers_`minYr'_`maxYr'.
+> dta, keepusing(mag_offered_code) gen(mergeOffers) keep(1 3)
+    = merge m:1 studentpseudoid endyear using /project/lausd/decentralized_choi
+> ce/data/offers_2004_2013.dta, keepusing(mag_offered_code) gen(mergeOffers) ke
+> ep(1 3)
+
+    Result                      Number of obs
+    -----------------------------------------
+    Not matched                       515,084
+        from master                   515,084  (mergeOffers==1)
+        from using                          0  (mergeOffers==2)
+
+    Matched                            34,513  (mergeOffers==3)
+    -----------------------------------------
+    - local covs "female black white hispanic poverty el eng_home"
+    - order endyear `covs', first
+    = order endyear female black white hispanic poverty el eng_home, first
+    - local scores "F1math F1ela F2math F2ela F3math F3ela avg_Fmath avg_Fela"
+    - order `scores', after(eng_home)
+    = order F1math F1ela F2math F2ela F3math F3ela avg_Fmath avg_Fela, after(en
+> g_home)
+    - rename (z_math_all z_ela_all) (lag_math lag_ela)
+    - bys endyear: egen mean_math = mean(lag_math)
+    - bys endyear: egen mean_ela = mean(lag_ela)
+    - replace lag_math = lag_math - mean_math
+(463,221 real changes made)
+    - replace lag_ela = lag_ela - mean_ela
+(418,047 real changes made)
+    - gen missing_math = missing(lag_math)
+    - gen missing_ela = missing(lag_ela)
+    - replace lag_math = 0 if missing_math == 1
+(61,645 real changes made)
+    - replace lag_ela = 0 if missing_ela == 1
+(63,079 real changes made)
+    - local lags "lag_math lag_ela missing_math missing_ela"
+    - order `lags', after(avg_Fela)
+    = order lag_math lag_ela missing_math missing_ela, after(avg_Fela)
+    - gen Dchoice = next_scode
+(74,160 missing values generated)
+    - order Dchoice, after(missing_ela)
+    - foreach code of local mag_codes{
+    - gen D_`code' = next_scode == `code'
+    = gen D_1331101 = next_scode == 1331101
+    - }
+    - gen D_`code' = next_scode == `code'
+    = gen D_1350001 = next_scode == 1350001
+    - }
+    - gen D_`code' = next_scode == `code'
+    = gen D_1521901 = next_scode == 1521901
+    - }
+    - gen D_`code' = next_scode == `code'
+    = gen D_1643802 = next_scode == 1643802
+    - }
+    - gen D_`code' = next_scode == `code'
+    = gen D_1713701 = next_scode == 1713701
+    - }
+    - gen D_`code' = next_scode == `code'
+    = gen D_1739001 = next_scode == 1739001
+    - }
+    - gen D_`code' = next_scode == `code'
+    = gen D_1802802 = next_scode == 1802802
+    - }
+    - gen D_`code' = next_scode == `code'
+    = gen D_1803802 = next_scode == 1803802
+    - }
+    - gen D_`code' = next_scode == `code'
+    = gen D_1804702 = next_scode == 1804702
+    - }
+    - gen D_`code' = next_scode == `code'
+    = gen D_1804703 = next_scode == 1804703
+    - }
+    - gen D_`code' = next_scode == `code'
+    = gen D_1806002 = next_scode == 1806002
+    - }
+    - gen D_`code' = next_scode == `code'
+    = gen D_1806602 = next_scode == 1806602
+    - }
+    - gen D_`code' = next_scode == `code'
+    = gen D_1807502 = next_scode == 1807502
+    - }
+    - gen D_`code' = next_scode == `code'
+    = gen D_1808002 = next_scode == 1808002
+    - }
+    - gen D_`code' = next_scode == `code'
+    = gen D_1810302 = next_scode == 1810302
+    - }
+    - gen D_`code' = next_scode == `code'
+    = gen D_1810702 = next_scode == 1810702
+    - }
+    - gen D_`code' = next_scode == `code'
+    = gen D_1811002 = next_scode == 1811002
+    - }
+    - gen D_`code' = next_scode == `code'
+    = gen D_1811202 = next_scode == 1811202
+    - }
+    - gen D_`code' = next_scode == `code'
+    = gen D_1811802 = next_scode == 1811802
+    - }
+    - gen D_`code' = next_scode == `code'
+    = gen D_1811803 = next_scode == 1811803
+    - }
+    - gen D_`code' = next_scode == `code'
+    = gen D_1812702 = next_scode == 1812702
+    - }
+    - gen D_`code' = next_scode == `code'
+    = gen D_1813702 = next_scode == 1813702
+    - }
+    - gen D_`code' = next_scode == `code'
+    = gen D_1815102 = next_scode == 1815102
+    - }
+    - gen D_`code' = next_scode == `code'
+    = gen D_1816802 = next_scode == 1816802
+    - }
+    - gen D_`code' = next_scode == `code'
+    = gen D_1817902 = next_scode == 1817902
+    - }
+    - gen D_`code' = next_scode == `code'
+    = gen D_1818202 = next_scode == 1818202
+    - }
+    - gen D_`code' = next_scode == `code'
+    = gen D_1820801 = next_scode == 1820801
+    - }
+    - gen D_`code' = next_scode == `code'
+    = gen D_1820802 = next_scode == 1820802
+    - }
+    - gen D_`code' = next_scode == `code'
+    = gen D_1820803 = next_scode == 1820803
+    - }
+    - gen D_`code' = next_scode == `code'
+    = gen D_1821702 = next_scode == 1821702
+    - }
+    - gen D_`code' = next_scode == `code'
+    = gen D_1822602 = next_scode == 1822602
+    - }
+    - gen D_`code' = next_scode == `code'
+    = gen D_1823502 = next_scode == 1823502
+    - }
+    - gen D_`code' = next_scode == `code'
+    = gen D_1823702 = next_scode == 1823702
+    - }
+    - gen D_`code' = next_scode == `code'
+    = gen D_1824002 = next_scode == 1824002
+    - }
+    - gen D_`code' = next_scode == `code'
+    = gen D_1825502 = next_scode == 1825502
+    - }
+    - gen D_`code' = next_scode == `code'
+    = gen D_1825902 = next_scode == 1825902
+    - }
+    - gen D_`code' = next_scode == `code'
+    = gen D_1826802 = next_scode == 1826802
+    - }
+    - gen D_`code' = next_scode == `code'
+    = gen D_1827202 = next_scode == 1827202
+    - }
+    - gen D_`code' = next_scode == `code'
+    = gen D_1832102 = next_scode == 1832102
+    - }
+    - gen D_`code' = next_scode == `code'
+    = gen D_1832103 = next_scode == 1832103
+    - }
+    - gen D_`code' = next_scode == `code'
+    = gen D_1835202 = next_scode == 1835202
+    - }
+    - gen D_`code' = next_scode == `code'
+    = gen D_1835402 = next_scode == 1835402
+    - }
+    - gen D_`code' = next_scode == `code'
+    = gen D_1835602 = next_scode == 1835602
+    - }
+    - gen D_`code' = next_scode == `code'
+    = gen D_1836302 = next_scode == 1836302
+    - }
+    - gen D_`code' = next_scode == `code'
+    = gen D_1838702 = next_scode == 1838702
+    - }
+    - gen D_`code' = next_scode == `code'
+    = gen D_1839601 = next_scode == 1839601
+    - }
+    - gen D_`code' = next_scode == `code'
+    = gen D_1839602 = next_scode == 1839602
+    - }
+    - gen D_`code' = next_scode == `code'
+    = gen D_1839603 = next_scode == 1839603
+    - }
+    - gen D_`code' = next_scode == `code'
+    = gen D_1842502 = next_scode == 1842502
+    - }
+    - gen D_`code' = next_scode == `code'
+    = gen D_1849301 = next_scode == 1849301
+    - }
+    - gen D_`code' = next_scode == `code'
+    = gen D_1849302 = next_scode == 1849302
+    - }
+    - gen D_`code' = next_scode == `code'
+    = gen D_1874101 = next_scode == 1874101
+    - }
+    - gen D_`code' = next_scode == `code'
+    = gen D_1884201 = next_scode == 1884201
+    - }
+    - foreach code of local mag_codes{
+    - gen A_`code' = mag_applied_code == `code'
+    = gen A_1331101 = mag_applied_code == 1331101
+    - }
+    - gen A_`code' = mag_applied_code == `code'
+    = gen A_1350001 = mag_applied_code == 1350001
+    - }
+    - gen A_`code' = mag_applied_code == `code'
+    = gen A_1521901 = mag_applied_code == 1521901
+    - }
+    - gen A_`code' = mag_applied_code == `code'
+    = gen A_1643802 = mag_applied_code == 1643802
+    - }
+    - gen A_`code' = mag_applied_code == `code'
+    = gen A_1713701 = mag_applied_code == 1713701
+    - }
+    - gen A_`code' = mag_applied_code == `code'
+    = gen A_1739001 = mag_applied_code == 1739001
+    - }
+    - gen A_`code' = mag_applied_code == `code'
+    = gen A_1802802 = mag_applied_code == 1802802
+    - }
+    - gen A_`code' = mag_applied_code == `code'
+    = gen A_1803802 = mag_applied_code == 1803802
+    - }
+    - gen A_`code' = mag_applied_code == `code'
+    = gen A_1804702 = mag_applied_code == 1804702
+    - }
+    - gen A_`code' = mag_applied_code == `code'
+    = gen A_1804703 = mag_applied_code == 1804703
+    - }
+    - gen A_`code' = mag_applied_code == `code'
+    = gen A_1806002 = mag_applied_code == 1806002
+    - }
+    - gen A_`code' = mag_applied_code == `code'
+    = gen A_1806602 = mag_applied_code == 1806602
+    - }
+    - gen A_`code' = mag_applied_code == `code'
+    = gen A_1807502 = mag_applied_code == 1807502
+    - }
+    - gen A_`code' = mag_applied_code == `code'
+    = gen A_1808002 = mag_applied_code == 1808002
+    - }
+    - gen A_`code' = mag_applied_code == `code'
+    = gen A_1810302 = mag_applied_code == 1810302
+    - }
+    - gen A_`code' = mag_applied_code == `code'
+    = gen A_1810702 = mag_applied_code == 1810702
+    - }
+    - gen A_`code' = mag_applied_code == `code'
+    = gen A_1811002 = mag_applied_code == 1811002
+    - }
+    - gen A_`code' = mag_applied_code == `code'
+    = gen A_1811202 = mag_applied_code == 1811202
+    - }
+    - gen A_`code' = mag_applied_code == `code'
+    = gen A_1811802 = mag_applied_code == 1811802
+    - }
+    - gen A_`code' = mag_applied_code == `code'
+    = gen A_1811803 = mag_applied_code == 1811803
+    - }
+    - gen A_`code' = mag_applied_code == `code'
+    = gen A_1812702 = mag_applied_code == 1812702
+    - }
+    - gen A_`code' = mag_applied_code == `code'
+    = gen A_1813702 = mag_applied_code == 1813702
+    - }
+    - gen A_`code' = mag_applied_code == `code'
+    = gen A_1815102 = mag_applied_code == 1815102
+    - }
+    - gen A_`code' = mag_applied_code == `code'
+    = gen A_1816802 = mag_applied_code == 1816802
+    - }
+    - gen A_`code' = mag_applied_code == `code'
+    = gen A_1817902 = mag_applied_code == 1817902
+    - }
+    - gen A_`code' = mag_applied_code == `code'
+    = gen A_1818202 = mag_applied_code == 1818202
+    - }
+    - gen A_`code' = mag_applied_code == `code'
+    = gen A_1820801 = mag_applied_code == 1820801
+    - }
+    - gen A_`code' = mag_applied_code == `code'
+    = gen A_1820802 = mag_applied_code == 1820802
+    - }
+    - gen A_`code' = mag_applied_code == `code'
+    = gen A_1820803 = mag_applied_code == 1820803
+    - }
+    - gen A_`code' = mag_applied_code == `code'
+    = gen A_1821702 = mag_applied_code == 1821702
+    - }
+    - gen A_`code' = mag_applied_code == `code'
+    = gen A_1822602 = mag_applied_code == 1822602
+    - }
+    - gen A_`code' = mag_applied_code == `code'
+    = gen A_1823502 = mag_applied_code == 1823502
+    - }
+    - gen A_`code' = mag_applied_code == `code'
+    = gen A_1823702 = mag_applied_code == 1823702
+    - }
+    - gen A_`code' = mag_applied_code == `code'
+    = gen A_1824002 = mag_applied_code == 1824002
+    - }
+    - gen A_`code' = mag_applied_code == `code'
+    = gen A_1825502 = mag_applied_code == 1825502
+    - }
+    - gen A_`code' = mag_applied_code == `code'
+    = gen A_1825902 = mag_applied_code == 1825902
+    - }
+    - gen A_`code' = mag_applied_code == `code'
+    = gen A_1826802 = mag_applied_code == 1826802
+    - }
+    - gen A_`code' = mag_applied_code == `code'
+    = gen A_1827202 = mag_applied_code == 1827202
+    - }
+    - gen A_`code' = mag_applied_code == `code'
+    = gen A_1832102 = mag_applied_code == 1832102
+    - }
+    - gen A_`code' = mag_applied_code == `code'
+    = gen A_1832103 = mag_applied_code == 1832103
+    - }
+    - gen A_`code' = mag_applied_code == `code'
+    = gen A_1835202 = mag_applied_code == 1835202
+    - }
+    - gen A_`code' = mag_applied_code == `code'
+    = gen A_1835402 = mag_applied_code == 1835402
+    - }
+    - gen A_`code' = mag_applied_code == `code'
+    = gen A_1835602 = mag_applied_code == 1835602
+    - }
+    - gen A_`code' = mag_applied_code == `code'
+    = gen A_1836302 = mag_applied_code == 1836302
+    - }
+    - gen A_`code' = mag_applied_code == `code'
+    = gen A_1838702 = mag_applied_code == 1838702
+    - }
+    - gen A_`code' = mag_applied_code == `code'
+    = gen A_1839601 = mag_applied_code == 1839601
+    - }
+    - gen A_`code' = mag_applied_code == `code'
+    = gen A_1839602 = mag_applied_code == 1839602
+    - }
+    - gen A_`code' = mag_applied_code == `code'
+    = gen A_1839603 = mag_applied_code == 1839603
+    - }
+    - gen A_`code' = mag_applied_code == `code'
+    = gen A_1842502 = mag_applied_code == 1842502
+    - }
+    - gen A_`code' = mag_applied_code == `code'
+    = gen A_1849301 = mag_applied_code == 1849301
+    - }
+    - gen A_`code' = mag_applied_code == `code'
+    = gen A_1849302 = mag_applied_code == 1849302
+    - }
+    - gen A_`code' = mag_applied_code == `code'
+    = gen A_1874101 = mag_applied_code == 1874101
+    - }
+    - gen A_`code' = mag_applied_code == `code'
+    = gen A_1884201 = mag_applied_code == 1884201
+    - }
+    - foreach code of local mag_codes{
+    - gen Z_`code' = mag_offered_code == `code'
+    = gen Z_1331101 = mag_offered_code == 1331101
+    - }
+    - gen Z_`code' = mag_offered_code == `code'
+    = gen Z_1350001 = mag_offered_code == 1350001
+    - }
+    - gen Z_`code' = mag_offered_code == `code'
+    = gen Z_1521901 = mag_offered_code == 1521901
+    - }
+    - gen Z_`code' = mag_offered_code == `code'
+    = gen Z_1643802 = mag_offered_code == 1643802
+    - }
+    - gen Z_`code' = mag_offered_code == `code'
+    = gen Z_1713701 = mag_offered_code == 1713701
+    - }
+    - gen Z_`code' = mag_offered_code == `code'
+    = gen Z_1739001 = mag_offered_code == 1739001
+    - }
+    - gen Z_`code' = mag_offered_code == `code'
+    = gen Z_1802802 = mag_offered_code == 1802802
+    - }
+    - gen Z_`code' = mag_offered_code == `code'
+    = gen Z_1803802 = mag_offered_code == 1803802
+    - }
+    - gen Z_`code' = mag_offered_code == `code'
+    = gen Z_1804702 = mag_offered_code == 1804702
+    - }
+    - gen Z_`code' = mag_offered_code == `code'
+    = gen Z_1804703 = mag_offered_code == 1804703
+    - }
+    - gen Z_`code' = mag_offered_code == `code'
+    = gen Z_1806002 = mag_offered_code == 1806002
+    - }
+    - gen Z_`code' = mag_offered_code == `code'
+    = gen Z_1806602 = mag_offered_code == 1806602
+    - }
+    - gen Z_`code' = mag_offered_code == `code'
+    = gen Z_1807502 = mag_offered_code == 1807502
+    - }
+    - gen Z_`code' = mag_offered_code == `code'
+    = gen Z_1808002 = mag_offered_code == 1808002
+    - }
+    - gen Z_`code' = mag_offered_code == `code'
+    = gen Z_1810302 = mag_offered_code == 1810302
+    - }
+    - gen Z_`code' = mag_offered_code == `code'
+    = gen Z_1810702 = mag_offered_code == 1810702
+    - }
+    - gen Z_`code' = mag_offered_code == `code'
+    = gen Z_1811002 = mag_offered_code == 1811002
+    - }
+    - gen Z_`code' = mag_offered_code == `code'
+    = gen Z_1811202 = mag_offered_code == 1811202
+    - }
+    - gen Z_`code' = mag_offered_code == `code'
+    = gen Z_1811802 = mag_offered_code == 1811802
+    - }
+    - gen Z_`code' = mag_offered_code == `code'
+    = gen Z_1811803 = mag_offered_code == 1811803
+    - }
+    - gen Z_`code' = mag_offered_code == `code'
+    = gen Z_1812702 = mag_offered_code == 1812702
+    - }
+    - gen Z_`code' = mag_offered_code == `code'
+    = gen Z_1813702 = mag_offered_code == 1813702
+    - }
+    - gen Z_`code' = mag_offered_code == `code'
+    = gen Z_1815102 = mag_offered_code == 1815102
+    - }
+    - gen Z_`code' = mag_offered_code == `code'
+    = gen Z_1816802 = mag_offered_code == 1816802
+    - }
+    - gen Z_`code' = mag_offered_code == `code'
+    = gen Z_1817902 = mag_offered_code == 1817902
+    - }
+    - gen Z_`code' = mag_offered_code == `code'
+    = gen Z_1818202 = mag_offered_code == 1818202
+    - }
+    - gen Z_`code' = mag_offered_code == `code'
+    = gen Z_1820801 = mag_offered_code == 1820801
+    - }
+    - gen Z_`code' = mag_offered_code == `code'
+    = gen Z_1820802 = mag_offered_code == 1820802
+    - }
+    - gen Z_`code' = mag_offered_code == `code'
+    = gen Z_1820803 = mag_offered_code == 1820803
+    - }
+    - gen Z_`code' = mag_offered_code == `code'
+    = gen Z_1821702 = mag_offered_code == 1821702
+    - }
+    - gen Z_`code' = mag_offered_code == `code'
+    = gen Z_1822602 = mag_offered_code == 1822602
+    - }
+    - gen Z_`code' = mag_offered_code == `code'
+    = gen Z_1823502 = mag_offered_code == 1823502
+    - }
+    - gen Z_`code' = mag_offered_code == `code'
+    = gen Z_1823702 = mag_offered_code == 1823702
+    - }
+    - gen Z_`code' = mag_offered_code == `code'
+    = gen Z_1824002 = mag_offered_code == 1824002
+    - }
+    - gen Z_`code' = mag_offered_code == `code'
+    = gen Z_1825502 = mag_offered_code == 1825502
+    - }
+    - gen Z_`code' = mag_offered_code == `code'
+    = gen Z_1825902 = mag_offered_code == 1825902
+    - }
+    - gen Z_`code' = mag_offered_code == `code'
+    = gen Z_1826802 = mag_offered_code == 1826802
+    - }
+    - gen Z_`code' = mag_offered_code == `code'
+    = gen Z_1827202 = mag_offered_code == 1827202
+    - }
+    - gen Z_`code' = mag_offered_code == `code'
+    = gen Z_1832102 = mag_offered_code == 1832102
+    - }
+    - gen Z_`code' = mag_offered_code == `code'
+    = gen Z_1832103 = mag_offered_code == 1832103
+    - }
+    - gen Z_`code' = mag_offered_code == `code'
+    = gen Z_1835202 = mag_offered_code == 1835202
+    - }
+    - gen Z_`code' = mag_offered_code == `code'
+    = gen Z_1835402 = mag_offered_code == 1835402
+    - }
+    - gen Z_`code' = mag_offered_code == `code'
+    = gen Z_1835602 = mag_offered_code == 1835602
+    - }
+    - gen Z_`code' = mag_offered_code == `code'
+    = gen Z_1836302 = mag_offered_code == 1836302
+    - }
+    - gen Z_`code' = mag_offered_code == `code'
+    = gen Z_1838702 = mag_offered_code == 1838702
+    - }
+    - gen Z_`code' = mag_offered_code == `code'
+    = gen Z_1839601 = mag_offered_code == 1839601
+    - }
+    - gen Z_`code' = mag_offered_code == `code'
+    = gen Z_1839602 = mag_offered_code == 1839602
+    - }
+    - gen Z_`code' = mag_offered_code == `code'
+    = gen Z_1839603 = mag_offered_code == 1839603
+    - }
+    - gen Z_`code' = mag_offered_code == `code'
+    = gen Z_1842502 = mag_offered_code == 1842502
+    - }
+    - gen Z_`code' = mag_offered_code == `code'
+    = gen Z_1849301 = mag_offered_code == 1849301
+    - }
+    - gen Z_`code' = mag_offered_code == `code'
+    = gen Z_1849302 = mag_offered_code == 1849302
+    - }
+    - gen Z_`code' = mag_offered_code == `code'
+    = gen Z_1874101 = mag_offered_code == 1874101
+    - }
+    - gen Z_`code' = mag_offered_code == `code'
+    = gen Z_1884201 = mag_offered_code == 1884201
+    - }
+    - gen Achoice= mag_applied_code
+(476,285 missing values generated)
+    - replace Achoice = 0 if missing(Achoice)
+(476,285 real changes made)
+    - egen enroll_one = rowtotal(D_*)
+    - gen D_0 = enroll_one ==0
+    - drop enroll_one
+    - order Achoice, after(Dchoice)
+    - order D_* A_* Z_*, after(Dchoice)
+    - order D_0, after(Dchoice)
+    - merge m:1 censusblockid using $DTAFINAL/distance_to_magnets_`minYr'_`maxY
+> r'.dta, gen(mergeDistance) keep(3)
+    = merge m:1 censusblockid using /project/lausd/decentralized_choice/data/di
+> stance_to_magnets_2004_2013.dta, gen(mergeDistance) keep(3)
+
+    Result                      Number of obs
+    -----------------------------------------
+    Not matched                             0
+    Matched                           412,541  (mergeDistance==3)
+    -----------------------------------------
+    - order d_*, after(Z_1884201)
+    - foreach code of local mag_codes{
+    - replace d_`code' = d_`code' - nearest_schl_dist
+    = replace d_1331101 = d_1331101 - nearest_schl_dist
+(412,541 real changes made)
+    - }
+    - replace d_`code' = d_`code' - nearest_schl_dist
+    = replace d_1350001 = d_1350001 - nearest_schl_dist
+(412,541 real changes made)
+    - }
+    - replace d_`code' = d_`code' - nearest_schl_dist
+    = replace d_1521901 = d_1521901 - nearest_schl_dist
+(412,541 real changes made)
+    - }
+    - replace d_`code' = d_`code' - nearest_schl_dist
+    = replace d_1643802 = d_1643802 - nearest_schl_dist
+(412,541 real changes made)
+    - }
+    - replace d_`code' = d_`code' - nearest_schl_dist
+    = replace d_1713701 = d_1713701 - nearest_schl_dist
+(412,541 real changes made)
+    - }
+    - replace d_`code' = d_`code' - nearest_schl_dist
+    = replace d_1739001 = d_1739001 - nearest_schl_dist
+(412,541 real changes made)
+    - }
+    - replace d_`code' = d_`code' - nearest_schl_dist
+    = replace d_1802802 = d_1802802 - nearest_schl_dist
+(412,541 real changes made)
+    - }
+    - replace d_`code' = d_`code' - nearest_schl_dist
+    = replace d_1803802 = d_1803802 - nearest_schl_dist
+(412,541 real changes made)
+    - }
+    - replace d_`code' = d_`code' - nearest_schl_dist
+    = replace d_1804702 = d_1804702 - nearest_schl_dist
+(412,541 real changes made)
+    - }
+    - replace d_`code' = d_`code' - nearest_schl_dist
+    = replace d_1804703 = d_1804703 - nearest_schl_dist
+(412,541 real changes made)
+    - }
+    - replace d_`code' = d_`code' - nearest_schl_dist
+    = replace d_1806002 = d_1806002 - nearest_schl_dist
+(412,541 real changes made)
+    - }
+    - replace d_`code' = d_`code' - nearest_schl_dist
+    = replace d_1806602 = d_1806602 - nearest_schl_dist
+(412,541 real changes made)
+    - }
+    - replace d_`code' = d_`code' - nearest_schl_dist
+    = replace d_1807502 = d_1807502 - nearest_schl_dist
+(412,541 real changes made)
+    - }
+    - replace d_`code' = d_`code' - nearest_schl_dist
+    = replace d_1808002 = d_1808002 - nearest_schl_dist
+(412,541 real changes made)
+    - }
+    - replace d_`code' = d_`code' - nearest_schl_dist
+    = replace d_1810302 = d_1810302 - nearest_schl_dist
+(412,541 real changes made)
+    - }
+    - replace d_`code' = d_`code' - nearest_schl_dist
+    = replace d_1810702 = d_1810702 - nearest_schl_dist
+(412,541 real changes made)
+    - }
+    - replace d_`code' = d_`code' - nearest_schl_dist
+    = replace d_1811002 = d_1811002 - nearest_schl_dist
+(412,541 real changes made)
+    - }
+    - replace d_`code' = d_`code' - nearest_schl_dist
+    = replace d_1811202 = d_1811202 - nearest_schl_dist
+(412,541 real changes made)
+    - }
+    - replace d_`code' = d_`code' - nearest_schl_dist
+    = replace d_1811802 = d_1811802 - nearest_schl_dist
+(412,541 real changes made)
+    - }
+    - replace d_`code' = d_`code' - nearest_schl_dist
+    = replace d_1811803 = d_1811803 - nearest_schl_dist
+(412,541 real changes made)
+    - }
+    - replace d_`code' = d_`code' - nearest_schl_dist
+    = replace d_1812702 = d_1812702 - nearest_schl_dist
+(412,541 real changes made)
+    - }
+    - replace d_`code' = d_`code' - nearest_schl_dist
+    = replace d_1813702 = d_1813702 - nearest_schl_dist
+(412,541 real changes made)
+    - }
+    - replace d_`code' = d_`code' - nearest_schl_dist
+    = replace d_1815102 = d_1815102 - nearest_schl_dist
+(412,541 real changes made)
+    - }
+    - replace d_`code' = d_`code' - nearest_schl_dist
+    = replace d_1816802 = d_1816802 - nearest_schl_dist
+(412,541 real changes made)
+    - }
+    - replace d_`code' = d_`code' - nearest_schl_dist
+    = replace d_1817902 = d_1817902 - nearest_schl_dist
+(412,541 real changes made)
+    - }
+    - replace d_`code' = d_`code' - nearest_schl_dist
+    = replace d_1818202 = d_1818202 - nearest_schl_dist
+(412,541 real changes made)
+    - }
+    - replace d_`code' = d_`code' - nearest_schl_dist
+    = replace d_1820801 = d_1820801 - nearest_schl_dist
+(412,541 real changes made)
+    - }
+    - replace d_`code' = d_`code' - nearest_schl_dist
+    = replace d_1820802 = d_1820802 - nearest_schl_dist
+(412,541 real changes made)
+    - }
+    - replace d_`code' = d_`code' - nearest_schl_dist
+    = replace d_1820803 = d_1820803 - nearest_schl_dist
+(412,541 real changes made)
+    - }
+    - replace d_`code' = d_`code' - nearest_schl_dist
+    = replace d_1821702 = d_1821702 - nearest_schl_dist
+(412,541 real changes made)
+    - }
+    - replace d_`code' = d_`code' - nearest_schl_dist
+    = replace d_1822602 = d_1822602 - nearest_schl_dist
+(412,541 real changes made)
+    - }
+    - replace d_`code' = d_`code' - nearest_schl_dist
+    = replace d_1823502 = d_1823502 - nearest_schl_dist
+(412,541 real changes made)
+    - }
+    - replace d_`code' = d_`code' - nearest_schl_dist
+    = replace d_1823702 = d_1823702 - nearest_schl_dist
+(412,541 real changes made)
+    - }
+    - replace d_`code' = d_`code' - nearest_schl_dist
+    = replace d_1824002 = d_1824002 - nearest_schl_dist
+(412,541 real changes made)
+    - }
+    - replace d_`code' = d_`code' - nearest_schl_dist
+    = replace d_1825502 = d_1825502 - nearest_schl_dist
+(412,541 real changes made)
+    - }
+    - replace d_`code' = d_`code' - nearest_schl_dist
+    = replace d_1825902 = d_1825902 - nearest_schl_dist
+(412,541 real changes made)
+    - }
+    - replace d_`code' = d_`code' - nearest_schl_dist
+    = replace d_1826802 = d_1826802 - nearest_schl_dist
+(412,541 real changes made)
+    - }
+    - replace d_`code' = d_`code' - nearest_schl_dist
+    = replace d_1827202 = d_1827202 - nearest_schl_dist
+(412,541 real changes made)
+    - }
+    - replace d_`code' = d_`code' - nearest_schl_dist
+    = replace d_1832102 = d_1832102 - nearest_schl_dist
+(412,541 real changes made)
+    - }
+    - replace d_`code' = d_`code' - nearest_schl_dist
+    = replace d_1832103 = d_1832103 - nearest_schl_dist
+(412,541 real changes made)
+    - }
+    - replace d_`code' = d_`code' - nearest_schl_dist
+    = replace d_1835202 = d_1835202 - nearest_schl_dist
+(412,541 real changes made)
+    - }
+    - replace d_`code' = d_`code' - nearest_schl_dist
+    = replace d_1835402 = d_1835402 - nearest_schl_dist
+(412,541 real changes made)
+    - }
+    - replace d_`code' = d_`code' - nearest_schl_dist
+    = replace d_1835602 = d_1835602 - nearest_schl_dist
+(412,541 real changes made)
+    - }
+    - replace d_`code' = d_`code' - nearest_schl_dist
+    = replace d_1836302 = d_1836302 - nearest_schl_dist
+(412,541 real changes made)
+    - }
+    - replace d_`code' = d_`code' - nearest_schl_dist
+    = replace d_1838702 = d_1838702 - nearest_schl_dist
+(412,541 real changes made)
+    - }
+    - replace d_`code' = d_`code' - nearest_schl_dist
+    = replace d_1839601 = d_1839601 - nearest_schl_dist
+(412,541 real changes made)
+    - }
+    - replace d_`code' = d_`code' - nearest_schl_dist
+    = replace d_1839602 = d_1839602 - nearest_schl_dist
+(412,541 real changes made)
+    - }
+    - replace d_`code' = d_`code' - nearest_schl_dist
+    = replace d_1839603 = d_1839603 - nearest_schl_dist
+(412,541 real changes made)
+    - }
+    - replace d_`code' = d_`code' - nearest_schl_dist
+    = replace d_1842502 = d_1842502 - nearest_schl_dist
+(412,541 real changes made)
+    - }
+    - replace d_`code' = d_`code' - nearest_schl_dist
+    = replace d_1849301 = d_1849301 - nearest_schl_dist
+(412,541 real changes made)
+    - }
+    - replace d_`code' = d_`code' - nearest_schl_dist
+    = replace d_1849302 = d_1849302 - nearest_schl_dist
+(412,541 real changes made)
+    - }
+    - replace d_`code' = d_`code' - nearest_schl_dist
+    = replace d_1874101 = d_1874101 - nearest_schl_dist
+(412,541 real changes made)
+    - }
+    - replace d_`code' = d_`code' - nearest_schl_dist
+    = replace d_1884201 = d_1884201 - nearest_schl_dist
+(412,541 real changes made)
+    - }
+    - order block_lat block_lon, after(d_1884201)
+    - drop if missing(avg_Fela) | missing(avg_Fmath)
+(38,009 observations deleted)
+    - gen inconsistent_enrollment = 0
+    - foreach code of local mag_codes {
+    - replace inconsistent_enrollment = 1 if D_`code' == 1 & Z_`code' == 0
+    = replace inconsistent_enrollment = 1 if D_1331101 == 1 & Z_1331101 == 0
+(431 real changes made)
+    - }
+    - replace inconsistent_enrollment = 1 if D_`code' == 1 & Z_`code' == 0
+    = replace inconsistent_enrollment = 1 if D_1350001 == 1 & Z_1350001 == 0
+(282 real changes made)
+    - }
+    - replace inconsistent_enrollment = 1 if D_`code' == 1 & Z_`code' == 0
+    = replace inconsistent_enrollment = 1 if D_1521901 == 1 & Z_1521901 == 0
+(14 real changes made)
+    - }
+    - replace inconsistent_enrollment = 1 if D_`code' == 1 & Z_`code' == 0
+    = replace inconsistent_enrollment = 1 if D_1643802 == 1 & Z_1643802 == 0
+(61 real changes made)
+    - }
+    - replace inconsistent_enrollment = 1 if D_`code' == 1 & Z_`code' == 0
+    = replace inconsistent_enrollment = 1 if D_1713701 == 1 & Z_1713701 == 0
+(788 real changes made)
+    - }
+    - replace inconsistent_enrollment = 1 if D_`code' == 1 & Z_`code' == 0
+    = replace inconsistent_enrollment = 1 if D_1739001 == 1 & Z_1739001 == 0
+(395 real changes made)
+    - }
+    - replace inconsistent_enrollment = 1 if D_`code' == 1 & Z_`code' == 0
+    = replace inconsistent_enrollment = 1 if D_1802802 == 1 & Z_1802802 == 0
+(307 real changes made)
+    - }
+    - replace inconsistent_enrollment = 1 if D_`code' == 1 & Z_`code' == 0
+    = replace inconsistent_enrollment = 1 if D_1803802 == 1 & Z_1803802 == 0
+(218 real changes made)
+    - }
+    - replace inconsistent_enrollment = 1 if D_`code' == 1 & Z_`code' == 0
+    = replace inconsistent_enrollment = 1 if D_1804702 == 1 & Z_1804702 == 0
+(91 real changes made)
+    - }
+    - replace inconsistent_enrollment = 1 if D_`code' == 1 & Z_`code' == 0
+    = replace inconsistent_enrollment = 1 if D_1804703 == 1 & Z_1804703 == 0
+(185 real changes made)
+    - }
+    - replace inconsistent_enrollment = 1 if D_`code' == 1 & Z_`code' == 0
+    = replace inconsistent_enrollment = 1 if D_1806002 == 1 & Z_1806002 == 0
+(245 real changes made)
+    - }
+    - replace inconsistent_enrollment = 1 if D_`code' == 1 & Z_`code' == 0
+    = replace inconsistent_enrollment = 1 if D_1806602 == 1 & Z_1806602 == 0
+(192 real changes made)
+    - }
+    - replace inconsistent_enrollment = 1 if D_`code' == 1 & Z_`code' == 0
+    = replace inconsistent_enrollment = 1 if D_1807502 == 1 & Z_1807502 == 0
+(311 real changes made)
+    - }
+    - replace inconsistent_enrollment = 1 if D_`code' == 1 & Z_`code' == 0
+    = replace inconsistent_enrollment = 1 if D_1808002 == 1 & Z_1808002 == 0
+(96 real changes made)
+    - }
+    - replace inconsistent_enrollment = 1 if D_`code' == 1 & Z_`code' == 0
+    = replace inconsistent_enrollment = 1 if D_1810302 == 1 & Z_1810302 == 0
+(192 real changes made)
+    - }
+    - replace inconsistent_enrollment = 1 if D_`code' == 1 & Z_`code' == 0
+    = replace inconsistent_enrollment = 1 if D_1810702 == 1 & Z_1810702 == 0
+(146 real changes made)
+    - }
+    - replace inconsistent_enrollment = 1 if D_`code' == 1 & Z_`code' == 0
+    = replace inconsistent_enrollment = 1 if D_1811002 == 1 & Z_1811002 == 0
+(241 real changes made)
+    - }
+    - replace inconsistent_enrollment = 1 if D_`code' == 1 & Z_`code' == 0
+    = replace inconsistent_enrollment = 1 if D_1811202 == 1 & Z_1811202 == 0
+(114 real changes made)
+    - }
+    - replace inconsistent_enrollment = 1 if D_`code' == 1 & Z_`code' == 0
+    = replace inconsistent_enrollment = 1 if D_1811802 == 1 & Z_1811802 == 0
+(50 real changes made)
+    - }
+    - replace inconsistent_enrollment = 1 if D_`code' == 1 & Z_`code' == 0
+    = replace inconsistent_enrollment = 1 if D_1811803 == 1 & Z_1811803 == 0
+(41 real changes made)
+    - }
+    - replace inconsistent_enrollment = 1 if D_`code' == 1 & Z_`code' == 0
+    = replace inconsistent_enrollment = 1 if D_1812702 == 1 & Z_1812702 == 0
+(169 real changes made)
+    - }
+    - replace inconsistent_enrollment = 1 if D_`code' == 1 & Z_`code' == 0
+    = replace inconsistent_enrollment = 1 if D_1813702 == 1 & Z_1813702 == 0
+(247 real changes made)
+    - }
+    - replace inconsistent_enrollment = 1 if D_`code' == 1 & Z_`code' == 0
+    = replace inconsistent_enrollment = 1 if D_1815102 == 1 & Z_1815102 == 0
+(337 real changes made)
+    - }
+    - replace inconsistent_enrollment = 1 if D_`code' == 1 & Z_`code' == 0
+    = replace inconsistent_enrollment = 1 if D_1816802 == 1 & Z_1816802 == 0
+(105 real changes made)
+    - }
+    - replace inconsistent_enrollment = 1 if D_`code' == 1 & Z_`code' == 0
+    = replace inconsistent_enrollment = 1 if D_1817902 == 1 & Z_1817902 == 0
+(128 real changes made)
+    - }
+    - replace inconsistent_enrollment = 1 if D_`code' == 1 & Z_`code' == 0
+    = replace inconsistent_enrollment = 1 if D_1818202 == 1 & Z_1818202 == 0
+(150 real changes made)
+    - }
+    - replace inconsistent_enrollment = 1 if D_`code' == 1 & Z_`code' == 0
+    = replace inconsistent_enrollment = 1 if D_1820801 == 1 & Z_1820801 == 0
+(3,729 real changes made)
+    - }
+    - replace inconsistent_enrollment = 1 if D_`code' == 1 & Z_`code' == 0
+    = replace inconsistent_enrollment = 1 if D_1820802 == 1 & Z_1820802 == 0
+(263 real changes made)
+    - }
+    - replace inconsistent_enrollment = 1 if D_`code' == 1 & Z_`code' == 0
+    = replace inconsistent_enrollment = 1 if D_1820803 == 1 & Z_1820803 == 0
+(122 real changes made)
+    - }
+    - replace inconsistent_enrollment = 1 if D_`code' == 1 & Z_`code' == 0
+    = replace inconsistent_enrollment = 1 if D_1821702 == 1 & Z_1821702 == 0
+(232 real changes made)
+    - }
+    - replace inconsistent_enrollment = 1 if D_`code' == 1 & Z_`code' == 0
+    = replace inconsistent_enrollment = 1 if D_1822602 == 1 & Z_1822602 == 0
+(286 real changes made)
+    - }
+    - replace inconsistent_enrollment = 1 if D_`code' == 1 & Z_`code' == 0
+    = replace inconsistent_enrollment = 1 if D_1823502 == 1 & Z_1823502 == 0
+(326 real changes made)
+    - }
+    - replace inconsistent_enrollment = 1 if D_`code' == 1 & Z_`code' == 0
+    = replace inconsistent_enrollment = 1 if D_1823702 == 1 & Z_1823702 == 0
+(156 real changes made)
+    - }
+    - replace inconsistent_enrollment = 1 if D_`code' == 1 & Z_`code' == 0
+    = replace inconsistent_enrollment = 1 if D_1824002 == 1 & Z_1824002 == 0
+(107 real changes made)
+    - }
+    - replace inconsistent_enrollment = 1 if D_`code' == 1 & Z_`code' == 0
+    = replace inconsistent_enrollment = 1 if D_1825502 == 1 & Z_1825502 == 0
+(196 real changes made)
+    - }
+    - replace inconsistent_enrollment = 1 if D_`code' == 1 & Z_`code' == 0
+    = replace inconsistent_enrollment = 1 if D_1825902 == 1 & Z_1825902 == 0
+(244 real changes made)
+    - }
+    - replace inconsistent_enrollment = 1 if D_`code' == 1 & Z_`code' == 0
+    = replace inconsistent_enrollment = 1 if D_1826802 == 1 & Z_1826802 == 0
+(155 real changes made)
+    - }
+    - replace inconsistent_enrollment = 1 if D_`code' == 1 & Z_`code' == 0
+    = replace inconsistent_enrollment = 1 if D_1827202 == 1 & Z_1827202 == 0
+(296 real changes made)
+    - }
+    - replace inconsistent_enrollment = 1 if D_`code' == 1 & Z_`code' == 0
+    = replace inconsistent_enrollment = 1 if D_1832102 == 1 & Z_1832102 == 0
+(216 real changes made)
+    - }
+    - replace inconsistent_enrollment = 1 if D_`code' == 1 & Z_`code' == 0
+    = replace inconsistent_enrollment = 1 if D_1832103 == 1 & Z_1832103 == 0
+(97 real changes made)
+    - }
+    - replace inconsistent_enrollment = 1 if D_`code' == 1 & Z_`code' == 0
+    = replace inconsistent_enrollment = 1 if D_1835202 == 1 & Z_1835202 == 0
+(141 real changes made)
+    - }
+    - replace inconsistent_enrollment = 1 if D_`code' == 1 & Z_`code' == 0
+    = replace inconsistent_enrollment = 1 if D_1835402 == 1 & Z_1835402 == 0
+(267 real changes made)
+    - }
+    - replace inconsistent_enrollment = 1 if D_`code' == 1 & Z_`code' == 0
+    = replace inconsistent_enrollment = 1 if D_1835602 == 1 & Z_1835602 == 0
+(235 real changes made)
+    - }
+    - replace inconsistent_enrollment = 1 if D_`code' == 1 & Z_`code' == 0
+    = replace inconsistent_enrollment = 1 if D_1836302 == 1 & Z_1836302 == 0
+(484 real changes made)
+    - }
+    - replace inconsistent_enrollment = 1 if D_`code' == 1 & Z_`code' == 0
+    = replace inconsistent_enrollment = 1 if D_1838702 == 1 & Z_1838702 == 0
+(13 real changes made)
+    - }
+    - replace inconsistent_enrollment = 1 if D_`code' == 1 & Z_`code' == 0
+    = replace inconsistent_enrollment = 1 if D_1839601 == 1 & Z_1839601 == 0
+(5,289 real changes made)
+    - }
+    - replace inconsistent_enrollment = 1 if D_`code' == 1 & Z_`code' == 0
+    = replace inconsistent_enrollment = 1 if D_1839602 == 1 & Z_1839602 == 0
+(12 real changes made)
+    - }
+    - replace inconsistent_enrollment = 1 if D_`code' == 1 & Z_`code' == 0
+    = replace inconsistent_enrollment = 1 if D_1839603 == 1 & Z_1839603 == 0
+(6 real changes made)
+    - }
+    - replace inconsistent_enrollment = 1 if D_`code' == 1 & Z_`code' == 0
+    = replace inconsistent_enrollment = 1 if D_1842502 == 1 & Z_1842502 == 0
+(88 real changes made)
+    - }
+    - replace inconsistent_enrollment = 1 if D_`code' == 1 & Z_`code' == 0
+    = replace inconsistent_enrollment = 1 if D_1849301 == 1 & Z_1849301 == 0
+(1,327 real changes made)
+    - }
+    - replace inconsistent_enrollment = 1 if D_`code' == 1 & Z_`code' == 0
+    = replace inconsistent_enrollment = 1 if D_1849302 == 1 & Z_1849302 == 0
+(250 real changes made)
+    - }
+    - replace inconsistent_enrollment = 1 if D_`code' == 1 & Z_`code' == 0
+    = replace inconsistent_enrollment = 1 if D_1874101 == 1 & Z_1874101 == 0
+(328 real changes made)
+    - }
+    - replace inconsistent_enrollment = 1 if D_`code' == 1 & Z_`code' == 0
+    = replace inconsistent_enrollment = 1 if D_1884201 == 1 & Z_1884201 == 0
+(1,833 real changes made)
+    - }
+    - count if inconsistent_enrollment == 1
+  22,234
+    - local dropped = r(N)
+    - drop if inconsistent_enrollment == 1
+(22,234 observations deleted)
+    - drop inconsistent_enrollment
+    - display "Dropped `dropped' students who enrolled in schools they didn't r
+> eceive offers from"
+    = display "Dropped 22234 students who enrolled in schools they didn't recei
+> ve offers from"
+Dropped 22234 students who enrolled in schools they didn't receive offers from
+    - drop studentclassofname esp_home ytdofattendeddays ytdofenrolleddays ytdo
+> fabsentdays otherabsencecount ytdofattendance appabsencecount mergeATT num_of
+> _suspensions_Class num_suspended_days_Class num_of_suspensions_In_school num_
+> suspended_days_In_school num_of_suspensions_Out_of_school num_suspended_days_
+> Out_of_school total_num_suspended_days total_num_suspensions mergeSuspensions
+>  gpa_fall gpa_spring mergeGPA
+    - drop mergeAFC mergeMagnet mergeDLE mergeACS mergePWT mergeSAS cst_ela cst
+> _math z_cst_ela z_cst_math z_sbac_ela z_sbac_math
+    - gen censustract = substr(censusblockid, 1, 11)
+    - merge m:1 censustract using `census_tracts', gen(mergeCensus) keep(1 3)
+    = merge m:1 censustract using /scratch/ryanlee22/15095978/St1455951.000002,
+>  gen(mergeCensus) keep(1 3)
+
+    Result                      Number of obs
+    -----------------------------------------
+    Not matched                             0
+    Matched                           352,298  (mergeCensus==3)
+    -----------------------------------------
+    - gen any_missing_score = missing_math==1 | missing_ela ==1
+    - gen current_in_mag = regexm(sname, "MAG") | regexm(sname, "MG") | regexm(
+> sname, "SOCES") | regexm(sname, "LACES")
+    - bys sname endyear : egen current_peer_quality =mean(lag_math)
+    - gen applied = Achoice !=0
+    - drop if applied==0 & appliedMagnet==1
+(14,637 observations deleted)
+    - sort endyear studentpseudoid
+    - save $DTAFINAL/structural_data_`minYr'_`maxYr'.dta, replace
+    = save /project/lausd/decentralized_choice/data/structural_data_2004_2013.d
+> ta, replace
+file /project/lausd/decentralized_choice/data/structural_data_2004_2013.dta
+    saved
+    - gen rand = runiform()
+    - sort rand
+    - keep if rand <=0.25
+(253,404 observations deleted)
+    - drop rand
+    - sort endyear studentpseudoid
+    - save $DTAFINAL/structural_data_`minYr'_`maxYr'_sample.dta, replace
+    = save /project/lausd/decentralized_choice/data/structural_data_2004_2013_s
+> ample.dta, replace
+file
+    /project/lausd/decentralized_choice/data/structural_data_2004_2013_sample
+    > .dta saved
+    ------------------------------------------------ end prepStructuralData ---
+  - prepareSeats, minYr(`minY') maxYr(`maxY')
+  = prepareSeats, minYr(2004) maxYr(2013)
+    ---------------------------------------------------- begin prepareSeats ---
+    - syntax, [minYr(int 2004) maxYr(int 2017)]
+    - use $BUILD/magnet_cutoffs/prog_seats_app.dta, clear
+    = use /project/lausd/build/output/data/magnet_cutoffs/prog_seats_app.dta, c
+> lear
+    - rename mag_cd_ schoolcostcentercode
+    - rename app_endyear endyear
+    - keep if endyear <=`maxYr' & endyear>=`minYr'
+    = keep if endyear <=2013 & endyear>=2004
+(20,163 observations deleted)
+    - keep if stu_grade==6
+(10,111 observations deleted)
+    - merge m:1 schoolcostcentercode using $DTAFINAL/magnet_codes_`minYr'_`maxY
+> r'.dta, gen(mergeSchools) keep(3)
+    = merge m:1 schoolcostcentercode using /project/lausd/decentralized_choice/
+> data/magnet_codes_2004_2013.dta, gen(mergeSchools) keep(3)
+
+    Result                      Number of obs
+    -----------------------------------------
+    Not matched                             0
+    Matched                               762  (mergeSchools==3)
+    -----------------------------------------
+    - preserve
+    - keep endyear schoolcostcentercode stu_grade phbao seats_available
+    - rename seats_available seats_
+    - reshape wide seats_, i(endyear stu_grade phbao) j(schoolcostcentercode)
+(j = 1331101 1350001 1521901 1643802 1713701 1739001 1802802 1803802 1804702 18
+> 04703 1806002 1806602 1807502 1808002 1810302 1810702 1811002 1811202 1811802
+>  1811803 1812702 1813702 1815102 1816802 1817902 1818202 1820801 1820802 1820
+> 803 1821702 1822602 1823502 1823702 1824002 1825502 1825902 1826802 1827202 1
+> 832102 1832103 1835202 1835402 1835602 1836302 1838702 1839601 1839602 183960
+> 3 1842502 1849301 1849302 1874101 1884201)
+
+Data                               Long   ->   Wide
+-----------------------------------------------------------------------------
+Number of observations              762   ->   20          
+Number of variables                   5   ->   56          
+j variable (53 values)schoolcostcentercode->   (dropped)
+xij variables:
+                                 seats_   ->   seats_1331101 seats_1350001 ... 
+> seats_1884201
+-----------------------------------------------------------------------------
+    - ds seats_*
+seat~1331101  seat~1806602  seat~1815102  seat~1824002  seat~1838702
+seat~1350001  seat~1807502  seat~1816802  seat~1825502  seat~1839601
+seat~1521901  seat~1808002  seat~1817902  seat~1825902  seat~1839602
+seat~1643802  seat~1810302  seat~1818202  seat~1826802  seat~1839603
+seat~1713701  seat~1810702  seat~1820801  seat~1827202  seat~1842502
+seat~1739001  seat~1811002  seat~1820802  seat~1832102  seat~1849301
+seat~1802802  seat~1811202  seat~1820803  seat~1832103  seat~1849302
+seat~1803802  seat~1811802  seat~1821702  seat~1835202  seat~1874101
+seat~1804702  seat~1811803  seat~1822602  seat~1835402  seat~1884201
+seat~1804703  seat~1812702  seat~1823502  seat~1835602
+seat~1806002  seat~1813702  seat~1823702  seat~1836302
+    - foreach var of varlist `r(varlist)'{
+    = foreach var of varlist seats_1331101 seats_1350001 seats_1521901 seats_16
+> 43802 seats_1713701 seats_1739001 seats_1802802 seats_1803802 seats_1804702 s
+> eats_1804703 seats_1806002 seats_1806602 seats_1807502 seats_1808002 seats_18
+> 10302 seats_1810702 seats_1811002 seats_1811202 seats_1811802 seats_1811803 s
+> eats_1812702 seats_1813702 seats_1815102 seats_1816802 seats_1817902 seats_18
+> 18202 seats_1820801 seats_1820802 seats_1820803 seats_1821702 seats_1822602 s
+> eats_1823502 seats_1823702 seats_1824002 seats_1825502 seats_1825902 seats_18
+> 26802 seats_1827202 seats_1832102 seats_1832103 seats_1835202 seats_1835402 s
+> eats_1835602 seats_1836302 seats_1838702 seats_1839601 seats_1839602 seats_18
+> 39603 seats_1842502 seats_1849301 seats_1849302 seats_1874101 seats_1884201{
+    - replace `var' = 0 if missing(`var')
+    = replace seats_1331101 = 0 if missing(seats_1331101)
+(0 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace seats_1350001 = 0 if missing(seats_1350001)
+(10 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace seats_1521901 = 0 if missing(seats_1521901)
+(18 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace seats_1643802 = 0 if missing(seats_1643802)
+(17 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace seats_1713701 = 0 if missing(seats_1713701)
+(0 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace seats_1739001 = 0 if missing(seats_1739001)
+(0 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace seats_1802802 = 0 if missing(seats_1802802)
+(9 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace seats_1803802 = 0 if missing(seats_1803802)
+(0 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace seats_1804702 = 0 if missing(seats_1804702)
+(6 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace seats_1804703 = 0 if missing(seats_1804703)
+(6 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace seats_1806002 = 0 if missing(seats_1806002)
+(13 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace seats_1806602 = 0 if missing(seats_1806602)
+(12 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace seats_1807502 = 0 if missing(seats_1807502)
+(0 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace seats_1808002 = 0 if missing(seats_1808002)
+(0 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace seats_1810302 = 0 if missing(seats_1810302)
+(6 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace seats_1810702 = 0 if missing(seats_1810702)
+(0 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace seats_1811002 = 0 if missing(seats_1811002)
+(0 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace seats_1811202 = 0 if missing(seats_1811202)
+(13 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace seats_1811802 = 0 if missing(seats_1811802)
+(1 real change made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace seats_1811803 = 0 if missing(seats_1811803)
+(4 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace seats_1812702 = 0 if missing(seats_1812702)
+(0 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace seats_1813702 = 0 if missing(seats_1813702)
+(0 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace seats_1815102 = 0 if missing(seats_1815102)
+(5 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace seats_1816802 = 0 if missing(seats_1816802)
+(1 real change made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace seats_1817902 = 0 if missing(seats_1817902)
+(2 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace seats_1818202 = 0 if missing(seats_1818202)
+(0 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace seats_1820801 = 0 if missing(seats_1820801)
+(18 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace seats_1820802 = 0 if missing(seats_1820802)
+(0 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace seats_1820803 = 0 if missing(seats_1820803)
+(14 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace seats_1821702 = 0 if missing(seats_1821702)
+(0 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace seats_1822602 = 0 if missing(seats_1822602)
+(0 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace seats_1823502 = 0 if missing(seats_1823502)
+(0 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace seats_1823702 = 0 if missing(seats_1823702)
+(7 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace seats_1824002 = 0 if missing(seats_1824002)
+(10 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace seats_1825502 = 0 if missing(seats_1825502)
+(7 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace seats_1825902 = 0 if missing(seats_1825902)
+(10 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace seats_1826802 = 0 if missing(seats_1826802)
+(11 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace seats_1827202 = 0 if missing(seats_1827202)
+(0 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace seats_1832102 = 0 if missing(seats_1832102)
+(0 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace seats_1832103 = 0 if missing(seats_1832103)
+(1 real change made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace seats_1835202 = 0 if missing(seats_1835202)
+(2 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace seats_1835402 = 0 if missing(seats_1835402)
+(0 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace seats_1835602 = 0 if missing(seats_1835602)
+(0 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace seats_1836302 = 0 if missing(seats_1836302)
+(0 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace seats_1838702 = 0 if missing(seats_1838702)
+(8 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace seats_1839601 = 0 if missing(seats_1839601)
+(19 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace seats_1839602 = 0 if missing(seats_1839602)
+(18 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace seats_1839603 = 0 if missing(seats_1839603)
+(18 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace seats_1842502 = 0 if missing(seats_1842502)
+(14 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace seats_1849301 = 0 if missing(seats_1849301)
+(18 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace seats_1849302 = 0 if missing(seats_1849302)
+(2 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace seats_1874101 = 0 if missing(seats_1874101)
+(0 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace seats_1884201 = 0 if missing(seats_1884201)
+(0 real changes made)
+    - }
+    - save $DTAFINAL/prog_seats_`minYr'_`maxYr'.dta, replace
+    = save /project/lausd/decentralized_choice/data/prog_seats_2004_2013.dta, r
+> eplace
+file /project/lausd/decentralized_choice/data/prog_seats_2004_2013.dta saved
+    - restore
+    - preserve
+    - collapse (sum) applications seats_available, by(schoolcostcentercode)
+    - gen p = seats_available / applications
+    - replace p = 1 if seats_available> applications & !missing(seats_available
+> )
+(21 real changes made)
+    - save $DTAFINAL/aggregate_prog_admission_prob_`minYr'_`maxYr'.dta, replace
+    = save /project/lausd/decentralized_choice/data/aggregate_prog_admission_pr
+> ob_2004_2013.dta, replace
+file
+    /project/lausd/decentralized_choice/data/aggregate_prog_admission_prob_20
+    > 04_2013.dta saved
+    - restore
+    - gen p_i = seats_available /applications
+(2 missing values generated)
+    - replace p_i = 1 if seats_available> applications & !missing(seats_availab
+> le)
+(261 real changes made)
+    - replace p_i = 0 if missing(p_i)
+(2 real changes made)
+    - keep endyear schoolcostcentercode stu_grade phbao p_i
+    - rename p_i p_i_
+    - reshape wide p_i_ , i(endyear stu_grade phbao ) j(schoolcostcentercode )
+(j = 1331101 1350001 1521901 1643802 1713701 1739001 1802802 1803802 1804702 18
+> 04703 1806002 1806602 1807502 1808002 1810302 1810702 1811002 1811202 1811802
+>  1811803 1812702 1813702 1815102 1816802 1817902 1818202 1820801 1820802 1820
+> 803 1821702 1822602 1823502 1823702 1824002 1825502 1825902 1826802 1827202 1
+> 832102 1832103 1835202 1835402 1835602 1836302 1838702 1839601 1839602 183960
+> 3 1842502 1849301 1849302 1874101 1884201)
+
+Data                               Long   ->   Wide
+-----------------------------------------------------------------------------
+Number of observations              762   ->   20          
+Number of variables                   5   ->   56          
+j variable (53 values)schoolcostcentercode->   (dropped)
+xij variables:
+                                   p_i_   ->   p_i_1331101 p_i_1350001 ... p_i_
+> 1884201
+-----------------------------------------------------------------------------
+    - ds p_i_*
+p_i_1331101  p_i_1804703  p_i_1811802  p_i_1820802  p_i_1826802  p_i_1839601
+p_i_1350001  p_i_1806002  p_i_1811803  p_i_1820803  p_i_1827202  p_i_1839602
+p_i_1521901  p_i_1806602  p_i_1812702  p_i_1821702  p_i_1832102  p_i_1839603
+p_i_1643802  p_i_1807502  p_i_1813702  p_i_1822602  p_i_1832103  p_i_1842502
+p_i_1713701  p_i_1808002  p_i_1815102  p_i_1823502  p_i_1835202  p_i_1849301
+p_i_1739001  p_i_1810302  p_i_1816802  p_i_1823702  p_i_1835402  p_i_1849302
+p_i_1802802  p_i_1810702  p_i_1817902  p_i_1824002  p_i_1835602  p_i_1874101
+p_i_1803802  p_i_1811002  p_i_1818202  p_i_1825502  p_i_1836302  p_i_1884201
+p_i_1804702  p_i_1811202  p_i_1820801  p_i_1825902  p_i_1838702
+    - foreach var of varlist `r(varlist)'{
+    = foreach var of varlist p_i_1331101 p_i_1350001 p_i_1521901 p_i_1643802 p_
+> i_1713701 p_i_1739001 p_i_1802802 p_i_1803802 p_i_1804702 p_i_1804703 p_i_180
+> 6002 p_i_1806602 p_i_1807502 p_i_1808002 p_i_1810302 p_i_1810702 p_i_1811002 
+> p_i_1811202 p_i_1811802 p_i_1811803 p_i_1812702 p_i_1813702 p_i_1815102 p_i_1
+> 816802 p_i_1817902 p_i_1818202 p_i_1820801 p_i_1820802 p_i_1820803 p_i_182170
+> 2 p_i_1822602 p_i_1823502 p_i_1823702 p_i_1824002 p_i_1825502 p_i_1825902 p_i
+> _1826802 p_i_1827202 p_i_1832102 p_i_1832103 p_i_1835202 p_i_1835402 p_i_1835
+> 602 p_i_1836302 p_i_1838702 p_i_1839601 p_i_1839602 p_i_1839603 p_i_1842502 p
+> _i_1849301 p_i_1849302 p_i_1874101 p_i_1884201{
+    - replace `var' = 0 if missing(`var')
+    = replace p_i_1331101 = 0 if missing(p_i_1331101)
+(0 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace p_i_1350001 = 0 if missing(p_i_1350001)
+(10 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace p_i_1521901 = 0 if missing(p_i_1521901)
+(18 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace p_i_1643802 = 0 if missing(p_i_1643802)
+(17 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace p_i_1713701 = 0 if missing(p_i_1713701)
+(0 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace p_i_1739001 = 0 if missing(p_i_1739001)
+(0 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace p_i_1802802 = 0 if missing(p_i_1802802)
+(9 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace p_i_1803802 = 0 if missing(p_i_1803802)
+(0 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace p_i_1804702 = 0 if missing(p_i_1804702)
+(6 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace p_i_1804703 = 0 if missing(p_i_1804703)
+(6 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace p_i_1806002 = 0 if missing(p_i_1806002)
+(13 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace p_i_1806602 = 0 if missing(p_i_1806602)
+(12 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace p_i_1807502 = 0 if missing(p_i_1807502)
+(0 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace p_i_1808002 = 0 if missing(p_i_1808002)
+(0 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace p_i_1810302 = 0 if missing(p_i_1810302)
+(6 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace p_i_1810702 = 0 if missing(p_i_1810702)
+(0 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace p_i_1811002 = 0 if missing(p_i_1811002)
+(0 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace p_i_1811202 = 0 if missing(p_i_1811202)
+(13 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace p_i_1811802 = 0 if missing(p_i_1811802)
+(1 real change made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace p_i_1811803 = 0 if missing(p_i_1811803)
+(4 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace p_i_1812702 = 0 if missing(p_i_1812702)
+(0 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace p_i_1813702 = 0 if missing(p_i_1813702)
+(0 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace p_i_1815102 = 0 if missing(p_i_1815102)
+(5 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace p_i_1816802 = 0 if missing(p_i_1816802)
+(1 real change made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace p_i_1817902 = 0 if missing(p_i_1817902)
+(2 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace p_i_1818202 = 0 if missing(p_i_1818202)
+(0 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace p_i_1820801 = 0 if missing(p_i_1820801)
+(18 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace p_i_1820802 = 0 if missing(p_i_1820802)
+(0 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace p_i_1820803 = 0 if missing(p_i_1820803)
+(14 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace p_i_1821702 = 0 if missing(p_i_1821702)
+(0 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace p_i_1822602 = 0 if missing(p_i_1822602)
+(0 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace p_i_1823502 = 0 if missing(p_i_1823502)
+(0 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace p_i_1823702 = 0 if missing(p_i_1823702)
+(7 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace p_i_1824002 = 0 if missing(p_i_1824002)
+(10 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace p_i_1825502 = 0 if missing(p_i_1825502)
+(7 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace p_i_1825902 = 0 if missing(p_i_1825902)
+(10 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace p_i_1826802 = 0 if missing(p_i_1826802)
+(11 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace p_i_1827202 = 0 if missing(p_i_1827202)
+(0 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace p_i_1832102 = 0 if missing(p_i_1832102)
+(0 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace p_i_1832103 = 0 if missing(p_i_1832103)
+(1 real change made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace p_i_1835202 = 0 if missing(p_i_1835202)
+(2 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace p_i_1835402 = 0 if missing(p_i_1835402)
+(0 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace p_i_1835602 = 0 if missing(p_i_1835602)
+(0 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace p_i_1836302 = 0 if missing(p_i_1836302)
+(0 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace p_i_1838702 = 0 if missing(p_i_1838702)
+(8 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace p_i_1839601 = 0 if missing(p_i_1839601)
+(19 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace p_i_1839602 = 0 if missing(p_i_1839602)
+(18 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace p_i_1839603 = 0 if missing(p_i_1839603)
+(18 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace p_i_1842502 = 0 if missing(p_i_1842502)
+(14 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace p_i_1849301 = 0 if missing(p_i_1849301)
+(16 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace p_i_1849302 = 0 if missing(p_i_1849302)
+(2 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace p_i_1874101 = 0 if missing(p_i_1874101)
+(0 real changes made)
+    - }
+    - replace `var' = 0 if missing(`var')
+    = replace p_i_1884201 = 0 if missing(p_i_1884201)
+(0 real changes made)
+    - }
+    - save $DTAFINAL/prog_seats_app_`minYr'_`maxYr'.dta, replace
+    = save /project/lausd/decentralized_choice/data/prog_seats_app_2004_2013.dt
+> a, replace
+file /project/lausd/decentralized_choice/data/prog_seats_app_2004_2013.dta
+    saved
+    ------------------------------------------------------ end prepareSeats ---
+  - student_p_i, minYr(`minY') maxYr(`maxY')
+  = student_p_i, minYr(2004) maxYr(2013)
+    ----------------------------------------------------- begin student_p_i ---
+    - syntax, [minYr(int 2004) maxYr(int 2017)]
+    - use $DTAFINAL/structural_data_`minYr'_`maxYr'.dta, clear
+    = use /project/lausd/decentralized_choice/data/structural_data_2004_2013.dt
+> a, clear
+    - gen phbao = (black==1 | asian==1 | hispanic==1 | other==1)
+    - gen stu_grade = 6
+    - merge m:1 phbao stu_grade endyear using $DTAFINAL/prog_seats_app_`minYr'_
+> `maxYr'.dta, gen(mergeP) keep( 1 3)
+    = merge m:1 phbao stu_grade endyear using /project/lausd/decentralized_choi
+> ce/data/prog_seats_app_2004_2013.dta, gen(mergeP) keep( 1 3)
+
+    Result                      Number of obs
+    -----------------------------------------
+    Not matched                             0
+    Matched                           337,661  (mergeP==3)
+    -----------------------------------------
+    - sort endyear studentpseudoid
+    - keep studentpseudoid endyear p_i_*
+    - save $DTAFINAL/student_p_i_`minYr'_`maxYr'.dta, replace
+    = save /project/lausd/decentralized_choice/data/student_p_i_2004_2013.dta, 
+> replace
+file /project/lausd/decentralized_choice/data/student_p_i_2004_2013.dta saved
+    - use $DTAFINAL/structural_data_`minYr'_`maxYr'_sample.dta, clear
+    = use /project/lausd/decentralized_choice/data/structural_data_2004_2013_sa
+> mple.dta, clear
+    - gen phbao = (black==1 | asian==1 | hispanic==1 | other==1)
+    - gen stu_grade = 6
+    - merge m:1 phbao stu_grade endyear using $DTAFINAL/prog_seats_app_`minYr'_
+> `maxYr'.dta, gen(mergeP) keep(1 3)
+    = merge m:1 phbao stu_grade endyear using /project/lausd/decentralized_choi
+> ce/data/prog_seats_app_2004_2013.dta, gen(mergeP) keep(1 3)
+
+    Result                      Number of obs
+    -----------------------------------------
+    Not matched                             0
+    Matched                            84,257  (mergeP==3)
+    -----------------------------------------
+    - sort endyear studentpseudoid
+    - keep studentpseudoid endyear p_i_*
+    - save $DTAFINAL/student_p_i_`minYr'_`maxYr'_sample.dta, replace
+    = save /project/lausd/decentralized_choice/data/student_p_i_2004_2013_sampl
+> e.dta, replace
+file
+    /project/lausd/decentralized_choice/data/student_p_i_2004_2013_sample.dta
+    saved
+    ------------------------------------------------------- end student_p_i ---
+  ---------------------------------------------------------------- end main ---
+
+. 
+. 
+end of do-file

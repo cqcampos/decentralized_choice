@@ -1,0 +1,961 @@
+/apps/python/3.10/3.10.9/bin/python3
+Job ID: 15212849
+Job User: cqcampos
+Num Cores: 8
+trying URL 'https://cran.rstudio.com/src/contrib/reticulate_1.43.0.tar.gz'
+Content type 'application/x-gzip' length 1681826 bytes (1.6 MB)
+==================================================
+downloaded 1.6 MB
+
+* installing *source* package ‘reticulate’ ...
+** package ‘reticulate’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+using C++ compiler: ‘g++ (GCC) 8.5.0 20210514 (Red Hat 8.5.0-28)’
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG  -I'/apps/R-4.3.2/lib64/R/library/Rcpp/include' -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c RcppExports.cpp -o RcppExports.o
+In file included from /apps/R-4.3.2/lib64/R/library/Rcpp/include/RcppCommon.h:128,
+                 from /apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp.h:27,
+                 from reticulate_types.h:10,
+                 from RcppExports.cpp:4:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘const char* Rcpp::type2name(SEXP)’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘const char* (*)(SEXPREC*)’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:86:26: note: in expansion of macro ‘GET_CALLABLE’
+         static Fun fun = GET_CALLABLE("type2name");
+                          ^~~~~~~~~~~~
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘long unsigned int Rcpp::internal::enterRNGScope()’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘long unsigned int (*)()’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:93:30: note: in expansion of macro ‘GET_CALLABLE’
+             static Fun fun = GET_CALLABLE("enterRNGScope");
+                              ^~~~~~~~~~~~
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘long unsigned int Rcpp::internal::exitRNGScope()’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘long unsigned int (*)()’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:99:30: note: in expansion of macro ‘GET_CALLABLE’
+             static Fun fun = GET_CALLABLE("exitRNGScope");
+                              ^~~~~~~~~~~~
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘long unsigned int Rcpp::internal::beginSuspendRNGSynchronization()’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘long unsigned int (*)()’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:105:30: note: in expansion of macro ‘GET_CALLABLE’
+             static Fun fun = GET_CALLABLE("beginSuspendRNGSynchronization");
+                              ^~~~~~~~~~~~
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘long unsigned int Rcpp::internal::endSuspendRNGSynchronization()’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘long unsigned int (*)()’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:111:30: note: in expansion of macro ‘GET_CALLABLE’
+             static Fun fun = GET_CALLABLE("endSuspendRNGSynchronization");
+                              ^~~~~~~~~~~~
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘double Rcpp::mktime00(tm&)’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘double (*)(tm&)’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:132:26: note: in expansion of macro ‘GET_CALLABLE’
+         static Fun fun = GET_CALLABLE("mktime00");
+                          ^~~~~~~~~~~~
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘tm* Rcpp::gmtime_(const time_t*)’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘tm* (*)(const long int*)’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:138:27: note: in expansion of macro ‘GET_CALLABLE’
+         static Fun fun =  GET_CALLABLE("gmtime_");
+                           ^~~~~~~~~~~~
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘SEXPREC* Rcpp::Rcpp_precious_preserve(SEXP)’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘SEXPREC* (*)(SEXPREC*)’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:154:26: note: in expansion of macro ‘GET_CALLABLE’
+         static Fun fun = GET_CALLABLE("Rcpp_precious_preserve");
+                          ^~~~~~~~~~~~
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘void Rcpp::Rcpp_precious_remove(SEXP)’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘void (*)(SEXPREC*)’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:159:26: note: in expansion of macro ‘GET_CALLABLE’
+         static Fun fun = GET_CALLABLE("Rcpp_precious_remove");
+                          ^~~~~~~~~~~~
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘Rcpp::Rostream<true>& Rcpp::Rcpp_cout_get()’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘Rcpp::Rostream<true>& (*)()’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:165:26: note: in expansion of macro ‘GET_CALLABLE’
+         static Fun fun = GET_CALLABLE("Rcpp_cout_get");
+                          ^~~~~~~~~~~~
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘Rcpp::Rostream<false>& Rcpp::Rcpp_cerr_get()’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘Rcpp::Rostream<false>& (*)()’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:170:26: note: in expansion of macro ‘GET_CALLABLE’
+         static Fun fun = GET_CALLABLE("Rcpp_cerr_get");
+                          ^~~~~~~~~~~~
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘SEXPREC* rcpp_set_stack_trace(SEXP)’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘SEXPREC* (*)(SEXPREC*)’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:188:23: note: in expansion of macro ‘GET_CALLABLE’
+     static Fun fun =  GET_CALLABLE("rcpp_set_stack_trace");
+                       ^~~~~~~~~~~~
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘std::__cxx11::string demangle(const string&)’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘std::__cxx11::basic_string<char> (*)(const std::__cxx11::basic_string<char>&)’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:194:22: note: in expansion of macro ‘GET_CALLABLE’
+     static Fun fun = GET_CALLABLE("demangle");
+                      ^~~~~~~~~~~~
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘const char* short_file_name(const char*)’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘const char* (*)(const char*)’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:200:22: note: in expansion of macro ‘GET_CALLABLE’
+     static Fun fun = GET_CALLABLE("short_file_name");
+                      ^~~~~~~~~~~~
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘SEXPREC* stack_trace(const char*, int)’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘SEXPREC* (*)(const char*, int)’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:206:22: note: in expansion of macro ‘GET_CALLABLE’
+     static Fun fun = GET_CALLABLE("stack_trace");
+                      ^~~~~~~~~~~~
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘SEXPREC* get_string_elt(SEXP, R_xlen_t)’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘SEXPREC* (*)(SEXPREC*, long int)’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:212:22: note: in expansion of macro ‘GET_CALLABLE’
+     static Fun fun = GET_CALLABLE("get_string_elt");
+                      ^~~~~~~~~~~~
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘const char* char_get_string_elt(SEXP, R_xlen_t)’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘const char* (*)(SEXPREC*, long int)’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:218:22: note: in expansion of macro ‘GET_CALLABLE’
+     static Fun fun = GET_CALLABLE("char_get_string_elt");
+                      ^~~~~~~~~~~~
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘void set_string_elt(SEXP, R_xlen_t, SEXP)’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘void (*)(SEXPREC*, long int, SEXPREC*)’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:224:22: note: in expansion of macro ‘GET_CALLABLE’
+     static Fun fun = GET_CALLABLE("set_string_elt");
+                      ^~~~~~~~~~~~
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘void char_set_string_elt(SEXP, R_xlen_t, const char*)’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘void (*)(SEXPREC*, long int, const char*)’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:230:22: note: in expansion of macro ‘GET_CALLABLE’
+     static Fun fun = GET_CALLABLE("char_set_string_elt");
+                      ^~~~~~~~~~~~
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘SEXPREC** get_string_ptr(SEXP)’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘SEXPREC** (*)(SEXPREC*)’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:236:22: note: in expansion of macro ‘GET_CALLABLE’
+     static Fun fun = GET_CALLABLE("get_string_ptr");
+                      ^~~~~~~~~~~~
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘SEXPREC* get_vector_elt(SEXP, R_xlen_t)’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘SEXPREC* (*)(SEXPREC*, long int)’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:242:22: note: in expansion of macro ‘GET_CALLABLE’
+     static Fun fun = GET_CALLABLE("get_vector_elt");
+                      ^~~~~~~~~~~~
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘void set_vector_elt(SEXP, R_xlen_t, SEXP)’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘void (*)(SEXPREC*, long int, SEXPREC*)’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:248:22: note: in expansion of macro ‘GET_CALLABLE’
+     static Fun fun = GET_CALLABLE("set_vector_elt");
+                      ^~~~~~~~~~~~
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘SEXPREC** get_vector_ptr(SEXP)’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘SEXPREC** (*)(SEXPREC*)’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:254:22: note: in expansion of macro ‘GET_CALLABLE’
+     static Fun fun = GET_CALLABLE("get_vector_ptr");
+                      ^~~~~~~~~~~~
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘const char* char_nocheck(SEXP)’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘const char* (*)(SEXPREC*)’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:260:22: note: in expansion of macro ‘GET_CALLABLE’
+     static Fun fun = GET_CALLABLE("char_nocheck");
+                      ^~~~~~~~~~~~
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘void* dataptr(SEXP)’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘void* (*)(SEXPREC*)’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:266:22: note: in expansion of macro ‘GET_CALLABLE’
+     static Fun fun = GET_CALLABLE("dataptr");
+                      ^~~~~~~~~~~~
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘void setCurrentScope(Rcpp::Module*)’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘void (*)(Rcpp::Module*)’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:278:22: note: in expansion of macro ‘GET_CALLABLE’
+     static Fun fun = GET_CALLABLE("setCurrentScope");
+                      ^~~~~~~~~~~~
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘int* get_cache(int)’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘int* (*)(int)’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:284:22: note: in expansion of macro ‘GET_CALLABLE’
+     static Fun fun = GET_CALLABLE("get_cache");
+                      ^~~~~~~~~~~~
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘int error_occured()’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘int (*)()’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:296:22: note: in expansion of macro ‘GET_CALLABLE’
+     static Fun fun = GET_CALLABLE("error_occured");
+                      ^~~~~~~~~~~~
+RcppExports.cpp: At global scope:
+RcppExports.cpp:840:45: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+     {"_reticulate_write_stdout", (DL_FUNC) &_reticulate_write_stdout, 1},
+                                             ^~~~~~~~~~~~~~~~~~~~~~~~
+RcppExports.cpp:841:45: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+     {"_reticulate_write_stderr", (DL_FUNC) &_reticulate_write_stderr, 1},
+                                             ^~~~~~~~~~~~~~~~~~~~~~~~
+RcppExports.cpp:844:48: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+     {"_reticulate_py_is_null_xptr", (DL_FUNC) &_reticulate_py_is_null_xptr, 1},
+                                                ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+RcppExports.cpp:845:49: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+     {"_reticulate_py_validate_xptr", (DL_FUNC) &_reticulate_py_validate_xptr, 1},
+                                                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+RcppExports.cpp:847:67: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+     {"_reticulate_conditionMessage_from_py_exception", (DL_FUNC) &_reticulate_conditionMessage_from_py_exception, 1},
+                                                                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+RcppExports.cpp:849:47: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+     {"_reticulate_py_is_callable", (DL_FUNC) &_reticulate_py_is_callable, 1},
+                                               ^~~~~~~~~~~~~~~~~~~~~~~~~~
+RcppExports.cpp:850:45: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+     {"_reticulate_is_py_object", (DL_FUNC) &_reticulate_is_py_object, 1},
+                                             ^~~~~~~~~~~~~~~~~~~~~~~~
+RcppExports.cpp:851:44: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+     {"_reticulate_py_to_r_cpp", (DL_FUNC) &_reticulate_py_to_r_cpp, 1},
+                                            ^~~~~~~~~~~~~~~~~~~~~~~
+RcppExports.cpp:852:47: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+     {"_reticulate_py_get_formals", (DL_FUNC) &_reticulate_py_get_formals, 1},
+                                               ^~~~~~~~~~~~~~~~~~~~~~~~~~
+RcppExports.cpp:853:45: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+     {"_reticulate_r_to_py_impl", (DL_FUNC) &_reticulate_r_to_py_impl, 2},
+                                             ^~~~~~~~~~~~~~~~~~~~~~~~
+RcppExports.cpp:855:55: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+     {"_reticulate_py_activate_virtualenv", (DL_FUNC) &_reticulate_py_activate_virtualenv, 1},
+                                                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+RcppExports.cpp:858:46: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+     {"_reticulate_py_initialize", (DL_FUNC) &_reticulate_py_initialize, 8},
+                                              ^~~~~~~~~~~~~~~~~~~~~~~~~
+RcppExports.cpp:860:43: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+     {"_reticulate_py_is_none", (DL_FUNC) &_reticulate_py_is_none, 1},
+                                           ^~~~~~~~~~~~~~~~~~~~~~
+RcppExports.cpp:861:48: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+     {"_reticulate_py_compare_impl", (DL_FUNC) &_reticulate_py_compare_impl, 3},
+                                                ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+RcppExports.cpp:862:44: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+     {"_reticulate_py_str_impl", (DL_FUNC) &_reticulate_py_str_impl, 1},
+                                            ^~~~~~~~~~~~~~~~~~~~~~~
+RcppExports.cpp:863:40: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+     {"_reticulate_py_repr", (DL_FUNC) &_reticulate_py_repr, 1},
+                                        ^~~~~~~~~~~~~~~~~~~
+RcppExports.cpp:864:41: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+     {"_reticulate_py_print", (DL_FUNC) &_reticulate_py_print, 1},
+                                         ^~~~~~~~~~~~~~~~~~~~
+RcppExports.cpp:865:47: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+     {"_reticulate_py_is_function", (DL_FUNC) &_reticulate_py_is_function, 1},
+                                               ^~~~~~~~~~~~~~~~~~~~~~~~~~
+RcppExports.cpp:867:56: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+     {"_reticulate_py_list_attributes_impl", (DL_FUNC) &_reticulate_py_list_attributes_impl, 1},
+                                                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+RcppExports.cpp:868:47: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+     {"_reticulate_py_get_convert", (DL_FUNC) &_reticulate_py_get_convert, 1},
+                                               ^~~~~~~~~~~~~~~~~~~~~~~~~~
+RcppExports.cpp:869:47: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+     {"_reticulate_py_set_convert", (DL_FUNC) &_reticulate_py_set_convert, 2},
+                                               ^~~~~~~~~~~~~~~~~~~~~~~~~~
+RcppExports.cpp:870:43: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+     {"_reticulate_py_new_ref", (DL_FUNC) &_reticulate_py_new_ref, 2},
+                                           ^~~~~~~~~~~~~~~~~~~~~~
+RcppExports.cpp:871:44: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+     {"_reticulate_py_has_attr", (DL_FUNC) &_reticulate_py_has_attr, 2},
+                                            ^~~~~~~~~~~~~~~~~~~~~~~
+RcppExports.cpp:872:44: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+     {"_reticulate_py_get_attr", (DL_FUNC) &_reticulate_py_get_attr, 3},
+                                            ^~~~~~~~~~~~~~~~~~~~~~~
+RcppExports.cpp:873:44: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+     {"_reticulate_py_set_attr", (DL_FUNC) &_reticulate_py_set_attr, 3},
+                                            ^~~~~~~~~~~~~~~~~~~~~~~
+RcppExports.cpp:874:44: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+     {"_reticulate_py_del_attr", (DL_FUNC) &_reticulate_py_del_attr, 2},
+                                            ^~~~~~~~~~~~~~~~~~~~~~~
+RcppExports.cpp:875:44: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+     {"_reticulate_py_get_item", (DL_FUNC) &_reticulate_py_get_item, 3},
+                                            ^~~~~~~~~~~~~~~~~~~~~~~
+RcppExports.cpp:876:44: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+     {"_reticulate_py_set_item", (DL_FUNC) &_reticulate_py_set_item, 3},
+                                            ^~~~~~~~~~~~~~~~~~~~~~~
+RcppExports.cpp:877:44: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+     {"_reticulate_py_del_item", (DL_FUNC) &_reticulate_py_del_item, 2},
+                                            ^~~~~~~~~~~~~~~~~~~~~~~
+RcppExports.cpp:878:50: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+     {"_reticulate_py_get_attr_types", (DL_FUNC) &_reticulate_py_get_attr_types, 3},
+                                                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+RcppExports.cpp:879:57: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+     {"_reticulate_py_ref_to_r_with_convert", (DL_FUNC) &_reticulate_py_ref_to_r_with_convert, 2},
+                                                         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+RcppExports.cpp:880:44: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+     {"_reticulate_py_ref_to_r", (DL_FUNC) &_reticulate_py_ref_to_r, 1},
+                                            ^~~~~~~~~~~~~~~~~~~~~~~
+RcppExports.cpp:881:45: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+     {"_reticulate_py_call_impl", (DL_FUNC) &_reticulate_py_call_impl, 3},
+                                             ^~~~~~~~~~~~~~~~~~~~~~~~
+RcppExports.cpp:882:45: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+     {"_reticulate_py_dict_impl", (DL_FUNC) &_reticulate_py_dict_impl, 3},
+                                             ^~~~~~~~~~~~~~~~~~~~~~~~
+RcppExports.cpp:883:49: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+     {"_reticulate_py_dict_get_item", (DL_FUNC) &_reticulate_py_dict_get_item, 2},
+                                                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+RcppExports.cpp:884:49: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+     {"_reticulate_py_dict_set_item", (DL_FUNC) &_reticulate_py_dict_set_item, 3},
+                                                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+RcppExports.cpp:885:47: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+     {"_reticulate_py_dict_length", (DL_FUNC) &_reticulate_py_dict_length, 1},
+                                               ^~~~~~~~~~~~~~~~~~~~~~~~~~
+RcppExports.cpp:886:49: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+     {"_reticulate_py_dict_get_keys", (DL_FUNC) &_reticulate_py_dict_get_keys, 1},
+                                                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+RcppExports.cpp:887:56: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+     {"_reticulate_py_dict_get_keys_as_str", (DL_FUNC) &_reticulate_py_dict_get_keys_as_str, 1},
+                                                        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+RcppExports.cpp:888:41: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+     {"_reticulate_py_tuple", (DL_FUNC) &_reticulate_py_tuple, 2},
+                                         ^~~~~~~~~~~~~~~~~~~~
+RcppExports.cpp:889:48: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+     {"_reticulate_py_tuple_length", (DL_FUNC) &_reticulate_py_tuple_length, 1},
+                                                ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+RcppExports.cpp:890:49: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+     {"_reticulate_py_module_import", (DL_FUNC) &_reticulate_py_module_import, 2},
+                                                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+RcppExports.cpp:891:55: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+     {"_reticulate_py_module_proxy_import", (DL_FUNC) &_reticulate_py_module_proxy_import, 1},
+                                                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+RcppExports.cpp:892:51: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+     {"_reticulate_py_list_submodules", (DL_FUNC) &_reticulate_py_list_submodules, 1},
+                                                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+RcppExports.cpp:893:51: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+     {"_reticulate_py_run_string_impl", (DL_FUNC) &_reticulate_py_run_string_impl, 3},
+                                                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+RcppExports.cpp:894:49: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+     {"_reticulate_py_run_file_impl", (DL_FUNC) &_reticulate_py_run_file_impl, 3},
+                                                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+RcppExports.cpp:895:45: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+     {"_reticulate_py_eval_impl", (DL_FUNC) &_reticulate_py_eval_impl, 2},
+                                             ^~~~~~~~~~~~~~~~~~~~~~~~
+RcppExports.cpp:896:57: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+     {"_reticulate_py_convert_pandas_series", (DL_FUNC) &_reticulate_py_convert_pandas_series, 1},
+                                                         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+RcppExports.cpp:897:53: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+     {"_reticulate_py_convert_pandas_df", (DL_FUNC) &_reticulate_py_convert_pandas_df, 1},
+                                                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+RcppExports.cpp:898:52: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+     {"_reticulate_r_convert_dataframe", (DL_FUNC) &_reticulate_r_convert_dataframe, 2},
+                                                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+RcppExports.cpp:899:47: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+     {"_reticulate_r_convert_date", (DL_FUNC) &_reticulate_r_convert_date, 2},
+                                               ^~~~~~~~~~~~~~~~~~~~~~~~~~
+RcppExports.cpp:900:47: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+     {"_reticulate_py_list_length", (DL_FUNC) &_reticulate_py_list_length, 1},
+                                               ^~~~~~~~~~~~~~~~~~~~~~~~~~
+RcppExports.cpp:901:44: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+     {"_reticulate_py_len_impl", (DL_FUNC) &_reticulate_py_len_impl, 2},
+                                            ^~~~~~~~~~~~~~~~~~~~~~~
+RcppExports.cpp:902:45: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+     {"_reticulate_py_bool_impl", (DL_FUNC) &_reticulate_py_bool_impl, 2},
+                                             ^~~~~~~~~~~~~~~~~~~~~~~~
+RcppExports.cpp:903:46: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+     {"_reticulate_py_has_method", (DL_FUNC) &_reticulate_py_has_method, 2},
+                                              ^~~~~~~~~~~~~~~~~~~~~~~~~
+RcppExports.cpp:904:38: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+     {"_reticulate_py_id", (DL_FUNC) &_reticulate_py_id, 1},
+                                      ^~~~~~~~~~~~~~~~~
+RcppExports.cpp:905:43: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+     {"_reticulate_py_capsule", (DL_FUNC) &_reticulate_py_capsule, 1},
+                                           ^~~~~~~~~~~~~~~~~~~~~~
+RcppExports.cpp:906:41: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+     {"_reticulate_py_slice", (DL_FUNC) &_reticulate_py_slice, 3},
+                                         ^~~~~~~~~~~~~~~~~~~~
+RcppExports.cpp:907:44: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+     {"_reticulate_as_iterator", (DL_FUNC) &_reticulate_as_iterator, 1},
+                                            ^~~~~~~~~~~~~~~~~~~~~~~
+RcppExports.cpp:908:45: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+     {"_reticulate_py_iter_next", (DL_FUNC) &_reticulate_py_iter_next, 2},
+                                             ^~~~~~~~~~~~~~~~~~~~~~~~
+RcppExports.cpp:909:43: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+     {"_reticulate_py_iterate", (DL_FUNC) &_reticulate_py_iterate, 3},
+                                           ^~~~~~~~~~~~~~~~~~~~~~
+RcppExports.cpp:910:54: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+     {"_reticulate_py_allow_threads_impl", (DL_FUNC) &_reticulate_py_allow_threads_impl, 1},
+                                                      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+RcppExports.cpp:911:41: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+     {"_reticulate_readline", (DL_FUNC) &_reticulate_readline, 1},
+                                         ^~~~~~~~~~~~~~~~~~~~
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG  -I'/apps/R-4.3.2/lib64/R/library/Rcpp/include' -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c event_loop.cpp -o event_loop.o
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG  -I'/apps/R-4.3.2/lib64/R/library/Rcpp/include' -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c libpython.cpp -o libpython.o
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG  -I'/apps/R-4.3.2/lib64/R/library/Rcpp/include' -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c output.cpp -o output.o
+In file included from /apps/R-4.3.2/lib64/R/library/Rcpp/include/RcppCommon.h:128,
+                 from /apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp.h:27,
+                 from output.cpp:4:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘const char* Rcpp::type2name(SEXP)’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘const char* (*)(SEXPREC*)’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:86:26: note: in expansion of macro ‘GET_CALLABLE’
+         static Fun fun = GET_CALLABLE("type2name");
+                          ^~~~~~~~~~~~
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘long unsigned int Rcpp::internal::enterRNGScope()’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘long unsigned int (*)()’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:93:30: note: in expansion of macro ‘GET_CALLABLE’
+             static Fun fun = GET_CALLABLE("enterRNGScope");
+                              ^~~~~~~~~~~~
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘long unsigned int Rcpp::internal::exitRNGScope()’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘long unsigned int (*)()’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:99:30: note: in expansion of macro ‘GET_CALLABLE’
+             static Fun fun = GET_CALLABLE("exitRNGScope");
+                              ^~~~~~~~~~~~
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘long unsigned int Rcpp::internal::beginSuspendRNGSynchronization()’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘long unsigned int (*)()’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:105:30: note: in expansion of macro ‘GET_CALLABLE’
+             static Fun fun = GET_CALLABLE("beginSuspendRNGSynchronization");
+                              ^~~~~~~~~~~~
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘long unsigned int Rcpp::internal::endSuspendRNGSynchronization()’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘long unsigned int (*)()’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:111:30: note: in expansion of macro ‘GET_CALLABLE’
+             static Fun fun = GET_CALLABLE("endSuspendRNGSynchronization");
+                              ^~~~~~~~~~~~
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘double Rcpp::mktime00(tm&)’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘double (*)(tm&)’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:132:26: note: in expansion of macro ‘GET_CALLABLE’
+         static Fun fun = GET_CALLABLE("mktime00");
+                          ^~~~~~~~~~~~
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘tm* Rcpp::gmtime_(const time_t*)’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘tm* (*)(const long int*)’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:138:27: note: in expansion of macro ‘GET_CALLABLE’
+         static Fun fun =  GET_CALLABLE("gmtime_");
+                           ^~~~~~~~~~~~
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘SEXPREC* Rcpp::Rcpp_precious_preserve(SEXP)’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘SEXPREC* (*)(SEXPREC*)’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:154:26: note: in expansion of macro ‘GET_CALLABLE’
+         static Fun fun = GET_CALLABLE("Rcpp_precious_preserve");
+                          ^~~~~~~~~~~~
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘void Rcpp::Rcpp_precious_remove(SEXP)’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘void (*)(SEXPREC*)’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:159:26: note: in expansion of macro ‘GET_CALLABLE’
+         static Fun fun = GET_CALLABLE("Rcpp_precious_remove");
+                          ^~~~~~~~~~~~
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘Rcpp::Rostream<true>& Rcpp::Rcpp_cout_get()’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘Rcpp::Rostream<true>& (*)()’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:165:26: note: in expansion of macro ‘GET_CALLABLE’
+         static Fun fun = GET_CALLABLE("Rcpp_cout_get");
+                          ^~~~~~~~~~~~
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘Rcpp::Rostream<false>& Rcpp::Rcpp_cerr_get()’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘Rcpp::Rostream<false>& (*)()’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:170:26: note: in expansion of macro ‘GET_CALLABLE’
+         static Fun fun = GET_CALLABLE("Rcpp_cerr_get");
+                          ^~~~~~~~~~~~
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘SEXPREC* rcpp_set_stack_trace(SEXP)’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘SEXPREC* (*)(SEXPREC*)’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:188:23: note: in expansion of macro ‘GET_CALLABLE’
+     static Fun fun =  GET_CALLABLE("rcpp_set_stack_trace");
+                       ^~~~~~~~~~~~
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘std::__cxx11::string demangle(const string&)’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘std::__cxx11::basic_string<char> (*)(const std::__cxx11::basic_string<char>&)’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:194:22: note: in expansion of macro ‘GET_CALLABLE’
+     static Fun fun = GET_CALLABLE("demangle");
+                      ^~~~~~~~~~~~
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘const char* short_file_name(const char*)’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘const char* (*)(const char*)’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:200:22: note: in expansion of macro ‘GET_CALLABLE’
+     static Fun fun = GET_CALLABLE("short_file_name");
+                      ^~~~~~~~~~~~
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘SEXPREC* stack_trace(const char*, int)’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘SEXPREC* (*)(const char*, int)’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:206:22: note: in expansion of macro ‘GET_CALLABLE’
+     static Fun fun = GET_CALLABLE("stack_trace");
+                      ^~~~~~~~~~~~
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘SEXPREC* get_string_elt(SEXP, R_xlen_t)’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘SEXPREC* (*)(SEXPREC*, long int)’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:212:22: note: in expansion of macro ‘GET_CALLABLE’
+     static Fun fun = GET_CALLABLE("get_string_elt");
+                      ^~~~~~~~~~~~
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘const char* char_get_string_elt(SEXP, R_xlen_t)’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘const char* (*)(SEXPREC*, long int)’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:218:22: note: in expansion of macro ‘GET_CALLABLE’
+     static Fun fun = GET_CALLABLE("char_get_string_elt");
+                      ^~~~~~~~~~~~
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘void set_string_elt(SEXP, R_xlen_t, SEXP)’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘void (*)(SEXPREC*, long int, SEXPREC*)’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:224:22: note: in expansion of macro ‘GET_CALLABLE’
+     static Fun fun = GET_CALLABLE("set_string_elt");
+                      ^~~~~~~~~~~~
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘void char_set_string_elt(SEXP, R_xlen_t, const char*)’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘void (*)(SEXPREC*, long int, const char*)’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:230:22: note: in expansion of macro ‘GET_CALLABLE’
+     static Fun fun = GET_CALLABLE("char_set_string_elt");
+                      ^~~~~~~~~~~~
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘SEXPREC** get_string_ptr(SEXP)’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘SEXPREC** (*)(SEXPREC*)’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:236:22: note: in expansion of macro ‘GET_CALLABLE’
+     static Fun fun = GET_CALLABLE("get_string_ptr");
+                      ^~~~~~~~~~~~
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘SEXPREC* get_vector_elt(SEXP, R_xlen_t)’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘SEXPREC* (*)(SEXPREC*, long int)’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:242:22: note: in expansion of macro ‘GET_CALLABLE’
+     static Fun fun = GET_CALLABLE("get_vector_elt");
+                      ^~~~~~~~~~~~
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘void set_vector_elt(SEXP, R_xlen_t, SEXP)’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘void (*)(SEXPREC*, long int, SEXPREC*)’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:248:22: note: in expansion of macro ‘GET_CALLABLE’
+     static Fun fun = GET_CALLABLE("set_vector_elt");
+                      ^~~~~~~~~~~~
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘SEXPREC** get_vector_ptr(SEXP)’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘SEXPREC** (*)(SEXPREC*)’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:254:22: note: in expansion of macro ‘GET_CALLABLE’
+     static Fun fun = GET_CALLABLE("get_vector_ptr");
+                      ^~~~~~~~~~~~
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘const char* char_nocheck(SEXP)’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘const char* (*)(SEXPREC*)’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:260:22: note: in expansion of macro ‘GET_CALLABLE’
+     static Fun fun = GET_CALLABLE("char_nocheck");
+                      ^~~~~~~~~~~~
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘void* dataptr(SEXP)’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘void* (*)(SEXPREC*)’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:266:22: note: in expansion of macro ‘GET_CALLABLE’
+     static Fun fun = GET_CALLABLE("dataptr");
+                      ^~~~~~~~~~~~
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘void setCurrentScope(Rcpp::Module*)’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘void (*)(Rcpp::Module*)’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:278:22: note: in expansion of macro ‘GET_CALLABLE’
+     static Fun fun = GET_CALLABLE("setCurrentScope");
+                      ^~~~~~~~~~~~
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘int* get_cache(int)’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘int* (*)(int)’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:284:22: note: in expansion of macro ‘GET_CALLABLE’
+     static Fun fun = GET_CALLABLE("get_cache");
+                      ^~~~~~~~~~~~
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘int error_occured()’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘int (*)()’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:296:22: note: in expansion of macro ‘GET_CALLABLE’
+     static Fun fun = GET_CALLABLE("error_occured");
+                      ^~~~~~~~~~~~
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG  -I'/apps/R-4.3.2/lib64/R/library/Rcpp/include' -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c pending_py_calls_notifier.cpp -o pending_py_calls_notifier.o
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG  -I'/apps/R-4.3.2/lib64/R/library/Rcpp/include' -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c python.cpp -o python.o
+In file included from /apps/R-4.3.2/lib64/R/library/Rcpp/include/RcppCommon.h:128,
+                 from /apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp.h:27,
+                 from python.cpp:7:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘const char* Rcpp::type2name(SEXP)’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘const char* (*)(SEXPREC*)’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:86:26: note: in expansion of macro ‘GET_CALLABLE’
+         static Fun fun = GET_CALLABLE("type2name");
+                          ^~~~~~~~~~~~
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘long unsigned int Rcpp::internal::enterRNGScope()’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘long unsigned int (*)()’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:93:30: note: in expansion of macro ‘GET_CALLABLE’
+             static Fun fun = GET_CALLABLE("enterRNGScope");
+                              ^~~~~~~~~~~~
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘long unsigned int Rcpp::internal::exitRNGScope()’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘long unsigned int (*)()’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:99:30: note: in expansion of macro ‘GET_CALLABLE’
+             static Fun fun = GET_CALLABLE("exitRNGScope");
+                              ^~~~~~~~~~~~
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘long unsigned int Rcpp::internal::beginSuspendRNGSynchronization()’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘long unsigned int (*)()’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:105:30: note: in expansion of macro ‘GET_CALLABLE’
+             static Fun fun = GET_CALLABLE("beginSuspendRNGSynchronization");
+                              ^~~~~~~~~~~~
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘long unsigned int Rcpp::internal::endSuspendRNGSynchronization()’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘long unsigned int (*)()’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:111:30: note: in expansion of macro ‘GET_CALLABLE’
+             static Fun fun = GET_CALLABLE("endSuspendRNGSynchronization");
+                              ^~~~~~~~~~~~
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘double Rcpp::mktime00(tm&)’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘double (*)(tm&)’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:132:26: note: in expansion of macro ‘GET_CALLABLE’
+         static Fun fun = GET_CALLABLE("mktime00");
+                          ^~~~~~~~~~~~
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘tm* Rcpp::gmtime_(const time_t*)’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘tm* (*)(const long int*)’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:138:27: note: in expansion of macro ‘GET_CALLABLE’
+         static Fun fun =  GET_CALLABLE("gmtime_");
+                           ^~~~~~~~~~~~
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘SEXPREC* Rcpp::Rcpp_precious_preserve(SEXP)’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘SEXPREC* (*)(SEXPREC*)’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:154:26: note: in expansion of macro ‘GET_CALLABLE’
+         static Fun fun = GET_CALLABLE("Rcpp_precious_preserve");
+                          ^~~~~~~~~~~~
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘void Rcpp::Rcpp_precious_remove(SEXP)’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘void (*)(SEXPREC*)’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:159:26: note: in expansion of macro ‘GET_CALLABLE’
+         static Fun fun = GET_CALLABLE("Rcpp_precious_remove");
+                          ^~~~~~~~~~~~
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘Rcpp::Rostream<true>& Rcpp::Rcpp_cout_get()’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘Rcpp::Rostream<true>& (*)()’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:165:26: note: in expansion of macro ‘GET_CALLABLE’
+         static Fun fun = GET_CALLABLE("Rcpp_cout_get");
+                          ^~~~~~~~~~~~
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘Rcpp::Rostream<false>& Rcpp::Rcpp_cerr_get()’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘Rcpp::Rostream<false>& (*)()’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:170:26: note: in expansion of macro ‘GET_CALLABLE’
+         static Fun fun = GET_CALLABLE("Rcpp_cerr_get");
+                          ^~~~~~~~~~~~
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘SEXPREC* rcpp_set_stack_trace(SEXP)’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘SEXPREC* (*)(SEXPREC*)’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:188:23: note: in expansion of macro ‘GET_CALLABLE’
+     static Fun fun =  GET_CALLABLE("rcpp_set_stack_trace");
+                       ^~~~~~~~~~~~
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘std::__cxx11::string demangle(const string&)’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘std::__cxx11::basic_string<char> (*)(const std::__cxx11::basic_string<char>&)’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:194:22: note: in expansion of macro ‘GET_CALLABLE’
+     static Fun fun = GET_CALLABLE("demangle");
+                      ^~~~~~~~~~~~
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘const char* short_file_name(const char*)’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘const char* (*)(const char*)’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:200:22: note: in expansion of macro ‘GET_CALLABLE’
+     static Fun fun = GET_CALLABLE("short_file_name");
+                      ^~~~~~~~~~~~
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘SEXPREC* stack_trace(const char*, int)’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘SEXPREC* (*)(const char*, int)’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:206:22: note: in expansion of macro ‘GET_CALLABLE’
+     static Fun fun = GET_CALLABLE("stack_trace");
+                      ^~~~~~~~~~~~
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘SEXPREC* get_string_elt(SEXP, R_xlen_t)’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘SEXPREC* (*)(SEXPREC*, long int)’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:212:22: note: in expansion of macro ‘GET_CALLABLE’
+     static Fun fun = GET_CALLABLE("get_string_elt");
+                      ^~~~~~~~~~~~
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘const char* char_get_string_elt(SEXP, R_xlen_t)’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘const char* (*)(SEXPREC*, long int)’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:218:22: note: in expansion of macro ‘GET_CALLABLE’
+     static Fun fun = GET_CALLABLE("char_get_string_elt");
+                      ^~~~~~~~~~~~
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘void set_string_elt(SEXP, R_xlen_t, SEXP)’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘void (*)(SEXPREC*, long int, SEXPREC*)’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:224:22: note: in expansion of macro ‘GET_CALLABLE’
+     static Fun fun = GET_CALLABLE("set_string_elt");
+                      ^~~~~~~~~~~~
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘void char_set_string_elt(SEXP, R_xlen_t, const char*)’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘void (*)(SEXPREC*, long int, const char*)’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:230:22: note: in expansion of macro ‘GET_CALLABLE’
+     static Fun fun = GET_CALLABLE("char_set_string_elt");
+                      ^~~~~~~~~~~~
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘SEXPREC** get_string_ptr(SEXP)’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘SEXPREC** (*)(SEXPREC*)’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:236:22: note: in expansion of macro ‘GET_CALLABLE’
+     static Fun fun = GET_CALLABLE("get_string_ptr");
+                      ^~~~~~~~~~~~
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘SEXPREC* get_vector_elt(SEXP, R_xlen_t)’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘SEXPREC* (*)(SEXPREC*, long int)’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:242:22: note: in expansion of macro ‘GET_CALLABLE’
+     static Fun fun = GET_CALLABLE("get_vector_elt");
+                      ^~~~~~~~~~~~
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘void set_vector_elt(SEXP, R_xlen_t, SEXP)’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘void (*)(SEXPREC*, long int, SEXPREC*)’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:248:22: note: in expansion of macro ‘GET_CALLABLE’
+     static Fun fun = GET_CALLABLE("set_vector_elt");
+                      ^~~~~~~~~~~~
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘SEXPREC** get_vector_ptr(SEXP)’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘SEXPREC** (*)(SEXPREC*)’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:254:22: note: in expansion of macro ‘GET_CALLABLE’
+     static Fun fun = GET_CALLABLE("get_vector_ptr");
+                      ^~~~~~~~~~~~
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘const char* char_nocheck(SEXP)’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘const char* (*)(SEXPREC*)’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:260:22: note: in expansion of macro ‘GET_CALLABLE’
+     static Fun fun = GET_CALLABLE("char_nocheck");
+                      ^~~~~~~~~~~~
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘void* dataptr(SEXP)’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘void* (*)(SEXPREC*)’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:266:22: note: in expansion of macro ‘GET_CALLABLE’
+     static Fun fun = GET_CALLABLE("dataptr");
+                      ^~~~~~~~~~~~
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘void setCurrentScope(Rcpp::Module*)’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘void (*)(Rcpp::Module*)’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:278:22: note: in expansion of macro ‘GET_CALLABLE’
+     static Fun fun = GET_CALLABLE("setCurrentScope");
+                      ^~~~~~~~~~~~
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘int* get_cache(int)’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘int* (*)(int)’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:284:22: note: in expansion of macro ‘GET_CALLABLE’
+     static Fun fun = GET_CALLABLE("get_cache");
+                      ^~~~~~~~~~~~
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h: In function ‘int error_occured()’:
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:82:73: warning: cast between incompatible function types from ‘DL_FUNC’ {aka ‘void* (*)()’} to ‘Fun’ {aka ‘int (*)()’} [-Wcast-function-type]
+     #define GET_CALLABLE(__FUN__) (Fun) R_GetCCallable( "Rcpp", __FUN__ )
+                                                                         ^
+/apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/routines.h:296:22: note: in expansion of macro ‘GET_CALLABLE’
+     static Fun fun = GET_CALLABLE("error_occured");
+                      ^~~~~~~~~~~~
+python.cpp: At global scope:
+python.cpp:2922:37: warning: cast between incompatible function types from ‘reticulate::libpython::PyObject* (*)(reticulate::libpython::PyObject*, reticulate::libpython::PyObject*, reticulate::libpython::PyObject*)’ {aka ‘reticulate::libpython::_object* (*)(reticulate::libpython::_object*, reticulate::libpython::_object*, reticulate::libpython::_object*)’} to ‘reticulate::libpython::PyCFunction’ {aka ‘reticulate::libpython::_object* (*)(reticulate::libpython::_object*, reticulate::libpython::_object*)’} [-Wcast-function-type]
+   { "call_r_function", (PyCFunction)call_r_function,
+                                     ^~~~~~~~~~~~~~~
+python.cpp:2924:61: warning: cast between incompatible function types from ‘reticulate::libpython::PyObject* (*)(reticulate::libpython::PyObject*, reticulate::libpython::PyObject*, reticulate::libpython::PyObject*)’ {aka ‘reticulate::libpython::_object* (*)(reticulate::libpython::_object*, reticulate::libpython::_object*, reticulate::libpython::_object*)’} to ‘reticulate::libpython::PyCFunction’ {aka ‘reticulate::libpython::_object* (*)(reticulate::libpython::_object*, reticulate::libpython::_object*)’} [-Wcast-function-type]
+   { "schedule_python_function_on_main_thread", (PyCFunction)schedule_python_function_on_main_thread,
+                                                             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+python.cpp: In function ‘SEXPREC* py_fetch_error(bool)’:
+python.cpp:1021:5: warning: this statement may fall through [-Wimplicit-fallthrough=]
+     }
+     ^
+python.cpp:1023:4: note: here
+    case -1: // Exception raised when checking for attr
+    ^~~~
+In file included from /apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp/r/headers.h:67,
+                 from /apps/R-4.3.2/lib64/R/library/Rcpp/include/RcppCommon.h:30,
+                 from /apps/R-4.3.2/lib64/R/library/Rcpp/include/Rcpp.h:27,
+                 from python.cpp:7:
+/apps/R-4.3.2/lib64/R/include/Rinternals.h:369:34: warning: this statement may fall through [-Wimplicit-fallthrough=]
+ #define UNPROTECT(n) Rf_unprotect(n)
+                      ~~~~~~~~~~~~^~~
+python.cpp:1038:5: note: in expansion of macro ‘UNPROTECT’
+     UNPROTECT(1);
+     ^~~~~~~~~
+python.cpp:1040:3: note: here
+   case -1: // Exception raised when checking for attr
+   ^~~~
+python.cpp:1061:30: warning: this statement may fall through [-Wimplicit-fallthrough=]
+     Py_DecRef(r_call_capsule);
+                              ^
+python.cpp:1063:3: note: here
+   case -1: // Exception raised when checking for attr
+   ^~~~
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG  -I'/apps/R-4.3.2/lib64/R/library/Rcpp/include' -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c readline.cpp -o readline.o
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG  -I'/apps/R-4.3.2/lib64/R/library/Rcpp/include' -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c signals.cpp -o signals.o
+g++ -shared -L/apps/R-4.3.2/lib64/R/lib -L/usr/local/lib64 -o reticulate.so RcppExports.o event_loop.o libpython.o output.o pending_py_calls_notifier.o python.o readline.o signals.o -L/apps/R-4.3.2/lib64/R/lib -lR
+installing to /home/cqcampos/R/library/00LOCK-reticulate/00new/reticulate/libs
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+*** copying figures
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (reticulate)
+
+The downloaded source packages are in
+	‘/hpc_temp/RtmpoaKW0w/downloaded_packages’
+Warning message:
+package ‘parallel’ is a base package, and should not be updated 
+Starting estimation at Mon Oct 13 13:58:01 CDT 2025
+         used (Mb) gc trigger (Mb) max used (Mb)
+Ncells 284285 15.2     664322 35.5   453531 24.3
+Vcells 489656  3.8    8388608 64.0  1815222 13.9
+[2025-10-13 13:58:02] Starting estimation process... 
+Loading required package: foreach
+Loading required package: iterators
+Warning messages:
+1: In rgl.init(initValue, onlyNULL) :
+  X11 error: BadValue (integer parameter out of range for operation)
+2: 'rgl.init' failed, will use the null device.
+See '?rgl.useNULL' for ways to avoid this warning. 
+Using Python from: /apps/python/3.10/3.10.9/bin/python3 
+[2025-10-13 13:58:11] Using 7 cores for parallel processing 
+[2025-10-13 13:58:11] Basic setup, lambda: 0.05 
+[2025-10-13 13:58:11] Basic setup, R: 300 
+[2025-10-13 13:58:11] Reading raw data... 
+[2025-10-13 13:58:39] Data loaded. Number of observations: 337661 
+[2025-10-13 13:59:06] Generating simulation draws... 
+[1] 3
+[1] "eta_out"
+[1] "Objfn Value:"
+[1] 62625.21
+[1] "Exponentiating following vars:"
+[1] "log(sd eta)"     "log(sd theta 1)" "log(sd theta 2)" "log(sd theta 3)"
+[1] 103
+[1] 103 100
+[1] "Estimating posteriors..."
+[1] "J-specific mean utilities"
+ [1] -0.133076290 -0.870128560 -1.758528238 -2.814689088  1.617928644
+ [6]  1.206638731 -1.972832995 -0.566906146 -1.578008585 -1.826733511
+[11] -2.403830371 -1.607160363  0.184663072 -0.947864178 -0.690579538
+[16] -0.643140359  1.586695307 -2.608806258 -1.000209800 -1.317708310
+[21]  0.183898254  0.812945495 -1.973547541 -1.070525690 -1.147347244
+[26]  0.638565191 -1.806656458 -1.322754196 -1.372838402 -0.084167500
+[31] -1.594780368  0.046369996 -2.411774471 -0.837480834 -2.357514807
+[36] -1.021810491 -1.630217521  2.120134144 -1.340708162 -1.547254575
+[41] -0.455932949  0.002064967  2.472508432 -1.224461012 -1.679134864
+[46] -0.902410969 -1.043730039 -0.585952844 -0.650419250 -1.108233059
+[51] -0.413367875  3.163251140  4.046146799
+[1] "beta x"
+              [,1]
+ [1,]  0.001697517
+ [2,] -0.106413709
+ [3,] -0.106203670
+ [4,] -1.097744574
+ [5,]  0.070225877
+ [6,] -0.275548291
+ [7,] -0.136566365
+ [8,]  0.174597973
+ [9,]  0.202008511
+[10,] -0.058852295
+[11,]  1.274702434
+[12,]  0.123373146
+[1] "distance parameters"
+               [,1]
+ [1,] -0.3248624810
+ [2,] -0.0021034268
+ [3,]  0.0162698521
+ [4,] -0.0123204141
+ [5,] -0.1305589918
+ [6,] -0.0150144406
+ [7,]  0.0164877190
+ [8,]  0.0235571077
+ [9,] -0.0001703718
+[10,] -0.0064474061
+[11,] -0.0014187536
+[12,]  0.0758511593
+[13,]  0.0259010798
+[14,]  0.0036403002
+[1] "cost parameters"
+ [1]  0.208573738  0.002236043 -0.034836939  0.064826547 -0.082928099
+ [6]  0.013934022  0.009634854 -0.009987262 -0.032843959 -0.018366321
+[11]  0.005178704 -0.097306349 -0.026026251
+[1] "sd(eta)"
+[1] 0.3629664
+[1] "sd(theta)"
+[1] 0.1889698 0.1253775 0.5407390
+[1] "pr(type)"
+[1] 0.44635179 0.48772384 0.06592437
+[1] "mu(theta type)"
+[1] -0.8759767  0.4300928  2.7490179
+          1%           5%          10%          15%          20%          40% 
+5.033698e-06 7.058552e-04 1.394611e-02 5.469243e-01 8.621942e-01 9.586876e-01 
+         50%          60%          80%          90%          95%          99% 
+9.706026e-01 9.779896e-01 9.878588e-01 9.919919e-01 9.943887e-01 9.973589e-01 
+[1] "Calculating posterior means and variances..."
+          1%           5%          10%          15%          20%          40% 
+3.273431e-05 3.733943e-03 5.227065e-02 2.695347e-01 6.437919e-01 9.050763e-01 
+         50%          60%          80%          90%          95%          99% 
+9.373910e-01 9.569029e-01 9.795796e-01 9.873023e-01 9.911723e-01 9.956791e-01 
+[1] "Calculating posterior means and variances..."
+          1%           5%          10%          15%          20%          40% 
+2.358718e-08 2.963416e-04 5.182498e-03 1.506838e-02 3.015468e-02 1.344409e-01 
+         50%          60%          80%          90%          95%          99% 
+2.107053e-01 3.034948e-01 5.423006e-01 7.009764e-01 7.979293e-01 9.057870e-01 
+[1] "Calculating posterior means and variances..."
+Job completed at Mon Oct 13 14:13:06 CDT 2025

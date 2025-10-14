@@ -1,0 +1,26 @@
+=== Estimation started at 2025-09-15 18:21:42 ===
+[2025-09-15 18:21:42] Starting estimation process...
+[2025-09-15 18:21:49] Using 7 cores for parallel processing
+[2025-09-15 18:21:49] Basic setup, lambda: 0.05
+[2025-09-15 18:21:49] Basic setup, R: 300
+[2025-09-15 18:21:49] Reading raw data...
+[2025-09-15 18:22:01] Data loaded. Number of observations: 337661
+[2025-09-15 18:22:13] Generating simulation draws...
+ (likelihood) - 2025-09-15 18:24:24] Computing likelihood when k =  1... 
+ (likelihood) - 2025-09-15 18:26:03] Completed all 300 simulation draws in 0.03 minutes 
+ (likelihood) - 2025-09-15 18:26:03] Low likelihood warning: 1549 observations (0.46%) hit minimum threshold (1e-6) 
+ (likelihood) - 2025-09-15 18:26:03] Pre-calculation check: 0 NaNs in likelihood_i 
+ (likelihood) - 2025-09-15 18:26:03] Likelihood summary - Min: 3.795e-10, Q1: 9.109e-01, Median: 9.706e-01, Mean: 8.203e-01, Q3: 9.857e-01, Max: 9.999e-01 
+ (likelihood) - 2025-09-15 18:26:03] Likelihood function completed 
+ (likelihood) - 2025-09-15 18:26:08] Computing likelihood when k =  2... 
+ (likelihood) - 2025-09-15 18:27:48] Completed all 300 simulation draws in 0.06 minutes 
+ (likelihood) - 2025-09-15 18:27:48] Low likelihood warning: 670 observations (0.2%) hit minimum threshold (1e-6) 
+ (likelihood) - 2025-09-15 18:27:48] Pre-calculation check: 0 NaNs in likelihood_i 
+ (likelihood) - 2025-09-15 18:27:48] Likelihood summary - Min: 2.082e-16, Q1: 7.799e-01, Median: 9.374e-01, Mean: 7.749e-01, Q3: 9.751e-01, Max: 1.000e+00 
+ (likelihood) - 2025-09-15 18:27:48] Likelihood function completed 
+ (likelihood) - 2025-09-15 18:27:52] Computing likelihood when k =  3... 
+ (likelihood) - 2025-09-15 18:29:40] Completed all 300 simulation draws in 0.09 minutes 
+ (likelihood) - 2025-09-15 18:29:40] Low likelihood warning: 6373 observations (1.89%) hit minimum threshold (1e-6) 
+ (likelihood) - 2025-09-15 18:29:40] Pre-calculation check: 0 NaNs in likelihood_i 
+ (likelihood) - 2025-09-15 18:29:40] Likelihood summary - Min: 9.290e-32, Q1: 4.979e-02, Median: 2.107e-01, Mean: 2.855e-01, Q3: 4.755e-01, Max: 1.000e+00 
+ (likelihood) - 2025-09-15 18:29:40] Likelihood function completed 

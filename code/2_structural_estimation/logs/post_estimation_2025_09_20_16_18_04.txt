@@ -1,0 +1,5 @@
+=== Estimation started at 2025-09-20 16:18:04 ===
+[2025-09-20 16:18:04] Starting estimation process...
+[2025-09-20 16:18:05] Using 9 cores for parallel processing
+[2025-09-20 16:18:05] Basic setup, lambda: 0.05
+[2025-09-20 16:18:05] Basic setup, R: 300

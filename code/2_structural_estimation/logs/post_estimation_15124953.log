@@ -1,0 +1,91 @@
+==========================================
+SLURM_JOB_ID = 15124953
+SLURM_SUBMIT_DIR = /project/lausd/decentralized_choice/code/2_structural_estimation
+SLURM_JOB_NODELIST = mcn62
+==========================================
+/apps/python/3.10/3.10.9/bin/python3
+Job ID: 15124953
+Job User: ryanlee22
+Num Cores: 8
+Warning message:
+package ‘parallel’ is a base package, and should not be updated 
+Starting estimation at Fri Sep 19 15:19:27 CDT 2025
+         used (Mb) gc trigger (Mb) max used (Mb)
+Ncells 284285 15.2     664322 35.5   453531 24.3
+Vcells 489656  3.8    8388608 64.0  1815222 13.9
+[2025-09-19 15:19:27] Starting estimation process... 
+Loading required package: foreach
+Loading required package: iterators
+Warning messages:
+1: In rgl.init(initValue, onlyNULL) : RGL: unable to open X11 display
+2: 'rgl.init' failed, will use the null device.
+See '?rgl.useNULL' for ways to avoid this warning. 
+Using Python from: /apps/python/3.10/3.10.9/bin/python3 
+[2025-09-19 15:19:35] Using 7 cores for parallel processing 
+[2025-09-19 15:19:35] Basic setup, lambda: 0.05 
+[2025-09-19 15:19:35] Basic setup, R: 300 
+[2025-09-19 15:19:35] Reading raw data... 
+[2025-09-19 15:20:02] Data loaded. Number of observations: 337661 
+[2025-09-19 15:20:29] Generating simulation draws... 
+[1] 1
+[1] "eta_out"
+[1] "Objfn Value:"
+[1] 64260.91
+[1] "Exponentiating following vars:"
+[1] "log(sd eta)"     "log(sd theta 1)"
+[1] "Estimating posteriors..."
+[1] "J-specific mean utilities"
+ [1]  0.72065244  0.19601423 -0.64060125 -1.62414052  2.38288564  1.87774834
+ [7] -0.73287402  0.57694547 -0.26741669 -0.48526684 -0.74177979 -0.48167672
+[13]  1.14353010  0.19811347  0.49777472  0.24340720  2.22573183 -1.01119652
+[19]  0.16446446 -0.06633002  0.92402126  1.50709006 -0.37712445  0.17800922
+[25]  0.15089362  1.34022069 -0.92644463  0.04781232 -0.22632543  0.66317936
+[31] -0.30502721  0.95868195 -0.65178283  0.38327904 -0.88466627 -0.03790530
+[37] -0.22887204  2.66642584 -0.22374966 -0.44140232  0.71767791  0.81246579
+[43]  2.99130939 -0.20063191 -0.39205799  0.12373235  0.04196692  0.37768417
+[49]  0.15965620 -0.42527357  0.71142900  3.81890490  4.55635869
+[1] "beta x"
+              [,1]
+ [1,]  0.009027977
+ [2,] -0.183640685
+ [3,]  0.050812030
+ [4,] -1.064454305
+ [5,]  0.058938580
+ [6,] -0.109572616
+ [7,] -0.119284318
+ [8,]  0.071910992
+ [9,]  0.094613436
+[10,] -0.028409791
+[11,]  0.514928748
+[12,]  0.038575565
+[1] "distance parameters"
+               [,1]
+ [1,] -0.2975052096
+ [2,] -0.0020174152
+ [3,]  0.0331184759
+ [4,] -0.0013501277
+ [5,] -0.0505791561
+ [6,] -0.0123060204
+ [7,]  0.0095856597
+ [8,]  0.0213527862
+ [9,] -0.0007500982
+[10,] -0.0053284401
+[11,] -0.0013692816
+[12,]  0.0804658234
+[13,]  0.0342808687
+[14,]  0.0025916093
+[1] "cost parameters"
+ [1]  0.3386101515  0.0031195902 -0.0307226132  0.0665868215 -0.0809763945
+ [6]  0.0131741245  0.0001613129 -0.0098217375 -0.0284856368 -0.0169437067
+[11]  0.0041507792 -0.0817912843 -0.0038309654
+[1] "sd(eta)"
+[1] 0.4198046
+[1] "sd(theta)"
+[1] 0.04512206
+[1] "pr(type)"
+[1] 1
+[1] "mu(theta type)"
+[1] 0
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+slurmstepd: error: *** JOB 15124953 ON mcn62 CANCELLED AT 2025-09-19T15:25:17 ***
+slurmstepd: error: *** STEP 15124953.0 ON mcn62 CANCELLED AT 2025-09-19T15:25:17 ***

@@ -1,0 +1,14 @@
+=== Estimation started at 2025-09-19 15:16:17 ===
+[2025-09-19 15:16:17] Starting estimation process...
+[2025-09-19 15:16:24] Using 7 cores for parallel processing
+[2025-09-19 15:16:24] Basic setup, lambda: 0.05
+[2025-09-19 15:16:24] Basic setup, R: 300
+[2025-09-19 15:16:24] Reading raw data...
+[2025-09-19 15:16:51] Data loaded. Number of observations: 337661
+[2025-09-19 15:17:19] Generating simulation draws...
+ (likelihood) - 2025-09-19 15:21:35] Computing likelihood when k =  1... 
+ (likelihood) - 2025-09-19 15:24:40] Completed all 300 simulation draws in 0.05 minutes 
+ (likelihood) - 2025-09-19 15:24:40] Low likelihood warning: 318 observations (0.09%) hit minimum threshold (1e-6) 
+ (likelihood) - 2025-09-19 15:24:40] Pre-calculation check: 0 NaNs in likelihood_i 
+ (likelihood) - 2025-09-19 15:24:40] Likelihood summary - Min: 2.048e-09, Q1: 7.614e-01, Median: 8.974e-01, Mean: 7.555e-01, Q3: 9.470e-01, Max: 9.989e-01 
+ (likelihood) - 2025-09-19 15:24:40] Likelihood function completed 

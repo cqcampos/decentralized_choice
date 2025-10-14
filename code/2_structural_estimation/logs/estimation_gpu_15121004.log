@@ -1,0 +1,54 @@
+==========================================
+SLURM_JOB_ID = 15121004
+SLURM_SUBMIT_DIR = /project/lausd/decentralized_choice/code/2_structural_estimation
+SLURM_JOB_NODELIST = mgpu04
+==========================================
+Job ID: 15121004
+Job User: ryanlee22
+Num Cores: 24
+Node Name: mgpu04
+Starting estimation at Wed Sep 17 10:35:46 CDT 2025
+Optimization specifications =========================================
+Number of threads use for torch operation 24
+Number of simulation draws: 300
+Number of types assumed: 1
+Eta outside of exp(): True
+X includes currently in magnet indicator: True
+Method for drawing normal: sobol
+Seed value for normal draws: 12345
+Number of blocks for objfn and grad: 4
+Last year of applications: 2013
+======================================================================
+Loading raw data...
+84257
+53
+(84257, 53)
+Drawing from normal...
+Min u: 1.1920928955078125e-07
+Max u: 0.9999998807907104
+Min u: 1.1920928955078125e-07
+Max u: 0.9999998807907104
+Printing the theta draws for round 1-5 for student 1-5
+tensor([[ 0.2283, -0.0807, -1.8039,  1.3607,  1.0810],
+        [ 1.8388, -1.3337, -0.2216,  0.0915,  0.0081],
+        [ 0.4589, -0.5152, -0.8406,  0.9408,  1.2818],
+        [ 1.1497, -0.6845, -0.6506,  0.3307,  0.5114],
+        [ 0.0365, -0.2840, -1.1945,  2.3192,  0.7842]], device='cuda:0')
+Printing some of the sims_c
+tensor([-0.6918,  0.2699,  0.2526, -0.3049,  0.2384, -1.0786,  0.8553, -0.7140,
+         0.9672, -0.1479, -0.3092,  0.6269,  0.5244,  0.2538, -0.4179, -0.3082,
+         0.0672, -0.0194,  0.5510,  2.1409, -0.6443, -1.0098,  0.1055, -0.5918,
+         0.7717,  1.4901, -0.2917, -0.5079, -0.6234,  0.8708, -1.2490, -0.9800,
+        -0.5789, -0.8838, -3.5513, -0.5024, -0.9778,  0.5311,  2.7746, -0.4511,
+         3.4911, -1.7472, -0.9146,  1.1632, -1.9182,  1.9947,  0.2430, -0.7491,
+         0.5771,  0.5596,  0.6479,  1.1130, -1.2514], device='cuda:0')
+Picking starting values for optimization...
+Traceback (most recent call last):
+  File "/project/lausd/decentralized_choice/code/2_structural_estimation/estimate_mixture.py", line 70, in <module>
+    omega_0, omega_names = set_start_params(mle_input_dict, hot_start=hot_start, last_yr=last_yr)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/project/lausd/decentralized_choice/code/2_structural_estimation/util.py", line 702, in set_start_params
+    raise ValueError(
+ValueError: Starting values have the wrong dimension: expected 94, got 81
+srun: error: mgpu04: task 0: Exited with exit code 1
+Job completed at Wed Sep 17 10:36:39 CDT 2025

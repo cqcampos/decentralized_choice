@@ -1,0 +1,90 @@
+==========================================
+SLURM_JOB_ID = 15095970
+SLURM_SUBMIT_DIR = /project/lausd/decentralized_choice/code/2_structural_estimation
+SLURM_JOB_NODELIST = mcn34
+==========================================
+Job ID: 15095970
+Job User: ryanlee22
+Num Cores: 32
+Starting estimation at Mon Sep  8 13:43:13 CDT 2025
+Optimization specifications =========================================
+Number of threads use for torch operation 32
+Number of simulation draws: 300
+Number of types assumed: 3
+Eta outside of exp(): True
+X includes currently in magnet indicator: True
+Method for drawing normal: sobol
+Seed value for normal draws: 12345
+Number of blocks for objfn and grad: 1
+Last year of applications: 2013
+======================================================================
+Loading raw data...
+105239
+53
+(105239, 53)
+Drawing from normal...
+Min u: 1.1920928955078125e-07
+Max u: 0.9999998807907104
+Min u: 1.1920928955078125e-07
+Max u: 0.9999998807907104
+Printing the theta draws for round 1-5 for student 1-5
+tensor([[ 0.2283, -0.0807, -1.8039,  1.3607,  1.0810],
+        [ 1.8388, -1.3337, -0.2216,  0.0915,  0.0081],
+        [ 0.4589, -0.5152, -0.8406,  0.9408,  1.2818],
+        [ 1.1497, -0.6845, -0.6506,  0.3307,  0.5114],
+        [ 0.0365, -0.2840, -1.1945,  2.3192,  0.7842]])
+Printing some of the sims_c
+tensor([-0.6918,  0.2699,  0.2526, -0.3049,  0.2384, -1.0786,  0.8553, -0.7140,
+         0.9672, -0.1479, -0.3092,  0.6269,  0.5244,  0.2538, -0.4179, -0.3082,
+         0.0672, -0.0194,  0.5510,  2.1409, -0.6443, -1.0098,  0.1055, -0.5918,
+         0.7717,  1.4901, -0.2917, -0.5079, -0.6234,  0.8708, -1.2490, -0.9800,
+        -0.5789, -0.8838, -3.5513, -0.5024, -0.9778,  0.5311,  2.7746, -0.4511,
+         3.4911, -1.7472, -0.9146,  1.1632, -1.9182,  1.9947,  0.2430, -0.7491,
+         0.5771,  0.5596,  0.6479,  1.1130, -1.2514])
+Picking starting values for optimization...
+Converting numpy arrays to tensors...
+starting values:
+[ 1.36831403e-02  7.22165737e-03  6.65152653e-04  0.00000000e+00
+  5.03615580e-02  1.72939690e-02  8.36191906e-03  3.64883741e-02
+  1.04523988e-02  9.59720256e-03  7.22165737e-03  3.04069784e-03
+  5.51126484e-02  1.66288163e-02  2.52758008e-02  2.67961497e-02
+  7.61124678e-02  4.37100315e-03  1.09275079e-02  1.02623552e-02
+  2.56558880e-02  4.34249660e-02  1.71039254e-02  2.09998195e-02
+  2.29002556e-02  4.63706421e-02  7.60174460e-04  2.70812151e-02
+  5.41624303e-03  3.25924800e-02  1.33030531e-02  2.28052338e-02
+  9.69222437e-03  7.88681002e-03  6.17641749e-03  8.26689725e-03
+  6.84157014e-03  1.36356294e-01  1.37781621e-02  7.60174460e-03
+  1.83392088e-02  4.57054894e-02  6.35695892e-02  2.19500375e-02
+  1.09275079e-02  1.14026169e-03  1.61537073e-03  1.42532711e-03
+  3.04069784e-03  1.80541434e-03  2.47056700e-02  1.28944593e-01
+  6.53750036e-02  0.00000000e+00  0.00000000e+00  0.00000000e+00
+  0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00
+  0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00
+  0.00000000e+00 -3.00000000e-01  0.00000000e+00  0.00000000e+00
+  0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00
+  0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00
+  0.00000000e+00  0.00000000e+00  0.00000000e+00  3.00000000e-01
+  0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00
+  0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00
+  0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00
+ -5.00000000e-01  0.00000000e+00  0.00000000e+00  0.00000000e+00
+  2.00000000e+00  1.00000000e+00 -1.00000000e+00 -5.00000000e-01]
+Starting nelder-mead to refine starting values of omega...
+Number of NaNs in likelihood: 105239
+Number of zero values in likelihood: 0
+Indices of NaNs in likelihood: 0
+Individual likelihood stats:
+Traceback (most recent call last):
+  File "/project/lausd/decentralized_choice/code/2_structural_estimation/estimate_mixture.py", line 115, in <module>
+    mle_fit_nm = minimize(
+  File "/apps/python/3.10/3.10.9/lib/python3.10/site-packages/scipy/optimize/_minimize.py", line 684, in minimize
+    res = _minimize_neldermead(fun, x0, args, callback, bounds=bounds,
+  File "/apps/python/3.10/3.10.9/lib/python3.10/site-packages/scipy/optimize/_optimize.py", line 845, in _minimize_neldermead
+    fsim[k] = func(sim[k])
+  File "/apps/python/3.10/3.10.9/lib/python3.10/site-packages/scipy/optimize/_optimize.py", line 569, in function_wrapper
+    fx = function(np.copy(x), *(wrapper_args + args))
+  File "/project/lausd/decentralized_choice/code/2_structural_estimation/util.py", line 826, in objfn_l_and_grad
+    print(f"Min     : {lik.min().item():.6e}")
+RuntimeError: min(): Expected reduction dim to be specified for input.numel() == 0. Specify the reduction dim with the 'dim' argument.
+srun: error: mcn34: task 0: Exited with exit code 1
+Job completed at Mon Sep  8 13:43:35 CDT 2025

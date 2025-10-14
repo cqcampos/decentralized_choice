@@ -1,0 +1,32 @@
+==========================================
+SLURM_JOB_ID = 15117205
+SLURM_SUBMIT_DIR = /project/lausd/decentralized_choice/code/2_structural_estimation
+SLURM_JOB_NODELIST = mcn34
+==========================================
+/apps/python/3.10/3.10.9/bin/python3
+Job ID: 15117205
+Job User: ryanlee22
+Num Cores: 8
+Warning message:
+package ‘parallel’ is a base package, and should not be updated 
+Starting estimation at Mon Sep 15 15:36:12 CDT 2025
+         used (Mb) gc trigger (Mb) max used (Mb)
+Ncells 284285 15.2     664322 35.5   453531 24.3
+Vcells 489656  3.8    8388608 64.0  1815222 13.9
+[2025-09-15 15:36:12] Starting estimation process... 
+Loading required package: foreach
+Loading required package: iterators
+Warning messages:
+1: In rgl.init(initValue, onlyNULL) : RGL: unable to open X11 display
+2: 'rgl.init' failed, will use the null device.
+See '?rgl.useNULL' for ways to avoid this warning. 
+sh: line 1: 3628969 Aborted                 (core dumped) '/usr/bin/python3' '/home/ryanlee22/R/library/reticulate/config/config.py' 2> /dev/null
+Error in python_config_impl(python) : 
+  Error 134 occurred running /usr/bin/python3: 
+Calls: use_python -> python_config -> python_config_impl
+In addition: Warning message:
+In system2(command = python, args = shQuote(script), stdout = TRUE,  :
+  running command ''/usr/bin/python3' '/home/ryanlee22/R/library/reticulate/config/config.py' 2>/dev/null' had status 134
+Execution halted
+srun: error: mcn34: task 0: Exited with exit code 1
+Job completed at Mon Sep 15 15:36:21 CDT 2025

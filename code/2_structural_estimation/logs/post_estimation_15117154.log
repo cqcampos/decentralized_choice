@@ -1,0 +1,2967 @@
+==========================================
+SLURM_JOB_ID = 15117154
+SLURM_SUBMIT_DIR = /project/lausd/decentralized_choice/code/2_structural_estimation
+SLURM_JOB_NODELIST = mcn34
+==========================================
+Job ID: 15117154
+Job User: ryanlee22
+Num Cores: 8
+also installing the dependency ‘rgl’
+
+trying URL 'https://cran.rstudio.com/src/contrib/rgl_1.3.24.tar.gz'
+Content type 'application/x-gzip' length 4146898 bytes (4.0 MB)
+==================================================
+downloaded 4.0 MB
+
+trying URL 'https://cran.rstudio.com/src/contrib/matlib_1.0.0.tar.gz'
+Content type 'application/x-gzip' length 660187 bytes (644 KB)
+==================================================
+downloaded 644 KB
+
+* installing *source* package ‘rgl’ ...
+** package ‘rgl’ successfully unpacked and MD5 sums checked
+** using staged installation
+checking for gcc... gcc
+checking whether the C compiler works... yes
+checking for C compiler default output file name... a.out
+checking for suffix of executables... 
+checking whether we are cross compiling... no
+checking for suffix of object files... o
+checking whether the compiler supports GNU C... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to enable C11 features... unsupported
+checking for gcc option to enable C99 features... none needed
+checking how to run the C preprocessor... gcc -E
+checking for gcc... (cached) gcc
+checking whether the compiler supports GNU C... (cached) yes
+checking whether gcc accepts -g... (cached) yes
+checking for gcc option to enable C11 features... (cached) unsupported
+checking for gcc option to enable C99 features... (cached) none needed
+checking for libpng-config... yes
+configure: using libpng-config
+configure: using libpng dynamic linkage
+checking for X... libraries , headers 
+checking for XAllocClassHint... yes
+checking for GL/gl.h... yes
+checking for GL/glu.h... yes
+checking for glEnd in -lGL... yes
+checking for glEnd... yes
+checking for gluErrorString in -lGLU... yes
+checking for gluErrorString... yes
+checking for pkg-config... yes
+configure: using Freetype and FTGL
+configure: creating ./config.status
+config.status: creating R/noOpenGL.R
+config.status: creating src/useNULL/Makevars
+config.status: creating src/Makevars
+** libs
+using C compiler: ‘gcc (GCC) 8.5.0 20210514 (Red Hat 8.5.0-28)’
+using C++ compiler: ‘g++ (GCC) 8.5.0 20210514 (Red Hat 8.5.0-28)’
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DHAVE_FREETYPE -Iext/ftgl -I/usr/include/freetype2 -I/usr/include/libpng16  -DR_NO_REMAP -Iext -Iext/glad/include -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c ABCLineSet.cpp -o ABCLineSet.o
+In file included from Shape.h:6,
+                 from subscene.h:4,
+                 from scene.h:9,
+                 from ABCLineSet.h:4,
+                 from ABCLineSet.cpp:2:
+SceneNode.h:69:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const TypeID getTypeID() const { return typeID; }
+          ^~~~~
+SceneNode.h:70:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const ObjID getObjID() const { return objID; }
+          ^~~~~
+In file included from subscene.h:4,
+                 from scene.h:9,
+                 from ABCLineSet.h:4,
+                 from ABCLineSet.cpp:2:
+Shape.h:53:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getBBoxChanges() const { return bboxChanges; }
+   ^~~~~
+Shape.h:65:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getIgnoreExtent() const { return ignoreExtent; }
+   ^~~~~
+Shape.h:122:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isTransparent() const { return transparent; }
+   ^~~~~
+Shape.h:124:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isBlended() const { return blended; }
+   ^~~~~
+In file included from ClipPlane.h:6,
+                 from subscene.h:5,
+                 from scene.h:9,
+                 from ABCLineSet.h:4,
+                 from ABCLineSet.cpp:2:
+PrimitiveSet.h:60:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const void setVertex(int index, double* v) { vertexArray.setVertex(index, v); }
+   ^~~~~
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DHAVE_FREETYPE -Iext/ftgl -I/usr/include/freetype2 -I/usr/include/libpng16  -DR_NO_REMAP -Iext -Iext/glad/include -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c BBoxDeco.cpp -o BBoxDeco.o
+In file included from BBoxDeco.h:6,
+                 from BBoxDeco.cpp:1:
+SceneNode.h:69:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const TypeID getTypeID() const { return typeID; }
+          ^~~~~
+SceneNode.h:70:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const ObjID getObjID() const { return objID; }
+          ^~~~~
+In file included from subscene.h:4,
+                 from scene.h:9,
+                 from BBoxDeco.cpp:7:
+Shape.h:53:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getBBoxChanges() const { return bboxChanges; }
+   ^~~~~
+Shape.h:65:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getIgnoreExtent() const { return ignoreExtent; }
+   ^~~~~
+Shape.h:122:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isTransparent() const { return transparent; }
+   ^~~~~
+Shape.h:124:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isBlended() const { return blended; }
+   ^~~~~
+In file included from ClipPlane.h:6,
+                 from subscene.h:5,
+                 from scene.h:9,
+                 from BBoxDeco.cpp:7:
+PrimitiveSet.h:60:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const void setVertex(int index, double* v) { vertexArray.setVertex(index, v); }
+   ^~~~~
+BBoxDeco.cpp: In member function ‘virtual int rgl::BBoxDeco::getAttributeCount(rgl::SceneNode*, rgl::AttribID)’:
+BBoxDeco.cpp:915:31: warning: this statement may fall through [-Wimplicit-fallthrough=]
+       if (count == 0) return 0;
+                               ^
+BBoxDeco.cpp:918:5: note: here
+     case VERTICES: {
+     ^~~~
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DHAVE_FREETYPE -Iext/ftgl -I/usr/include/freetype2 -I/usr/include/libpng16  -DR_NO_REMAP -Iext -Iext/glad/include -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c Background.cpp -o Background.o
+In file included from Shape.h:6,
+                 from Background.h:4,
+                 from Background.cpp:1:
+SceneNode.h:69:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const TypeID getTypeID() const { return typeID; }
+          ^~~~~
+SceneNode.h:70:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const ObjID getObjID() const { return objID; }
+          ^~~~~
+In file included from Background.h:4,
+                 from Background.cpp:1:
+Shape.h:53:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getBBoxChanges() const { return bboxChanges; }
+   ^~~~~
+Shape.h:65:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getIgnoreExtent() const { return ignoreExtent; }
+   ^~~~~
+Shape.h:122:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isTransparent() const { return transparent; }
+   ^~~~~
+Shape.h:124:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isBlended() const { return blended; }
+   ^~~~~
+In file included from Background.h:6,
+                 from Background.cpp:1:
+PrimitiveSet.h:60:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const void setVertex(int index, double* v) { vertexArray.setVertex(index, v); }
+   ^~~~~
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DHAVE_FREETYPE -Iext/ftgl -I/usr/include/freetype2 -I/usr/include/libpng16  -DR_NO_REMAP -Iext -Iext/glad/include -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c ClipPlane.cpp -o ClipPlane.o
+In file included from Shape.h:6,
+                 from ClipPlane.h:5,
+                 from ClipPlane.cpp:1:
+SceneNode.h:69:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const TypeID getTypeID() const { return typeID; }
+          ^~~~~
+SceneNode.h:70:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const ObjID getObjID() const { return objID; }
+          ^~~~~
+In file included from ClipPlane.h:5,
+                 from ClipPlane.cpp:1:
+Shape.h:53:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getBBoxChanges() const { return bboxChanges; }
+   ^~~~~
+Shape.h:65:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getIgnoreExtent() const { return ignoreExtent; }
+   ^~~~~
+Shape.h:122:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isTransparent() const { return transparent; }
+   ^~~~~
+Shape.h:124:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isBlended() const { return blended; }
+   ^~~~~
+In file included from ClipPlane.h:6,
+                 from ClipPlane.cpp:1:
+PrimitiveSet.h:60:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const void setVertex(int index, double* v) { vertexArray.setVertex(index, v); }
+   ^~~~~
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DHAVE_FREETYPE -Iext/ftgl -I/usr/include/freetype2 -I/usr/include/libpng16  -DR_NO_REMAP -Iext -Iext/glad/include -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c Color.cpp -o Color.o
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DHAVE_FREETYPE -Iext/ftgl -I/usr/include/freetype2 -I/usr/include/libpng16  -DR_NO_REMAP -Iext -Iext/glad/include -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c Disposable.cpp -o Disposable.o
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DHAVE_FREETYPE -Iext/ftgl -I/usr/include/freetype2 -I/usr/include/libpng16  -DR_NO_REMAP -Iext -Iext/glad/include -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c Light.cpp -o Light.o
+In file included from Light.h:4,
+                 from Light.cpp:1:
+SceneNode.h:69:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const TypeID getTypeID() const { return typeID; }
+          ^~~~~
+SceneNode.h:70:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const ObjID getObjID() const { return objID; }
+          ^~~~~
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DHAVE_FREETYPE -Iext/ftgl -I/usr/include/freetype2 -I/usr/include/libpng16  -DR_NO_REMAP -Iext -Iext/glad/include -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c LineSet.cpp -o LineSet.o
+In file included from Shape.h:6,
+                 from PrimitiveSet.h:4,
+                 from LineSet.cpp:1:
+SceneNode.h:69:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const TypeID getTypeID() const { return typeID; }
+          ^~~~~
+SceneNode.h:70:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const ObjID getObjID() const { return objID; }
+          ^~~~~
+In file included from PrimitiveSet.h:4,
+                 from LineSet.cpp:1:
+Shape.h:53:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getBBoxChanges() const { return bboxChanges; }
+   ^~~~~
+Shape.h:65:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getIgnoreExtent() const { return ignoreExtent; }
+   ^~~~~
+Shape.h:122:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isTransparent() const { return transparent; }
+   ^~~~~
+Shape.h:124:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isBlended() const { return blended; }
+   ^~~~~
+In file included from LineSet.cpp:1:
+PrimitiveSet.h:60:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const void setVertex(int index, double* v) { vertexArray.setVertex(index, v); }
+   ^~~~~
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DHAVE_FREETYPE -Iext/ftgl -I/usr/include/freetype2 -I/usr/include/libpng16  -DR_NO_REMAP -Iext -Iext/glad/include -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c LineStripSet.cpp -o LineStripSet.o
+In file included from Shape.h:6,
+                 from PrimitiveSet.h:4,
+                 from LineStripSet.cpp:1:
+SceneNode.h:69:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const TypeID getTypeID() const { return typeID; }
+          ^~~~~
+SceneNode.h:70:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const ObjID getObjID() const { return objID; }
+          ^~~~~
+In file included from PrimitiveSet.h:4,
+                 from LineStripSet.cpp:1:
+Shape.h:53:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getBBoxChanges() const { return bboxChanges; }
+   ^~~~~
+Shape.h:65:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getIgnoreExtent() const { return ignoreExtent; }
+   ^~~~~
+Shape.h:122:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isTransparent() const { return transparent; }
+   ^~~~~
+Shape.h:124:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isBlended() const { return blended; }
+   ^~~~~
+In file included from LineStripSet.cpp:1:
+PrimitiveSet.h:60:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const void setVertex(int index, double* v) { vertexArray.setVertex(index, v); }
+   ^~~~~
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DHAVE_FREETYPE -Iext/ftgl -I/usr/include/freetype2 -I/usr/include/libpng16  -DR_NO_REMAP -Iext -Iext/glad/include -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c Material.cpp -o Material.o
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DHAVE_FREETYPE -Iext/ftgl -I/usr/include/freetype2 -I/usr/include/libpng16  -DR_NO_REMAP -Iext -Iext/glad/include -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c NULLgui.cpp -o NULLgui.o
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DHAVE_FREETYPE -Iext/ftgl -I/usr/include/freetype2 -I/usr/include/libpng16  -DR_NO_REMAP -Iext -Iext/glad/include -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c PlaneSet.cpp -o PlaneSet.o
+In file included from Shape.h:6,
+                 from subscene.h:4,
+                 from scene.h:9,
+                 from PlaneSet.h:4,
+                 from PlaneSet.cpp:2:
+SceneNode.h:69:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const TypeID getTypeID() const { return typeID; }
+          ^~~~~
+SceneNode.h:70:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const ObjID getObjID() const { return objID; }
+          ^~~~~
+In file included from subscene.h:4,
+                 from scene.h:9,
+                 from PlaneSet.h:4,
+                 from PlaneSet.cpp:2:
+Shape.h:53:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getBBoxChanges() const { return bboxChanges; }
+   ^~~~~
+Shape.h:65:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getIgnoreExtent() const { return ignoreExtent; }
+   ^~~~~
+Shape.h:122:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isTransparent() const { return transparent; }
+   ^~~~~
+Shape.h:124:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isBlended() const { return blended; }
+   ^~~~~
+In file included from ClipPlane.h:6,
+                 from subscene.h:5,
+                 from scene.h:9,
+                 from PlaneSet.h:4,
+                 from PlaneSet.cpp:2:
+PrimitiveSet.h:60:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const void setVertex(int index, double* v) { vertexArray.setVertex(index, v); }
+   ^~~~~
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DHAVE_FREETYPE -Iext/ftgl -I/usr/include/freetype2 -I/usr/include/libpng16  -DR_NO_REMAP -Iext -Iext/glad/include -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c PointSet.cpp -o PointSet.o
+In file included from Shape.h:6,
+                 from PrimitiveSet.h:4,
+                 from PointSet.cpp:1:
+SceneNode.h:69:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const TypeID getTypeID() const { return typeID; }
+          ^~~~~
+SceneNode.h:70:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const ObjID getObjID() const { return objID; }
+          ^~~~~
+In file included from PrimitiveSet.h:4,
+                 from PointSet.cpp:1:
+Shape.h:53:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getBBoxChanges() const { return bboxChanges; }
+   ^~~~~
+Shape.h:65:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getIgnoreExtent() const { return ignoreExtent; }
+   ^~~~~
+Shape.h:122:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isTransparent() const { return transparent; }
+   ^~~~~
+Shape.h:124:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isBlended() const { return blended; }
+   ^~~~~
+In file included from PointSet.cpp:1:
+PrimitiveSet.h:60:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const void setVertex(int index, double* v) { vertexArray.setVertex(index, v); }
+   ^~~~~
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DHAVE_FREETYPE -Iext/ftgl -I/usr/include/freetype2 -I/usr/include/libpng16  -DR_NO_REMAP -Iext -Iext/glad/include -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c PrimitiveSet.cpp -o PrimitiveSet.o
+In file included from Shape.h:6,
+                 from PrimitiveSet.h:4,
+                 from PrimitiveSet.cpp:1:
+SceneNode.h:69:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const TypeID getTypeID() const { return typeID; }
+          ^~~~~
+SceneNode.h:70:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const ObjID getObjID() const { return objID; }
+          ^~~~~
+In file included from PrimitiveSet.h:4,
+                 from PrimitiveSet.cpp:1:
+Shape.h:53:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getBBoxChanges() const { return bboxChanges; }
+   ^~~~~
+Shape.h:65:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getIgnoreExtent() const { return ignoreExtent; }
+   ^~~~~
+Shape.h:122:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isTransparent() const { return transparent; }
+   ^~~~~
+Shape.h:124:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isBlended() const { return blended; }
+   ^~~~~
+In file included from PrimitiveSet.cpp:1:
+PrimitiveSet.h:60:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const void setVertex(int index, double* v) { vertexArray.setVertex(index, v); }
+   ^~~~~
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DHAVE_FREETYPE -Iext/ftgl -I/usr/include/freetype2 -I/usr/include/libpng16  -DR_NO_REMAP -Iext -Iext/glad/include -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c R.cpp -o R.o
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DHAVE_FREETYPE -Iext/ftgl -I/usr/include/freetype2 -I/usr/include/libpng16  -DR_NO_REMAP -Iext -Iext/glad/include -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c RenderContext.cpp -o RenderContext.o
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DHAVE_FREETYPE -Iext/ftgl -I/usr/include/freetype2 -I/usr/include/libpng16  -DR_NO_REMAP -Iext -Iext/glad/include -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c Shape.cpp -o Shape.o
+In file included from Shape.h:6,
+                 from Shape.cpp:5:
+SceneNode.h:69:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const TypeID getTypeID() const { return typeID; }
+          ^~~~~
+SceneNode.h:70:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const ObjID getObjID() const { return objID; }
+          ^~~~~
+In file included from Shape.cpp:5:
+Shape.h:53:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getBBoxChanges() const { return bboxChanges; }
+   ^~~~~
+Shape.h:65:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getIgnoreExtent() const { return ignoreExtent; }
+   ^~~~~
+Shape.h:122:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isTransparent() const { return transparent; }
+   ^~~~~
+Shape.h:124:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isBlended() const { return blended; }
+   ^~~~~
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DHAVE_FREETYPE -Iext/ftgl -I/usr/include/freetype2 -I/usr/include/libpng16  -DR_NO_REMAP -Iext -Iext/glad/include -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c SphereMesh.cpp -o SphereMesh.o
+In file included from Shape.h:6,
+                 from subscene.h:4,
+                 from SphereMesh.cpp:2:
+SceneNode.h:69:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const TypeID getTypeID() const { return typeID; }
+          ^~~~~
+SceneNode.h:70:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const ObjID getObjID() const { return objID; }
+          ^~~~~
+In file included from subscene.h:4,
+                 from SphereMesh.cpp:2:
+Shape.h:53:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getBBoxChanges() const { return bboxChanges; }
+   ^~~~~
+Shape.h:65:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getIgnoreExtent() const { return ignoreExtent; }
+   ^~~~~
+Shape.h:122:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isTransparent() const { return transparent; }
+   ^~~~~
+Shape.h:124:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isBlended() const { return blended; }
+   ^~~~~
+In file included from ClipPlane.h:6,
+                 from subscene.h:5,
+                 from SphereMesh.cpp:2:
+PrimitiveSet.h:60:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const void setVertex(int index, double* v) { vertexArray.setVertex(index, v); }
+   ^~~~~
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DHAVE_FREETYPE -Iext/ftgl -I/usr/include/freetype2 -I/usr/include/libpng16  -DR_NO_REMAP -Iext -Iext/glad/include -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c SphereSet.cpp -o SphereSet.o
+In file included from Shape.h:6,
+                 from subscene.h:4,
+                 from scene.h:9,
+                 from SphereSet.h:4,
+                 from SphereSet.cpp:1:
+SceneNode.h:69:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const TypeID getTypeID() const { return typeID; }
+          ^~~~~
+SceneNode.h:70:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const ObjID getObjID() const { return objID; }
+          ^~~~~
+In file included from subscene.h:4,
+                 from scene.h:9,
+                 from SphereSet.h:4,
+                 from SphereSet.cpp:1:
+Shape.h:53:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getBBoxChanges() const { return bboxChanges; }
+   ^~~~~
+Shape.h:65:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getIgnoreExtent() const { return ignoreExtent; }
+   ^~~~~
+Shape.h:122:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isTransparent() const { return transparent; }
+   ^~~~~
+Shape.h:124:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isBlended() const { return blended; }
+   ^~~~~
+In file included from ClipPlane.h:6,
+                 from subscene.h:5,
+                 from scene.h:9,
+                 from SphereSet.h:4,
+                 from SphereSet.cpp:1:
+PrimitiveSet.h:60:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const void setVertex(int index, double* v) { vertexArray.setVertex(index, v); }
+   ^~~~~
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DHAVE_FREETYPE -Iext/ftgl -I/usr/include/freetype2 -I/usr/include/libpng16  -DR_NO_REMAP -Iext -Iext/glad/include -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c SpriteSet.cpp -o SpriteSet.o
+In file included from Shape.h:6,
+                 from SpriteSet.h:5,
+                 from SpriteSet.cpp:2:
+SceneNode.h:69:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const TypeID getTypeID() const { return typeID; }
+          ^~~~~
+SceneNode.h:70:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const ObjID getObjID() const { return objID; }
+          ^~~~~
+In file included from SpriteSet.h:5,
+                 from SpriteSet.cpp:2:
+Shape.h:53:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getBBoxChanges() const { return bboxChanges; }
+   ^~~~~
+Shape.h:65:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getIgnoreExtent() const { return ignoreExtent; }
+   ^~~~~
+Shape.h:122:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isTransparent() const { return transparent; }
+   ^~~~~
+Shape.h:124:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isBlended() const { return blended; }
+   ^~~~~
+In file included from ClipPlane.h:6,
+                 from subscene.h:5,
+                 from scene.h:9,
+                 from SpriteSet.h:6,
+                 from SpriteSet.cpp:2:
+PrimitiveSet.h:60:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const void setVertex(int index, double* v) { vertexArray.setVertex(index, v); }
+   ^~~~~
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DHAVE_FREETYPE -Iext/ftgl -I/usr/include/freetype2 -I/usr/include/libpng16  -DR_NO_REMAP -Iext -Iext/glad/include -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c Surface.cpp -o Surface.o
+In file included from Shape.h:6,
+                 from Surface.h:4,
+                 from Surface.cpp:1:
+SceneNode.h:69:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const TypeID getTypeID() const { return typeID; }
+          ^~~~~
+SceneNode.h:70:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const ObjID getObjID() const { return objID; }
+          ^~~~~
+In file included from Surface.h:4,
+                 from Surface.cpp:1:
+Shape.h:53:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getBBoxChanges() const { return bboxChanges; }
+   ^~~~~
+Shape.h:65:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getIgnoreExtent() const { return ignoreExtent; }
+   ^~~~~
+Shape.h:122:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isTransparent() const { return transparent; }
+   ^~~~~
+Shape.h:124:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isBlended() const { return blended; }
+   ^~~~~
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DHAVE_FREETYPE -Iext/ftgl -I/usr/include/freetype2 -I/usr/include/libpng16  -DR_NO_REMAP -Iext -Iext/glad/include -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c TextSet.cpp -o TextSet.o
+In file included from Shape.h:6,
+                 from TextSet.h:7,
+                 from TextSet.cpp:1:
+SceneNode.h:69:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const TypeID getTypeID() const { return typeID; }
+          ^~~~~
+SceneNode.h:70:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const ObjID getObjID() const { return objID; }
+          ^~~~~
+In file included from TextSet.h:7,
+                 from TextSet.cpp:1:
+Shape.h:53:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getBBoxChanges() const { return bboxChanges; }
+   ^~~~~
+Shape.h:65:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getIgnoreExtent() const { return ignoreExtent; }
+   ^~~~~
+Shape.h:122:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isTransparent() const { return transparent; }
+   ^~~~~
+Shape.h:124:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isBlended() const { return blended; }
+   ^~~~~
+In file included from ClipPlane.h:6,
+                 from subscene.h:5,
+                 from TextSet.cpp:6:
+PrimitiveSet.h:60:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const void setVertex(int index, double* v) { vertexArray.setVertex(index, v); }
+   ^~~~~
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DHAVE_FREETYPE -Iext/ftgl -I/usr/include/freetype2 -I/usr/include/libpng16  -DR_NO_REMAP -Iext -Iext/glad/include -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c Texture.cpp -o Texture.o
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DHAVE_FREETYPE -Iext/ftgl -I/usr/include/freetype2 -I/usr/include/libpng16  -DR_NO_REMAP -Iext -Iext/glad/include -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c Viewpoint.cpp -o Viewpoint.o
+In file included from Viewpoint.h:4,
+                 from Viewpoint.cpp:1:
+SceneNode.h:69:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const TypeID getTypeID() const { return typeID; }
+          ^~~~~
+SceneNode.h:70:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const ObjID getObjID() const { return objID; }
+          ^~~~~
+In file included from subscene.h:4,
+                 from Viewpoint.cpp:3:
+Shape.h:53:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getBBoxChanges() const { return bboxChanges; }
+   ^~~~~
+Shape.h:65:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getIgnoreExtent() const { return ignoreExtent; }
+   ^~~~~
+Shape.h:122:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isTransparent() const { return transparent; }
+   ^~~~~
+Shape.h:124:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isBlended() const { return blended; }
+   ^~~~~
+In file included from ClipPlane.h:6,
+                 from subscene.h:5,
+                 from Viewpoint.cpp:3:
+PrimitiveSet.h:60:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const void setVertex(int index, double* v) { vertexArray.setVertex(index, v); }
+   ^~~~~
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DHAVE_FREETYPE -Iext/ftgl -I/usr/include/freetype2 -I/usr/include/libpng16  -DR_NO_REMAP -Iext -Iext/glad/include -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c api.cpp -o api.o
+In file included from Shape.h:6,
+                 from subscene.h:4,
+                 from scene.h:9,
+                 from rglview.h:8,
+                 from Device.h:10,
+                 from DeviceManager.h:8,
+                 from api.cpp:6:
+SceneNode.h:69:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const TypeID getTypeID() const { return typeID; }
+          ^~~~~
+SceneNode.h:70:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const ObjID getObjID() const { return objID; }
+          ^~~~~
+In file included from subscene.h:4,
+                 from scene.h:9,
+                 from rglview.h:8,
+                 from Device.h:10,
+                 from DeviceManager.h:8,
+                 from api.cpp:6:
+Shape.h:53:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getBBoxChanges() const { return bboxChanges; }
+   ^~~~~
+Shape.h:65:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getIgnoreExtent() const { return ignoreExtent; }
+   ^~~~~
+Shape.h:122:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isTransparent() const { return transparent; }
+   ^~~~~
+Shape.h:124:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isBlended() const { return blended; }
+   ^~~~~
+In file included from ClipPlane.h:6,
+                 from subscene.h:5,
+                 from scene.h:9,
+                 from rglview.h:8,
+                 from Device.h:10,
+                 from DeviceManager.h:8,
+                 from api.cpp:6:
+PrimitiveSet.h:60:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const void setVertex(int index, double* v) { vertexArray.setVertex(index, v); }
+   ^~~~~
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DHAVE_FREETYPE -Iext/ftgl -I/usr/include/freetype2 -I/usr/include/libpng16  -DR_NO_REMAP -Iext -Iext/glad/include -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c assert.cpp -o assert.o
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DHAVE_FREETYPE -Iext/ftgl -I/usr/include/freetype2 -I/usr/include/libpng16  -DR_NO_REMAP -Iext -Iext/glad/include -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c callbacks.cpp -o callbacks.o
+In file included from Shape.h:6,
+                 from subscene.h:4,
+                 from scene.h:9,
+                 from rglview.h:8,
+                 from callbacks.cpp:1:
+SceneNode.h:69:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const TypeID getTypeID() const { return typeID; }
+          ^~~~~
+SceneNode.h:70:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const ObjID getObjID() const { return objID; }
+          ^~~~~
+In file included from subscene.h:4,
+                 from scene.h:9,
+                 from rglview.h:8,
+                 from callbacks.cpp:1:
+Shape.h:53:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getBBoxChanges() const { return bboxChanges; }
+   ^~~~~
+Shape.h:65:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getIgnoreExtent() const { return ignoreExtent; }
+   ^~~~~
+Shape.h:122:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isTransparent() const { return transparent; }
+   ^~~~~
+Shape.h:124:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isBlended() const { return blended; }
+   ^~~~~
+In file included from ClipPlane.h:6,
+                 from subscene.h:5,
+                 from scene.h:9,
+                 from rglview.h:8,
+                 from callbacks.cpp:1:
+PrimitiveSet.h:60:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const void setVertex(int index, double* v) { vertexArray.setVertex(index, v); }
+   ^~~~~
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DHAVE_FREETYPE -Iext/ftgl -I/usr/include/freetype2 -I/usr/include/libpng16  -DR_NO_REMAP -Iext -Iext/glad/include -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c device.cpp -o device.o
+In file included from Shape.h:6,
+                 from subscene.h:4,
+                 from scene.h:9,
+                 from rglview.h:8,
+                 from Device.h:10,
+                 from device.cpp:6:
+SceneNode.h:69:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const TypeID getTypeID() const { return typeID; }
+          ^~~~~
+SceneNode.h:70:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const ObjID getObjID() const { return objID; }
+          ^~~~~
+In file included from subscene.h:4,
+                 from scene.h:9,
+                 from rglview.h:8,
+                 from Device.h:10,
+                 from device.cpp:6:
+Shape.h:53:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getBBoxChanges() const { return bboxChanges; }
+   ^~~~~
+Shape.h:65:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getIgnoreExtent() const { return ignoreExtent; }
+   ^~~~~
+Shape.h:122:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isTransparent() const { return transparent; }
+   ^~~~~
+Shape.h:124:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isBlended() const { return blended; }
+   ^~~~~
+In file included from ClipPlane.h:6,
+                 from subscene.h:5,
+                 from scene.h:9,
+                 from rglview.h:8,
+                 from Device.h:10,
+                 from device.cpp:6:
+PrimitiveSet.h:60:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const void setVertex(int index, double* v) { vertexArray.setVertex(index, v); }
+   ^~~~~
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DHAVE_FREETYPE -Iext/ftgl -I/usr/include/freetype2 -I/usr/include/libpng16  -DR_NO_REMAP -Iext -Iext/glad/include -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c devicemanager.cpp -o devicemanager.o
+In file included from Shape.h:6,
+                 from subscene.h:4,
+                 from scene.h:9,
+                 from rglview.h:8,
+                 from Device.h:10,
+                 from DeviceManager.h:8,
+                 from devicemanager.cpp:7:
+SceneNode.h:69:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const TypeID getTypeID() const { return typeID; }
+          ^~~~~
+SceneNode.h:70:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const ObjID getObjID() const { return objID; }
+          ^~~~~
+In file included from subscene.h:4,
+                 from scene.h:9,
+                 from rglview.h:8,
+                 from Device.h:10,
+                 from DeviceManager.h:8,
+                 from devicemanager.cpp:7:
+Shape.h:53:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getBBoxChanges() const { return bboxChanges; }
+   ^~~~~
+Shape.h:65:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getIgnoreExtent() const { return ignoreExtent; }
+   ^~~~~
+Shape.h:122:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isTransparent() const { return transparent; }
+   ^~~~~
+Shape.h:124:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isBlended() const { return blended; }
+   ^~~~~
+In file included from ClipPlane.h:6,
+                 from subscene.h:5,
+                 from scene.h:9,
+                 from rglview.h:8,
+                 from Device.h:10,
+                 from DeviceManager.h:8,
+                 from devicemanager.cpp:7:
+PrimitiveSet.h:60:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const void setVertex(int index, double* v) { vertexArray.setVertex(index, v); }
+   ^~~~~
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DHAVE_FREETYPE -Iext/ftgl -I/usr/include/freetype2 -I/usr/include/libpng16  -DR_NO_REMAP -Iext -Iext/glad/include -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c earcut.cpp -o earcut.o
+In file included from Shape.h:6,
+                 from subscene.h:4,
+                 from scene.h:9,
+                 from ABCLineSet.h:4,
+                 from api.h:4,
+                 from earcut.cpp:4:
+SceneNode.h:69:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const TypeID getTypeID() const { return typeID; }
+          ^~~~~
+SceneNode.h:70:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const ObjID getObjID() const { return objID; }
+          ^~~~~
+In file included from subscene.h:4,
+                 from scene.h:9,
+                 from ABCLineSet.h:4,
+                 from api.h:4,
+                 from earcut.cpp:4:
+Shape.h:53:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getBBoxChanges() const { return bboxChanges; }
+   ^~~~~
+Shape.h:65:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getIgnoreExtent() const { return ignoreExtent; }
+   ^~~~~
+Shape.h:122:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isTransparent() const { return transparent; }
+   ^~~~~
+Shape.h:124:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isBlended() const { return blended; }
+   ^~~~~
+In file included from ClipPlane.h:6,
+                 from subscene.h:5,
+                 from scene.h:9,
+                 from ABCLineSet.h:4,
+                 from api.h:4,
+                 from earcut.cpp:4:
+PrimitiveSet.h:60:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const void setVertex(int index, double* v) { vertexArray.setVertex(index, v); }
+   ^~~~~
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DHAVE_FREETYPE -Iext/ftgl -I/usr/include/freetype2 -I/usr/include/libpng16  -DR_NO_REMAP -Iext -Iext/glad/include -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c fps.cpp -o fps.o
+In file included from Shape.h:6,
+                 from subscene.h:4,
+                 from scene.h:9,
+                 from fps.h:8,
+                 from fps.cpp:5:
+SceneNode.h:69:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const TypeID getTypeID() const { return typeID; }
+          ^~~~~
+SceneNode.h:70:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const ObjID getObjID() const { return objID; }
+          ^~~~~
+In file included from subscene.h:4,
+                 from scene.h:9,
+                 from fps.h:8,
+                 from fps.cpp:5:
+Shape.h:53:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getBBoxChanges() const { return bboxChanges; }
+   ^~~~~
+Shape.h:65:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getIgnoreExtent() const { return ignoreExtent; }
+   ^~~~~
+Shape.h:122:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isTransparent() const { return transparent; }
+   ^~~~~
+Shape.h:124:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isBlended() const { return blended; }
+   ^~~~~
+In file included from ClipPlane.h:6,
+                 from subscene.h:5,
+                 from scene.h:9,
+                 from fps.h:8,
+                 from fps.cpp:5:
+PrimitiveSet.h:60:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const void setVertex(int index, double* v) { vertexArray.setVertex(index, v); }
+   ^~~~~
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DHAVE_FREETYPE -Iext/ftgl -I/usr/include/freetype2 -I/usr/include/libpng16  -DR_NO_REMAP -Iext -Iext/glad/include -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c ftgl.cpp -o ftgl.o
+In file included from ext/ftgl/FTCharmap.h:35,
+                 from ext/ftgl/FTCharmap.cpp:30,
+                 from ftgl.cpp:5:
+ext/ftgl/FTCharToGlyphIndexMap.h:99:9: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+         const GlyphIndex find(CharacterCode c)
+         ^~~~~
+In file included from ext/ftgl/FTFace.cpp:30,
+                 from ftgl.cpp:6:
+ext/ftgl/FTLibrary.h:69:9: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+         const FT_Library* const GetLibrary() const { return library; }
+         ^~~~~
+In file included from ext/ftgl/FTFont/FTFont.cpp:41,
+                 from ftgl.cpp:7:
+ext/ftgl/FTGlyphContainer.h:95:9: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+         const FTGlyph* const Glyph(const unsigned int characterCode) const;
+         ^~~~~
+In file included from ftgl.cpp:10:
+ext/ftgl/FTGlyphContainer.cpp:79:1: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+ const FTGlyph* const FTGlyphContainer::Glyph(const unsigned int charCode) const
+ ^~~~~
+In file included from ext/ftgl/FTFont/FTFont.cpp:30,
+                 from ftgl.cpp:7:
+ext/ftgl/FTUnicode.h: In member function ‘void FTUnicodeStringItr<T>::readUTF8() [with T = unsigned char]’:
+ext/ftgl/FTUnicode.h:193:37: warning: this statement may fall through [-Wimplicit-fallthrough=]
+           case 6: ch += *nextPos++; ch <<= 6; /* remember, illegal UTF-8 */
+                                     ^~
+ext/ftgl/FTUnicode.h:194:11: note: here
+           case 5: ch += *nextPos++; ch <<= 6; /* remember, illegal UTF-8 */
+           ^~~~
+ext/ftgl/FTUnicode.h:194:37: warning: this statement may fall through [-Wimplicit-fallthrough=]
+           case 5: ch += *nextPos++; ch <<= 6; /* remember, illegal UTF-8 */
+                                     ^~
+ext/ftgl/FTUnicode.h:195:11: note: here
+           case 4: ch += *nextPos++; ch <<= 6;
+           ^~~~
+ext/ftgl/FTUnicode.h:195:37: warning: this statement may fall through [-Wimplicit-fallthrough=]
+           case 4: ch += *nextPos++; ch <<= 6;
+                                     ^~
+ext/ftgl/FTUnicode.h:196:11: note: here
+           case 3: ch += *nextPos++; ch <<= 6;
+           ^~~~
+ext/ftgl/FTUnicode.h:196:37: warning: this statement may fall through [-Wimplicit-fallthrough=]
+           case 3: ch += *nextPos++; ch <<= 6;
+                                     ^~
+ext/ftgl/FTUnicode.h:197:11: note: here
+           case 2: ch += *nextPos++; ch <<= 6;
+           ^~~~
+ext/ftgl/FTUnicode.h:197:37: warning: this statement may fall through [-Wimplicit-fallthrough=]
+           case 2: ch += *nextPos++; ch <<= 6;
+                                     ^~
+ext/ftgl/FTUnicode.h:198:11: note: here
+           case 1: ch += *nextPos++;
+           ^~~~
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DHAVE_FREETYPE -Iext/ftgl -I/usr/include/freetype2 -I/usr/include/libpng16  -DR_NO_REMAP -Iext -Iext/glad/include -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c geom.cpp -o geom.o
+gcc -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DHAVE_FREETYPE -Iext/ftgl -I/usr/include/freetype2 -I/usr/include/libpng16  -DR_NO_REMAP -Iext -Iext/glad/include -Iext/earcut  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -std=gnu99   -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c gl.c -o gl.o
+gcc -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DHAVE_FREETYPE -Iext/ftgl -I/usr/include/freetype2 -I/usr/include/libpng16  -DR_NO_REMAP -Iext -Iext/glad/include -Iext/earcut  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -std=gnu99   -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c gl2ps.c -o gl2ps.o
+gl2ps.c: In function ‘gl2psPDFgroupListWriteXObjectResources’:
+gl2ps.c:4106:12: warning: this statement may fall through [-Wimplicit-fallthrough=]
+       offs += fprintf(gl2ps->stream, "/Im%d %d 0 R\n", gro->imno, gro->imobjno);
+            ^~
+gl2ps.c:4107:5: note: here
+     case GL2PS_TRIANGLE:
+     ^~~~
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DHAVE_FREETYPE -Iext/ftgl -I/usr/include/freetype2 -I/usr/include/libpng16  -DR_NO_REMAP -Iext -Iext/glad/include -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c glErrors.cpp -o glErrors.o
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DHAVE_FREETYPE -Iext/ftgl -I/usr/include/freetype2 -I/usr/include/libpng16  -DR_NO_REMAP -Iext -Iext/glad/include -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c glgui.cpp -o glgui.o
+In file included from Shape.h:6,
+                 from subscene.h:4,
+                 from glgui.cpp:15:
+SceneNode.h:69:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const TypeID getTypeID() const { return typeID; }
+          ^~~~~
+SceneNode.h:70:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const ObjID getObjID() const { return objID; }
+          ^~~~~
+In file included from subscene.h:4,
+                 from glgui.cpp:15:
+Shape.h:53:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getBBoxChanges() const { return bboxChanges; }
+   ^~~~~
+Shape.h:65:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getIgnoreExtent() const { return ignoreExtent; }
+   ^~~~~
+Shape.h:122:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isTransparent() const { return transparent; }
+   ^~~~~
+Shape.h:124:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isBlended() const { return blended; }
+   ^~~~~
+In file included from ClipPlane.h:6,
+                 from subscene.h:5,
+                 from glgui.cpp:15:
+PrimitiveSet.h:60:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const void setVertex(int index, double* v) { vertexArray.setVertex(index, v); }
+   ^~~~~
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DHAVE_FREETYPE -Iext/ftgl -I/usr/include/freetype2 -I/usr/include/libpng16  -DR_NO_REMAP -Iext -Iext/glad/include -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c gui.cpp -o gui.o
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DHAVE_FREETYPE -Iext/ftgl -I/usr/include/freetype2 -I/usr/include/libpng16  -DR_NO_REMAP -Iext -Iext/glad/include -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c init.cpp -o init.o
+In file included from Shape.h:6,
+                 from subscene.h:4,
+                 from scene.h:9,
+                 from rglview.h:8,
+                 from Device.h:10,
+                 from DeviceManager.h:8,
+                 from init.cpp:4:
+SceneNode.h:69:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const TypeID getTypeID() const { return typeID; }
+          ^~~~~
+SceneNode.h:70:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const ObjID getObjID() const { return objID; }
+          ^~~~~
+In file included from subscene.h:4,
+                 from scene.h:9,
+                 from rglview.h:8,
+                 from Device.h:10,
+                 from DeviceManager.h:8,
+                 from init.cpp:4:
+Shape.h:53:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getBBoxChanges() const { return bboxChanges; }
+   ^~~~~
+Shape.h:65:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getIgnoreExtent() const { return ignoreExtent; }
+   ^~~~~
+Shape.h:122:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isTransparent() const { return transparent; }
+   ^~~~~
+Shape.h:124:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isBlended() const { return blended; }
+   ^~~~~
+In file included from ClipPlane.h:6,
+                 from subscene.h:5,
+                 from scene.h:9,
+                 from rglview.h:8,
+                 from Device.h:10,
+                 from DeviceManager.h:8,
+                 from init.cpp:4:
+PrimitiveSet.h:60:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const void setVertex(int index, double* v) { vertexArray.setVertex(index, v); }
+   ^~~~~
+init.cpp:201:11: warning: cast between incompatible function types from ‘void (*)(int*, int*, int*)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_dev_open, 3),
+           ^~~~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:202:11: warning: cast between incompatible function types from ‘void (*)(int*)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_dev_close, 1),
+           ^~~~~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:203:11: warning: cast between incompatible function types from ‘void (*)(int*, int*)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_dev_setcurrent, 2),
+           ^~~~~~~~~~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:204:11: warning: cast between incompatible function types from ‘void (*)(int*, int*, char**)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_snapshot, 3),
+           ^~~~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:205:11: warning: cast between incompatible function types from ‘void (*)(int*, int*, char**)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_postscript, 3),
+           ^~~~~~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:206:11: warning: cast between incompatible function types from ‘void (*)(int*, int*, char**, double*)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_material, 4),
+           ^~~~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:207:11: warning: cast between incompatible function types from ‘void (*)(int*, int*, int*, char**, double*)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_getmaterial, 5),
+           ^~~~~~~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:208:11: warning: cast between incompatible function types from ‘void (*)(int*)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_getcolorcount, 1),
+           ^~~~~~~~~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:209:11: warning: cast between incompatible function types from ‘void (*)(int*, int*)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_dev_bringtotop, 2),
+           ^~~~~~~~~~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:210:11: warning: cast between incompatible function types from ‘void (*)(int*, int*)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_clear, 2),
+           ^~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:211:11: warning: cast between incompatible function types from ‘void (*)(int*, int*)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_pop, 2),
+           ^~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:212:11: warning: cast between incompatible function types from ‘void (*)(int*, int*, int*)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_id_count, 3),
+           ^~~~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:213:11: warning: cast between incompatible function types from ‘void (*)(int*, int*, char**, int*)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_ids, 4),
+           ^~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:214:11: warning: cast between incompatible function types from ‘void (*)(int*, int*, double*)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_viewpoint, 3),
+           ^~~~~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:215:11: warning: cast between incompatible function types from ‘void (*)(int*, double*)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_getObserver, 2),
+           ^~~~~~~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:216:11: warning: cast between incompatible function types from ‘void (*)(int*, double*)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_setObserver, 2),
+           ^~~~~~~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:217:11: warning: cast between incompatible function types from ‘void (*)(int*, int*, int*)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_attrib_count, 3),
+           ^~~~~~~~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:218:11: warning: cast between incompatible function types from ‘void (*)(int*, int*, int*, int*, double*)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_attrib, 5),
+           ^~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:219:11: warning: cast between incompatible function types from ‘void (*)(int*, int*, int*, int*, char**)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_text_attrib, 5),
+           ^~~~~~~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:220:11: warning: cast between incompatible function types from ‘void (*)(int*, int*, double*)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_bg, 3),
+           ^~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:221:11: warning: cast between incompatible function types from ‘void (*)(int*, int*, double*, double*, char**, double*, char**, double*, char**)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_bbox, 9),
+           ^~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:222:11: warning: cast between incompatible function types from ‘void (*)(int*, int*, double*)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_light, 3),
+           ^~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:223:11: warning: cast between incompatible function types from ‘void (*)(int*, int*, int*, int*, double*)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_pixels, 5),
+           ^~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:224:11: warning: cast between incompatible function types from ‘void (*)(int*, int*, double*, double*)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_planes, 4),
+           ^~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:225:11: warning: cast between incompatible function types from ‘void (*)(int*, int*, double*, double*)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_clipplanes, 4),
+           ^~~~~~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:226:11: warning: cast between incompatible function types from ‘void (*)(int*, int*, double*, double*)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_abclines, 4),
+           ^~~~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:227:11: warning: cast between incompatible function types from ‘void (*)(int*, int*, double*, double*, double*, double*, double*, double*, double*, double*, int*, int*, int*)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_surface, 13),
+           ^~~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:228:11: warning: cast between incompatible function types from ‘void (*)(int*, int*, double*, double*, int*)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_spheres, 5),
+           ^~~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:229:11: warning: cast between incompatible function types from ‘void (*)(int*, int*, double*, char**, double*, int*, char**, int*, double*, int*, int*, int*)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_texts, 12),
+           ^~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:230:11: warning: cast between incompatible function types from ‘void (*)(int*, int*, double*, double*, int*, double*, double*, int*, double*)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_sprites, 9),
+           ^~~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:231:11: warning: cast between incompatible function types from ‘void (*)(int*, int*, int*, int*)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_newsubscene, 4),
+           ^~~~~~~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:232:11: warning: cast between incompatible function types from ‘void (*)(int*)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_setsubscene, 1),
+           ^~~~~~~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:233:11: warning: cast between incompatible function types from ‘void (*)(int*, int*)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_getsubsceneid, 2),
+           ^~~~~~~~~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:234:11: warning: cast between incompatible function types from ‘void (*)(int*)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_getsubsceneparent, 1),
+           ^~~~~~~~~~~~~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:235:11: warning: cast between incompatible function types from ‘void (*)(int*, int*)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_getsubscenechildcount, 2),
+           ^~~~~~~~~~~~~~~~~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:236:11: warning: cast between incompatible function types from ‘void (*)(int*, int*)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_getsubscenechildren, 2),
+           ^~~~~~~~~~~~~~~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:237:11: warning: cast between incompatible function types from ‘void (*)(int*, int*)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_gc, 2),
+           ^~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:238:11: warning: cast between incompatible function types from ‘void (*)(int*, int*)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_setEmbeddings, 2),
+           ^~~~~~~~~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:239:11: warning: cast between incompatible function types from ‘void (*)(int*, int*)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_getEmbeddings, 2),
+           ^~~~~~~~~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:240:11: warning: cast between incompatible function types from ‘void (*)(int*, int*, int*)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_addtosubscene, 3),
+           ^~~~~~~~~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:241:11: warning: cast between incompatible function types from ‘void (*)(int*, int*, int*)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_delfromsubscene, 3),
+           ^~~~~~~~~~~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:242:11: warning: cast between incompatible function types from ‘void (*)(int*, int*, int*, int*, double*)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_selectstate, 5),
+           ^~~~~~~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:243:11: warning: cast between incompatible function types from ‘void (*)(int*, int*, int*, int*)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_setselectstate, 4),
+           ^~~~~~~~~~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:244:11: warning: cast between incompatible function types from ‘void (*)(int*)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_quit, 1),
+           ^~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:245:11: warning: cast between incompatible function types from ‘void (*)(int*)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_incrementID, 1),
+           ^~~~~~~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+  };
+  ^
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:253:11: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP, SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_init, 4),
+           ^~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:256:11: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_earcut, 2),
+           ^~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:257:11: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_par3d, 3),
+           ^~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:258:11: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_setMouseCallbacks, 6),
+           ^~~~~~~~~~~~~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:259:11: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_setWheelCallback, 3),
+           ^~~~~~~~~~~~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:260:11: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP, SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_setAxisCallback, 4),
+           ^~~~~~~~~~~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:261:11: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_getMouseCallbacks, 3),
+           ^~~~~~~~~~~~~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:262:11: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_getWheelCallback, 2),
+           ^~~~~~~~~~~~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:263:11: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_getAxisCallback, 3),
+           ^~~~~~~~~~~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:264:11: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP, SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_primitive, 4),
+           ^~~~~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DHAVE_FREETYPE -Iext/ftgl -I/usr/include/freetype2 -I/usr/include/libpng16  -DR_NO_REMAP -Iext -Iext/glad/include -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c par3d.cpp -o par3d.o
+In file included from Shape.h:6,
+                 from subscene.h:4,
+                 from scene.h:9,
+                 from rglview.h:8,
+                 from Device.h:10,
+                 from DeviceManager.h:8,
+                 from par3d.cpp:7:
+SceneNode.h:69:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const TypeID getTypeID() const { return typeID; }
+          ^~~~~
+SceneNode.h:70:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const ObjID getObjID() const { return objID; }
+          ^~~~~
+In file included from subscene.h:4,
+                 from scene.h:9,
+                 from rglview.h:8,
+                 from Device.h:10,
+                 from DeviceManager.h:8,
+                 from par3d.cpp:7:
+Shape.h:53:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getBBoxChanges() const { return bboxChanges; }
+   ^~~~~
+Shape.h:65:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getIgnoreExtent() const { return ignoreExtent; }
+   ^~~~~
+Shape.h:122:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isTransparent() const { return transparent; }
+   ^~~~~
+Shape.h:124:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isBlended() const { return blended; }
+   ^~~~~
+In file included from ClipPlane.h:6,
+                 from subscene.h:5,
+                 from scene.h:9,
+                 from rglview.h:8,
+                 from Device.h:10,
+                 from DeviceManager.h:8,
+                 from par3d.cpp:7:
+PrimitiveSet.h:60:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const void setVertex(int index, double* v) { vertexArray.setVertex(index, v); }
+   ^~~~~
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DHAVE_FREETYPE -Iext/ftgl -I/usr/include/freetype2 -I/usr/include/libpng16  -DR_NO_REMAP -Iext -Iext/glad/include -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c pixmap.cpp -o pixmap.o
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DHAVE_FREETYPE -Iext/ftgl -I/usr/include/freetype2 -I/usr/include/libpng16  -DR_NO_REMAP -Iext -Iext/glad/include -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c platform.cpp -o platform.o
+gcc -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DHAVE_FREETYPE -Iext/ftgl -I/usr/include/freetype2 -I/usr/include/libpng16  -DR_NO_REMAP -Iext -Iext/glad/include -Iext/earcut  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -std=gnu99   -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c pretty.c -o pretty.o
+In file included from /apps/R-4.3.2/lib64/R/include/R_ext/BLAS.h:39,
+                 from /apps/R-4.3.2/lib64/R/include/R_ext/Applic.h:41,
+                 from pretty.c:6:
+/apps/R-4.3.2/lib64/R/include/R_ext/Complex.h:80:6: warning: ISO C99 doesn’t support unnamed structs/unions [-Wpedantic]
+     };
+      ^
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DHAVE_FREETYPE -Iext/ftgl -I/usr/include/freetype2 -I/usr/include/libpng16  -DR_NO_REMAP -Iext -Iext/glad/include -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c render.cpp -o render.o
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DHAVE_FREETYPE -Iext/ftgl -I/usr/include/freetype2 -I/usr/include/libpng16  -DR_NO_REMAP -Iext -Iext/glad/include -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c rglmath.cpp -o rglmath.o
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DHAVE_FREETYPE -Iext/ftgl -I/usr/include/freetype2 -I/usr/include/libpng16  -DR_NO_REMAP -Iext -Iext/glad/include -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c rglview.cpp -o rglview.o
+In file included from Shape.h:6,
+                 from subscene.h:4,
+                 from scene.h:9,
+                 from rglview.h:8,
+                 from rglview.cpp:11:
+SceneNode.h:69:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const TypeID getTypeID() const { return typeID; }
+          ^~~~~
+SceneNode.h:70:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const ObjID getObjID() const { return objID; }
+          ^~~~~
+In file included from subscene.h:4,
+                 from scene.h:9,
+                 from rglview.h:8,
+                 from rglview.cpp:11:
+Shape.h:53:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getBBoxChanges() const { return bboxChanges; }
+   ^~~~~
+Shape.h:65:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getIgnoreExtent() const { return ignoreExtent; }
+   ^~~~~
+Shape.h:122:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isTransparent() const { return transparent; }
+   ^~~~~
+Shape.h:124:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isBlended() const { return blended; }
+   ^~~~~
+In file included from ClipPlane.h:6,
+                 from subscene.h:5,
+                 from scene.h:9,
+                 from rglview.h:8,
+                 from rglview.cpp:11:
+PrimitiveSet.h:60:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const void setVertex(int index, double* v) { vertexArray.setVertex(index, v); }
+   ^~~~~
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DHAVE_FREETYPE -Iext/ftgl -I/usr/include/freetype2 -I/usr/include/libpng16  -DR_NO_REMAP -Iext -Iext/glad/include -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c scene.cpp -o scene.o
+In file included from Shape.h:6,
+                 from subscene.h:4,
+                 from scene.h:9,
+                 from scene.cpp:5:
+SceneNode.h:69:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const TypeID getTypeID() const { return typeID; }
+          ^~~~~
+SceneNode.h:70:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const ObjID getObjID() const { return objID; }
+          ^~~~~
+In file included from subscene.h:4,
+                 from scene.h:9,
+                 from scene.cpp:5:
+Shape.h:53:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getBBoxChanges() const { return bboxChanges; }
+   ^~~~~
+Shape.h:65:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getIgnoreExtent() const { return ignoreExtent; }
+   ^~~~~
+Shape.h:122:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isTransparent() const { return transparent; }
+   ^~~~~
+Shape.h:124:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isBlended() const { return blended; }
+   ^~~~~
+In file included from ClipPlane.h:6,
+                 from subscene.h:5,
+                 from scene.h:9,
+                 from scene.cpp:5:
+PrimitiveSet.h:60:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const void setVertex(int index, double* v) { vertexArray.setVertex(index, v); }
+   ^~~~~
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DHAVE_FREETYPE -Iext/ftgl -I/usr/include/freetype2 -I/usr/include/libpng16  -DR_NO_REMAP -Iext -Iext/glad/include -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c select.cpp -o select.o
+In file included from Shape.h:6,
+                 from subscene.h:4,
+                 from scene.h:9,
+                 from select.h:7,
+                 from select.cpp:5:
+SceneNode.h:69:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const TypeID getTypeID() const { return typeID; }
+          ^~~~~
+SceneNode.h:70:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const ObjID getObjID() const { return objID; }
+          ^~~~~
+In file included from subscene.h:4,
+                 from scene.h:9,
+                 from select.h:7,
+                 from select.cpp:5:
+Shape.h:53:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getBBoxChanges() const { return bboxChanges; }
+   ^~~~~
+Shape.h:65:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getIgnoreExtent() const { return ignoreExtent; }
+   ^~~~~
+Shape.h:122:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isTransparent() const { return transparent; }
+   ^~~~~
+Shape.h:124:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isBlended() const { return blended; }
+   ^~~~~
+In file included from ClipPlane.h:6,
+                 from subscene.h:5,
+                 from scene.h:9,
+                 from select.h:7,
+                 from select.cpp:5:
+PrimitiveSet.h:60:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const void setVertex(int index, double* v) { vertexArray.setVertex(index, v); }
+   ^~~~~
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DHAVE_FREETYPE -Iext/ftgl -I/usr/include/freetype2 -I/usr/include/libpng16  -DR_NO_REMAP -Iext -Iext/glad/include -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c subscene.cpp -o subscene.o
+In file included from Shape.h:6,
+                 from subscene.h:4,
+                 from subscene.cpp:1:
+SceneNode.h:69:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const TypeID getTypeID() const { return typeID; }
+          ^~~~~
+SceneNode.h:70:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const ObjID getObjID() const { return objID; }
+          ^~~~~
+In file included from subscene.h:4,
+                 from subscene.cpp:1:
+Shape.h:53:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getBBoxChanges() const { return bboxChanges; }
+   ^~~~~
+Shape.h:65:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getIgnoreExtent() const { return ignoreExtent; }
+   ^~~~~
+Shape.h:122:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isTransparent() const { return transparent; }
+   ^~~~~
+Shape.h:124:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isBlended() const { return blended; }
+   ^~~~~
+In file included from ClipPlane.h:6,
+                 from subscene.h:5,
+                 from subscene.cpp:1:
+PrimitiveSet.h:60:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const void setVertex(int index, double* v) { vertexArray.setVertex(index, v); }
+   ^~~~~
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DHAVE_FREETYPE -Iext/ftgl -I/usr/include/freetype2 -I/usr/include/libpng16  -DR_NO_REMAP -Iext -Iext/glad/include -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c win32gui.cpp -o win32gui.o
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DHAVE_FREETYPE -Iext/ftgl -I/usr/include/freetype2 -I/usr/include/libpng16  -DR_NO_REMAP -Iext -Iext/glad/include -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c win32lib.cpp -o win32lib.o
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DHAVE_FREETYPE -Iext/ftgl -I/usr/include/freetype2 -I/usr/include/libpng16  -DR_NO_REMAP -Iext -Iext/glad/include -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c x11gui.cpp -o x11gui.o
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DHAVE_FREETYPE -Iext/ftgl -I/usr/include/freetype2 -I/usr/include/libpng16  -DR_NO_REMAP -Iext -Iext/glad/include -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c x11lib.cpp -o x11lib.o
+g++ -shared -L/apps/R-4.3.2/lib64/R/lib -L/usr/local/lib64 -o rgl.so ABCLineSet.o BBoxDeco.o Background.o ClipPlane.o Color.o Disposable.o Light.o LineSet.o LineStripSet.o Material.o NULLgui.o PlaneSet.o PointSet.o PrimitiveSet.o R.o RenderContext.o Shape.o SphereMesh.o SphereSet.o SpriteSet.o Surface.o TextSet.o Texture.o Viewpoint.o api.o assert.o callbacks.o device.o devicemanager.o earcut.o fps.o ftgl.o geom.o gl.o gl2ps.o glErrors.o glgui.o gui.o init.o par3d.o pixmap.o platform.o pretty.o render.o rglmath.o rglview.o scene.o select.o subscene.o win32gui.o win32lib.o x11gui.o x11lib.o -lGLU -lGL -L/usr/lib64 -lpng16 -lX11 -lfreetype -lz -lbz2 -lpng16 -lm -lm -lz -L/apps/R-4.3.2/lib64/R/lib -lR
+cp -Rp OpenGL useNULL && \
+mkdir -p useNULL/ext && \
+cp -Rp ext/earcut useNULL/ext/earcut && \
+cp -p *.c *.h *.cpp useNULL/ && \
+cd useNULL && \
+/apps/R-4.3.2/lib64/R/bin/R CMD SHLIB -o useNULL.so *.cpp *.c && \
+cd .. && \
+mkdir -p ../inst/useNULL && \
+mv useNULL/useNULL.so ../inst/useNULL/rgl.so && \
+rm useNULL/*.cpp useNULL/*.c useNULL/*.h useNULL/OpenGL/*
+using C compiler: ‘gcc (GCC) 8.5.0 20210514 (Red Hat 8.5.0-28)’
+using C++ compiler: ‘g++ (GCC) 8.5.0 20210514 (Red Hat 8.5.0-28)’
+make[1]: Entering directory '/hpc_temp/RtmpVzFgXI/R.INSTALL3756532323039c/rgl/src/useNULL'
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DRGL_NO_OPENGL -DR_NO_REMAP -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c ABCLineSet.cpp -o ABCLineSet.o
+In file included from Shape.h:6,
+                 from subscene.h:4,
+                 from scene.h:9,
+                 from ABCLineSet.h:4,
+                 from ABCLineSet.cpp:2:
+SceneNode.h:69:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const TypeID getTypeID() const { return typeID; }
+          ^~~~~
+SceneNode.h:70:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const ObjID getObjID() const { return objID; }
+          ^~~~~
+In file included from subscene.h:4,
+                 from scene.h:9,
+                 from ABCLineSet.h:4,
+                 from ABCLineSet.cpp:2:
+Shape.h:53:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getBBoxChanges() const { return bboxChanges; }
+   ^~~~~
+Shape.h:65:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getIgnoreExtent() const { return ignoreExtent; }
+   ^~~~~
+Shape.h:122:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isTransparent() const { return transparent; }
+   ^~~~~
+Shape.h:124:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isBlended() const { return blended; }
+   ^~~~~
+In file included from ClipPlane.h:6,
+                 from subscene.h:5,
+                 from scene.h:9,
+                 from ABCLineSet.h:4,
+                 from ABCLineSet.cpp:2:
+PrimitiveSet.h:60:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const void setVertex(int index, double* v) { vertexArray.setVertex(index, v); }
+   ^~~~~
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DRGL_NO_OPENGL -DR_NO_REMAP -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c BBoxDeco.cpp -o BBoxDeco.o
+In file included from BBoxDeco.h:6,
+                 from BBoxDeco.cpp:1:
+SceneNode.h:69:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const TypeID getTypeID() const { return typeID; }
+          ^~~~~
+SceneNode.h:70:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const ObjID getObjID() const { return objID; }
+          ^~~~~
+In file included from subscene.h:4,
+                 from scene.h:9,
+                 from BBoxDeco.cpp:7:
+Shape.h:53:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getBBoxChanges() const { return bboxChanges; }
+   ^~~~~
+Shape.h:65:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getIgnoreExtent() const { return ignoreExtent; }
+   ^~~~~
+Shape.h:122:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isTransparent() const { return transparent; }
+   ^~~~~
+Shape.h:124:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isBlended() const { return blended; }
+   ^~~~~
+In file included from ClipPlane.h:6,
+                 from subscene.h:5,
+                 from scene.h:9,
+                 from BBoxDeco.cpp:7:
+PrimitiveSet.h:60:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const void setVertex(int index, double* v) { vertexArray.setVertex(index, v); }
+   ^~~~~
+BBoxDeco.cpp: In member function ‘virtual int rgl::BBoxDeco::getAttributeCount(rgl::SceneNode*, rgl::AttribID)’:
+BBoxDeco.cpp:915:31: warning: this statement may fall through [-Wimplicit-fallthrough=]
+       if (count == 0) return 0;
+                               ^
+BBoxDeco.cpp:918:5: note: here
+     case VERTICES: {
+     ^~~~
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DRGL_NO_OPENGL -DR_NO_REMAP -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c Background.cpp -o Background.o
+In file included from Shape.h:6,
+                 from Background.h:4,
+                 from Background.cpp:1:
+SceneNode.h:69:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const TypeID getTypeID() const { return typeID; }
+          ^~~~~
+SceneNode.h:70:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const ObjID getObjID() const { return objID; }
+          ^~~~~
+In file included from Background.h:4,
+                 from Background.cpp:1:
+Shape.h:53:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getBBoxChanges() const { return bboxChanges; }
+   ^~~~~
+Shape.h:65:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getIgnoreExtent() const { return ignoreExtent; }
+   ^~~~~
+Shape.h:122:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isTransparent() const { return transparent; }
+   ^~~~~
+Shape.h:124:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isBlended() const { return blended; }
+   ^~~~~
+In file included from Background.h:6,
+                 from Background.cpp:1:
+PrimitiveSet.h:60:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const void setVertex(int index, double* v) { vertexArray.setVertex(index, v); }
+   ^~~~~
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DRGL_NO_OPENGL -DR_NO_REMAP -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c ClipPlane.cpp -o ClipPlane.o
+In file included from Shape.h:6,
+                 from ClipPlane.h:5,
+                 from ClipPlane.cpp:1:
+SceneNode.h:69:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const TypeID getTypeID() const { return typeID; }
+          ^~~~~
+SceneNode.h:70:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const ObjID getObjID() const { return objID; }
+          ^~~~~
+In file included from ClipPlane.h:5,
+                 from ClipPlane.cpp:1:
+Shape.h:53:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getBBoxChanges() const { return bboxChanges; }
+   ^~~~~
+Shape.h:65:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getIgnoreExtent() const { return ignoreExtent; }
+   ^~~~~
+Shape.h:122:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isTransparent() const { return transparent; }
+   ^~~~~
+Shape.h:124:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isBlended() const { return blended; }
+   ^~~~~
+In file included from ClipPlane.h:6,
+                 from ClipPlane.cpp:1:
+PrimitiveSet.h:60:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const void setVertex(int index, double* v) { vertexArray.setVertex(index, v); }
+   ^~~~~
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DRGL_NO_OPENGL -DR_NO_REMAP -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c Color.cpp -o Color.o
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DRGL_NO_OPENGL -DR_NO_REMAP -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c Disposable.cpp -o Disposable.o
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DRGL_NO_OPENGL -DR_NO_REMAP -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c Light.cpp -o Light.o
+In file included from Light.h:4,
+                 from Light.cpp:1:
+SceneNode.h:69:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const TypeID getTypeID() const { return typeID; }
+          ^~~~~
+SceneNode.h:70:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const ObjID getObjID() const { return objID; }
+          ^~~~~
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DRGL_NO_OPENGL -DR_NO_REMAP -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c LineSet.cpp -o LineSet.o
+In file included from Shape.h:6,
+                 from PrimitiveSet.h:4,
+                 from LineSet.cpp:1:
+SceneNode.h:69:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const TypeID getTypeID() const { return typeID; }
+          ^~~~~
+SceneNode.h:70:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const ObjID getObjID() const { return objID; }
+          ^~~~~
+In file included from PrimitiveSet.h:4,
+                 from LineSet.cpp:1:
+Shape.h:53:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getBBoxChanges() const { return bboxChanges; }
+   ^~~~~
+Shape.h:65:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getIgnoreExtent() const { return ignoreExtent; }
+   ^~~~~
+Shape.h:122:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isTransparent() const { return transparent; }
+   ^~~~~
+Shape.h:124:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isBlended() const { return blended; }
+   ^~~~~
+In file included from LineSet.cpp:1:
+PrimitiveSet.h:60:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const void setVertex(int index, double* v) { vertexArray.setVertex(index, v); }
+   ^~~~~
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DRGL_NO_OPENGL -DR_NO_REMAP -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c LineStripSet.cpp -o LineStripSet.o
+In file included from Shape.h:6,
+                 from PrimitiveSet.h:4,
+                 from LineStripSet.cpp:1:
+SceneNode.h:69:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const TypeID getTypeID() const { return typeID; }
+          ^~~~~
+SceneNode.h:70:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const ObjID getObjID() const { return objID; }
+          ^~~~~
+In file included from PrimitiveSet.h:4,
+                 from LineStripSet.cpp:1:
+Shape.h:53:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getBBoxChanges() const { return bboxChanges; }
+   ^~~~~
+Shape.h:65:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getIgnoreExtent() const { return ignoreExtent; }
+   ^~~~~
+Shape.h:122:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isTransparent() const { return transparent; }
+   ^~~~~
+Shape.h:124:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isBlended() const { return blended; }
+   ^~~~~
+In file included from LineStripSet.cpp:1:
+PrimitiveSet.h:60:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const void setVertex(int index, double* v) { vertexArray.setVertex(index, v); }
+   ^~~~~
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DRGL_NO_OPENGL -DR_NO_REMAP -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c Material.cpp -o Material.o
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DRGL_NO_OPENGL -DR_NO_REMAP -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c NULLgui.cpp -o NULLgui.o
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DRGL_NO_OPENGL -DR_NO_REMAP -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c PlaneSet.cpp -o PlaneSet.o
+In file included from Shape.h:6,
+                 from subscene.h:4,
+                 from scene.h:9,
+                 from PlaneSet.h:4,
+                 from PlaneSet.cpp:2:
+SceneNode.h:69:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const TypeID getTypeID() const { return typeID; }
+          ^~~~~
+SceneNode.h:70:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const ObjID getObjID() const { return objID; }
+          ^~~~~
+In file included from subscene.h:4,
+                 from scene.h:9,
+                 from PlaneSet.h:4,
+                 from PlaneSet.cpp:2:
+Shape.h:53:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getBBoxChanges() const { return bboxChanges; }
+   ^~~~~
+Shape.h:65:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getIgnoreExtent() const { return ignoreExtent; }
+   ^~~~~
+Shape.h:122:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isTransparent() const { return transparent; }
+   ^~~~~
+Shape.h:124:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isBlended() const { return blended; }
+   ^~~~~
+In file included from ClipPlane.h:6,
+                 from subscene.h:5,
+                 from scene.h:9,
+                 from PlaneSet.h:4,
+                 from PlaneSet.cpp:2:
+PrimitiveSet.h:60:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const void setVertex(int index, double* v) { vertexArray.setVertex(index, v); }
+   ^~~~~
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DRGL_NO_OPENGL -DR_NO_REMAP -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c PointSet.cpp -o PointSet.o
+In file included from Shape.h:6,
+                 from PrimitiveSet.h:4,
+                 from PointSet.cpp:1:
+SceneNode.h:69:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const TypeID getTypeID() const { return typeID; }
+          ^~~~~
+SceneNode.h:70:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const ObjID getObjID() const { return objID; }
+          ^~~~~
+In file included from PrimitiveSet.h:4,
+                 from PointSet.cpp:1:
+Shape.h:53:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getBBoxChanges() const { return bboxChanges; }
+   ^~~~~
+Shape.h:65:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getIgnoreExtent() const { return ignoreExtent; }
+   ^~~~~
+Shape.h:122:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isTransparent() const { return transparent; }
+   ^~~~~
+Shape.h:124:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isBlended() const { return blended; }
+   ^~~~~
+In file included from PointSet.cpp:1:
+PrimitiveSet.h:60:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const void setVertex(int index, double* v) { vertexArray.setVertex(index, v); }
+   ^~~~~
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DRGL_NO_OPENGL -DR_NO_REMAP -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c PrimitiveSet.cpp -o PrimitiveSet.o
+In file included from Shape.h:6,
+                 from PrimitiveSet.h:4,
+                 from PrimitiveSet.cpp:1:
+SceneNode.h:69:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const TypeID getTypeID() const { return typeID; }
+          ^~~~~
+SceneNode.h:70:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const ObjID getObjID() const { return objID; }
+          ^~~~~
+In file included from PrimitiveSet.h:4,
+                 from PrimitiveSet.cpp:1:
+Shape.h:53:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getBBoxChanges() const { return bboxChanges; }
+   ^~~~~
+Shape.h:65:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getIgnoreExtent() const { return ignoreExtent; }
+   ^~~~~
+Shape.h:122:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isTransparent() const { return transparent; }
+   ^~~~~
+Shape.h:124:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isBlended() const { return blended; }
+   ^~~~~
+In file included from PrimitiveSet.cpp:1:
+PrimitiveSet.h:60:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const void setVertex(int index, double* v) { vertexArray.setVertex(index, v); }
+   ^~~~~
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DRGL_NO_OPENGL -DR_NO_REMAP -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c R.cpp -o R.o
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DRGL_NO_OPENGL -DR_NO_REMAP -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c RenderContext.cpp -o RenderContext.o
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DRGL_NO_OPENGL -DR_NO_REMAP -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c Shape.cpp -o Shape.o
+In file included from Shape.h:6,
+                 from Shape.cpp:5:
+SceneNode.h:69:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const TypeID getTypeID() const { return typeID; }
+          ^~~~~
+SceneNode.h:70:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const ObjID getObjID() const { return objID; }
+          ^~~~~
+In file included from Shape.cpp:5:
+Shape.h:53:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getBBoxChanges() const { return bboxChanges; }
+   ^~~~~
+Shape.h:65:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getIgnoreExtent() const { return ignoreExtent; }
+   ^~~~~
+Shape.h:122:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isTransparent() const { return transparent; }
+   ^~~~~
+Shape.h:124:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isBlended() const { return blended; }
+   ^~~~~
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DRGL_NO_OPENGL -DR_NO_REMAP -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c SphereMesh.cpp -o SphereMesh.o
+In file included from Shape.h:6,
+                 from subscene.h:4,
+                 from SphereMesh.cpp:2:
+SceneNode.h:69:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const TypeID getTypeID() const { return typeID; }
+          ^~~~~
+SceneNode.h:70:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const ObjID getObjID() const { return objID; }
+          ^~~~~
+In file included from subscene.h:4,
+                 from SphereMesh.cpp:2:
+Shape.h:53:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getBBoxChanges() const { return bboxChanges; }
+   ^~~~~
+Shape.h:65:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getIgnoreExtent() const { return ignoreExtent; }
+   ^~~~~
+Shape.h:122:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isTransparent() const { return transparent; }
+   ^~~~~
+Shape.h:124:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isBlended() const { return blended; }
+   ^~~~~
+In file included from ClipPlane.h:6,
+                 from subscene.h:5,
+                 from SphereMesh.cpp:2:
+PrimitiveSet.h:60:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const void setVertex(int index, double* v) { vertexArray.setVertex(index, v); }
+   ^~~~~
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DRGL_NO_OPENGL -DR_NO_REMAP -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c SphereSet.cpp -o SphereSet.o
+In file included from Shape.h:6,
+                 from subscene.h:4,
+                 from scene.h:9,
+                 from SphereSet.h:4,
+                 from SphereSet.cpp:1:
+SceneNode.h:69:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const TypeID getTypeID() const { return typeID; }
+          ^~~~~
+SceneNode.h:70:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const ObjID getObjID() const { return objID; }
+          ^~~~~
+In file included from subscene.h:4,
+                 from scene.h:9,
+                 from SphereSet.h:4,
+                 from SphereSet.cpp:1:
+Shape.h:53:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getBBoxChanges() const { return bboxChanges; }
+   ^~~~~
+Shape.h:65:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getIgnoreExtent() const { return ignoreExtent; }
+   ^~~~~
+Shape.h:122:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isTransparent() const { return transparent; }
+   ^~~~~
+Shape.h:124:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isBlended() const { return blended; }
+   ^~~~~
+In file included from ClipPlane.h:6,
+                 from subscene.h:5,
+                 from scene.h:9,
+                 from SphereSet.h:4,
+                 from SphereSet.cpp:1:
+PrimitiveSet.h:60:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const void setVertex(int index, double* v) { vertexArray.setVertex(index, v); }
+   ^~~~~
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DRGL_NO_OPENGL -DR_NO_REMAP -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c SpriteSet.cpp -o SpriteSet.o
+In file included from Shape.h:6,
+                 from SpriteSet.h:5,
+                 from SpriteSet.cpp:2:
+SceneNode.h:69:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const TypeID getTypeID() const { return typeID; }
+          ^~~~~
+SceneNode.h:70:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const ObjID getObjID() const { return objID; }
+          ^~~~~
+In file included from SpriteSet.h:5,
+                 from SpriteSet.cpp:2:
+Shape.h:53:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getBBoxChanges() const { return bboxChanges; }
+   ^~~~~
+Shape.h:65:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getIgnoreExtent() const { return ignoreExtent; }
+   ^~~~~
+Shape.h:122:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isTransparent() const { return transparent; }
+   ^~~~~
+Shape.h:124:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isBlended() const { return blended; }
+   ^~~~~
+In file included from ClipPlane.h:6,
+                 from subscene.h:5,
+                 from scene.h:9,
+                 from SpriteSet.h:6,
+                 from SpriteSet.cpp:2:
+PrimitiveSet.h:60:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const void setVertex(int index, double* v) { vertexArray.setVertex(index, v); }
+   ^~~~~
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DRGL_NO_OPENGL -DR_NO_REMAP -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c Surface.cpp -o Surface.o
+In file included from Shape.h:6,
+                 from Surface.h:4,
+                 from Surface.cpp:1:
+SceneNode.h:69:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const TypeID getTypeID() const { return typeID; }
+          ^~~~~
+SceneNode.h:70:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const ObjID getObjID() const { return objID; }
+          ^~~~~
+In file included from Surface.h:4,
+                 from Surface.cpp:1:
+Shape.h:53:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getBBoxChanges() const { return bboxChanges; }
+   ^~~~~
+Shape.h:65:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getIgnoreExtent() const { return ignoreExtent; }
+   ^~~~~
+Shape.h:122:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isTransparent() const { return transparent; }
+   ^~~~~
+Shape.h:124:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isBlended() const { return blended; }
+   ^~~~~
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DRGL_NO_OPENGL -DR_NO_REMAP -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c TextSet.cpp -o TextSet.o
+In file included from Shape.h:6,
+                 from TextSet.h:7,
+                 from TextSet.cpp:1:
+SceneNode.h:69:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const TypeID getTypeID() const { return typeID; }
+          ^~~~~
+SceneNode.h:70:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const ObjID getObjID() const { return objID; }
+          ^~~~~
+In file included from TextSet.h:7,
+                 from TextSet.cpp:1:
+Shape.h:53:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getBBoxChanges() const { return bboxChanges; }
+   ^~~~~
+Shape.h:65:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getIgnoreExtent() const { return ignoreExtent; }
+   ^~~~~
+Shape.h:122:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isTransparent() const { return transparent; }
+   ^~~~~
+Shape.h:124:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isBlended() const { return blended; }
+   ^~~~~
+In file included from ClipPlane.h:6,
+                 from subscene.h:5,
+                 from TextSet.cpp:6:
+PrimitiveSet.h:60:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const void setVertex(int index, double* v) { vertexArray.setVertex(index, v); }
+   ^~~~~
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DRGL_NO_OPENGL -DR_NO_REMAP -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c Texture.cpp -o Texture.o
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DRGL_NO_OPENGL -DR_NO_REMAP -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c Viewpoint.cpp -o Viewpoint.o
+In file included from Viewpoint.h:4,
+                 from Viewpoint.cpp:1:
+SceneNode.h:69:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const TypeID getTypeID() const { return typeID; }
+          ^~~~~
+SceneNode.h:70:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const ObjID getObjID() const { return objID; }
+          ^~~~~
+In file included from subscene.h:4,
+                 from Viewpoint.cpp:3:
+Shape.h:53:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getBBoxChanges() const { return bboxChanges; }
+   ^~~~~
+Shape.h:65:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getIgnoreExtent() const { return ignoreExtent; }
+   ^~~~~
+Shape.h:122:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isTransparent() const { return transparent; }
+   ^~~~~
+Shape.h:124:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isBlended() const { return blended; }
+   ^~~~~
+In file included from ClipPlane.h:6,
+                 from subscene.h:5,
+                 from Viewpoint.cpp:3:
+PrimitiveSet.h:60:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const void setVertex(int index, double* v) { vertexArray.setVertex(index, v); }
+   ^~~~~
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DRGL_NO_OPENGL -DR_NO_REMAP -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c api.cpp -o api.o
+In file included from Shape.h:6,
+                 from subscene.h:4,
+                 from scene.h:9,
+                 from rglview.h:8,
+                 from Device.h:10,
+                 from DeviceManager.h:8,
+                 from api.cpp:6:
+SceneNode.h:69:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const TypeID getTypeID() const { return typeID; }
+          ^~~~~
+SceneNode.h:70:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const ObjID getObjID() const { return objID; }
+          ^~~~~
+In file included from subscene.h:4,
+                 from scene.h:9,
+                 from rglview.h:8,
+                 from Device.h:10,
+                 from DeviceManager.h:8,
+                 from api.cpp:6:
+Shape.h:53:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getBBoxChanges() const { return bboxChanges; }
+   ^~~~~
+Shape.h:65:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getIgnoreExtent() const { return ignoreExtent; }
+   ^~~~~
+Shape.h:122:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isTransparent() const { return transparent; }
+   ^~~~~
+Shape.h:124:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isBlended() const { return blended; }
+   ^~~~~
+In file included from ClipPlane.h:6,
+                 from subscene.h:5,
+                 from scene.h:9,
+                 from rglview.h:8,
+                 from Device.h:10,
+                 from DeviceManager.h:8,
+                 from api.cpp:6:
+PrimitiveSet.h:60:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const void setVertex(int index, double* v) { vertexArray.setVertex(index, v); }
+   ^~~~~
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DRGL_NO_OPENGL -DR_NO_REMAP -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c assert.cpp -o assert.o
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DRGL_NO_OPENGL -DR_NO_REMAP -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c callbacks.cpp -o callbacks.o
+In file included from Shape.h:6,
+                 from subscene.h:4,
+                 from scene.h:9,
+                 from rglview.h:8,
+                 from callbacks.cpp:1:
+SceneNode.h:69:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const TypeID getTypeID() const { return typeID; }
+          ^~~~~
+SceneNode.h:70:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const ObjID getObjID() const { return objID; }
+          ^~~~~
+In file included from subscene.h:4,
+                 from scene.h:9,
+                 from rglview.h:8,
+                 from callbacks.cpp:1:
+Shape.h:53:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getBBoxChanges() const { return bboxChanges; }
+   ^~~~~
+Shape.h:65:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getIgnoreExtent() const { return ignoreExtent; }
+   ^~~~~
+Shape.h:122:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isTransparent() const { return transparent; }
+   ^~~~~
+Shape.h:124:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isBlended() const { return blended; }
+   ^~~~~
+In file included from ClipPlane.h:6,
+                 from subscene.h:5,
+                 from scene.h:9,
+                 from rglview.h:8,
+                 from callbacks.cpp:1:
+PrimitiveSet.h:60:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const void setVertex(int index, double* v) { vertexArray.setVertex(index, v); }
+   ^~~~~
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DRGL_NO_OPENGL -DR_NO_REMAP -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c device.cpp -o device.o
+In file included from Shape.h:6,
+                 from subscene.h:4,
+                 from scene.h:9,
+                 from rglview.h:8,
+                 from Device.h:10,
+                 from device.cpp:6:
+SceneNode.h:69:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const TypeID getTypeID() const { return typeID; }
+          ^~~~~
+SceneNode.h:70:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const ObjID getObjID() const { return objID; }
+          ^~~~~
+In file included from subscene.h:4,
+                 from scene.h:9,
+                 from rglview.h:8,
+                 from Device.h:10,
+                 from device.cpp:6:
+Shape.h:53:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getBBoxChanges() const { return bboxChanges; }
+   ^~~~~
+Shape.h:65:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getIgnoreExtent() const { return ignoreExtent; }
+   ^~~~~
+Shape.h:122:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isTransparent() const { return transparent; }
+   ^~~~~
+Shape.h:124:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isBlended() const { return blended; }
+   ^~~~~
+In file included from ClipPlane.h:6,
+                 from subscene.h:5,
+                 from scene.h:9,
+                 from rglview.h:8,
+                 from Device.h:10,
+                 from device.cpp:6:
+PrimitiveSet.h:60:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const void setVertex(int index, double* v) { vertexArray.setVertex(index, v); }
+   ^~~~~
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DRGL_NO_OPENGL -DR_NO_REMAP -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c devicemanager.cpp -o devicemanager.o
+In file included from Shape.h:6,
+                 from subscene.h:4,
+                 from scene.h:9,
+                 from rglview.h:8,
+                 from Device.h:10,
+                 from DeviceManager.h:8,
+                 from devicemanager.cpp:7:
+SceneNode.h:69:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const TypeID getTypeID() const { return typeID; }
+          ^~~~~
+SceneNode.h:70:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const ObjID getObjID() const { return objID; }
+          ^~~~~
+In file included from subscene.h:4,
+                 from scene.h:9,
+                 from rglview.h:8,
+                 from Device.h:10,
+                 from DeviceManager.h:8,
+                 from devicemanager.cpp:7:
+Shape.h:53:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getBBoxChanges() const { return bboxChanges; }
+   ^~~~~
+Shape.h:65:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getIgnoreExtent() const { return ignoreExtent; }
+   ^~~~~
+Shape.h:122:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isTransparent() const { return transparent; }
+   ^~~~~
+Shape.h:124:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isBlended() const { return blended; }
+   ^~~~~
+In file included from ClipPlane.h:6,
+                 from subscene.h:5,
+                 from scene.h:9,
+                 from rglview.h:8,
+                 from Device.h:10,
+                 from DeviceManager.h:8,
+                 from devicemanager.cpp:7:
+PrimitiveSet.h:60:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const void setVertex(int index, double* v) { vertexArray.setVertex(index, v); }
+   ^~~~~
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DRGL_NO_OPENGL -DR_NO_REMAP -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c earcut.cpp -o earcut.o
+In file included from Shape.h:6,
+                 from subscene.h:4,
+                 from scene.h:9,
+                 from ABCLineSet.h:4,
+                 from api.h:4,
+                 from earcut.cpp:4:
+SceneNode.h:69:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const TypeID getTypeID() const { return typeID; }
+          ^~~~~
+SceneNode.h:70:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const ObjID getObjID() const { return objID; }
+          ^~~~~
+In file included from subscene.h:4,
+                 from scene.h:9,
+                 from ABCLineSet.h:4,
+                 from api.h:4,
+                 from earcut.cpp:4:
+Shape.h:53:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getBBoxChanges() const { return bboxChanges; }
+   ^~~~~
+Shape.h:65:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getIgnoreExtent() const { return ignoreExtent; }
+   ^~~~~
+Shape.h:122:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isTransparent() const { return transparent; }
+   ^~~~~
+Shape.h:124:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isBlended() const { return blended; }
+   ^~~~~
+In file included from ClipPlane.h:6,
+                 from subscene.h:5,
+                 from scene.h:9,
+                 from ABCLineSet.h:4,
+                 from api.h:4,
+                 from earcut.cpp:4:
+PrimitiveSet.h:60:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const void setVertex(int index, double* v) { vertexArray.setVertex(index, v); }
+   ^~~~~
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DRGL_NO_OPENGL -DR_NO_REMAP -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c fps.cpp -o fps.o
+In file included from Shape.h:6,
+                 from subscene.h:4,
+                 from scene.h:9,
+                 from fps.h:8,
+                 from fps.cpp:5:
+SceneNode.h:69:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const TypeID getTypeID() const { return typeID; }
+          ^~~~~
+SceneNode.h:70:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const ObjID getObjID() const { return objID; }
+          ^~~~~
+In file included from subscene.h:4,
+                 from scene.h:9,
+                 from fps.h:8,
+                 from fps.cpp:5:
+Shape.h:53:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getBBoxChanges() const { return bboxChanges; }
+   ^~~~~
+Shape.h:65:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getIgnoreExtent() const { return ignoreExtent; }
+   ^~~~~
+Shape.h:122:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isTransparent() const { return transparent; }
+   ^~~~~
+Shape.h:124:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isBlended() const { return blended; }
+   ^~~~~
+In file included from ClipPlane.h:6,
+                 from subscene.h:5,
+                 from scene.h:9,
+                 from fps.h:8,
+                 from fps.cpp:5:
+PrimitiveSet.h:60:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const void setVertex(int index, double* v) { vertexArray.setVertex(index, v); }
+   ^~~~~
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DRGL_NO_OPENGL -DR_NO_REMAP -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c ftgl.cpp -o ftgl.o
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DRGL_NO_OPENGL -DR_NO_REMAP -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c geom.cpp -o geom.o
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DRGL_NO_OPENGL -DR_NO_REMAP -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c glErrors.cpp -o glErrors.o
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DRGL_NO_OPENGL -DR_NO_REMAP -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c glgui.cpp -o glgui.o
+In file included from Shape.h:6,
+                 from subscene.h:4,
+                 from glgui.cpp:15:
+SceneNode.h:69:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const TypeID getTypeID() const { return typeID; }
+          ^~~~~
+SceneNode.h:70:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const ObjID getObjID() const { return objID; }
+          ^~~~~
+In file included from subscene.h:4,
+                 from glgui.cpp:15:
+Shape.h:53:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getBBoxChanges() const { return bboxChanges; }
+   ^~~~~
+Shape.h:65:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getIgnoreExtent() const { return ignoreExtent; }
+   ^~~~~
+Shape.h:122:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isTransparent() const { return transparent; }
+   ^~~~~
+Shape.h:124:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isBlended() const { return blended; }
+   ^~~~~
+In file included from ClipPlane.h:6,
+                 from subscene.h:5,
+                 from glgui.cpp:15:
+PrimitiveSet.h:60:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const void setVertex(int index, double* v) { vertexArray.setVertex(index, v); }
+   ^~~~~
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DRGL_NO_OPENGL -DR_NO_REMAP -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c gui.cpp -o gui.o
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DRGL_NO_OPENGL -DR_NO_REMAP -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c init.cpp -o init.o
+In file included from Shape.h:6,
+                 from subscene.h:4,
+                 from scene.h:9,
+                 from rglview.h:8,
+                 from Device.h:10,
+                 from DeviceManager.h:8,
+                 from init.cpp:4:
+SceneNode.h:69:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const TypeID getTypeID() const { return typeID; }
+          ^~~~~
+SceneNode.h:70:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const ObjID getObjID() const { return objID; }
+          ^~~~~
+In file included from subscene.h:4,
+                 from scene.h:9,
+                 from rglview.h:8,
+                 from Device.h:10,
+                 from DeviceManager.h:8,
+                 from init.cpp:4:
+Shape.h:53:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getBBoxChanges() const { return bboxChanges; }
+   ^~~~~
+Shape.h:65:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getIgnoreExtent() const { return ignoreExtent; }
+   ^~~~~
+Shape.h:122:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isTransparent() const { return transparent; }
+   ^~~~~
+Shape.h:124:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isBlended() const { return blended; }
+   ^~~~~
+In file included from ClipPlane.h:6,
+                 from subscene.h:5,
+                 from scene.h:9,
+                 from rglview.h:8,
+                 from Device.h:10,
+                 from DeviceManager.h:8,
+                 from init.cpp:4:
+PrimitiveSet.h:60:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const void setVertex(int index, double* v) { vertexArray.setVertex(index, v); }
+   ^~~~~
+init.cpp:201:11: warning: cast between incompatible function types from ‘void (*)(int*, int*, int*)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_dev_open, 3),
+           ^~~~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:202:11: warning: cast between incompatible function types from ‘void (*)(int*)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_dev_close, 1),
+           ^~~~~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:203:11: warning: cast between incompatible function types from ‘void (*)(int*, int*)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_dev_setcurrent, 2),
+           ^~~~~~~~~~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:204:11: warning: cast between incompatible function types from ‘void (*)(int*, int*, char**)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_snapshot, 3),
+           ^~~~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:205:11: warning: cast between incompatible function types from ‘void (*)(int*, int*, char**)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_postscript, 3),
+           ^~~~~~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:206:11: warning: cast between incompatible function types from ‘void (*)(int*, int*, char**, double*)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_material, 4),
+           ^~~~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:207:11: warning: cast between incompatible function types from ‘void (*)(int*, int*, int*, char**, double*)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_getmaterial, 5),
+           ^~~~~~~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:208:11: warning: cast between incompatible function types from ‘void (*)(int*)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_getcolorcount, 1),
+           ^~~~~~~~~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:209:11: warning: cast between incompatible function types from ‘void (*)(int*, int*)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_dev_bringtotop, 2),
+           ^~~~~~~~~~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:210:11: warning: cast between incompatible function types from ‘void (*)(int*, int*)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_clear, 2),
+           ^~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:211:11: warning: cast between incompatible function types from ‘void (*)(int*, int*)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_pop, 2),
+           ^~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:212:11: warning: cast between incompatible function types from ‘void (*)(int*, int*, int*)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_id_count, 3),
+           ^~~~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:213:11: warning: cast between incompatible function types from ‘void (*)(int*, int*, char**, int*)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_ids, 4),
+           ^~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:214:11: warning: cast between incompatible function types from ‘void (*)(int*, int*, double*)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_viewpoint, 3),
+           ^~~~~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:215:11: warning: cast between incompatible function types from ‘void (*)(int*, double*)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_getObserver, 2),
+           ^~~~~~~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:216:11: warning: cast between incompatible function types from ‘void (*)(int*, double*)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_setObserver, 2),
+           ^~~~~~~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:217:11: warning: cast between incompatible function types from ‘void (*)(int*, int*, int*)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_attrib_count, 3),
+           ^~~~~~~~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:218:11: warning: cast between incompatible function types from ‘void (*)(int*, int*, int*, int*, double*)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_attrib, 5),
+           ^~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:219:11: warning: cast between incompatible function types from ‘void (*)(int*, int*, int*, int*, char**)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_text_attrib, 5),
+           ^~~~~~~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:220:11: warning: cast between incompatible function types from ‘void (*)(int*, int*, double*)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_bg, 3),
+           ^~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:221:11: warning: cast between incompatible function types from ‘void (*)(int*, int*, double*, double*, char**, double*, char**, double*, char**)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_bbox, 9),
+           ^~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:222:11: warning: cast between incompatible function types from ‘void (*)(int*, int*, double*)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_light, 3),
+           ^~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:223:11: warning: cast between incompatible function types from ‘void (*)(int*, int*, int*, int*, double*)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_pixels, 5),
+           ^~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:224:11: warning: cast between incompatible function types from ‘void (*)(int*, int*, double*, double*)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_planes, 4),
+           ^~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:225:11: warning: cast between incompatible function types from ‘void (*)(int*, int*, double*, double*)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_clipplanes, 4),
+           ^~~~~~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:226:11: warning: cast between incompatible function types from ‘void (*)(int*, int*, double*, double*)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_abclines, 4),
+           ^~~~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:227:11: warning: cast between incompatible function types from ‘void (*)(int*, int*, double*, double*, double*, double*, double*, double*, double*, double*, int*, int*, int*)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_surface, 13),
+           ^~~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:228:11: warning: cast between incompatible function types from ‘void (*)(int*, int*, double*, double*, int*)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_spheres, 5),
+           ^~~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:229:11: warning: cast between incompatible function types from ‘void (*)(int*, int*, double*, char**, double*, int*, char**, int*, double*, int*, int*, int*)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_texts, 12),
+           ^~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:230:11: warning: cast between incompatible function types from ‘void (*)(int*, int*, double*, double*, int*, double*, double*, int*, double*)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_sprites, 9),
+           ^~~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:231:11: warning: cast between incompatible function types from ‘void (*)(int*, int*, int*, int*)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_newsubscene, 4),
+           ^~~~~~~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:232:11: warning: cast between incompatible function types from ‘void (*)(int*)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_setsubscene, 1),
+           ^~~~~~~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:233:11: warning: cast between incompatible function types from ‘void (*)(int*, int*)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_getsubsceneid, 2),
+           ^~~~~~~~~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:234:11: warning: cast between incompatible function types from ‘void (*)(int*)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_getsubsceneparent, 1),
+           ^~~~~~~~~~~~~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:235:11: warning: cast between incompatible function types from ‘void (*)(int*, int*)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_getsubscenechildcount, 2),
+           ^~~~~~~~~~~~~~~~~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:236:11: warning: cast between incompatible function types from ‘void (*)(int*, int*)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_getsubscenechildren, 2),
+           ^~~~~~~~~~~~~~~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:237:11: warning: cast between incompatible function types from ‘void (*)(int*, int*)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_gc, 2),
+           ^~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:238:11: warning: cast between incompatible function types from ‘void (*)(int*, int*)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_setEmbeddings, 2),
+           ^~~~~~~~~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:239:11: warning: cast between incompatible function types from ‘void (*)(int*, int*)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_getEmbeddings, 2),
+           ^~~~~~~~~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:240:11: warning: cast between incompatible function types from ‘void (*)(int*, int*, int*)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_addtosubscene, 3),
+           ^~~~~~~~~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:241:11: warning: cast between incompatible function types from ‘void (*)(int*, int*, int*)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_delfromsubscene, 3),
+           ^~~~~~~~~~~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:242:11: warning: cast between incompatible function types from ‘void (*)(int*, int*, int*, int*, double*)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_selectstate, 5),
+           ^~~~~~~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:243:11: warning: cast between incompatible function types from ‘void (*)(int*, int*, int*, int*)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_setselectstate, 4),
+           ^~~~~~~~~~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:244:11: warning: cast between incompatible function types from ‘void (*)(int*)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_quit, 1),
+           ^~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:245:11: warning: cast between incompatible function types from ‘void (*)(int*)’ to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_incrementID, 1),
+           ^~~~~~~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+  };
+  ^
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:248:2: warning: missing initializer for member ‘R_CMethodDef::types’ [-Wmissing-field-initializers]
+init.cpp:253:11: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP, SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_init, 4),
+           ^~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:256:11: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_earcut, 2),
+           ^~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:257:11: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_par3d, 3),
+           ^~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:258:11: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_setMouseCallbacks, 6),
+           ^~~~~~~~~~~~~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:259:11: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_setWheelCallback, 3),
+           ^~~~~~~~~~~~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:260:11: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP, SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_setAxisCallback, 4),
+           ^~~~~~~~~~~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:261:11: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_getMouseCallbacks, 3),
+           ^~~~~~~~~~~~~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:262:11: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_getWheelCallback, 2),
+           ^~~~~~~~~~~~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:263:11: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_getAxisCallback, 3),
+           ^~~~~~~~~~~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+init.cpp:264:11: warning: cast between incompatible function types from ‘SEXPREC* (*)(SEXP, SEXP, SEXP, SEXP)’ {aka ‘SEXPREC* (*)(SEXPREC*, SEXPREC*, SEXPREC*, SEXPREC*)’} to ‘DL_FUNC’ {aka ‘void* (*)()’} [-Wcast-function-type]
+    FUNDEF(rgl_primitive, 4),
+           ^~~~~~~~~~~~~
+init.cpp:108:45: note: in definition of macro ‘FUNDEF’
+ #define FUNDEF(name, n)  {#name, (DL_FUNC) &name, n}
+                                             ^~~~
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DRGL_NO_OPENGL -DR_NO_REMAP -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c par3d.cpp -o par3d.o
+In file included from Shape.h:6,
+                 from subscene.h:4,
+                 from scene.h:9,
+                 from rglview.h:8,
+                 from Device.h:10,
+                 from DeviceManager.h:8,
+                 from par3d.cpp:7:
+SceneNode.h:69:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const TypeID getTypeID() const { return typeID; }
+          ^~~~~
+SceneNode.h:70:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const ObjID getObjID() const { return objID; }
+          ^~~~~
+In file included from subscene.h:4,
+                 from scene.h:9,
+                 from rglview.h:8,
+                 from Device.h:10,
+                 from DeviceManager.h:8,
+                 from par3d.cpp:7:
+Shape.h:53:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getBBoxChanges() const { return bboxChanges; }
+   ^~~~~
+Shape.h:65:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getIgnoreExtent() const { return ignoreExtent; }
+   ^~~~~
+Shape.h:122:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isTransparent() const { return transparent; }
+   ^~~~~
+Shape.h:124:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isBlended() const { return blended; }
+   ^~~~~
+In file included from ClipPlane.h:6,
+                 from subscene.h:5,
+                 from scene.h:9,
+                 from rglview.h:8,
+                 from Device.h:10,
+                 from DeviceManager.h:8,
+                 from par3d.cpp:7:
+PrimitiveSet.h:60:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const void setVertex(int index, double* v) { vertexArray.setVertex(index, v); }
+   ^~~~~
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DRGL_NO_OPENGL -DR_NO_REMAP -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c pixmap.cpp -o pixmap.o
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DRGL_NO_OPENGL -DR_NO_REMAP -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c platform.cpp -o platform.o
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DRGL_NO_OPENGL -DR_NO_REMAP -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c render.cpp -o render.o
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DRGL_NO_OPENGL -DR_NO_REMAP -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c rglmath.cpp -o rglmath.o
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DRGL_NO_OPENGL -DR_NO_REMAP -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c rglview.cpp -o rglview.o
+In file included from Shape.h:6,
+                 from subscene.h:4,
+                 from scene.h:9,
+                 from rglview.h:8,
+                 from rglview.cpp:11:
+SceneNode.h:69:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const TypeID getTypeID() const { return typeID; }
+          ^~~~~
+SceneNode.h:70:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const ObjID getObjID() const { return objID; }
+          ^~~~~
+In file included from subscene.h:4,
+                 from scene.h:9,
+                 from rglview.h:8,
+                 from rglview.cpp:11:
+Shape.h:53:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getBBoxChanges() const { return bboxChanges; }
+   ^~~~~
+Shape.h:65:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getIgnoreExtent() const { return ignoreExtent; }
+   ^~~~~
+Shape.h:122:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isTransparent() const { return transparent; }
+   ^~~~~
+Shape.h:124:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isBlended() const { return blended; }
+   ^~~~~
+In file included from ClipPlane.h:6,
+                 from subscene.h:5,
+                 from scene.h:9,
+                 from rglview.h:8,
+                 from rglview.cpp:11:
+PrimitiveSet.h:60:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const void setVertex(int index, double* v) { vertexArray.setVertex(index, v); }
+   ^~~~~
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DRGL_NO_OPENGL -DR_NO_REMAP -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c scene.cpp -o scene.o
+In file included from Shape.h:6,
+                 from subscene.h:4,
+                 from scene.h:9,
+                 from scene.cpp:5:
+SceneNode.h:69:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const TypeID getTypeID() const { return typeID; }
+          ^~~~~
+SceneNode.h:70:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const ObjID getObjID() const { return objID; }
+          ^~~~~
+In file included from subscene.h:4,
+                 from scene.h:9,
+                 from scene.cpp:5:
+Shape.h:53:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getBBoxChanges() const { return bboxChanges; }
+   ^~~~~
+Shape.h:65:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getIgnoreExtent() const { return ignoreExtent; }
+   ^~~~~
+Shape.h:122:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isTransparent() const { return transparent; }
+   ^~~~~
+Shape.h:124:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isBlended() const { return blended; }
+   ^~~~~
+In file included from ClipPlane.h:6,
+                 from subscene.h:5,
+                 from scene.h:9,
+                 from scene.cpp:5:
+PrimitiveSet.h:60:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const void setVertex(int index, double* v) { vertexArray.setVertex(index, v); }
+   ^~~~~
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DRGL_NO_OPENGL -DR_NO_REMAP -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c select.cpp -o select.o
+In file included from Shape.h:6,
+                 from subscene.h:4,
+                 from scene.h:9,
+                 from select.h:7,
+                 from select.cpp:5:
+SceneNode.h:69:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const TypeID getTypeID() const { return typeID; }
+          ^~~~~
+SceneNode.h:70:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const ObjID getObjID() const { return objID; }
+          ^~~~~
+In file included from subscene.h:4,
+                 from scene.h:9,
+                 from select.h:7,
+                 from select.cpp:5:
+Shape.h:53:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getBBoxChanges() const { return bboxChanges; }
+   ^~~~~
+Shape.h:65:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getIgnoreExtent() const { return ignoreExtent; }
+   ^~~~~
+Shape.h:122:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isTransparent() const { return transparent; }
+   ^~~~~
+Shape.h:124:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isBlended() const { return blended; }
+   ^~~~~
+In file included from ClipPlane.h:6,
+                 from subscene.h:5,
+                 from scene.h:9,
+                 from select.h:7,
+                 from select.cpp:5:
+PrimitiveSet.h:60:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const void setVertex(int index, double* v) { vertexArray.setVertex(index, v); }
+   ^~~~~
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DRGL_NO_OPENGL -DR_NO_REMAP -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c subscene.cpp -o subscene.o
+In file included from Shape.h:6,
+                 from subscene.h:4,
+                 from subscene.cpp:1:
+SceneNode.h:69:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const TypeID getTypeID() const { return typeID; }
+          ^~~~~
+SceneNode.h:70:10: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   inline const ObjID getObjID() const { return objID; }
+          ^~~~~
+In file included from subscene.h:4,
+                 from subscene.cpp:1:
+Shape.h:53:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getBBoxChanges() const { return bboxChanges; }
+   ^~~~~
+Shape.h:65:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool getIgnoreExtent() const { return ignoreExtent; }
+   ^~~~~
+Shape.h:122:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isTransparent() const { return transparent; }
+   ^~~~~
+Shape.h:124:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const bool isBlended() const { return blended; }
+   ^~~~~
+In file included from ClipPlane.h:6,
+                 from subscene.h:5,
+                 from subscene.cpp:1:
+PrimitiveSet.h:60:3: warning: type qualifiers ignored on function return type [-Wignored-qualifiers]
+   const void setVertex(int index, double* v) { vertexArray.setVertex(index, v); }
+   ^~~~~
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DRGL_NO_OPENGL -DR_NO_REMAP -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c win32gui.cpp -o win32gui.o
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DRGL_NO_OPENGL -DR_NO_REMAP -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c win32lib.cpp -o win32lib.o
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DRGL_NO_OPENGL -DR_NO_REMAP -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c x11gui.cpp -o x11gui.o
+g++ -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DRGL_NO_OPENGL -DR_NO_REMAP -Iext/earcut  -I/usr/local/include    -fpic  -g -O2 -std=gnu++14 -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c x11lib.cpp -o x11lib.o
+gcc -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DRGL_NO_OPENGL -DR_NO_REMAP -Iext/earcut  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -std=gnu99   -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c gl.c -o gl.o
+gcc -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DRGL_NO_OPENGL -DR_NO_REMAP -Iext/earcut  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -std=gnu99   -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c gl2ps.c -o gl2ps.o
+gcc -I"/apps/R-4.3.2/lib64/R/include" -DNDEBUG -I/usr/local/include -DHAVE_PNG_H -I/usr/include/libpng16 -DRGL_NO_OPENGL -DR_NO_REMAP -Iext/earcut  -I/usr/local/include   -fvisibility=hidden -fpic  -g -O2 -std=gnu99   -lblas -llapack -Wall -Wextra -Wno-unused -pedantic -fPIC -c pretty.c -o pretty.o
+In file included from /apps/R-4.3.2/lib64/R/include/R_ext/BLAS.h:39,
+                 from /apps/R-4.3.2/lib64/R/include/R_ext/Applic.h:41,
+                 from pretty.c:6:
+/apps/R-4.3.2/lib64/R/include/R_ext/Complex.h:80:6: warning: ISO C99 doesn’t support unnamed structs/unions [-Wpedantic]
+     };
+      ^
+g++ -shared -L/apps/R-4.3.2/lib64/R/lib -L/usr/local/lib64 -o useNULL.so ABCLineSet.o BBoxDeco.o Background.o ClipPlane.o Color.o Disposable.o Light.o LineSet.o LineStripSet.o Material.o NULLgui.o PlaneSet.o PointSet.o PrimitiveSet.o R.o RenderContext.o Shape.o SphereMesh.o SphereSet.o SpriteSet.o Surface.o TextSet.o Texture.o Viewpoint.o api.o assert.o callbacks.o device.o devicemanager.o earcut.o fps.o ftgl.o geom.o glErrors.o glgui.o gui.o init.o par3d.o pixmap.o platform.o render.o rglmath.o rglview.o scene.o select.o subscene.o win32gui.o win32lib.o x11gui.o x11lib.o gl.o gl2ps.o pretty.o -L/usr/lib64 -lpng16 -L/apps/R-4.3.2/lib64/R/lib -lR
+make[1]: Leaving directory '/hpc_temp/RtmpVzFgXI/R.INSTALL3756532323039c/rgl/src/useNULL'
+installing to /home/ryanlee22/R/library/00LOCK-rgl/00new/rgl/libs
+** R
+** demo
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+*** copying figures
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+Warning: 'rgl.init' failed, will use the null device.
+See '?rgl.useNULL' for ways to avoid this warning.
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+Warning: 'rgl.init' failed, will use the null device.
+See '?rgl.useNULL' for ways to avoid this warning.
+** testing if installed package keeps a record of temporary installation path
+* DONE (rgl)
+* installing *source* package ‘matlib’ ...
+** package ‘matlib’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** data
+*** moving datasets to lazyload DB
+** inst
+** byte-compile and prepare package for lazy loading
+Warning: 'rgl.init' failed, will use the null device.
+See '?rgl.useNULL' for ways to avoid this warning.
+** help
+*** installing help indices
+*** copying figures
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+Warning: 'rgl.init' failed, will use the null device.
+See '?rgl.useNULL' for ways to avoid this warning.
+** testing if installed package can be loaded from final location
+Warning: 'rgl.init' failed, will use the null device.
+See '?rgl.useNULL' for ways to avoid this warning.
+** testing if installed package keeps a record of temporary installation path
+* DONE (matlib)
+
+The downloaded source packages are in
+	‘/hpc_temp/RtmpTr2ojf/downloaded_packages’
+Warning message:
+package ‘parallel’ is a base package, and should not be updated 
+Starting estimation at Mon Sep 15 15:26:39 CDT 2025
+         used (Mb) gc trigger (Mb) max used (Mb)
+Ncells 284285 15.2     664322 35.5   453531 24.3
+Vcells 489656  3.8    8388608 64.0  1815222 13.9
+[2025-09-15 15:26:39] Starting estimation process... 
+Loading required package: foreach
+Loading required package: iterators
+Warning messages:
+1: In rgl.init(initValue, onlyNULL) : RGL: unable to open X11 display
+2: 'rgl.init' failed, will use the null device.
+See '?rgl.useNULL' for ways to avoid this warning. 
+sh: line 1: 3627973 Aborted                 (core dumped) '/usr/bin/python3' '/home/ryanlee22/R/library/reticulate/config/config.py' 2> /dev/null
+Error in python_config_impl(python) : 
+  Error 134 occurred running /usr/bin/python3: 
+Calls: use_python -> python_config -> python_config_impl
+In addition: Warning message:
+In system2(command = python, args = shQuote(script), stdout = TRUE,  :
+  running command ''/usr/bin/python3' '/home/ryanlee22/R/library/reticulate/config/config.py' 2>/dev/null' had status 134
+Execution halted
+srun: error: mcn34: task 0: Exited with exit code 1
+Job completed at Mon Sep 15 15:26:48 CDT 2025

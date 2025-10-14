@@ -1,0 +1,20 @@
+=== Estimation started at 2025-09-19 15:25:47 ===
+[2025-09-19 15:25:47] Starting estimation process...
+[2025-09-19 15:25:55] Using 7 cores for parallel processing
+[2025-09-19 15:25:55] Basic setup, lambda: 0.05
+[2025-09-19 15:25:55] Basic setup, R: 300
+[2025-09-19 15:25:55] Reading raw data...
+[2025-09-19 15:26:23] Data loaded. Number of observations: 337661
+[2025-09-19 15:26:50] Generating simulation draws...
+ (likelihood) - 2025-09-19 15:31:03] Computing likelihood when k =  1... 
+ (likelihood) - 2025-09-19 15:34:09] Completed all 300 simulation draws in 0.05 minutes 
+ (likelihood) - 2025-09-19 15:34:10] Low likelihood warning: 876 observations (0.26%) hit minimum threshold (1e-6) 
+ (likelihood) - 2025-09-19 15:34:10] Pre-calculation check: 0 NaNs in likelihood_i 
+ (likelihood) - 2025-09-19 15:34:10] Likelihood summary - Min: 3.770e-10, Q1: 8.578e-01, Median: 9.533e-01, Mean: 8.004e-01, Q3: 9.789e-01, Max: 9.999e-01 
+ (likelihood) - 2025-09-19 15:34:10] Likelihood function completed 
+ (likelihood) - 2025-09-19 15:34:16] Computing likelihood when k =  2... 
+ (likelihood) - 2025-09-19 15:37:25] Completed all 300 simulation draws in 0.11 minutes 
+ (likelihood) - 2025-09-19 15:37:26] Low likelihood warning: 2230 observations (0.66%) hit minimum threshold (1e-6) 
+ (likelihood) - 2025-09-19 15:37:26] Pre-calculation check: 0 NaNs in likelihood_i 
+ (likelihood) - 2025-09-19 15:37:26] Likelihood summary - Min: 5.090e-24, Q1: 1.245e-01, Median: 3.547e-01, Mean: 3.807e-01, Q3: 6.115e-01, Max: 1.000e+00 
+ (likelihood) - 2025-09-19 15:37:26] Likelihood function completed 

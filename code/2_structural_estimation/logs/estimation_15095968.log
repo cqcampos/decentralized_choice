@@ -1,0 +1,87 @@
+==========================================
+SLURM_JOB_ID = 15095968
+SLURM_SUBMIT_DIR = /project/lausd/decentralized_choice/code/2_structural_estimation
+SLURM_JOB_NODELIST = mcn34
+==========================================
+Job ID: 15095968
+Job User: ryanlee22
+Num Cores: 32
+Starting estimation at Mon Sep  8 13:38:53 CDT 2025
+Optimization specifications =========================================
+Number of threads use for torch operation 32
+Number of simulation draws: 300
+Number of types assumed: 3
+Eta outside of exp(): True
+X includes currently in magnet indicator: True
+Method for drawing normal: sobol
+Seed value for normal draws: 12345
+Number of blocks for objfn and grad: 1
+Last year of applications: 2013
+======================================================================
+Loading raw data...
+105239
+53
+(105239, 53)
+Drawing from normal...
+Min u: 1.1920928955078125e-07
+Max u: 0.9999998807907104
+Min u: 1.1920928955078125e-07
+Max u: 0.9999998807907104
+Printing the theta draws for round 1-5 for student 1-5
+tensor([[ 0.2283, -0.0807, -1.8039,  1.3607,  1.0810],
+        [ 1.8388, -1.3337, -0.2216,  0.0915,  0.0081],
+        [ 0.4589, -0.5152, -0.8406,  0.9408,  1.2818],
+        [ 1.1497, -0.6845, -0.6506,  0.3307,  0.5114],
+        [ 0.0365, -0.2840, -1.1945,  2.3192,  0.7842]])
+Printing some of the sims_c
+tensor([-0.6918,  0.2699,  0.2526, -0.3049,  0.2384, -1.0786,  0.8553, -0.7140,
+         0.9672, -0.1479, -0.3092,  0.6269,  0.5244,  0.2538, -0.4179, -0.3082,
+         0.0672, -0.0194,  0.5510,  2.1409, -0.6443, -1.0098,  0.1055, -0.5918,
+         0.7717,  1.4901, -0.2917, -0.5079, -0.6234,  0.8708, -1.2490, -0.9800,
+        -0.5789, -0.8838, -3.5513, -0.5024, -0.9778,  0.5311,  2.7746, -0.4511,
+         3.4911, -1.7472, -0.9146,  1.1632, -1.9182,  1.9947,  0.2430, -0.7491,
+         0.5771,  0.5596,  0.6479,  1.1130, -1.2514])
+Picking starting values for optimization...
+Converting numpy arrays to tensors...
+starting values:
+[-3.34740784e-01 -1.14442044e+00  1.45726738e+00  1.26781772e+00
+ -2.40437083e+00 -5.90432041e-01 -1.98170668e+00 -2.29430221e+00
+ -2.77842559e+00 -1.60058126e-01 -1.53904393e+00 -7.99726889e-01
+ -1.08023774e+00  1.52680159e+00 -2.89918042e+00 -1.04516522e+00
+ -1.87273784e+00  1.56998468e-01  5.24793158e-01 -2.43209064e+00
+ -1.21555714e+00 -1.07982176e+00  4.69714401e-01 -1.81804843e+00
+ -5.20050043e-01 -2.02389473e+00 -3.18777045e-01 -2.79925748e+00
+ -2.73876338e+00  1.90031002e+00 -1.47096578e+00 -1.75067185e+00
+ -4.87024336e-01  6.91786235e-02  2.48051050e+00 -1.54896383e+00
+ -2.15573042e+00 -4.95785834e-01  2.93636784e+00  1.08813323e+01
+ -2.15559618e-03 -1.14444396e-01 -1.84430658e-01 -1.37176999e+00
+  1.44665605e-01 -2.85566093e-01 -1.10820358e-01  2.17851932e-01
+  2.15778672e-01 -6.42640039e-02  1.47056069e+00  9.67305012e-02
+ -3.33748213e-01 -6.50104713e-03  1.35728073e-02 -1.24539973e-02
+ -1.47908860e-01 -2.04031013e-02  8.76604968e-03  1.53581105e-02
+  1.58851984e-03 -1.29014073e-02 -1.60201877e-03  6.93169753e-02
+  3.00734130e-02  3.78272721e-03  1.75023031e-01 -5.92588118e-04
+ -4.72051738e-02  5.69911661e-02 -9.89516558e-02  4.54400527e-03
+  2.91404159e-03 -1.84929230e-02 -3.42463283e-02 -2.40607531e-02
+  7.10128083e-03 -1.02901007e-01 -3.39329790e-02 -1.03232609e+00
+ -4.59423632e-01 -4.29233066e-01 -2.00000000e-01  2.57690523e+00
+ -1.00000000e-01 -2.28333914e-01 -1.00000000e-01]
+Starting nelder-mead to refine starting values of omega...
+Traceback (most recent call last):
+  File "/project/lausd/decentralized_choice/code/2_structural_estimation/estimate_mixture.py", line 115, in <module>
+    mle_fit_nm = minimize(
+  File "/apps/python/3.10/3.10.9/lib/python3.10/site-packages/scipy/optimize/_minimize.py", line 684, in minimize
+    res = _minimize_neldermead(fun, x0, args, callback, bounds=bounds,
+  File "/apps/python/3.10/3.10.9/lib/python3.10/site-packages/scipy/optimize/_optimize.py", line 845, in _minimize_neldermead
+    fsim[k] = func(sim[k])
+  File "/apps/python/3.10/3.10.9/lib/python3.10/site-packages/scipy/optimize/_optimize.py", line 569, in function_wrapper
+    fx = function(np.copy(x), *(wrapper_args + args))
+  File "/project/lausd/decentralized_choice/code/2_structural_estimation/util.py", line 768, in objfn_l_and_grad
+    wgt_l_i, g_i = ind_l_and_grad(omega, mle_input_dict, sims_theta, sims_c, grad)
+  File "/project/lausd/decentralized_choice/code/2_structural_estimation/util.py", line 1412, in ind_l_and_grad
+    omega_dict = parse_params(omega, mle_inp)
+  File "/project/lausd/decentralized_choice/code/2_structural_estimation/util.py", line 693, in parse_params
+    sigma_eta = np.exp(omega[cursor])  # scalar
+IndexError: index 92 is out of bounds for axis 0 with size 87
+srun: error: mcn34: task 0: Exited with exit code 1
+Job completed at Mon Sep  8 13:39:09 CDT 2025

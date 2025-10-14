@@ -1,0 +1,8 @@
+==========================================
+SLURM_JOB_ID = 15095981
+SLURM_SUBMIT_DIR = /project/lausd/decentralized_choice/code/0_build_data
+SLURM_JOB_NODELIST = mcn56
+==========================================
+Job ID: 15095981
+Job User: ryanlee22
+Num Cores: 32

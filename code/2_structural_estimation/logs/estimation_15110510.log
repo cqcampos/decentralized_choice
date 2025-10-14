@@ -1,0 +1,509 @@
+==========================================
+SLURM_JOB_ID = 15110510
+SLURM_SUBMIT_DIR = /project/lausd/decentralized_choice/code/2_structural_estimation
+SLURM_JOB_NODELIST = mcn34
+==========================================
+Job ID: 15110510
+Job User: ryanlee22
+Num Cores: 32
+Starting estimation at Fri Sep 12 15:47:26 CDT 2025
+Optimization specifications =========================================
+Number of threads use for torch operation 32
+Number of simulation draws: 300
+Number of types assumed: 3
+Eta outside of exp(): True
+X includes currently in magnet indicator: True
+Method for drawing normal: sobol
+Seed value for normal draws: 12345
+Number of blocks for objfn and grad: 1
+Last year of applications: 2013
+======================================================================
+Loading raw data...
+84257
+53
+(84257, 53)
+Drawing from normal...
+Min u: 1.1920928955078125e-07
+Max u: 0.9999998807907104
+Min u: 1.1920928955078125e-07
+Max u: 0.9999998807907104
+Printing the theta draws for round 1-5 for student 1-5
+tensor([[ 0.2283, -0.0807, -1.8039,  1.3607,  1.0810],
+        [ 1.8388, -1.3337, -0.2216,  0.0915,  0.0081],
+        [ 0.4589, -0.5152, -0.8406,  0.9408,  1.2818],
+        [ 1.1497, -0.6845, -0.6506,  0.3307,  0.5114],
+        [ 0.0365, -0.2840, -1.1945,  2.3192,  0.7842]])
+Printing some of the sims_c
+tensor([-0.6918,  0.2699,  0.2526, -0.3049,  0.2384, -1.0786,  0.8553, -0.7140,
+         0.9672, -0.1479, -0.3092,  0.6269,  0.5244,  0.2538, -0.4179, -0.3082,
+         0.0672, -0.0194,  0.5510,  2.1409, -0.6443, -1.0098,  0.1055, -0.5918,
+         0.7717,  1.4901, -0.2917, -0.5079, -0.6234,  0.8708, -1.2490, -0.9800,
+        -0.5789, -0.8838, -3.5513, -0.5024, -0.9778,  0.5311,  2.7746, -0.4511,
+         3.4911, -1.7472, -0.9146,  1.1632, -1.9182,  1.9947,  0.2430, -0.7491,
+         0.5771,  0.5596,  0.6479,  1.1130, -1.2514])
+Picking starting values for optimization...
+Converting numpy arrays to tensors...
+starting values:
+[-8.234400e-02 -8.120080e-01 -1.657717e+00 -2.702595e+00  1.672002e+00
+  1.428475e+00 -1.928099e+00 -5.315540e-01 -1.535448e+00 -1.792133e+00
+ -2.338426e+00 -1.606545e+00  2.234830e-01 -9.019740e-01 -6.333520e-01
+ -5.985360e-01  1.634750e+00 -2.540916e+00 -9.636940e-01 -1.282817e+00
+  2.308790e-01  8.611400e-01 -1.913761e+00 -1.024508e+00 -1.102711e+00
+  6.824610e-01 -1.704199e+00 -1.273383e+00 -1.352369e+00 -4.099100e-02
+ -1.561058e+00  9.540700e-02 -2.344869e+00 -7.510740e-01 -2.311019e+00
+ -9.773920e-01 -1.581657e+00  2.189675e+00 -1.302953e+00 -1.507649e+00
+ -4.023840e-01  4.403800e-02  2.522300e+00 -1.180310e+00 -1.631329e+00
+ -9.450150e-01 -9.844680e-01 -5.442500e-01 -5.547780e-01 -1.059589e+00
+ -3.626050e-01  3.226497e+00  4.136221e+00  6.077000e-03 -1.144900e-01
+ -1.095170e-01 -1.107454e+00  6.018500e-02 -2.192010e-01 -1.486060e-01
+  1.669270e-01  2.016570e-01 -5.874800e-02  1.270226e+00  1.308480e-01
+ -3.260710e-01 -1.849000e-03  1.894200e-02 -1.078700e-02 -1.271290e-01
+ -1.619300e-02  1.647800e-02  2.292900e-02  1.210000e-04 -6.810000e-03
+ -1.514000e-03  7.544800e-02  2.666600e-02  3.646000e-03  2.253120e-01
+  2.595000e-03 -3.631200e-02  6.433300e-02 -8.302900e-02  1.223200e-02
+  1.100300e-02 -1.152200e-02 -3.367400e-02 -1.863100e-02  5.244000e-03
+ -9.665300e-02 -2.514900e-02 -9.957830e-01 -1.562508e+00 -2.038194e+00
+ -1.038199e+00  1.904746e+00  2.156522e+00 -9.221000e-01  3.905670e-01]
+Starting nelder-mead to refine starting values of omega...
+Number of NaNs in likelihood: 0
+Number of zero values in likelihood: 0
+Individual likelihood stats:
+Min     : 1.148807e-09
+Max     : 9.997040e-01
+1% quantile  : 3.946787e-05
+25% quantile : 7.865432e-01
+50% quantile : 9.023368e-01
+75% quantile : 9.439280e-01
+99% quantile : 9.912404e-01
+=============================================
+Objfn Value: 67212.36477105823
+Number of NaNs in likelihood: 0
+Number of zero values in likelihood: 0
+Individual likelihood stats:
+Min     : 1.148807e-09
+Max     : 9.997040e-01
+1% quantile  : 3.940160e-05
+25% quantile : 7.865432e-01
+50% quantile : 9.023385e-01
+75% quantile : 9.439282e-01
+99% quantile : 9.912405e-01
+=============================================
+Objfn Value: 67212.73208529077
+Number of NaNs in likelihood: 0
+Number of zero values in likelihood: 0
+Individual likelihood stats:
+Min     : 1.148808e-09
+Max     : 9.997040e-01
+1% quantile  : 3.940183e-05
+25% quantile : 7.865650e-01
+50% quantile : 9.023480e-01
+75% quantile : 9.439475e-01
+99% quantile : 9.912423e-01
+=============================================
+Objfn Value: 67213.71213160822
+Number of NaNs in likelihood: 0
+Number of zero values in likelihood: 0
+Individual likelihood stats:
+Min     : 1.148807e-09
+Max     : 9.997040e-01
+1% quantile  : 3.946787e-05
+25% quantile : 7.865458e-01
+50% quantile : 9.023368e-01
+75% quantile : 9.439280e-01
+99% quantile : 9.912404e-01
+=============================================
+Objfn Value: 67212.20308825845
+Number of NaNs in likelihood: 0
+Number of zero values in likelihood: 0
+Individual likelihood stats:
+Min     : 1.148807e-09
+Max     : 9.997040e-01
+1% quantile  : 3.946787e-05
+25% quantile : 7.865432e-01
+50% quantile : 9.023391e-01
+75% quantile : 9.439282e-01
+99% quantile : 9.912404e-01
+=============================================
+Objfn Value: 67212.02903886649
+Number of NaNs in likelihood: 0
+Number of zero values in likelihood: 0
+Individual likelihood stats:
+Min     : 1.148807e-09
+Max     : 9.997039e-01
+1% quantile  : 3.947275e-05
+25% quantile : 7.864855e-01
+50% quantile : 9.023041e-01
+75% quantile : 9.439101e-01
+99% quantile : 9.912400e-01
+=============================================
+Objfn Value: 67210.073498486
+Number of NaNs in likelihood: 0
+Number of zero values in likelihood: 0
+Individual likelihood stats:
+Min     : 1.148807e-09
+Max     : 9.997040e-01
+1% quantile  : 3.951301e-05
+25% quantile : 7.863858e-01
+50% quantile : 9.022758e-01
+75% quantile : 9.439106e-01
+99% quantile : 9.912404e-01
+=============================================
+Objfn Value: 67210.6746440107
+Number of NaNs in likelihood: 0
+Number of zero values in likelihood: 0
+Individual likelihood stats:
+Min     : 1.148807e-09
+Max     : 9.997040e-01
+1% quantile  : 3.941925e-05
+25% quantile : 7.865909e-01
+50% quantile : 9.023865e-01
+75% quantile : 9.439683e-01
+99% quantile : 9.912700e-01
+=============================================
+Objfn Value: 67210.89429359976
+Number of NaNs in likelihood: 0
+Number of zero values in likelihood: 0
+Individual likelihood stats:
+Min     : 1.148839e-09
+Max     : 9.997042e-01
+1% quantile  : 3.940386e-05
+25% quantile : 7.866858e-01
+50% quantile : 9.023579e-01
+75% quantile : 9.439424e-01
+99% quantile : 9.912459e-01
+=============================================
+Objfn Value: 67212.5506075412
+Number of NaNs in likelihood: 0
+Number of zero values in likelihood: 0
+Individual likelihood stats:
+Min     : 1.148807e-09
+Max     : 9.997040e-01
+1% quantile  : 3.913089e-05
+25% quantile : 7.865831e-01
+50% quantile : 9.024157e-01
+75% quantile : 9.439972e-01
+99% quantile : 9.912679e-01
+=============================================
+Objfn Value: 67215.82015460769
+Number of NaNs in likelihood: 0
+Number of zero values in likelihood: 0
+Individual likelihood stats:
+Min     : 1.148807e-09
+Max     : 9.997040e-01
+1% quantile  : 3.941508e-05
+25% quantile : 7.866785e-01
+50% quantile : 9.023975e-01
+75% quantile : 9.440186e-01
+99% quantile : 9.912603e-01
+=============================================
+Objfn Value: 67216.42811096946
+Number of NaNs in likelihood: 0
+Number of zero values in likelihood: 0
+Individual likelihood stats:
+Min     : 1.148807e-09
+Max     : 9.997040e-01
+1% quantile  : 3.935872e-05
+25% quantile : 7.865807e-01
+50% quantile : 9.024084e-01
+75% quantile : 9.440334e-01
+99% quantile : 9.913036e-01
+=============================================
+Objfn Value: 67217.83312701085
+Number of NaNs in likelihood: 0
+Number of zero values in likelihood: 0
+Individual likelihood stats:
+Min     : 1.148807e-09
+Max     : 9.997040e-01
+1% quantile  : 3.946787e-05
+25% quantile : 7.865807e-01
+50% quantile : 9.023418e-01
+75% quantile : 9.439282e-01
+99% quantile : 9.912404e-01
+=============================================
+Objfn Value: 67213.60039314996
+Number of NaNs in likelihood: 0
+Number of zero values in likelihood: 0
+Individual likelihood stats:
+Min     : 1.147433e-09
+Max     : 9.997040e-01
+1% quantile  : 3.938160e-05
+25% quantile : 7.864549e-01
+50% quantile : 9.023159e-01
+75% quantile : 9.439162e-01
+99% quantile : 9.912289e-01
+=============================================
+Objfn Value: 67213.78774894819
+Number of NaNs in likelihood: 0
+Number of zero values in likelihood: 0
+Individual likelihood stats:
+Min     : 1.148807e-09
+Max     : 9.997068e-01
+1% quantile  : 3.947039e-05
+25% quantile : 7.865834e-01
+50% quantile : 9.023685e-01
+75% quantile : 9.439606e-01
+99% quantile : 9.912572e-01
+=============================================
+Objfn Value: 67213.88756710445
+Number of NaNs in likelihood: 0
+Number of zero values in likelihood: 0
+Individual likelihood stats:
+Min     : 1.148807e-09
+Max     : 9.997040e-01
+1% quantile  : 3.940246e-05
+25% quantile : 7.866853e-01
+50% quantile : 9.023961e-01
+75% quantile : 9.439770e-01
+99% quantile : 9.912573e-01
+=============================================
+Objfn Value: 67212.29344311482
+Number of NaNs in likelihood: 0
+Number of zero values in likelihood: 0
+Individual likelihood stats:
+Min     : 1.148807e-09
+Max     : 9.997041e-01
+1% quantile  : 3.946796e-05
+25% quantile : 7.867263e-01
+50% quantile : 9.023673e-01
+75% quantile : 9.439522e-01
+99% quantile : 9.912404e-01
+=============================================
+Objfn Value: 67213.71559829306
+Number of NaNs in likelihood: 0
+Number of zero values in likelihood: 0
+Individual likelihood stats:
+Min     : 1.148807e-09
+Max     : 9.997040e-01
+1% quantile  : 3.934363e-05
+25% quantile : 7.857693e-01
+50% quantile : 9.019900e-01
+75% quantile : 9.437487e-01
+99% quantile : 9.912297e-01
+=============================================
+Objfn Value: 67215.57325470661
+Number of NaNs in likelihood: 0
+Number of zero values in likelihood: 0
+Individual likelihood stats:
+Min     : 1.148807e-09
+Max     : 9.997040e-01
+1% quantile  : 3.940168e-05
+25% quantile : 7.865807e-01
+50% quantile : 9.023656e-01
+75% quantile : 9.439825e-01
+99% quantile : 9.912870e-01
+=============================================
+Objfn Value: 67216.27933088185
+Number of NaNs in likelihood: 0
+Number of zero values in likelihood: 0
+Individual likelihood stats:
+Min     : 1.148807e-09
+Max     : 9.997040e-01
+1% quantile  : 3.951301e-05
+25% quantile : 7.865920e-01
+50% quantile : 9.023513e-01
+75% quantile : 9.439480e-01
+99% quantile : 9.912639e-01
+=============================================
+Objfn Value: 67214.18073178761
+Number of NaNs in likelihood: 0
+Number of zero values in likelihood: 0
+Individual likelihood stats:
+Min     : 1.148810e-09
+Max     : 9.997040e-01
+1% quantile  : 3.940190e-05
+25% quantile : 7.866306e-01
+50% quantile : 9.023680e-01
+75% quantile : 9.439696e-01
+99% quantile : 9.912696e-01
+=============================================
+Objfn Value: 67212.89894642978
+Number of NaNs in likelihood: 0
+Number of zero values in likelihood: 0
+Individual likelihood stats:
+Min     : 1.148807e-09
+Max     : 9.997040e-01
+1% quantile  : 3.946787e-05
+25% quantile : 7.865262e-01
+50% quantile : 9.023186e-01
+75% quantile : 9.439171e-01
+99% quantile : 9.912403e-01
+=============================================
+Objfn Value: 67211.68789603034
+Number of NaNs in likelihood: 0
+Number of zero values in likelihood: 0
+Individual likelihood stats:
+Min     : 1.148806e-09
+Max     : 9.997029e-01
+1% quantile  : 3.946724e-05
+25% quantile : 7.863723e-01
+50% quantile : 9.022668e-01
+75% quantile : 9.438864e-01
+99% quantile : 9.912365e-01
+=============================================
+Objfn Value: 67212.65928857462
+Number of NaNs in likelihood: 0
+Number of zero values in likelihood: 0
+Individual likelihood stats:
+Min     : 1.148807e-09
+Max     : 9.997040e-01
+1% quantile  : 3.978723e-05
+25% quantile : 7.865963e-01
+50% quantile : 9.024554e-01
+75% quantile : 9.441092e-01
+99% quantile : 9.914392e-01
+=============================================
+Objfn Value: 67209.8507119387
+Number of NaNs in likelihood: 0
+Number of zero values in likelihood: 0
+Individual likelihood stats:
+Min     : 1.148807e-09
+Max     : 9.997040e-01
+1% quantile  : 3.951301e-05
+25% quantile : 7.866307e-01
+50% quantile : 9.024199e-01
+75% quantile : 9.440242e-01
+99% quantile : 9.913022e-01
+=============================================
+Objfn Value: 67213.73378813697
+Number of NaNs in likelihood: 0
+Number of zero values in likelihood: 0
+Individual likelihood stats:
+Min     : 1.148807e-09
+Max     : 9.997040e-01
+1% quantile  : 3.946789e-05
+25% quantile : 7.867121e-01
+50% quantile : 9.024231e-01
+75% quantile : 9.440434e-01
+99% quantile : 9.912952e-01
+=============================================
+Objfn Value: 67213.56737053103
+Number of NaNs in likelihood: 0
+Number of zero values in likelihood: 0
+Individual likelihood stats:
+Min     : 1.148807e-09
+Max     : 9.997040e-01
+1% quantile  : 3.937676e-05
+25% quantile : 7.862836e-01
+50% quantile : 9.022687e-01
+75% quantile : 9.438893e-01
+99% quantile : 9.912404e-01
+=============================================
+Objfn Value: 67213.1315226524
+Number of NaNs in likelihood: 0
+Number of zero values in likelihood: 0
+Individual likelihood stats:
+Min     : 1.148807e-09
+Max     : 9.997040e-01
+1% quantile  : 3.946787e-05
+25% quantile : 7.865537e-01
+50% quantile : 9.023391e-01
+75% quantile : 9.439282e-01
+99% quantile : 9.912404e-01
+=============================================
+Objfn Value: 67212.06231003512
+Number of NaNs in likelihood: 0
+Number of zero values in likelihood: 0
+Individual likelihood stats:
+Min     : 1.148865e-09
+Max     : 9.997041e-01
+1% quantile  : 3.936987e-05
+25% quantile : 7.867102e-01
+50% quantile : 9.023681e-01
+75% quantile : 9.440056e-01
+99% quantile : 9.912605e-01
+=============================================
+Objfn Value: 67216.99302546069
+Number of NaNs in likelihood: 0
+Number of zero values in likelihood: 0
+Individual likelihood stats:
+Min     : 1.148807e-09
+Max     : 9.997040e-01
+1% quantile  : 3.946787e-05
+25% quantile : 7.865807e-01
+50% quantile : 9.023421e-01
+75% quantile : 9.439282e-01
+99% quantile : 9.912404e-01
+=============================================
+Objfn Value: 67212.91553727443
+Number of NaNs in likelihood: 0
+Number of zero values in likelihood: 0
+Individual likelihood stats:
+Min     : 1.148807e-09
+Max     : 9.997040e-01
+1% quantile  : 3.946787e-05
+25% quantile : 7.865432e-01
+50% quantile : 9.023368e-01
+75% quantile : 9.439293e-01
+99% quantile : 9.912404e-01
+=============================================
+Objfn Value: 67212.48605640778
+Number of NaNs in likelihood: 0
+Number of zero values in likelihood: 0
+Individual likelihood stats:
+Min     : 1.148807e-09
+Max     : 9.997040e-01
+1% quantile  : 3.951301e-05
+25% quantile : 7.867048e-01
+50% quantile : 9.023787e-01
+75% quantile : 9.439563e-01
+99% quantile : 9.912406e-01
+=============================================
+Objfn Value: 67217.17171919963
+Number of NaNs in likelihood: 0
+Number of zero values in likelihood: 0
+Individual likelihood stats:
+Min     : 1.148806e-09
+Max     : 9.997040e-01
+1% quantile  : 3.946786e-05
+25% quantile : 7.865324e-01
+50% quantile : 9.023334e-01
+75% quantile : 9.439273e-01
+99% quantile : 9.912404e-01
+=============================================
+Objfn Value: 67212.13152221205
+Number of NaNs in likelihood: 0
+Number of zero values in likelihood: 0
+Individual likelihood stats:
+Min     : 1.148807e-09
+Max     : 9.997040e-01
+1% quantile  : 3.951301e-05
+25% quantile : 7.865807e-01
+50% quantile : 9.024155e-01
+75% quantile : 9.440127e-01
+99% quantile : 9.913305e-01
+=============================================
+Objfn Value: 67217.30235746311
+Number of NaNs in likelihood: 0
+Number of zero values in likelihood: 0
+Individual likelihood stats:
+Min     : 1.148807e-09
+Max     : 9.997040e-01
+1% quantile  : 3.946801e-05
+25% quantile : 7.865537e-01
+50% quantile : 9.023421e-01
+75% quantile : 9.439286e-01
+99% quantile : 9.912404e-01
+=============================================
+Objfn Value: 67211.55319843403
+Number of NaNs in likelihood: 0
+Number of zero values in likelihood: 0
+Individual likelihood stats:
+Min     : 1.148807e-09
+Max     : 9.997040e-01
+1% quantile  : 3.913098e-05
+25% quantile : 7.866245e-01
+50% quantile : 9.024106e-01
+75% quantile : 9.439853e-01
+99% quantile : 9.912866e-01
+=============================================
+Objfn Value: 67215.2788102816
+Number of NaNs in likelihood: 0
+Number of zero values in likelihood: 0
+Individual likelihood stats:
+Min     : 1.148807e-09
+Max     : 9.997040e-01
+1% quantile  : 3.946787e-05
+25% quantile : 7.865832e-01
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+slurmstepd: error: *** JOB 15110510 ON mcn34 CANCELLED AT 2025-09-12T15:52:10 ***
+slurmstepd: error: *** STEP 15110510.0 ON mcn34 CANCELLED AT 2025-09-12T15:52:10 ***
