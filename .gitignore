@@ -1,3 +1,5 @@
 code/archive/obsolete/code_git/
 code/**/logs/
 *.log
+code/**/logs/
+*.log
