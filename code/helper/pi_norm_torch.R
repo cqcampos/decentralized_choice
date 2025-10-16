@@ -109,12 +109,18 @@ pi_norm_torch_grad <- function(param_tens, inp, zero_seat_bool, preference_model
     # Calculate utility of each portfolio during the app stage
     # u_bar is N by J matrix, where u_bar[i,j] is i's app-stage utility of choosing school j
     
+    # CC Change
+    #u_bar <- inp$delta_j$unsqueeze(1) +  # school-specific mean utility (None by J)
+    #  torch_matmul(inp$X, inp$delta_X)$unsqueeze(2) + # decision maker mean utility (N by None)
+    #  torch_einsum("nkj,k->nj", list(inp$D, inp$psi_D)) + # distance effects (N by J)
+    #  inp$theta$unsqueeze(2)                              # Individual r.c. (N by none)
     u_bar <- inp$delta_j$unsqueeze(1) +  # school-specific mean utility (None by J)
-      torch_matmul(inp$X, inp$delta_X)$unsqueeze(2) + # decision maker mean utility (N by None)
-      torch_einsum("nkj,k->nj", list(inp$D, inp$psi_D)) + # distance effects (N by J)
-      inp$theta$unsqueeze(2)                              # Individual r.c. (N by none)
-    
-    
+      torch_matmul(inp$X, inp$delta_X)$unsqueeze(2)  # decision maker mean utility (N by None)
+    # Add distance effects if not eliminating travel costs 
+    if(preference_model !=5 & preference_model!=6 & preference_model != 9){
+      u_bar <- u_bar + torch_einsum("nkj,k->nj", list(inp$D, inp$psi_D)) # distance effects (N by J)
+    }
+    u_bar <- u_bar + inp$theta$unsqueeze(2) # Individual r.c. (N by none) 
     # Calculate net expected utility max
     # Define helper function for calculating cost
     cost_app <- function(preference_model, inp, eta_spec){
@@ -291,12 +297,22 @@ pi_norm_torch <- function(param, inp, zero_seat_bool, preference_model, eta, ite
   # Calculate utility of each portfolio during the app stage
   # u_bar is N by J matrix, where u_bar[i,j] is i's app-stage utility of choosing school j
   
-  u_bar <- inp$delta_j$unsqueeze(1) +  # school-specific mean utility
-    torch_matmul(inp$X, inp$delta_X)$unsqueeze(2) + # decision maker mean utility
-    torch_einsum("nkj,k->nj", list(inp$D, inp$psi_D)) + # distance effects
+  #u_bar <- inp$delta_j$unsqueeze(1) +  # school-specific mean utility
+  #  torch_matmul(inp$X, inp$delta_X)$unsqueeze(2) + # decision maker mean utility
+  #  torch_einsum("nkj,k->nj", list(inp$D, inp$psi_D)) + # distance effects
+  #  inp$theta$unsqueeze(2)
+  
+  u_bar <- inp$delta_j$unsqueeze(1) +  
+    torch_matmul(inp$X, inp$delta_X)$unsqueeze(2) + 
     inp$theta$unsqueeze(2)
+
+  if (preference_model != 5 & preference_model != 6 & preference_model != 9) {
+    distance_component <- torch_einsum("nkj,k->nj", list(inp$D, inp$psi_D))
+    u_bar <- u_bar + distance_component
+  }
   
-  
+
+
   # Calculate net expected utility max
   # Define helper function for calculating cost
   cost_app <- function(preference_model, inp, eta_spec){

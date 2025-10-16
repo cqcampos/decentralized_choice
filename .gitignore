@@ -5,3 +5,5 @@ code/**/logs/
 *.log
 code/**/logs/
 *.log
+code/4_counterfactual/.Rhistory
+estimates/

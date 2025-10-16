@@ -1,15 +1,10 @@
 #!/bin/bash
-  
-#SBATCH --account=faculty
 #SBATCH --partition=highmem
-#SBATCH --mem=800GB       
 #SBATCH --cpus-per-task=10
+#SBATCH --mem=700GB
 #SBATCH --time=4-00:00:00
 #SBATCH --job-name=cfals
-#SBATCH --output=/project/lausd/decentralized_choice/code/4_counterfactual/logs/counterfactual_%j.log  # %j will be replaced by the job ID
-#SBATCH --mail-type=BEGIN,END,FAIL  # Email notifications
-#SBATCH --mail-user=Christopher.Campos@chicagobooth.edu  # Replace with your email
-
+#SBATCH --output=logs/counterfactual_%j.log
 
 module load R/4.3/4.3.2
 module load gcc/9.2.0
@@ -28,15 +23,12 @@ Rscript -e "pkgs <- c('haven', 'doParallel', 'foreach', 'numDeriv', 'parallel', 
             new_pkgs <- pkgs[!pkgs %in% installed.packages(lib.loc='$R_LIBS_USER')[,'Package']]; 
             if(length(new_pkgs)>0) install.packages(new_pkgs, lib='$R_LIBS_USER', repos='https://cran.rstudio.com/')"
 
-
 # Set up R environment variables to use the correct number of cores
 export MC_CORES=$SLURM_CPUS_PER_TASK
 export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
 
 
-# Run the R script
+# Run the R script for counterfactuals
 echo "Starting estimation at $(date)"
-srun Rscript --vanilla run_counterfactual_2.R
-
+srun Rscript --vanilla run_counterfactual.R
 echo "Job completed at $(date)"
-

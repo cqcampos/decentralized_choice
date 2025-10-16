@@ -69,10 +69,8 @@ simulate_counterfactual <- function(dir, endyear, low_score_school, mean_school_
     }
 
 
-  
-  
-
-  if(preference_model==2){
+  # Shift preferences for info policies 
+  if(preference_model==2 | preference_model==8 | preference_model==9){ # sort of baseline info provision option
     shift_factor <- ifelse(type_draw == 1, sd_theta_1, ifelse(type_draw == 2, sd_theta_2, sd_theta_3))
     improve_draw <- runif(N)    # one Uniform(0,1) draw per obs
     theta_choice[improve_draw < 0.5] <- theta_choice[improve_draw < 0.5] +  shift_factor[improve_draw < 0.5]
@@ -83,8 +81,8 @@ simulate_counterfactual <- function(dir, endyear, low_score_school, mean_school_
   }
   
   
-  # Calculate eq. admission probs for counterfactual policies 
-  if(preference_model>0 & preference_model < 4){
+  # Calculate eq. admission probs for counterfactual policies (no need to do if considering a policy with DA )
+  if( preference_model==1 | preference_model==2 | preference_model==3 | preference_model==5){
     
     if (!use_mean_pi){
       hot_start_path <- paste0(dir, "/estimates/", eta, "_K", K,  "_init_param_preference_model_", preference_model,"_", last_yr, ".csv") 
@@ -109,10 +107,11 @@ simulate_counterfactual <- function(dir, endyear, low_score_school, mean_school_
     
     } else {
       pi_br <- read.csv(file.path(dir, "estimates", "pi_br_average.csv"))
-      scenario_str <- ifelse(preference_model==1, "Shutting Down Application Costs",
+      scenario_str <- ifelse(preference_model == 1, "Shutting Down Application Costs",
                          ifelse(preference_model == 2, "Info Provision", 
-                                ifelse(preference_model == 3, "Targeted Info Provision", 
-                                       "Error: preference_model should be 1,2, or 3")))
+                                ifelse(preference_model == 3, "Targeted Info Provision",
+                                       ifelse(preference_model == 5, "Eliminate Travel Costs",
+                                              "Error: preference_model should be 1, 2, 3, or 5"))))
       
       print("Using mean(pi best response)")
       pi_br <- pi_br %>%
@@ -151,16 +150,18 @@ simulate_counterfactual <- function(dir, endyear, low_score_school, mean_school_
   # let's add them together and that's our U_bar 
   U_bar <- sweep(delta_j_mat, 1, delta_X_mat, FUN = "+")
   
-  
-  # Add the distance (D) component (summing over Q_D for each school j)
-  D_component <- matrix(0, nrow = N, ncol = J)
-  # Takes the sum of each row of D[,,j]* psi_D which is just d_{ij}*X_i*psi_D
-  # It is the multiplication by X_i that initially has D[,,,] have the extra 
-  # dimension 
-  for (j in 1:J) {
-    D_component[, j] <- rowSums(D[,,j] * matrix(psi_D, nrow = N, ncol = Q_D, byrow = TRUE))
+  # CC Add distance component if we have travel costs 
+  if(preference_model!=5 & preference_model!=6  & preference_model!=9){
+    # Add the distance (D) component (summing over Q_D for each school j)
+    D_component <- matrix(0, nrow = N, ncol = J)
+    # Takes the sum of each row of D[,,j]* psi_D which is just d_{ij}*X_i*psi_D
+    # It is the multiplication by X_i that initially has D[,,,] have the extra 
+    # dimension 
+    for (j in 1:J) {
+      D_component[, j] <- rowSums(D[,,j] * matrix(psi_D, nrow = N, ncol = Q_D, byrow = TRUE))
+    }
+    U_bar <- U_bar + D_component
   }
-  U_bar <- U_bar + D_component
   U_tilde <- U_bar  + matrix(theta_choice, N, J) 
   
   
@@ -179,8 +180,8 @@ simulate_counterfactual <- function(dir, endyear, low_score_school, mean_school_
     Emax[, j+1] <- log(exp_U0 + exp_U_1[, j]) + 0.577
   }
   
-  # For preference_model < 4, assignments are decentralized
-  if (preference_model < 4){
+  # CC For preference_model ==0,1 2, 3,5, assignments are decentralized
+  if (preference_model == 0 | preference_model==1 | preference_model ==2 | preference_model==3 | preference_model==5){
     # 7. Compute application costs C
     c_X <- matrix(c_X, ncol=1, nrow=length(c_X))
     C_f_bar <- matrix( rep(exp(W %*% c_X), Q_A), ncol = Q_A) 
@@ -299,9 +300,130 @@ simulate_counterfactual <- function(dir, endyear, low_score_school, mean_school_
     
     
     
+  } else if (preference_model==7) {
+    # This is counterfactual where students are optimally sorted based on match quality
+    # Implementation of maxAllocation from outcome_analysis.do
+    
+    # Step 1: Calculate potential outcomes for each student-school pair
+    X_outcome <- cbind(X[,1:9], X[,12])
+    X_outcome <- cbind(X_outcome[,1:4], asian, X_outcome[,5:10])
+    X_outcome_inter <- cbind(X[,1:10], X[,12])
+    X_outcome_inter <- cbind(X_outcome_inter[,1:4], asian, X_outcome_inter[,5:11])
+    
+    res_ability_math <- rnorm(N, 0, 1)
+    
+    # Y_1_j for each school j (N x J matrix)
+    Y_1_j_math <- matrix(rep(alpha_j_math, times = N), nrow = N, byrow = TRUE) +
+      as.vector(X_outcome %*% as.matrix(alpha_0_X_math) + theta * (alpha_0_math + alpha_m_math) +
+                  X_outcome_inter %*% as.matrix(alpha_m_X_math) + yearfe + blockfe + res_ability_math)
+    
+    # Y_0 (no magnet)
+    Y_0_math <- X_outcome %*% as.matrix(alpha_0_X_math) + theta * alpha_0_math + 
+      yearfe + blockfe + res_ability_math
+    
+    # Match quality for each student-school pair (N x J matrix)
+    match_quality <- Y_1_j_math - as.vector(Y_0_math)
+    
+    # Step 2: Create a mapping from school index (1:J) to schoolcode
+    # Extract unique school codes from seats_eq in order
+    school_codes <- unique(seats_eq$schoolcode)
+    
+    # Sort schools by VAM (alpha_j) - highest quality first
+    school_quality_df <- data.frame(
+      school_idx = 1:J,
+      school_code = school_codes[1:J],  # Assuming ordered correspondence
+      quality = alpha_j_math
+    )
+    school_quality_df <- school_quality_df %>% arrange(desc(quality))
+    
+    # Step 3: Prepare seat allocation tracking
+    # Initialize assignment matrix (N x J) - which school each student is assigned to
+    assignment <- matrix(0, nrow = N, ncol = J)
+    assigned_students <- rep(FALSE, N)
+    
+    # Step 4: Loop through each year
+    for (yr in unique(endyear)) {
+      # Students in this year
+      year_mask <- (endyear == yr)
+      
+      # For each school in quality order
+      for (school_rank in 1:nrow(school_quality_df)) {
+        j <- school_quality_df$school_idx[school_rank]
+        sch_code <- school_quality_df$school_code[school_rank]
+        
+        # Get seats available for this school-year-phbao combination
+        seats_phbao1 <- seats_eq %>%
+          filter(schoolcode == sch_code, endyear == yr, phbao == 1) %>%
+          pull(seats) %>% 
+          {if(length(.) > 0) .[1] else 0}
+        
+        seats_phbao0 <- seats_eq %>%
+          filter(schoolcode == sch_code, endyear == yr, phbao == 0) %>%
+          pull(seats) %>%
+          {if(length(.) > 0) .[1] else 0}
+        
+        # Allocate PHBAO students
+        if (seats_phbao1 > 0) {
+          # Eligible students: PHBAO, in this year, not yet assigned
+          eligible <- year_mask & (phbao == 1) & !assigned_students
+          
+          if (sum(eligible) > 0) {
+            # Sort eligible students by match quality with this school
+            eligible_idx <- which(eligible)
+            match_scores <- match_quality[eligible_idx, j]
+            top_students <- eligible_idx[order(match_scores, decreasing = TRUE)]
+            
+            # Allocate up to seats_phbao1 students
+            n_allocate <- min(seats_phbao1, length(top_students))
+            if (n_allocate > 0) {
+              allocated_idx <- top_students[1:n_allocate]
+              assignment[allocated_idx, j] <- 1
+              assigned_students[allocated_idx] <- TRUE
+            }
+          }
+        }
+        
+        # Allocate non-PHBAO students
+        if (seats_phbao0 > 0) {
+          # Eligible students: non-PHBAO, in this year, not yet assigned
+          eligible <- year_mask & (phbao == 0) & !assigned_students
+          
+          if (sum(eligible) > 0) {
+            # Sort eligible students by match quality with this school
+            eligible_idx <- which(eligible)
+            match_scores <- match_quality[eligible_idx, j]
+            top_students <- eligible_idx[order(match_scores, decreasing = TRUE)]
+            
+            # Allocate up to seats_phbao0 students
+            n_allocate <- min(seats_phbao0, length(top_students))
+            if (n_allocate > 0) {
+              allocated_idx <- top_students[1:n_allocate]
+              assignment[allocated_idx, j] <- 1
+              assigned_students[allocated_idx] <- TRUE
+            }
+          }
+        }
+      }
+    }
+    
+    # Step 5: Create enrollment matrix E_new
+    # Students assigned to a school get that column, others get outside option (column 1)
+    E_new <- matrix(0, nrow = N, ncol = J + 1)
+    for (i in 1:N) {
+      if (any(assignment[i, ] == 1)) {
+        # Student assigned to a school
+        j_assigned <- which(assignment[i, ] == 1)[1]  # Get first (should be only one)
+        E_new[i, j_assigned + 1] <- 1  # +1 because column 1 is outside option
+      } else {
+        # Student not assigned to any school - outside option
+        E_new[i, 1] <- 1
+      }
+    }
+
   } else{
     # No post-application shock. Students simply rank options with "enrollment" utility greater than the outside option
     # There's no application cost, thanks to centralized admission system
+    # versions 4, 6, 8, 9 should go here.
     V <- matrix(0, nrow = N, ncol = Q_A+1)
     V[,1] <- app_shock[, 1]
     V[,2:(J+1)] <- U_tilde + app_shock[, 2:(J+1)] 
@@ -413,7 +535,8 @@ simulate_counterfactual <- function(dir, endyear, low_score_school, mean_school_
   n_full_enroll_j <- sum(seats_mat<=E_k & seats_mat>0) 
   n_80_enroll_j  <- sum( (seats_mat*.8) <= E_k& seats_mat >0)
   
-  if (preference_model <4){
+  ## CC edit 
+  if (preference_model==0 | preference_model==2 | preference_model==3 | preference_model==5 ){
     # Applications >= seats
     A_k <- list()
     for (k in (1:ncol(stu_type_mat))){
@@ -501,10 +624,15 @@ simulate_counterfactual <- function(dir, endyear, low_score_school, mean_school_
   # threshold for marginal set at std*0.1
   threshold  <- 0.1*sd_diff
   marginal   <- (diff < threshold)*(diff>0)
-  
-  if(preference_model < 4){ # Decentralized
-    app_rate    <- mean(A_any) 
-    offer_rate  <- mean(Z_any[A_any])
+
+  if(preference_model==0 | preference_model==2 | preference_model ==3 | preference_model==5 | preference_model==7 ){ # Decentralized
+    if(preference_model==0 | preference_model==2 | preference_model==3 | preference_model==5){
+      app_rate    <- mean(A_any)
+      offer_rate  <- mean(Z_any[A_any])
+    } else if (preference_model==7){
+      app_rate    <- NaN
+      offer_rate  <- NaN
+    }
     attend_rate <- mean(E_any)
     attend_rate_black <- mean(E_any[X[,2]>0])
     attend_rate_hisp  <- mean(E_any[X[,3]>0])
@@ -668,6 +796,16 @@ run_sim_cf <- function(dir, win_os, nsims, preference_model, endyear, low_score_
                   ifelse(preference_model == 1, "Shutting Down Application Costs", 
                   ifelse(preference_model == 2, "Info Provision", 
                   ifelse(preference_model == 3, "Targeted Info Provision", "DA"))))
+  scenario_str <- ifelse(preference_model == 0, "baseline",
+                  ifelse(preference_model == 1, "Shutting Down Application Costs",
+                  ifelse(preference_model == 2, "Info Provision",
+                  ifelse(preference_model == 3, "Targeted Info Provision",
+                  ifelse(preference_model == 4, "DA",
+                  ifelse(preference_model == 5, "Eliminate Travel Costs",
+                  ifelse(preference_model == 6, "DA + No Travel Costs",
+                  ifelse(preference_model == 7, "Max Allocation",
+                  ifelse(preference_model == 8, "DA + Info Provision",
+                  ifelse(preference_model == 9, "DA + Info Provision + No Travel Costs", NA))))))))))
   
   ids <- seq_len(nsims)
   s <- Sys.time()
@@ -716,7 +854,7 @@ run_sim_cf <- function(dir, win_os, nsims, preference_model, endyear, low_score_
   app_suffix <- ifelse(last_yr == 2013, "_2013", "")
   
   outfile <- paste0(dir, "/estimates/", eta, "_K", K , "_simulate_counterfactual_", 
-                    preference_model,  mean_pi_str, app_suffix, "_maxapp_", maxapps, ".csv")
+                    preference_model,  mean_pi_str, app_suffix, "_maxapp_", maxapps, "_8_9_", ".csv")
   write.csv(df, outfile, row.names = FALSE)
   
   

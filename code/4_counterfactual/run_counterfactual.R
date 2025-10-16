@@ -1,46 +1,72 @@
 ################################################################################
 # Script: run_counterfactual.R 
 # Author: Chris Campos, Ryan Lee
-# Last Edited: Ryan Lee
+# Last Edited: Ryan, October 16, 2025 
 # Estimates counterfactual policy outcomes 
 # 
 # Dependencies:
-
 ################################################################################
 rm(list = ls())
 gc()
 options(error = recover) 
 
-# Use torch for finding equilibrium pi
-use_torch_for_eq <- TRUE
-use_mean_pi      <-  FALSE # Use the mean(pi_br), instead of optimizing each round
-
-
 ################################################################################
 ########################### Preliminaries ######################################
 ################################################################################
-# Set personal library path
-#install.packages(c("haven", "doParallel", "foreach", "numDeriv", "parallel"))
-
-# Establish paths 
-#dir <- "/Volumes/lausd/decentralized_choice"
-# dir <- "Z:/decentralized_choice"
-dir <- "/project/lausd/decentralized_choice"
+# --- Establish paths  ---
+slurm_user <- Sys.getenv("SLURM_JOB_USER") 
+if (slurm_user == "") {
+  # When running code in local device ---
+  # Detect OS and set base directory
+  os_name <- Sys.info()[["sysname"]]
+  if (os_name == "Windows") {
+    dir <- "Z:/decentralized_choice"
+  } else {
+    dir <- "/Volumes/lausd/decentralized_choice"
+  }
+} else {
+  # When running code via Slurm ---
+  # Update path based on Slurm account
+  dir <- "/project/lausd/decentralized_choice"
+  
+  # Update cloned repo path to run code from
+  if (slurm_user == "faculty") {
+    code_dir <- "/project/lausd/decentralized_choice/code/chris/decentralized_choice"
+  } else if (slurm_user == "ryanlee22") {
+    code_dir <- "/project/lausd/decentralized_choice/code/ryan/decentralized_choice"
+  } else {
+    stop(sprintf(
+      "Unrecognized Slurm user: '%s'.\nPlease update `code_dir` to point to your cloned repository on the server.",
+      slurm_user
+    ))
+  }
+}
+# For determining method of parallel computation
 win_os <- (dir =="Z:/decentralized_choice")
 
-# Explicitly point to the Python binary from the module system
-# Note that failing to specify python path can cause issue when reading NPZ file:
+# Use torch for finding equilibrium pi
+use_torch_for_eq <- TRUE
+
+# Use the mean(pi_br), instead of optimizing each round
+use_mean_pi      <-  FALSE 
+
+
+# --- Load library and helper functions ---
+# Point to the Python binary from the module system
+# Failing to specify python path can cause issue when reading NPZ file:
 # reticulate won't convert the numpy array to matrix. 
-
-#reticulate::install_python("3.12")
-
-#use_python("C:/Users/admin/AppData/Local/r-reticulate/r-reticulate/pyenv/pyenv-win/versions/3.12.3/python.exe", required = TRUE) # For windows
-# use_python("C:/Users/Administrator/AppData/Local/Programs/Python/Python312/python.exe", required = TRUE) # For windows
 use_python("/apps/python/3.10/3.10.9/bin/python3", required = TRUE) # For Mercury Cluster Python 3.10
-# use_python("/usr/bin/python3", required = TRUE) # For Mac users?
+reticulate::py_install("numpy")
+reticulate::py_install("numba")
+
+# When running code in your local device:
+# reticulate::install_python("3.12")
+# use_python("/usr/bin/python3", required = TRUE) # Yes, for mac users 
+# use_python("C:/Users/Administrator/AppData/Local/Programs/Python/Python312/python.exe", required = TRUE) # For windows
+# use_python("C:/Users/{USERNAME}/AppData/Local/r-reticulate/r-reticulate/pyenv/pyenv-win/versions/3.12.3/python.exe", required = TRUE) # For windows
 
 
-# Load libraries
+# Load R libraries
 if (use_torch_for_eq){
   library("torch")
   print("Is CUDA available?")
@@ -54,23 +80,20 @@ library(foreach)     # For parallel loops
 library(dplyr)
 library(tidyr)
 library(matrixStats) # row wise, column wise stats
-library(doParallel) # For checking number of cores available
-library(reticulate) # Python
-# reticulate::py_install("numpy")
+library(doParallel)  # For checking number of cores available
+library(reticulate)  # Python
 
 
 # Source helper files 
-source(paste0(dir, "/code/helper/get_data.R"))
-source(paste0(dir,"/code/helper/simulate_counterfactual.r")) 
-source(paste0(dir, "/code/helper/pi_norm_torch.R"))
-source(paste0(dir, "/code/helper/calculate_eq.R"))
-source(paste0(dir, "/code/helper/matching.R"))
+source(paste0(code_dir, "/code/helper/get_data.R"))
+source(paste0(code_dir,"/code/helper/simulate_counterfactual.r")) 
+source(paste0(code_dir, "/code/helper/pi_norm_torch.R"))
+source(paste0(code_dir, "/code/helper/calculate_eq.R"))
+source(paste0(code_dir, "/code/helper/matching.R"))
 
 
-
-
-################################# Log file setup ###############################
-log_file <- paste0(dir,  "/code/4_counterfactual/logs/run_counterfactual_", format(Sys.time(), "%Y_%m_%d_%H_%M_%S"), ".txt")
+# --- Log file setup ---
+log_file <- paste0(code_dir,  "/code/4_counterfactual/logs/run_counterfactual_", format(Sys.time(), "%Y_%m_%d_%H_%M_%S"), ".txt")
 # Initialize log file with timestamp
 write(paste("=== Estimation started at", format(Sys.time(), "%Y-%m-%d %H:%M:%S"), "==="), 
       file = log_file)
@@ -86,7 +109,7 @@ log_message <- function(msg) {
 }
 log_message("Starting counterfactual estimation...")
 
-# Set parameters we will use in counterfactuals 
+# --- Set parameters we will use in counterfactuals ---
 maxapps         <- 1
 nsims           <- 100
 
@@ -111,6 +134,11 @@ print(paste("K:", K))
 seats <- read_dta(paste0(dir, "/data/prog_seats_2004_", last_yr, ".dta"))
 # Load structural sample
 rawdata <- read_dta(paste0(dir, "/data/structural_data_2004_", last_yr, ".dta"))
+rawdata$districtdum2 <- ifelse(rawdata$localdistrictcode=="E", 1, 0)
+rawdata$districtdum3 <- ifelse(rawdata$localdistrictcode=="NE",1, 0)
+rawdata$districtdum4 <- ifelse(rawdata$localdistrictcode=="NW",1, 0)
+rawdata$districtdum5 <- ifelse(rawdata$localdistrictcode=="S",1, 0)
+rawdata$districtdum6 <- ifelse(rawdata$localdistrictcode=="W",1, 0)
 
 if (accuracy){
   # Load sample used for fitting MLE model 
@@ -152,7 +180,7 @@ rawdata <- rawdata %>%
   inner_join(outcome_fes_ela, by = c("studentpseudoid" = "studentpseudoid", "endyear" = "endyear"))
 rawdata <- rawdata %>% group_by(preferredlocationcode, endyear) %>%
   mutate(mean_school_scores = mean(lag_math, na.rm=TRUE))
-rawdata$low_score_school <- ifelse(rawdata$mean_school_scores < -0.3, 1, 0)
+rawdata$low_score_school <- ifelse(rawdata$mean_school_scores < -0, 1, 0)
 white <- rawdata$white
 asian <- rawdata$asian
 phbao <- 1- rawdata$white
@@ -191,6 +219,15 @@ storage.mode(pi_i) <- "numeric"
 X <- scale(X, center = TRUE, scale = FALSE)
 Q_X <- ncol(X)
 
+# Additional variables used for the outcome model
+X_Y <- as.matrix(cbind( rawdata$missing_ela, rawdata$missing_math,
+                       rawdata$districtdum2, 
+                       rawdata$districtdum3,
+                       rawdata$districtdum4,
+                       rawdata$districtdum5,
+                       rawdata$districtdum6))
+X_Y <- scale(X_Y, center = TRUE, scale = FALSE)
+
 # Distance variables:
 X_2 <- cbind(1, X)  # Add an intercept
 Q_D <- ncol(X_2)
@@ -215,6 +252,7 @@ Q_X <- ncol(X)
 # D is N × Q_D × J, so Q_D = dim(D)[2]
 Q_D <- dim(D)[2]
 Q_W <- ncol(W)
+
 
 ################################################################################
 ##################### Estimated Model Parameters ###############################
@@ -281,16 +319,16 @@ if(K==3){
 }
 # Outcome model: math
 alpha_j_math <- outcome_ates_math$estimate 
-alpha_0_X_math <- outcome_betas_math$est_math[1:11]
-alpha_m_X_math <- outcome_betas_math$est_math[12:23]
-alpha_0_math <- outcome_betas_math$est_math[24]
-alpha_m_math <- outcome_betas_math$est_math[25]
+alpha_0_X_math <- outcome_betas_math$est_math[1:13]
+alpha_m_X_math <- outcome_betas_math$est_math[14:30]
+alpha_0_math <- outcome_betas_math$est_math[32]
+alpha_m_math <- outcome_betas_math$est_math[31]
 # Outcome model: ela
 alpha_j_ela <- outcome_ates_ela$estimate
-alpha_0_X_ela <- outcome_betas_ela$est_ela[1:11]
-alpha_m_X_ela <- outcome_betas_ela$est_ela[12:23]
-alpha_0_ela <- outcome_betas_ela$est_ela[24]
-alpha_m_ela <- outcome_betas_ela$est_ela[25]
+alpha_0_X_ela <- outcome_betas_ela$est_ela[1:13]
+alpha_m_X_ela <- outcome_betas_ela$est_ela[14:30]
+alpha_0_ela <- outcome_betas_ela$est_ela[32]
+alpha_m_ela <- outcome_betas_ela$est_ela[31]
 
 outcome_params <- list(
   alpha_j_math = alpha_j_math,
@@ -361,18 +399,18 @@ exog <- list(
   last_yr          = last_yr
 )
 
-
-source(paste0(dir,"/code/helper/simulate_counterfactual.r")) 
-source(paste0(dir, "/code/helper/pi_norm_torch.R"))
-source(paste0(dir, "/code/helper/calculate_eq.R"))
-
 # Repeat Monte Carlo draws
 # p_mod == 0 <- baseline
 # p_mod == 1 <- No application cost
 # p_mod == 2 <- Info provision
 # p_mod == 3 <- Targeted info provision
 # p_mod == 4 <- Unified enrollments
-for (p_mod in c(3)){
+# p_mod == 5 <- remove travel costs 
+# p_mod == 6 <- DA + no travel costs  
+# p_mod == 7 <- optimal sorting on match quality 
+# p_mod == 8 <- Unified Enrollment (DA) + Info provision 
+# p_mod == 9 <- Unified Enrollment (DA) + no travel costs + Info Provision
+for (p_mod in c(0)){
   run_sim_cf(dir, win_os, nsims, p_mod, endyear, low_score_school, mean_school_scores, 
              phbao, asian, white, 
              yearfe, blockfe, outcome_fes, 
