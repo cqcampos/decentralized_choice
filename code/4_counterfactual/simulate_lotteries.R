@@ -258,14 +258,13 @@ simulate_once <- function(sim,
       Y_math   = Y_math[student],
       Y0_ela   = Y_0_ela[student],
       Y1_ela   = Y_1_ela[student],
-      Y_ela    = Y_ela[student],
-      theta_i = theta_i[student]
+      Y_ela    = Y_ela[student]
     ) |>
     dplyr::select(sim, student, endyear, phbao, school, school_code,
                   cell_id, seats, apps, oversubscribed,
                   applied, offered, enrolled, 
                   Y_math, Y0_math, Y1_math, 
-                  Y_ela, Y0_ela, Y1_ela, theta_i )
+                  Y_ela, Y0_ela, Y1_ela)
   
   
   if (restrict_to_oversubscribed) {
