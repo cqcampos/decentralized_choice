@@ -85,7 +85,7 @@ simulate_counterfactual <- function(dir, endyear, low_score_school, mean_school_
   if( preference_model==1 | preference_model==2 | preference_model==3 | preference_model==5){
     
     if (!use_mean_pi){
-      hot_start_path <- paste0(dir, "estimates/", eta, "_K", K,  "_init_param_preference_model_", preference_model,"_", last_yr, ".csv") 
+      hot_start_path <- paste0(dir, "/estimates/", eta, "_K", K,  "_init_param_preference_model_", preference_model,"_", last_yr, ".csv") 
       if (file.exists(hot_start_path)){
         print("Using previously optimized best-response as a starting value")
         param_init <- read.csv(hot_start_path)
@@ -304,40 +304,23 @@ simulate_counterfactual <- function(dir, endyear, low_score_school, mean_school_
     # This is counterfactual where students are optimally sorted based on match quality
     # Implementation of maxAllocation from outcome_analysis.do
     
-
-    
-
-    Y_0_math <- X_outcome %*% (as.matrix(alpha_0_X_math))  + theta * alpha_0_math + 
-      yearfe + blockfe + res_ability_math0
-    
-    res_ability_ela1 <- rnorm(N, 0, 1)
-    res_ability_ela0 <- rnorm(N, 0, 1)
-    Y_1_ela <-  matrix(rep(alpha_j_ela, times = N), nrow = N, byrow = TRUE) +
-      as.vector(X_outcome %*% (as.matrix(alpha_0_X_ela)) + theta * (alpha_0_ela + alpha_m_ela) +
-                  X_outcome_inter %*% (as.matrix(alpha_m_X_ela)) + yearfe_ela + blockfe_ela +
-                  res_ability_ela1)
-    Y_1_ela <- rowMeans(Y_1_ela) # average across j
-    Y_0_ela <- X_outcome %*% (as.matrix(alpha_0_X_ela)) + theta * alpha_0_ela + 
-      yearfe_ela + blockfe_ela + res_ability_ela0
-    
-    
     # Step 1: Calculate potential outcomes for each student-school pair
-    X_outcome <- cbind(X[,1:2], X[,4], X[,3], asian, 
-                       X[, 5:7], X[,9], X[8], X[,12], X_Y[,1:2])
-    X_outcome_inter <- cbind(X_outcome[, 1:8], X[,10], X_outcome[,9:11],
-                             X_Y[,3:7]) # Add median income te hetero and region hetero
+    X_outcome <- cbind(X[,1:9], X[,12])
+    X_outcome <- cbind(X_outcome[,1:4], asian, X_outcome[,5:10])
+    X_outcome_inter <- cbind(X[,1:10], X[,12])
+    X_outcome_inter <- cbind(X_outcome_inter[,1:4], asian, X_outcome_inter[,5:11])
     
-    res_ability_math1 <- rnorm(N, 0, 1)
-    res_ability_math0 <- rnorm(N,0,1)
+    res_ability_math <- rnorm(N, 0, 1)
     
     # Y_1_j for each school j (N x J matrix)
-    Y_1_j_math <-  matrix(rep(alpha_j_math, times = N), nrow = N, byrow = TRUE) +
-      as.vector(X_outcome %*% (as.matrix(alpha_0_X_math) )  + theta * (alpha_0_math +alpha_m_math) +
-                  X_outcome_inter %*% (as.matrix(alpha_m_X_math)) + yearfe + blockfe +
-                  res_ability_math1)
+    Y_1_j_math <- matrix(rep(alpha_j_math, times = N), nrow = N, byrow = TRUE) +
+      as.vector(X_outcome %*% as.matrix(alpha_0_X_math) + theta * (alpha_0_math + alpha_m_math) +
+                  X_outcome_inter %*% as.matrix(alpha_m_X_math) + yearfe + blockfe + res_ability_math)
     
-    Y_0_math <- X_outcome %*% (as.matrix(alpha_0_X_math))  + theta * alpha_0_math + 
-      yearfe + blockfe + res_ability_math0
+    # Y_0 (no magnet)
+    Y_0_math <- X_outcome %*% as.matrix(alpha_0_X_math) + theta * alpha_0_math + 
+      yearfe + blockfe + res_ability_math
+    
     # Match quality for each student-school pair (N x J matrix)
     match_quality <- Y_1_j_math - as.vector(Y_0_math)
     
@@ -448,7 +431,7 @@ simulate_counterfactual <- function(dir, endyear, low_score_school, mean_school_
     
     # Path where intermediary data for running DA are stored
     py_inputdir <- file.path(dir, "data/intermediate/counterfactual_matching")
-    py_path <- file.path(code_dir, "code/helper/DA.py")
+    py_path <- file.path(dir, "code/helper/DA.py")
     
     # Run DA
     matched <- assign_da(V, stu_type, seats_eq, py_inputdir, py_path, round)
@@ -582,40 +565,49 @@ simulate_counterfactual <- function(dir, endyear, low_score_school, mean_school_
   # 14. Simulate outcomes Y0 and Y1
   # Y1 and Y0
   # median income not estimated because of fixed effects
-  # Discrepancies in the order of variables so have to ensure this is the right arrangement 
-  X_outcome <- cbind(X[,1:2], X[,4], X[,3], asian, 
-                     X[, 5:7], X[,9], X[8], X[,12], X_Y[,1:2])
-  X_outcome_inter <- cbind(X_outcome[, 1:8], X[,10], X_outcome[,9:11],
-                           X_Y[,3:7]) # Add median income te hetero and region hetero
+  X_outcome <- cbind(X[,1:9], X[,12])
+  X_outcome <- cbind(X_outcome[,1:4], asian, X_outcome[,5:10])
+  X_outcome_inter <- cbind(X[,1:10], X[,12]) # add interaction effect for median income 
+  X_outcome_inter <- cbind(X_outcome_inter[,1:4], asian, X_outcome_inter[,5:11])
   
-  res_ability_math1 <- rnorm(N, 0, 1)
-  res_ability_math0 <- rnorm(N,0,1)
+  res_ability_math <- rnorm(N, 0, 1)
   Y_1_math <-  matrix(rep(alpha_j_math, times = N), nrow = N, byrow = TRUE) +
-    as.vector(X_outcome %*% (as.matrix(alpha_0_X_math) )  + theta * (alpha_0_math +alpha_m_math) +
+    as.vector(X_outcome %*% (as.matrix(alpha_0_X_math)) + theta * (alpha_0_math +alpha_m_math) +
                 X_outcome_inter %*% (as.matrix(alpha_m_X_math)) + yearfe + blockfe +
-                res_ability_math1)
+                res_ability_math)
   Y_1_math <- rowMeans(Y_1_math) # average across j
   Y_0_math <- X_outcome %*% (as.matrix(alpha_0_X_math))  + theta * alpha_0_math + 
-    yearfe + blockfe + res_ability_math0
+    yearfe + blockfe + res_ability_math
   
-  res_ability_ela1 <- rnorm(N, 0, 1)
-  res_ability_ela0 <- rnorm(N, 0, 1)
+  res_ability_ela <- rnorm(N, 0, 1)
   Y_1_ela <-  matrix(rep(alpha_j_ela, times = N), nrow = N, byrow = TRUE) +
     as.vector(X_outcome %*% (as.matrix(alpha_0_X_ela)) + theta * (alpha_0_ela + alpha_m_ela) +
                 X_outcome_inter %*% (as.matrix(alpha_m_X_ela)) + yearfe_ela + blockfe_ela +
-                res_ability_ela1)
+                res_ability_ela)
   Y_1_ela <- rowMeans(Y_1_ela) # average across j
   Y_0_ela <- X_outcome %*% (as.matrix(alpha_0_X_ela)) + theta * alpha_0_ela + 
-    yearfe_ela + blockfe_ela + res_ability_ela0
+    yearfe_ela + blockfe_ela + res_ability_ela
   
   
   
   # 15. Realized outcome & welfare metrics
+  #print(dim(S))
+  #print(dim(Y_1))
+  #print(head(S))
   E_enroll <- rowSums(E_new[,2:(J+1)] >0)
+  #print(S_mag)
+  
   Y_math       <- Y_0_math + E_enroll*(Y_1_math - Y_0_math)
   Y_ela        <- Y_0_ela + E_enroll*(Y_1_ela - Y_0_ela)
   beta_math    <- Y_1_math - Y_0_math
   beta_ela     <- Y_1_ela - Y_0_ela
+  
+  #print(Y)
+  #print(beta)
+  
+  
+  #print(head(beta))
+  
   
   # 16. Compute rates and AMTE
   #print(head(A))
@@ -633,7 +625,7 @@ simulate_counterfactual <- function(dir, endyear, low_score_school, mean_school_
   threshold  <- 0.1*sd_diff
   marginal   <- (diff < threshold)*(diff>0)
 
-  if(preference_model==0 | preference_model==1 | preference_model==2 | preference_model ==3 | preference_model==5 | preference_model==7 ){ # Decentralized
+  if(preference_model==0 | preference_model==2 | preference_model ==3 | preference_model==5 | preference_model==7 ){ # Decentralized
     if(preference_model==0 | preference_model==2 | preference_model==3 | preference_model==5){
       app_rate    <- mean(A_any)
       offer_rate  <- mean(Z_any[A_any])
@@ -646,7 +638,6 @@ simulate_counterfactual <- function(dir, endyear, low_score_school, mean_school_
     attend_rate_hisp  <- mean(E_any[X[,3]>0])
     attend_rate_white <- mean(E_any[X[,4]>0])
     attend_rate_asian <- mean(E_any[asian>0])
-    attend_rate_pov <- mean(E_any[X[,5]>0])
     
 
   } else{ # Centralized
@@ -682,13 +673,9 @@ simulate_counterfactual <- function(dir, endyear, low_score_school, mean_school_
     n_white              <- sum(X[,4] > 0)
     attend_rate_white    <- n_choice_offer_white / n_white 
     
-    n_choice_offer_asian <- sum(match_id[asian > 0,]$matched_school_id > 1)
-    n_asian              <- sum(X[asian>0] > 0)
+    n_choice_offer_asian <- sum(match_id[X[,5] > 0,]$matched_school_id > 1)
+    n_asian              <- sum(X[,5] > 0)
     attend_rate_asian    <- n_choice_offer_asian / n_asian 
-    
-    n_choice_offer_pov <- sum(match_id[X[,5] > 0,]$matched_school_id > 1)
-    n_pov              <- sum(X[,5] > 0)
-    attend_rate_pov    <- n_choice_offer_pov / n_pov
   }
   
   #print(app_rate)
@@ -753,11 +740,10 @@ simulate_counterfactual <- function(dir, endyear, low_score_school, mean_school_
               Y_pov_ela = Y_pov_ela,
               Y_nonpov_ela = Y_nonpov_ela,
               Y_asian_ela = Y_asian_ela  ,
-              attend_rate_black = attend_rate_black,
+              attned_rate_black = attend_rate_black,
               attend_rate_hisp  = attend_rate_hisp,
               attend_rate_white = attend_rate_white,
               attend_rate_asian = attend_rate_asian,
-              attend_rate_pov   = attend_rate_pov,
               n_over_sub_j      = n_over_sub_j,
               n_80_enroll_j     = n_80_enroll_j,
               n_full_enroll_j   = n_full_enroll_j
@@ -868,7 +854,7 @@ run_sim_cf <- function(dir, win_os, nsims, preference_model, endyear, low_score_
   app_suffix <- ifelse(last_yr == 2013, "_2013", "")
   
   outfile <- paste0(dir, "/estimates/", eta, "_K", K , "_simulate_counterfactual_", 
-                    preference_model,  mean_pi_str, app_suffix, "_maxapp_", maxapps, ".csv")
+                    preference_model,  mean_pi_str, app_suffix, "_maxapp_", maxapps, "_8_9_", ".csv")
   write.csv(df, outfile, row.names = FALSE)
   
   

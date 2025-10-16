@@ -631,7 +631,7 @@ likelihood_K_mixture <- function(omega, data, grad = FALSE, log_file=NULL, poste
       #theta_r[ , , k] <- theta_mat
       # Calculate posterior weights
       log_lik <- log(likelihood_sim)
-      log_weights <- log_lik   + log_prior_mat 
+      log_weights <- log_lik   
       
       # Normalize weights
       max_log_w <- apply(log_weights, 1, max)  
