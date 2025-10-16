@@ -1,6 +1,5 @@
 #!/bin/bash
 # Description: Wrapper to submit Slurm jobs with account and user-specific email
-
 set -euo pipefail
 
 # --- Configuration ---
