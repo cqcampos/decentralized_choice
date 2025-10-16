@@ -2,11 +2,11 @@
   
 #SBATCH --account=faculty
 #SBATCH --partition=highmem
-#SBATCH --mem=384GB       
+#SBATCH --mem=280GB       
 #SBATCH --cpus-per-task=8
 #SBATCH --time=1-00:00:00
 #SBATCH --job-name=post_estimation 
-#SBATCH --output=/project/lausd/decentralized_choice/code/2_structural_estimation/logs/post_estimation_%j.log  # %j will be replaced by the job ID
+#SBATCH --output=/project/lausd/decentralized_choice/logs/post_estimation_%j.log  # %j will be replaced by the job ID
 #SBATCH --nodelist=mcn62
 
 
