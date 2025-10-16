@@ -52,19 +52,6 @@ use_mean_pi      <-  FALSE
 
 
 # --- Load library and helper functions ---
-# Point to the Python binary from the module system
-# Failing to specify python path can cause issue when reading NPZ file:
-# reticulate won't convert the numpy array to matrix. 
-use_python("/apps/python/3.10/3.10.9/bin/python3", required = TRUE) # For Mercury Cluster Python 3.10
-reticulate::py_install("numpy")
-reticulate::py_install("numba")
-
-# When running code in your local device:
-# reticulate::install_python("3.12")
-# use_python("/usr/bin/python3", required = TRUE) # Yes, for mac users 
-# use_python("C:/Users/Administrator/AppData/Local/Programs/Python/Python312/python.exe", required = TRUE) # For windows
-# use_python("C:/Users/{USERNAME}/AppData/Local/r-reticulate/r-reticulate/pyenv/pyenv-win/versions/3.12.3/python.exe", required = TRUE) # For windows
-
 
 # Load R libraries
 if (use_torch_for_eq){
@@ -82,6 +69,19 @@ library(tidyr)
 library(matrixStats) # row wise, column wise stats
 library(doParallel)  # For checking number of cores available
 library(reticulate)  # Python
+
+# Point to the Python binary from the module system
+# Failing to specify python path can cause issue when reading NPZ file:
+# reticulate won't convert the numpy array to matrix. 
+use_python("/apps/python/3.10/3.10.9/bin/python3", required = TRUE) # For Mercury Cluster Python 3.10
+reticulate::py_install("numpy")
+reticulate::py_install("numba")
+
+# When running code in your local device:
+# reticulate::install_python("3.12")
+# use_python("/usr/bin/python3", required = TRUE) # Yes, for mac users 
+# use_python("C:/Users/Administrator/AppData/Local/Programs/Python/Python312/python.exe", required = TRUE) # For windows
+# use_python("C:/Users/{USERNAME}/AppData/Local/r-reticulate/r-reticulate/pyenv/pyenv-win/versions/3.12.3/python.exe", required = TRUE) # For windows
 
 
 # Source helper files 
@@ -410,7 +410,7 @@ exog <- list(
 # p_mod == 7 <- optimal sorting on match quality 
 # p_mod == 8 <- Unified Enrollment (DA) + Info provision 
 # p_mod == 9 <- Unified Enrollment (DA) + no travel costs + Info Provision
-for (p_mod in c(0)){
+for (p_mod in c(1)){
   run_sim_cf(dir, win_os, nsims, p_mod, endyear, low_score_school, mean_school_scores, 
              phbao, asian, white, 
              yearfe, blockfe, outcome_fes, 

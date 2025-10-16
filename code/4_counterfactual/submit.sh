@@ -38,3 +38,5 @@ else
       sbatch --account="$ACCOUNT" \
         <(sed '1s/^\xEF\xBB\xBF//; s/\r$//' counterfactual.sh)
 fi
+
+squeue --user "$USER_NAME"
