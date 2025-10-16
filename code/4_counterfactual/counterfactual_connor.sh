@@ -6,7 +6,7 @@
 #SBATCH --mem=600GB
 #SBATCH --time=4-00:00:00
 #SBATCH --job-name=magnet_model
-#SBATCH --output=/project/lausd/decentralized_choice/code/4_counterfactual/logs/counterfactual_%j.log  # %j will be replaced by the job ID
+#SBATCH --output=/project/lausd/decentralized_choice/code/chris/decentralized_choice/code/4_counterfactual/logs/counterfactual_%j.log  # %j will be replaced by the job ID
 #SBATCH --mail-type=BEGIN,END,FAIL  # Email notifications
 #SBATCH --mail-user=connor.fogal@chicagobooth.edu  # Replace with your email
 
