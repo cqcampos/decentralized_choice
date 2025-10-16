@@ -20,7 +20,7 @@ options(error = recover)
 #install.packages(c("haven", "doParallel", "foreach", "numDeriv", "parallel"))
 
 # Establish paths 
-dir <- "/Volumes/lausd/decentralized_choice"
+dir <- "/Volumes/lausd/decentralized_choice/code/chris/decentralized_choice"
 # dir <- "Z:/decentralized_choice"
 #dir <- "/project/lausd/decentralized_choice"
 win_os <- (dir =="Z:/decentralized_choice")
@@ -339,7 +339,7 @@ panel <- simulate_lottery_panel(
   exog    = exog,
   params  = params,
   out_file = paste0(dir, "/estimates/sim_lottery_panel.csv"),
-  restrict_to_oversubscribed = TRUE,
+  restrict_to_oversubscribed = FALSE,
   scale_app = 0.05,
   seed = 12345
 )

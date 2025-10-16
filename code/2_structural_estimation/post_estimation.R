@@ -19,11 +19,12 @@ rm(list = ls())
 gc()
 
 dir <- "/project/lausd/decentralized_choice"
+interdir <- "/code/chris/decentralized_choice/code" # this must be edited if running for main replication 
 # dir <- "Z:/decentralized_choice"
 setwd(dir)
 
 # Log file setup
-log_file <- paste0(getwd(), "/code/2_structural_estimation/logs", "/post_estimation_", format(Sys.time(), "%Y_%m_%d_%H_%M_%S"), ".txt")
+log_file <- paste0(dir, interdir, "/2_structural_estimation/logs", "/post_estimation_", format(Sys.time(), "%Y_%m_%d_%H_%M_%S"), ".txt")
 # Initialize log file with timestamp
 write(paste("=== Estimation started at", format(Sys.time(), "%Y-%m-%d %H:%M:%S"), "==="), 
       file = log_file)
@@ -63,7 +64,7 @@ use_python("/apps/python/3.10/3.10.9/bin/python3", required = TRUE) # For Mercur
 
 # Print Python config to confirm
 cat("Using Python from:", py_config()$python, "\n")
-source(paste0(dir, "/code/helper/read_npz.R"))
+source(paste0(dir, interdir, "/helper/read_npz.R"))
 
 
 ################################################################################
@@ -76,10 +77,10 @@ log_message(paste("Using", num_cores, "cores for parallel processing"))
 
 
 # Source helper files 
-source(paste0(dir, "/code/helper/get_data.R"))
-source(paste0(dir, "/code/helper/get_pi.R"))
-source(paste0(dir, "/code/helper/likelihood_mixture_types.R"))
-source(paste0(dir, "/code/helper/names.R"))
+source(paste0(dir, interdir, "/helper/get_data.R"))
+source(paste0(dir, interdir, "/helper/get_pi.R"))
+source(paste0(dir, interdir, "/helper/likelihood_mixture_types.R"))
+source(paste0(dir, interdir, "/helper/names.R"))
 
 # Basic setup
 last_yr_2013  <- TRUE               # If true, uses 2004-2013 estimation results
