@@ -34,8 +34,8 @@ program define main
 
 	*peer_effects
 
-	model_validate, eta("eta_out") homog("hetero") types(3) subject("math") blockfe("TRUE") app_2013(1)
-	
+*	model_validate, eta("eta_out") homog("hetero") types(3) subject("math") blockfe("TRUE") app_2013(1)
+
 	model_lates ,  eta("eta_out") homog("hetero") types(3) subject("math") blockfe("TRUE") app_2013(1)
 end 
 
@@ -49,7 +49,7 @@ end
 capture program drop set_paths
 program define set_paths
 
-	if "`c(os)'"=="MacOSX" & "`c(username)'"=="cqcampos"{
+	if "`c(os)'"=="MacOSX" & "`c(username)'"=="ccampos"{
 		global ROOT "/Volumes/lausd/decentralized_choice"
 		global BUILD "/Volumes/lausd/build/output/data"
     	global MAGNET "/Volumes/lausd/magnet"
@@ -588,8 +588,9 @@ syntax, [eta(string) homog(string) types(int 1) subject(string) blockfe(string) 
 	drop mu_theta magnet theta_percentile overall_percentile 
 	rename (y0 y1 y delta matcheffect) (y0_ela y1_ela y_ela delta_ela matcheffect_ela)
 	rename y1_novam y1_novam_ela
+	rename y2 y2_ela 
 	rename yhat yhat_ela
-	rename yhat_vam yhat_vam_ela
+
 	tempfile tempela 
 	save `tempela'
 	use "$DTAFINAL/lotteries.dta", clear
@@ -599,7 +600,7 @@ syntax, [eta(string) homog(string) types(int 1) subject(string) blockfe(string) 
 	*keep if cellsize >=20
 	drop cellsize 
 	bys lottery_ID: gen cellsize = _N
-	keep if cellsize >=100
+	keep if cellsize >=0
 
 	* make lottery offers real quick
 	levelsof lottery_ID , local(lotteries) clean
@@ -613,36 +614,42 @@ syntax, [eta(string) homog(string) types(int 1) subject(string) blockfe(string) 
 	merge 1:1 studentpseudoid endyear using `temp', keep(1 3) nogen
 	merge 1:1 studentpseudoid endyear using `tempela', keep(1 3) nogen
 	rename offer_magnet out_offer 
-	ivreg2 avg_Fmath (y = offer_*) i.lottery_ID , partial(i.lottery_ID) robust
-	stop;
+	ivreghdfe avg_Fmath (y = offer_*)  , absorb(lottery_ID) robust
+
 	gen sample_math = e(sample)
 	tempfile math_rf math_fs
-	reghdfe avg_Fmath offer_* if sample_math==1, absorb(lottery_ID) cluster(lottery_ID)
+	reghdfe avg_Fmath offer_*   if sample_math==1, absorb(lottery_ID) cluster(lottery_ID)
 	parmest, saving(`math_rf', replace)
 	reghdfe y offer_* if sample_math==1, absorb(lottery_ID) cluster(lottery_ID)
 	parmest, saving(`math_fs', replace)
 	tempfile ela_rf ela_fs
-	ivreg2 avg_Fela (y_ela = offer_*) i.lottery_ID , partial(i.lottery_ID) robust
+	ivreghdfe avg_Fela (y_ela = offer_*) , absorb(lottery_ID) robust
+
 	gen sample_ela = e(sample)
-	reghdfe avg_Fela offer_* if sample_ela==1, absorb(lottery_ID) cluster(lottery_ID)
+	reghdfe avg_Fela offer_*   if sample_ela==1, absorb(lottery_ID) cluster(lottery_ID)
 	parmest, saving(`ela_rf', replace)
-	reghdfe y_ela offer_* if sample_ela==1, absorb(lottery_ID) cluster(lottery_ID)
+	reghdfe y_ela offer_*   if sample_ela==1, absorb(lottery_ID) cluster(lottery_ID)
 	parmest, saving(`ela_fs', replace)
 
 	use `math_rf', clear
-	drop if regexm(parm, "o.offer_") | regexm(parm, "cons")
+	drop if regexm(parm, "o.offer_") | regexm(parm, "cons") 
+	keep if regexm(parm, "offer")
 	keep estimate parm stderr 
 	gen subject = "math"
 	gen type = "rf"
 	save `math_rf', replace
 	use `math_fs', clear
 	drop if regexm(parm, "o.offer_") | regexm(parm, "cons")
+	keep if regexm(parm, "offer")
+
 	keep estimate parm stderr 
 	gen subject = "math"
 	gen type = "fs"
 	save `math_fs', replace
 	use `ela_rf', clear
 	drop if regexm(parm, "o.offer_") | regexm(parm, "cons")
+	keep if regexm(parm, "offer")
+
 	keep estimate parm stderr 
 	gen subject = "ela"
 	gen type = "rf"
@@ -658,7 +665,19 @@ syntax, [eta(string) homog(string) types(int 1) subject(string) blockfe(string) 
 	append using `math_fs'
 	append using `ela_rf'
 	append using `ela_fs'
-	stop;
+	reshape wide estimate stderr , i(parm subject) j(type) string
+	reg estimaterf estimatefs [aweight=1/stderrfs], vce(cluster parm)
+	local slope: dis %05.3f _b[estimatefs]
+	local se: dis %05.3f _se[estimatefs]
+	twoway (scatter estimaterf estimatefs  if subject=="ela" , color(gs10)) ///
+		(scatter estimaterf estimatefs  if subject=="math" , color(black)) ///
+		 (function y = x , range(-2 2) color(maroon) lpattern(dash)) , ///
+		legend(off) ///
+		xtitle("First Stage") ytitle("Reduced Form") ///
+		note("Slope = `slope' (`se')")
+	graph export $figures/model_viv.pdf, replace 
+
+
 end 
 
 capture program drop model_lates 
@@ -680,6 +699,7 @@ syntax, [eta(string) homog(string) types(int 1) subject(string) blockfe(string) 
 	rename (y0 y1 y delta matcheffect) (y0_ela y1_ela y_ela delta_ela matcheffect_ela)
 	rename y1_novam y1_novam_ela
 	rename yhat yhat_ela
+	
 	tempfile tempela 
 	save `tempela'
 	use "$DTAFINAL/lotteries.dta", clear
@@ -731,19 +751,19 @@ syntax, [eta(string) homog(string) types(int 1) subject(string) blockfe(string) 
 
 		* now estimate again on the model-based outcomes 
 		* Math RF
-		ivreghdfe yhat above_cutoff   if `d'==1 & endyear<=2013, cluster( lottery_ID) absorb(lottery_ID)
+		ivreghdfe y above_cutoff   if `d'==1 & endyear<=2013, cluster( lottery_ID) absorb(lottery_ID)
 		local rf_math: dis %05.3f _b[above_cutoff]
 		local rf_math_se: dis %05.3f _se[above_cutoff]
 		* Math IV
-		ivreghdfe yhat (magnet_enroll_date = above_cutoff) if `d'==1 & endyear<=2013, absorb(lottery_ID) cluster(lottery_ID)
+		ivreghdfe y (magnet_enroll_date = above_cutoff) if `d'==1 & endyear<=2013, absorb(lottery_ID) cluster(lottery_ID)
 		local iv_math: dis %05.3f _b[magnet_enroll_date]
 		local iv_math_se: dis %05.3f _se[magnet_enroll_date]
 		* ELA RF
-		ivreghdfe yhat_ela above_cutoff   if `d'==1 & endyear<=2013, cluster(lottery_ID) absorb(lottery_ID)
+		ivreghdfe y_ela above_cutoff   if `d'==1 & endyear<=2013, cluster(lottery_ID) absorb(lottery_ID)
 		local rf_ela: dis %05.3f _b[above_cutoff]
 		local rf_ela_se: dis %05.3f _se[above_cutoff]
 		* ELA IV
-		ivreghdfe yhat_ela (magnet_enroll_date = above_cutoff)  if `d'==1 & endyear<=2013, absorb(lottery_ID) cluster(lottery_ID)
+		ivreghdfe y_ela (magnet_enroll_date = above_cutoff)  if `d'==1 & endyear<=2013, absorb(lottery_ID) cluster(lottery_ID)
 		local iv_ela: dis %05.3f _b[magnet_enroll_date]
 		local iv_ela_se: dis %05.3f _se[magnet_enroll_date]
 
@@ -759,7 +779,29 @@ syntax, [eta(string) homog(string) types(int 1) subject(string) blockfe(string) 
 
 		local i = `i' + 1
 	}
-	matrix list results 
 
+	matrix list results 
+	clear 
+	svmat results 
+
+	rename results1 rf_math
+	rename results2 rf_se_math 
+	rename results3 iv_math
+	rename results4 iv_se_math
+	rename results5 rf_ela
+	rename results6 rf_se_ela
+	rename results7 iv_ela
+	rename results8 iv_se_ela
+	rename results9 rf_cf_math 
+	rename results10 rf_se_cf_math
+	rename results11 iv_cf_math
+	rename results12 iv_se_cf_math
+	rename results13 rf_cf_ela
+	rename results14 rf_se_cf_ela
+	rename results15 iv_cf_ela
+	rename results16 iv_se_cf_ela
+	
+	gen i =_n
+	reshape long rf_ rf_se_ iv_ iv_se rf_cf_ rf_se_cf iv_cf_ iv_se_cf_ , string i(i)
 end 
 main 
