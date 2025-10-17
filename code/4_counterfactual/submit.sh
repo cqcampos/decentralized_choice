@@ -6,12 +6,12 @@ set -euo pipefail
 SEND_EMAIL=false   # override at runtime: SEND_EMAIL=false bash submit.sh
 
 # --- Context ---
-ACCOUNT=${SLURM_JOB_ACCOUNT:-pi-cqcampos}
+ACCOUNT=${SLURM_JOB_ACCOUNT:-faculty}
 USER_NAME=${USER:-$(whoami)}
 
 # --- Map usernames/accounts to email addresses ---
 case "$ACCOUNT:$USER_NAME" in
-  faculty:*)      EMAIL_USER="Christopher.Campos@chicagobooth.edu" ;;
+  cqcampos:*)      EMAIL_USER="Christopher.Campos@chicagobooth.edu" ;;
   *:atumturk)     EMAIL_USER="Ayse.Tumturk@chicagobooth.edu" ;;
   *:cfogal)       EMAIL_USER="Connor.Fogal@chicagobooth.edu" ;;
   *:ryanlee22)    EMAIL_USER="Ryan.Lee2@chicagobooth.edu" ;;

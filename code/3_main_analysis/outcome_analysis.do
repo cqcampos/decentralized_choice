@@ -30,23 +30,26 @@ program define main
     *event_study, type("block")
 
 
-
+    
     * Table 4 
     forval k = 3/3{
     	foreach c in  "eta_out" {
 		foreach sbjt in "math" "ela"{
-			demand_for_effectiveness, eta("`c'") homog("hetero") types(`k') subject("`sbjt'") app_2013(1)
+		*	demand_for_effectiveness, eta("`c'") homog("hetero") types(`k') subject("`sbjt'") app_2013(1)
 		
 			
-		 	cf_regressions, eta("`c'") homog("hetero") types(`k') subject("`sbjt'") blockfe("TRUE") app_2013(1)
+		* 	cf_regressions, eta("`c'") homog("hetero") types(`k') subject("`sbjt'") blockfe("TRUE") app_2013(1)
             
 		}
-		*cf_regressions_noncog, eta("`c'") homog("hetero") types(`k')  blockfe("TRUE") app_2013(1)
+
         
 		cf_table, eta("`c'") homog("hetero") types(`k') blockfe("TRUE") app_2013(1)
-        
+
+        cf_table_robust, eta("`c'") homog("hetero") types(`k') blockfe("TRUE") app_2013(1)   
 	}
     }
+    stop;
+    *teHistogram, eta("eta_out") homog("hetero") types(3) blockfe("TRUE") app_2013(1)
     *counterfactuals
 
 
@@ -475,8 +478,8 @@ syntax, [eta(string) homog(string) types(int 1) subject(string) blockfe(string) 
 
     drop if missing(mu_theta)
 
-    * Variables that we will estimate main effects and match effects for 
-    local vars "female black white hispanic asian poverty el eng_home median_income lag_math lag_ela peer_q  yrdum2 yrdum3 yrdum4 yrdum5 yrdum6 yrdum7 yrdum8 yrdum9 yrdum10"
+    * Variables that we will estimate main effects on need to be mean centered 
+    local vars "female black hispanic white poverty el eng_home lag_ela lag_math peer_q asian missing_ela missing_math median_income yrdum2 yrdum3 yrdum4 yrdum5 yrdum6 yrdum7 yrdum8 yrdum9 yrdum10 districtdum2 districtdum3 districtdum4 districtdum5 districtdum6"
     foreach var of local vars{
         egen meantemp = mean(`var')
         gen orig_`var' = `var'
@@ -490,8 +493,7 @@ syntax, [eta(string) homog(string) types(int 1) subject(string) blockfe(string) 
     *gen orig_median_income = median_income
     *drop magnet_mu_theta 
 
-    local vars "female black white hispanic asian poverty el eng_home median_income lag_math lag_ela peer_q  districtdum2 districtdum3 districtdum4 districtdum5 districtdum6 "
-
+    local vars "female black hispanic white poverty el eng_home lag_ela lag_math peer_q asian median_income districtdum2 districtdum3 districtdum4 districtdum5 districtdum6"
     foreach var of local vars{
         gen magnet_`var' = magnet_enroll*`var'
     }
@@ -526,7 +528,7 @@ syntax, [eta(string) homog(string) types(int 1) subject(string) blockfe(string) 
         local blockstub "noabsorb"
     }
     rename D_0 neighborhood_school 
-
+    local vars "female black hispanic white poverty el eng_home lag_ela lag_math peer_q asian missing_ela missing_math"
     reghdfe  avg_F`subject'   D_* `vars'   magnet_*  ///  
         mu_theta  theta_magnet  yrdum2-yrdum10  districtdum*, absorb(censusblockid)  vce(cluster schoolcostcentercode) residuals(yres)
     gen yhat = avg_F`subject' - yres
@@ -554,12 +556,13 @@ syntax, [eta(string) homog(string) types(int 1) subject(string) blockfe(string) 
     }
     local maineffectstub ""
     local matcheffectstub ""
+    local vars "female black hispanic white poverty el eng_home lag_ela lag_math peer_q asian median_income districtdum2 districtdum3 districtdum4 districtdum5 districtdum6"
     foreach var of local vars{
         local maineffectstub = "`maineffectstub' + _b[`var']*`var'"
         local matcheffectstub = "`matcheffectstub' + _b[magnet_`var']*`var'"
     }
     local yearstub "+ _b[yrdum2]*yrdum2 + _b[yrdum3]*yrdum3 + _b[yrdum4]*yrdum4 + _b[yrdum5]*yrdum5 + _b[yrdum6]*yrdum6 + _b[yrdum7]*yrdum7 + _b[yrdum8]*yrdum8 + _b[yrdum9]*yrdum9 + _b[yrdum10]*yrdum10"
-	
+	local districtstub "+ _b[districtdum2]*districtdum2 + _b[districtdum3]*districtdum3 + _b[districtdum4]*districtdum4 + _b[districtdum5]*districtdum5 + _b[districtdum6]*districtdum6"
 	
     gen y0 = _b[_cons] + _b[mu_theta]*mu_theta  `maineffectstub' `yearstub' `districtstub' `blockstub'
     gen y1 = y0 + _b[magnet] + _b[theta_magnet]*mu_theta `matcheffectstub'
@@ -573,7 +576,7 @@ syntax, [eta(string) homog(string) types(int 1) subject(string) blockfe(string) 
 	tempfile y1y0
 
 	preserve 
-	keep studentpseudoid endyear y0 y1 delta matcheffect y1_novam y overall_percentile theta_percentile mu_theta magnet y2 yhat 
+	keep studentpseudoid endyear y0 y1 delta matcheffect y1_novam y overall_percentile theta_percentile mu_theta magnet y2 yhat applied inLottery
 	save $ESTIMATES/y1y0_`eta'_`homog'_K`types'_`subject'_blockfe`blockfe'`app_suffix'.dta, replace 
 	restore   
 
@@ -642,8 +645,8 @@ program define cf_table
 
     drop if missing(mu_theta)
 
-    * Variables that we will estimate main effects and match effects for 
-    local vars "female black white hispanic asian poverty el eng_home median_income  lag_math lag_ela peer_q  yrdum2 yrdum3 yrdum4 yrdum5 yrdum6 yrdum7 yrdum8 yrdum9 yrdum10"
+  * Variables that we will estimate main effects on need to be mean centered 
+    local vars "female black hispanic white poverty el eng_home lag_ela lag_math peer_q asian missing_ela missing_math median_income yrdum2 yrdum3 yrdum4 yrdum5 yrdum6 yrdum7 yrdum8 yrdum9 yrdum10 districtdum2 districtdum3 districtdum4 districtdum5 districtdum6"
     foreach var of local vars{
         egen meantemp = mean(`var')
         gen orig_`var' = `var'
@@ -657,59 +660,11 @@ program define cf_table
     *gen orig_median_income = median_income
     *drop magnet_mu_theta 
 
-    local vars "female black white hispanic asian poverty el eng_home median_income  lag_math lag_ela peer_q  districtdum2 districtdum3 districtdum4 districtdum5 districtdum6 "
-
+    local vars "female black hispanic white poverty el eng_home lag_ela lag_math peer_q asian median_income districtdum2 districtdum3 districtdum4 districtdum5 districtdum6"
     foreach var of local vars{
         gen magnet_`var' = magnet_enroll*`var'
     }
 
-/*
-
-    ********************************* Read in data and merge inputs  *********************************
-
-    use $DTAFINAL/structural_data_2004_`last_yr'.dta, clear 
-    rename current_in_mag in_magnet 
-    rename current_peer_quality peer_q 
-
-    replace localdistrictcode = "C" if localdistrictcode=="XS" // 161 students in this unique district code so lump with central 
-
-    tab endyear, gen(yrdum)
-    tab localdistrictcode, gen(districtdum)
-    rename yrdum1 outyr 
-    rename districtdum1 outdist
-
-
-    local vars "female black white hispanic asian poverty el eng_home median_income lag_math lag_ela peer_q"
-    merge m:1 studentpseudoid endyear using `posteriors', keepusing(mu_theta var_theta) gen(mergePosteriors) keep(1 3)
-    gen magnet_enroll = D_0==0
-
-    gen theta_magnet = mu_theta * magnet_enroll
-    local vars "female black white hispanic asian poverty el eng_home median_income lag_math lag_ela peer_q"
-
-
-    * Variables that we will estimate main effects and match effects for 
-    local vars "female black white hispanic asian poverty el eng_home median_income  born_usa gifted lag_math lag_ela peer_q  yrdum2 yrdum3 yrdum4 yrdum5 yrdum6 yrdum7 yrdum8 yrdum9 yrdum10"
-    foreach var of local vars{
-        egen meantemp = mean(`var')
-        gen orig_`var' = `var'
-        replace `var' = `var' - meantemp
-        drop meantemp
-    }
-    
-    gen orig_in_magnet = in_magnet
-    *gen orig_peer_q = peer_q
-    *gen theta_magnet = mu_theta * magnet_enroll
-    *gen orig_median_income = median_income
-    *drop magnet_mu_theta 
-
-    local vars "female black white hispanic asian poverty el eng_home median_income  born_usa  lag_math lag_ela peer_q  districtdum2 districtdum3 districtdum4 districtdum5 districtdum6"
-
-    foreach var of local vars{
-        gen magnet_`var' = magnet_enroll*`var'
-    }
-
-    rename magnet_enroll magnet
-    */
     rename magnet_enroll outmagnet 
    * rename magnet_offer outoffer
     ********************************* Estimate the outcome model *********************************
@@ -720,11 +675,9 @@ program define cf_table
         local blockstub "noabsorb"
     }
     rename D_0 neighborhood_school 
-    local vars "female black white hispanic asian poverty el eng_home lag_math lag_ela peer_q"
-    local vars "female black white hispanic asian poverty el eng_home  lag_math lag_ela peer_q missing_ela missing_math"
+    local vars "female black hispanic white poverty el eng_home lag_ela lag_math peer_q asian  missing_ela missing_math"
     reghdfe  avg_Fmath   D_* `vars'   magnet_*  ///  
           theta_magnet mu_theta  yrdum* districtdum*, `blockstub'  vce(cluster schoolcostcentercode)
-
     test mu_theta = theta_magnet=0
     local p_math : di %9.3f round(r(p), 0.001)
     di `p_math'
@@ -732,11 +685,21 @@ program define cf_table
     test magnet_female = magnet_black = magnet_white = magnet_hispanic = magnet_asian = magnet_poverty = magnet_el = magnet_eng_home = magnet_lag_math = magnet_lag_ela = magnet_median_income = theta_magnet= 0 
     local p_hetero_math : di %9.3f round(r(p), 0.001)
 
+    * Save FEs
+    rename (__hdfe1__ ) (blockfe)
+	replace blockfe = _b[_cons] + blockfe 
+    gen yearfe = blockfe // Note that we won't use the yearfe 
+    preserve
+    	keep studentpseudoid endyear yearfe blockfe 
+        export delimited "$ESTIMATES/outcome_model_fes_`eta'_`homog'_K`types'`app_suffix'_math.csv", replace
+    restore 
+    drop yearfe blockfe 
+
     preserve 
         parmest, norestore
 
         drop if _n<=`n_schools'
-        drop if _n>=34
+        drop if _n>=33
 	
 
         keep parm estimate stderr 
@@ -789,25 +752,25 @@ program define cf_table
         local sd_math : di %9.3f round(r(mean), 0.001)
     restore 
 
-    * Save the parameter estimates and fixed effects; they are inputs for the structural estimation 
-    reghdfe  avg_Fmath   D_* `vars'   magnet_*  ///  
-        mu_theta  theta_magnet  , absorb(endyear censusblockid localdistrictcode, savefe)  vce(cluster schoolcostcentercode)
-    rename (__hdfe1__ __hdfe2__ __hdfe3__) (yearfe blockfe districtfe)
-	replace yearfe = _b[_cons] + yearfe + districtfe 
-    preserve
-    	keep studentpseudoid endyear yearfe blockfe 
-        export delimited "$ESTIMATES/outcome_model_fes_`eta'_`homog'_K`types'`app_suffix'_math.csv", replace
-    restore 
-    drop yearfe blockfe 
-    
 
+    * ELA regression
     reghdfe  avg_Fela   D_* `vars'   magnet_*  ///  
-        mu_theta  theta_magnet  yrdum*  districtdum*, `blockstub'  vce(cluster schoolcostcentercode)
+          theta_magnet mu_theta  yrdum*  districtdum*, `blockstub'  vce(cluster schoolcostcentercode)
     test mu_theta = theta_magnet=0
     local p_ela : di %9.3f round(r(p), 0.001)
     local obs_ela : di %12.0fc e(N)
     test magnet_female = magnet_black = magnet_white = magnet_hispanic = magnet_asian = magnet_poverty = magnet_el = magnet_eng_home = magnet_lag_math = magnet_lag_ela = magnet_median_income = theta_magnet= 0 
     local p_hetero_ela : di %9.3f round(r(p), 0.001)
+
+    * Save FEs
+    rename (__hdfe1__ ) (blockfe)
+	replace blockfe = _b[_cons] + blockfe 
+    gen yearfe = blockfe // Note that we won't use the yearfe 
+    preserve
+    	keep studentpseudoid endyear yearfe blockfe 
+        export delimited "$ESTIMATES/outcome_model_fes_`eta'_`homog'_K`types'`app_suffix'_math.csv", replace
+    restore 
+    drop yearfe blockfe 
 
     preserve 
         parmest, norestore
@@ -850,16 +813,6 @@ program define cf_table
         local sd_ela : di %9.3f round(r(mean), 0.001)
     restore 
 
-    * Save the parameter estimates and fixed effects; they are inputs for the structural estimation 
-    reghdfe  avg_Fela   D_* `vars'   magnet_*  ///  
-        mu_theta  theta_magnet  districtdum*, absorb(endyear censusblockid, savefe)  vce(cluster schoolcostcentercode)
-    rename (__hdfe1__ __hdfe2__) (yearfe blockfe)
-	replace yearfe = _b[_cons] + yearfe 
-    preserve
-    	keep studentpseudoid endyear yearfe blockfe 
-        export delimited "$ESTIMATES/outcome_model_fes_`eta'_`homog'_K`types'`app_suffix'_ela.csv", replace
-    restore 
-
     use `math_estimates', clear
     merge 1:1 parm using `ela_estimates', gen(mergeEstimates) keep(1 3)
     local vars "female black white hispanic asian poverty el median_income eng_home lag_math lag_ela peer_q"
@@ -885,6 +838,273 @@ program define cf_table
         else if "`var'"=="lag_math" local rowname "Baseline Math"
         else if "`var'"=="lag_ela" local rowname "Baseline ELA"
         else if "`var'"=="peer_q" local rowname "Baseline Peer Quality"
+
+        sum est_math if parm == "`var'"
+        local est_math : di %9.3f round(r(mean), 0.001)
+        sum se_math if parm == "`var'"
+        local se_math : di %9.3f round(r(mean), 0.001)
+        sum est_math if parm == "magnet_`var'"
+        local est_math2 : di %9.3f round(r(mean), 0.001)
+        sum se_math if parm == "magnet_`var'"
+        local se_math2 : di %9.3f round(r(mean), 0.001)
+        sum est_ela if parm == "`var'"
+        local est_ela : di %9.3f round(r(mean), 0.001)
+        sum se_ela if parm == "`var'"
+        local se_ela : di %9.3f round(r(mean), 0.001)
+        sum est_ela if parm == "magnet_`var'"
+        local est_ela2 : di %9.3f round(r(mean), 0.001)
+        sum se_ela if parm == "magnet_`var'"
+        local se_ela2 : di %9.3f round(r(mean), 0.001)
+        tex `rowname' & `est_math' & `est_math2' & `est_ela' & `est_ela2' \\ 
+        tex & (`se_math') & (`se_math2') & (`se_ela') & (`se_ela2') \\ 
+    }
+    sum est_math if parm == "mu_theta" 
+    local est_math : di %9.3f round(r(mean), 0.001)
+    sum se_math if parm == "mu_theta"
+    local se_math : di %9.3f round(r(mean), 0.001)
+    sum est_math if parm == "theta_magnet"
+    local est_math2 : di %9.3f round(r(mean), 0.001)
+    sum se_math if parm == "theta_magnet"
+    local se_math2 : di %9.3f round(r(mean), 0.001)
+    sum est_ela if parm == "mu_theta"
+    local est_ela : di %9.3f round(r(mean), 0.001)
+    sum se_ela if parm == "mu_theta"
+    local se_ela : di %9.3f round(r(mean), 0.001)
+    sum est_ela if parm == "theta_magnet"
+    local est_ela2 : di %9.3f round(r(mean), 0.001)
+    sum se_ela if parm == "theta_magnet"
+    local se_ela2 : di %9.3f round(r(mean), 0.001)
+    tex Choice School Preference $\theta_i$ & `est_math' & `est_math2' & `est_ela' & `est_ela2' \\
+    tex & (`se_math') & (`se_math2') & (`se_ela') & (`se_ela2') \\ 
+	tex \addlinespace \hline \addlinespace
+    tex Neighborhood Effects & \multicolumn{2}{c}{\checkmark} & \multicolumn{2}{c}{\checkmark} \\
+    tex Year Effects & \multicolumn{2}{c}{\checkmark} & \multicolumn{2}{c}{\checkmark} \\
+    tex District Effects & \multicolumn{2}{c}{\checkmark} & \multicolumn{2}{c}{\checkmark} \\
+	tex \$H_0:$ No selection on unobservables  (p-values)& \multicolumn{2}{c}{`p_math'} & \multicolumn{2}{c}{`p_ela'} \\ 
+    tex \$H_0:$ No treatment effect heterogeneity (p-values) & \multicolumn{2}{c}{`p_hetero_math'} & \multicolumn{2}{c}{`p_hetero_ela'} \\
+    tex Observations & \multicolumn{2}{c}{`obs_math'} & \multicolumn{2}{c}{`obs_ela'} \\ \addlinespace \hline\bottomrule
+	tex  \end{tabular}
+	texdoc close 
+end
+
+
+
+
+capture program drop cf_table_robust
+program define cf_table_robust
+    syntax, [eta(string) homog(string) types(int 1)  blockfe(string) app_2013(int 0)]
+
+ 
+    local last_yr = cond(`app_2013', 2013, 2008)
+    local app_suffix = cond(`app_2013', "_2013", "")
+    local n_schools = cond(`app_2013', 53, 40)
+    
+    ********************************* Prepare some inputs for the analysis *********************************
+
+    * Read in posterior mean estimates 
+    import delimited using "$ESTIMATES/in_mag_ind_`eta'_posteriors_`homog'_K`types'`app_suffix'.csv", clear stringcols(3)
+    drop v1 
+    rename (v4 v5) (mu_theta var_theta)
+    isid studentpseudoid endyear 
+    tempfile posteriors 
+    save `posteriors'
+
+
+
+
+ ********************************* Read in data and merge inputs  *********************************
+    use "$DTAFINAL/structural_data_2004_`last_yr'.dta", clear 
+    rename current_in_mag in_magnet 
+    rename current_peer_quality peer_q 
+
+    local vars "female black white hispanic asian poverty el eng_home median_income lag_math lag_ela peer_q"
+    merge m:1 studentpseudoid endyear using `posteriors', keepusing(mu_theta var_theta) gen(mergePosteriors) keep(1 3)
+    gen magnet_enroll = D_0==0
+
+    rename magnet_offer offer_var
+    tab endyear, gen(yrdum)
+    replace localdistrictcode = "C" if localdistrictcode=="XS" // 161 students in this unique district code so lump with central 
+    tab localdistrictcode, gen(districtdum)
+    rename yrdum1 outyr 
+    rename districtdum1 outdist
+
+    drop if missing(mu_theta)
+
+    * Variables that we will estimate main effects and match effects for 
+    local vars "female black white hispanic asian poverty el eng_home median_income  lag_math lag_ela peer_q  yrdum2 yrdum3 yrdum4 yrdum5 yrdum6 yrdum7 yrdum8 yrdum9 yrdum10"
+    foreach var of local vars{
+        egen meantemp = mean(`var')
+        gen orig_`var' = `var'
+        replace `var' = `var' - meantemp
+        drop meantemp
+    }
+    
+    gen orig_in_magnet = in_magnet
+    *gen orig_peer_q = peer_q
+    gen theta_magnet = mu_theta * magnet_enroll
+    *gen orig_median_income = median_income
+    *drop magnet_mu_theta 
+ 
+    local vars "female black white hispanic asian poverty el eng_home median_income  lag_math lag_ela peer_q rel_nearest_mag_dist  districtdum2 districtdum3 districtdum4 districtdum5 districtdum6 "
+
+    foreach var of local vars{
+        gen magnet_`var' = magnet_enroll*`var'
+    }
+    rename magnet_enroll outmagnet 
+   * rename magnet_offer outoffer
+    ********************************* Estimate the outcome model *********************************
+    if("`blockfe'"=="TRUE"){
+        local blockstub "absorb(censusblockid, savefe)"
+    }
+    else{
+        local blockstub "noabsorb"
+    }
+    rename D_0 neighborhood_school 
+    local vars "female black white hispanic asian poverty el eng_home lag_math lag_ela peer_q"
+    local vars "female black white hispanic asian poverty el eng_home  lag_math lag_ela peer_q missing_ela missing_math"
+    reghdfe  avg_Fmath   D_* `vars'   magnet_*  ///  
+          theta_magnet mu_theta  yrdum* districtdum*, `blockstub'  vce(cluster schoolcostcentercode)
+
+    test mu_theta = theta_magnet=0
+    local p_math : di %9.3f round(r(p), 0.001)
+    di `p_math'
+    local obs_math : di %12.0fc e(N)
+    test magnet_rel_nearest_mag_dist = magnet_female = magnet_black = magnet_white = magnet_hispanic = magnet_asian = magnet_poverty = magnet_el = magnet_eng_home = magnet_lag_math = magnet_lag_ela = magnet_median_income = theta_magnet= 0 
+    local p_hetero_math : di %9.3f round(r(p), 0.001)
+
+    preserve 
+        parmest, norestore
+
+        drop if _n<=`n_schools'
+        drop if _n>=34
+	
+
+        keep parm estimate stderr 
+        rename (estimate stderr) (est_math se_math)
+        tempfile math_estimates
+        save `math_estimates', replace
+    restore    
+
+
+    * Estimate enrollment-weighted average of magnet effects 
+      preserve 
+        parmest, norestore 
+        keep if regexm(parm, "D_")
+        sum estimate 
+        local mag_effects = r(mean)
+        tempfile mag_data 
+        split parm, parse("_")
+        rename parm2 D 
+        destring D, replace 
+        keep D estimate stderr 
+        save `mag_data', replace
+    restore 
+    preserve 
+        collapse (mean) D_*  
+        egen rowsum = rowtotal(D_*) 
+        gen i =1 
+        reshape long D_, i(i)
+        replace D_ = D_ / rowsum
+        rename _j D 
+        keep D D_ 
+        rename D_ enrollment_share 
+        tempfile shares 
+        save `shares', replace
+    restore 
+    preserve
+        use `mag_data', clear
+        merge m:1 D using `shares', keepusing(enrollment_share) gen(mergeShares) keep(1 3)
+        gen magnet_effect = estimate * enrollment_share
+        egen avg_effect = total(magnet_effect)
+        sum avg_effect
+        local mag_effects_math : di %9.3f round(r(mean), 0.001)
+        egen mean_effect = mean(estimate)
+        gen var_component = (estimate - mean_effect)^2 - stderr^2
+        replace var_component = var_component * enrollment_share
+        egen var = total(var_component)
+        gen sd = sqrt(var)
+        sum sd
+        local sd_math : di %9.3f round(r(mean), 0.001)
+    restore 
+
+    
+
+    reghdfe  avg_Fela   D_* `vars'   magnet_*  ///  
+        mu_theta  theta_magnet  yrdum*  districtdum*, `blockstub'  vce(cluster schoolcostcentercode)
+    test mu_theta = theta_magnet=0
+    local p_ela : di %9.3f round(r(p), 0.001)
+    local obs_ela : di %12.0fc e(N)
+    test magnet_female = magnet_black = magnet_white = magnet_hispanic = magnet_asian = magnet_poverty = magnet_el = magnet_eng_home = magnet_lag_math = magnet_lag_ela = magnet_median_income = theta_magnet= 0 
+    local p_hetero_ela : di %9.3f round(r(p), 0.001)
+
+    preserve 
+        parmest, norestore
+
+        drop if _n<=`n_schools'
+        drop if _n>=34
+        keep parm estimate stderr 
+        rename (estimate stderr) (est_ela se_ela)
+        tempfile ela_estimates
+        save `ela_estimates', replace
+    restore
+
+      preserve 
+        parmest, norestore 
+        keep if regexm(parm, "D_")
+        sum estimate 
+        local mag_effects = r(mean)
+        tempfile mag_data 
+        split parm, parse("_")
+        rename parm2 D 
+        destring D, replace 
+        keep D estimate stderr 
+        save `mag_data', replace
+    restore 
+    preserve
+        use `mag_data', clear
+        merge m:1 D using `shares', keepusing(enrollment_share) gen(mergeShares) keep(1 3)
+        gen magnet_effect = estimate * enrollment_share
+        egen avg_effect = total(magnet_effect)
+        sum avg_effect
+        local mag_effects_ela : di %9.3f round(r(mean), 0.001)
+        egen mean_effect = mean(estimate)
+        gen var_component = (estimate - mean_effect)^2 - stderr^2
+        replace var_component = var_component * enrollment_share
+        egen var = total(var_component)
+        gen sd = sqrt(var)
+        sum sd
+        local sd_ela : di %9.3f round(r(mean), 0.001)
+    restore 
+
+
+
+    use `math_estimates', clear
+    merge 1:1 parm using `ela_estimates', gen(mergeEstimates) keep(1 3)
+
+    local vars "female black white hispanic asian poverty el median_income eng_home lag_math lag_ela peer_q rel_nearest_mag_dist"
+
+	texdoc init "$tables/`eta'_`homog'_K`types'`app_suffix'_cf_table_robust.tex" , replace force 
+	tex \begin{tabular}{lcccc} \toprule \hline
+    tex & \multicolumn{2}{c}{Math} & \multicolumn{2}{c}{ELA} \\ \cline{2-5}
+	tex  & Neighborhood School & Choice School & Neighborhood School & Choice School \\ 
+    tex & (1) & (2) & (3) & (4) \\\hline \hline 
+    tex Main Effects & & `mag_effects_math' & & `mag_effects_ela' \\
+    tex &  & [`sd_math']  &  & [`sd_ela']  \\
+    foreach var of local vars{
+        if "`var'"=="female" local rowname "Female"
+        else if "`var'"=="black" local rowname "Black"
+        else if "`var'"=="white" local rowname "White"
+        else if "`var'"=="hispanic" local rowname "Hispanic"
+        else if "`var'"=="asian" local rowname "Asian"
+        else if "`var'"=="poverty" local rowname "Poverty"
+        else if "`var'"=="el" local rowname "LEP"
+        else if "`var'" =="median_income" local rowname "Median Income"
+        else if "`var'"=="born_usa" local rowname "Born in U.S."
+        else if "`var'"=="eng_home" local rowname "English Home"
+        else if "`var'"=="lag_math" local rowname "Baseline Math"
+        else if "`var'"=="lag_ela" local rowname "Baseline ELA"
+        else if "`var'"=="peer_q" local rowname "Baseline Peer Quality"
+        else if "`var'"=="rel_nearest_mag_dist" local rowname "Relative Distance"
 
         sum est_math if parm == "`var'"
         local est_math : di %9.3f round(r(mean), 0.001)
@@ -1269,6 +1489,39 @@ program define cf_table2
     tex Observations & \multicolumn{2}{c}{`obs_math'} & \multicolumn{2}{c}{`obs_ela'} & \multicolumn{2}{c}{`obs_socio'} \\ \addlinespace \hline\bottomrule
     tex  \end{tabular}
     texdoc close 
+end
+
+
+capture program drop teHistogram
+program define teHistogram
+    syntax, [eta(string) homog(string) types(int 1)  blockfe(string) app_2013(int 0)]
+
+
+
+    use $ESTIMATES/y1y0_`eta'_`homog'_K`types'_math_blockfe`blockfe'_2013.dta, replace 
+    gen subject = "math"
+    tempfile math 
+    save `math', replace 
+    use $ESTIMATES/y1y0_`eta'_`homog'_K`types'_ela_blockfe`blockfe'_2013.dta, replace 
+    gen subject = "ela"
+
+    append using `math'
+
+    reshape wide yhat y0 y1 delta matcheffect y1_novam y y2, i(studentpseudoid endyear) j(subject) string
+
+    binscatter deltaela deltamath if overall_percentile >0.1 & overall_percentile <=0.9, nquantiles(50) ///
+        xtitle("Math Treatment Effect") ytitle("ELA Treatment Effect")  /// 
+        lcolor(black) mcolors(maroon) 
+    graph export $figures/te_binscatter_`eta'_`homog'_K`types'_blockfe`blockfe'_2013.pdf, replace
+
+    histogram overall_percentile if inLottery==1,  ///
+        xtitle("Inclination to Treatment Percentile") ytitle("Fraction") ///
+        lcolor(black) fcolor(gs14) frac
+    graph export $figures/overall_percentile_hist_`eta'_`homog'_K`types'_blockfe`blockfe'_2013.pdf, replace
+    histogram theta_percentile if inLottery==1,  ///
+        xtitle("Inclination to Treatment Percentile") ytitle("Fraction") ///
+        lcolor(black) fcolor(gs14) frac
+    graph export $figures/theta_percentile_hist_`eta'_`homog'_K`types'_blockfe`blockfe'_2013.pdf, replace
 end
 
 

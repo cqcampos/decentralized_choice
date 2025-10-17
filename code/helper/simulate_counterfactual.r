@@ -303,41 +303,21 @@ simulate_counterfactual <- function(dir, endyear, low_score_school, mean_school_
   } else if (preference_model==7) {
     # This is counterfactual where students are optimally sorted based on match quality
     # Implementation of maxAllocation from outcome_analysis.do
-    
-
-    
-
-    Y_0_math <- X_outcome %*% (as.matrix(alpha_0_X_math))  + theta * alpha_0_math + 
-      yearfe + blockfe + res_ability_math0
-    
-    res_ability_ela1 <- rnorm(N, 0, 1)
-    res_ability_ela0 <- rnorm(N, 0, 1)
-    Y_1_ela <-  matrix(rep(alpha_j_ela, times = N), nrow = N, byrow = TRUE) +
-      as.vector(X_outcome %*% (as.matrix(alpha_0_X_ela)) + theta * (alpha_0_ela + alpha_m_ela) +
-                  X_outcome_inter %*% (as.matrix(alpha_m_X_ela)) + yearfe_ela + blockfe_ela +
-                  res_ability_ela1)
-    Y_1_ela <- rowMeans(Y_1_ela) # average across j
-    Y_0_ela <- X_outcome %*% (as.matrix(alpha_0_X_ela)) + theta * alpha_0_ela + 
-      yearfe_ela + blockfe_ela + res_ability_ela0
-    
-    
     # Step 1: Calculate potential outcomes for each student-school pair
-    X_outcome <- cbind(X[,1:2], X[,4], X[,3], asian, 
-                       X[, 5:7], X[,9], X[8], X[,12], X_Y[,1:2])
-    X_outcome_inter <- cbind(X_outcome[, 1:8], X[,10], X_outcome[,9:11],
-                             X_Y[,3:7]) # Add median income te hetero and region hetero
+    # female black hispanic white poverty el eng_home lag_ela lag_math peer_q asian missing_ela missing_math
+    X_outcome <- cbind(X[,1:9], X[,12], asian, X_Y[,1:2]) 
     
-    res_ability_math1 <- rnorm(N, 0, 1)
-    res_ability_math0 <- rnorm(N,0,1)
+    X_outcome_inter <- cbind(X_outcome[, 1:11], X[, 10], X_Y[,3:7])  # Add median income te hetero and region hetero
     
+    
+    res_ability_math0 <- rnorm(N, 0, 1)
+    Y_0_math <- as.vector(X_outcome %*% (as.matrix(alpha_0_X_math))  + theta * alpha_0_math + 
+                            yearfe + res_ability_math0)
     # Y_1_j for each school j (N x J matrix)
-    Y_1_j_math <-  matrix(rep(alpha_j_math, times = N), nrow = N, byrow = TRUE) +
-      as.vector(X_outcome %*% (as.matrix(alpha_0_X_math) )  + theta * (alpha_0_math +alpha_m_math) +
-                  X_outcome_inter %*% (as.matrix(alpha_m_X_math)) + yearfe + blockfe +
-                  res_ability_math1)
+    Y_1_j_math <-  as.vector( X_outcome_inter %*% (as.matrix(alpha_m_X_math) ) +
+                              theta * (alpha_m_math) + Y_0_math) +
+      matrix(rep(alpha_j_math, times = N), nrow = N, byrow = TRUE) 
     
-    Y_0_math <- X_outcome %*% (as.matrix(alpha_0_X_math))  + theta * alpha_0_math + 
-      yearfe + blockfe + res_ability_math0
     # Match quality for each student-school pair (N x J matrix)
     match_quality <- Y_1_j_math - as.vector(Y_0_math)
     
@@ -583,30 +563,28 @@ simulate_counterfactual <- function(dir, endyear, low_score_school, mean_school_
   # Y1 and Y0
   # median income not estimated because of fixed effects
   # Discrepancies in the order of variables so have to ensure this is the right arrangement 
-  X_outcome <- cbind(X[,1:2], X[,4], X[,3], asian, 
-                     X[, 5:7], X[,9], X[8], X[,12], X_Y[,1:2])
-  X_outcome_inter <- cbind(X_outcome[, 1:8], X[,10], X_outcome[,9:11],
-                           X_Y[,3:7]) # Add median income te hetero and region hetero
+  X_outcome <- cbind(X[,1:9], X[,12], asian, X_Y[,1:2])
+  X_outcome_inter <- cbind(X_outcome[, 1:11], X[, 10], X_Y[,3:7])  # Add median income te hetero and region hetero
   
-  res_ability_math1 <- rnorm(N, 0, 1)
-  res_ability_math0 <- rnorm(N,0,1)
-  Y_1_math <-  matrix(rep(alpha_j_math, times = N), nrow = N, byrow = TRUE) +
-    as.vector(X_outcome %*% (as.matrix(alpha_0_X_math) )  + theta * (alpha_0_math +alpha_m_math) +
-                X_outcome_inter %*% (as.matrix(alpha_m_X_math)) + yearfe + blockfe +
-                res_ability_math1)
+  
+
+  res_ability_math0 <- rnorm(N, 0, 1)
+  Y_0_math <- as.vector(X_outcome %*% (as.matrix(alpha_0_X_math))  + theta * alpha_0_math + 
+    yearfe + res_ability_math0)
+  
+  Y_1_math <-  as.vector( X_outcome_inter %*% (as.matrix(alpha_m_X_math) ) +
+                            theta * (alpha_m_math) + Y_0_math) +
+                  matrix(rep(alpha_j_math, times = N), nrow = N, byrow = TRUE) 
   Y_1_math <- rowMeans(Y_1_math) # average across j
-  Y_0_math <- X_outcome %*% (as.matrix(alpha_0_X_math))  + theta * alpha_0_math + 
-    yearfe + blockfe + res_ability_math0
-  
-  res_ability_ela1 <- rnorm(N, 0, 1)
+
   res_ability_ela0 <- rnorm(N, 0, 1)
-  Y_1_ela <-  matrix(rep(alpha_j_ela, times = N), nrow = N, byrow = TRUE) +
-    as.vector(X_outcome %*% (as.matrix(alpha_0_X_ela)) + theta * (alpha_0_ela + alpha_m_ela) +
-                X_outcome_inter %*% (as.matrix(alpha_m_X_ela)) + yearfe_ela + blockfe_ela +
-                res_ability_ela1)
+  Y_0_ela <- as.vector(X_outcome %*% (as.matrix(alpha_0_X_ela))  + theta * alpha_0_ela + 
+                          yearfe + res_ability_ela0)
+  Y_1_ela <-  as.vector( X_outcome_inter %*% (as.matrix(alpha_m_X_ela) ) +
+                            theta * (alpha_m_ela) + Y_0_ela) +
+    matrix(rep(alpha_j_ela, times = N), nrow = N, byrow = TRUE) 
   Y_1_ela <- rowMeans(Y_1_ela) # average across j
-  Y_0_ela <- X_outcome %*% (as.matrix(alpha_0_X_ela)) + theta * alpha_0_ela + 
-    yearfe_ela + blockfe_ela + res_ability_ela0
+
   
   
   

@@ -1,5 +1,4 @@
 #!/bin/bash
-#SBATCH --account=pi-cqcampos
 #SBATCH --partition=highmem
 #SBATCH --cpus-per-task=10
 #SBATCH --mem=600GB

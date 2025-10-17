@@ -23,6 +23,7 @@ if (slurm_user == "") {
     dir <- "Z:/decentralized_choice"
   } else {
     dir <- "/Volumes/lausd/decentralized_choice"
+    code_dir <- file.path(dir, "code/chris/decentralized_choice")
   }
 } else {
   # When running code via Slurm ---
@@ -30,7 +31,7 @@ if (slurm_user == "") {
   dir <- "/project/lausd/decentralized_choice"
   
   # Update cloned repo path to run code from
-  if (slurm_user == "faculty") {
+  if (slurm_user == "cqcampos") {
     code_dir <- "/project/lausd/decentralized_choice/code/chris/decentralized_choice"
   } else if (slurm_user == "ryanlee22") {
     code_dir <- "/project/lausd/decentralized_choice/code/ryan/decentralized_choice"
@@ -134,12 +135,6 @@ print(paste("K:", K))
 seats <- read_dta(paste0(dir, "/data/prog_seats_2004_", last_yr, ".dta"))
 # Load structural sample
 rawdata <- read_dta(paste0(dir, "/data/structural_data_2004_", last_yr, ".dta"))
-rawdata$districtdum2 <- ifelse(rawdata$localdistrictcode=="E", 1, 0)
-rawdata$districtdum3 <- ifelse(rawdata$localdistrictcode=="NE",1, 0)
-rawdata$districtdum4 <- ifelse(rawdata$localdistrictcode=="NW",1, 0)
-rawdata$districtdum5 <- ifelse(rawdata$localdistrictcode=="S",1, 0)
-rawdata$districtdum6 <- ifelse(rawdata$localdistrictcode=="W",1, 0)
-
 if (accuracy){
   # Load sample used for fitting MLE model 
   # 876 students submitted applications in multiple years (e.g., 2005 & 2006)
@@ -181,6 +176,13 @@ rawdata <- rawdata %>%
 rawdata <- rawdata %>% group_by(preferredlocationcode, endyear) %>%
   mutate(mean_school_scores = mean(lag_math, na.rm=TRUE))
 rawdata$low_score_school <- ifelse(rawdata$mean_school_scores < -0, 1, 0)
+
+rawdata$districtdum2 <- ifelse(rawdata$localdistrictcode=="E", 1, 0)
+rawdata$districtdum3 <- ifelse(rawdata$localdistrictcode=="NE",1, 0)
+rawdata$districtdum4 <- ifelse(rawdata$localdistrictcode=="NW",1, 0)
+rawdata$districtdum5 <- ifelse(rawdata$localdistrictcode=="S",1, 0)
+rawdata$districtdum6 <- ifelse(rawdata$localdistrictcode=="W",1, 0)
+
 white <- rawdata$white
 asian <- rawdata$asian
 phbao <- 1- rawdata$white
@@ -192,6 +194,7 @@ asian <- rawdata$asian
 endyear <- rawdata$endyear
 mean_school_scores <- rawdata$mean_school_scores
 low_score_school <- rawdata$low_score_school
+
 
 # Use helper function to create matrices relevant for counterfactuals 
 data_list <- get_data(rawdata, J)
@@ -410,7 +413,7 @@ exog <- list(
 # p_mod == 7 <- optimal sorting on match quality 
 # p_mod == 8 <- Unified Enrollment (DA) + Info provision 
 # p_mod == 9 <- Unified Enrollment (DA) + no travel costs + Info Provision
-for (p_mod in c(1)){
+for (p_mod in c(1,2,3,4,5,6,7,8, 9)){
   run_sim_cf(dir, win_os, nsims, p_mod, endyear, low_score_school, mean_school_scores, 
              phbao, asian, white, 
              yearfe, blockfe, outcome_fes, 
