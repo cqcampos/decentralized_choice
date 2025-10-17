@@ -324,11 +324,11 @@ pi_norm_torch <- function(param, inp, zero_seat_bool, preference_model, eta, ite
       c_f_bar <- torch_einsum("nk,k -> n", list(inp$W, inp$c_X))
       
       if (eta_spec == "eta_in"){
-        return(torch_exp(c_f_bar)$unsqueeze(2) + inp$C_j) # cost shock
-      } else if (eta_spec == "eta_out"){ # Ryan: Added!
-        return(torch_exp(c_f_bar)$unsqueeze(2) + inp$C_j)
-      } else{
-        print("Error from cost_app(): Please set 'eta_spec' to 'eta_in' or 'eta_out'!!!")
+          return(torch_exp(c_f_bar + inp$C_j)$unsqueeze(2) ) # cost shock
+        } else if (eta_spec == "eta_out"){ # Ryan: Added!
+          return(torch_exp(c_f_bar)$unsqueeze(2) + inp$C_j)
+        } else{
+          print("Error from cost_app(): Please set 'eta_spec' to 'eta_in' or 'eta_out'!!!")
       }
     }
   }
