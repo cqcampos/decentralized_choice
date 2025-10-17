@@ -61,6 +61,26 @@ convert_to_torch <- function(seats_eq,
     
   }
   
+# Define helper function for calculating cost
+cost_app <- function(preference_model, inp, eta_spec){
+  if (preference_model == 1){
+    C <- 0
+  } else{
+    
+    # length n vector of mean cost
+    c_f_bar <- torch_einsum("nk,k -> n", list(inp$W, inp$c_X))
+    
+    if (eta_spec == "eta_in"){
+        return(torch_exp(c_f_bar + inp$C_j)$unsqueeze(2) ) # cost shock
+      } else if (eta_spec == "eta_out"){ # Ryan: Added!
+        return(torch_exp(c_f_bar)$unsqueeze(2) + inp$C_j)
+      } else{
+        print("Error from cost_app(): Please set 'eta_spec' to 'eta_in' or 'eta_out'!!!")
+    }
+  }
+}
+
+
 # Takes param_tens (tensor)  as an input
 pi_norm_torch_grad <- function(param_tens, inp, zero_seat_bool, preference_model, eta){
   
@@ -122,27 +142,6 @@ pi_norm_torch_grad <- function(param_tens, inp, zero_seat_bool, preference_model
     }
     u_bar <- u_bar + inp$theta$unsqueeze(2) # Individual r.c. (N by none) 
     # Calculate net expected utility max
-    # Define helper function for calculating cost
-    cost_app <- function(preference_model, inp, eta_spec){
-      if (preference_model == 1){
-        C <- 0
-      } else{
-        
-        # length n vector of mean cost
-        c_f_bar <- torch_einsum("nk,k -> n", list(inp$W, inp$c_X))
-        
-        if (eta_spec == "eta_in"){
-          return(torch_exp(c_f_bar + inp$C_j)$unsqueeze(2) ) # cost shock
-        } else if (eta_spec == "eta_out"){ # Ryan: Added!
-          return(torch_exp(c_f_bar)$unsqueeze(2) + inp$C_j)
-        } else{
-          print("Error from cost_app(): Please set 'eta_spec' to 'eta_in' or 'eta_out'!!!")
-        }
-      }
-    }
-    
-    
-    
     # note: 1-pi_ij not shown in the computation, as it's cancelled out 
     lambda <- 0.05
     euler_cons <- .577
@@ -313,28 +312,7 @@ pi_norm_torch <- function(param, inp, zero_seat_bool, preference_model, eta, ite
   
 
 
-  # Calculate net expected utility max
-  # Define helper function for calculating cost
-  cost_app <- function(preference_model, inp, eta_spec){
-    if (preference_model == 1){
-      C <- 0
-    } else{
-      
-      # length n vector of mean cost
-      c_f_bar <- torch_einsum("nk,k -> n", list(inp$W, inp$c_X))
-      
-      if (eta_spec == "eta_in"){
-          return(torch_exp(c_f_bar + inp$C_j)$unsqueeze(2) ) # cost shock
-        } else if (eta_spec == "eta_out"){ # Ryan: Added!
-          return(torch_exp(c_f_bar)$unsqueeze(2) + inp$C_j)
-        } else{
-          print("Error from cost_app(): Please set 'eta_spec' to 'eta_in' or 'eta_out'!!!")
-      }
-    }
-  }
-  
-  
-  
+  # Calculate net expected utility max  
   # note: 1-pi_ij not shown in the computation, as it's cancelled out 
   lambda <- 0.05
   euler_cons <- .577
